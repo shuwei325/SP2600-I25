@@ -1,0 +1,389 @@
+---
+title: 'Tema 2: Análisis multivariado de series temporales-5'
+subtitle: 'Curso: Tópicos Avanzados de Series Temporales'
+format: clean-revealjs
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+author:
+  - name: Shu Wei Chou Chen
+    #orcid: 0000-0001-5495-2486
+    email: shuwei.chou@ucr.ac.cr
+    affiliations: Escuela de Estadística, Universidad de Costa Rica
+#date: last-modified
+lang: es  # español
+---
+
+```{r, include=FALSE}
+library(ggplot2)
+library(forecast)
+library(tidyverse)
+library(fpp2)
+library(astsa)
+library(sarima)
+library(car)
+library(fGarch)
+library(xts)
+library(vars)
+library(MASS)
+library(MTS)
+```
+
+En las clases anteriores vimos:
+
+1. Introducción
+2. Modelos ARMA vectoriales
+3. Causalidad de Granger <br>
+4. Raíz unitarias <br>
+
+ 
+## Contenido
+
+<ol start="5">
+
+5. Procesos cointegrados: definición y pruebas de hipótesis para cointegración y modelos de corrección del error. <br>
+</ol>
+
+
+ 
+## Procesos cointegrados
+
+- Recuerde que si $\nabla^d X_t$ (univariada) es estacionario, decimos que $X_t$ es integrado de orden $d$, y es denotado por $X_t \sim I(d)$.
+
+**Definición:** Sea $X_t$ una serie multivariada de $k$ dimensión. Se dice que $X_t$ es cointegrado de orden $(d, b)$, denotado por $X_t \sim CI(d,b)$, si:
+  - Todos los componentes de $X_t$ es $I(d)$, y
+  - existe un vector $\alpha$ no nulo, tal que $Z_t=\alpha'X_t \sim I(d-b), d\geq b>0$.
+
+El vector $\alpha$ es llamado vector de cointegración.
+
+**Ejemplo:** 
+- Si $X_t$ y $Y_t$ son $I(1)$, pero existe una combinación lineal $Z_t=Y_t- \alpha_1 X_t \sim I(0)$. 
+- En este caso, $d=1$ y $b=1$ y el vector de cointegración es $\alpha'=(1,-\alpha_1)$.
+
+ 
+## Ejemplo
+
+- Considere $a_t$ y $b_t$ ruidos blancos Gaussianos.
+
+$$\left. \begin{eqnarray}  X_t &=& X_{t-1} + a_t = \sum_{i=1}^t a_t \\  Y_{t} &=& 0.6 X_t + b_t \end{eqnarray}\right.$$
+- Note que 
+  - $a_t$ y $b_t$ son $I(0)$ por ser ruidos blancos. 
+  - $X_t$ y $Y_t$ son $I(1)$.
+  - $Y_{t} - 0.6 X_t = b_t \sim I(0)$
+  - El vector de cointegración es $\alpha=(1,-0.6)$.
+
+ 
+## Ejemplo
+
+- Observe dos realizaciones de estas dos series.
+- Estas series tienen una tendencia estocástica común.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r echo=FALSE, fig.align="center", out.width = "100%"}
+set.seed(123456)
+a <- rnorm(1000)
+b <- rnorm(1000)
+x <- cumsum(a)
+y <- 0.6*x + b
+data <- ts(data.frame(x,y))
+autoplot(data)
+```
+:::
+
+::: {.column width="50%"}
+```{r echo=FALSE, fig.align="center", out.width = "100%"}
+set.seed(654321)
+a <- rnorm(1000)
+b <- rnorm(1000)
+x <- cumsum(a)
+y <- 0.6*x + b
+data <- ts(data.frame(x,y))
+autoplot(data)
+
+```
+:::
+::::
+
+
+ 
+## Pruebas de hipótesis para cointegración
+
+**Procedimiento de Engle y Granger**
+
+- Sea $X_t=(X_{1,t},...,X_{k,t})'$ una serie multivariada y cada una de las series es $I(1)$.
+
+- Considere $X_t=(X_{1,t},\dot{X}_{2,t}')'$ con $\dot{X}_{2,t}= (X_{2,t},...,X_{k,t})'$ y la regresión
+
+$$X_{1,t}= \beta_0+ \beta_1'  \dot{X}_{2,t}+u_t,$$
+con el fin de obtener los residuales $u_t$ y realizar la prueba de Dickey-Fuller aumentado para comprobar si $u_t$ es $I(1)$ o $I(0)$.
+
+- Note que el modelo estimado permite expresar el vector de cointegración como $\alpha=(1, -\beta'_1)$.
+
+
+ 
+## Ejemplo
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Se tiene 3 series macroeconómicas (en logarítmo) del Reino Unido del cuarto trimestre, 1966 al segundo trimestre de 1991.
+
+- *lc*: Índice de consumo  
+- *li*: Nivel del ingreso   
+- *lw*: La riqueza del país  
+
+
+- Se ve claramente que no son series estacionarias.
+
+
+:::
+
+::: {.column width="50%"}
+
+```{r echo=FALSE, fig.align="center", out.width = "100%"}
+data(Raotbl3)
+lc <- ts(Raotbl3$lc, start=c(1966,4), end=c(1991,2),
+         frequency=4)
+li <- ts(Raotbl3$li, start=c(1966,4), end=c(1991,2),
+         frequency=4)
+lw <- ts(Raotbl3$lw, start=c(1966,4), end=c(1991,2),
+         frequency=4)
+ukcons <- window(cbind(lc, li, lw), start=c(1967, 2),
+                 end=c(1991,2))
+autoplot(ukcons)
+```
+:::
+::::
+ 
+## Ejemplo
+
+- Se estima las regresiones lineales:
+
+```{r, fig.align="center", out.width = "80%"}
+lc.eq <- lm(lc ~ li + lw, data=ukcons)
+li.eq <- lm(li ~ lc + lw, data=ukcons)
+lw.eq <- lm(lw ~ li + lc, data=ukcons)
+```
+
+- Los gráficos de los residuales:
+```{r echo=FALSE, fig.align="center", out.width = "40%"}
+error.lc <- ts(resid(lc.eq), start=c(1967,2),
+               end=c(1991,2), frequency=4)
+error.li <- ts(resid(li.eq), start=c(1967,2),
+               end=c(1991,2), frequency=4)
+error.lw <- ts(resid(lw.eq), start=c(1967,2),
+               end=c(1991,2), frequency=4)
+par(mfrow=c(3,1))
+plot(error.lc)
+plot(error.li)
+plot(error.lw)
+```
+
+ 
+## Ejemplo
+
+
+- Veremos en el laboratorio que los residuales de los 3 modelos son $I(0)$ de acuerdo a la prueba de Dickey-Fuller aumentado (ADF).
+
+
+| Modelo | ADF     | valor crítico (5%)   |
+|  --|:  -:|       :|
+| lc     | -4.14   | -1.95                |
+| li     | -4.06   | -1.95                |
+| lw     | -2.71   | -1.95                |
+
+- Note que no nos interesa buscar evidencias de que sean no correlacionados, sino que los residuales sean $I(0)$.
+
+ 
+## Algunas consideraciones sobre proceso cointegrados
+
+- La relación entre series cointegradas de $I(1)$ es denominada **relación de largo plazo**.
+
+- Mientras que, la relación entre series de $I(0)$ es denominada **relación de corto plazo**.
+
+
+ 
+## Modelos de corrección del error
+
+- Suponga que $X_t$ y $Y_t$ son $I(1)$ y se cointegran: 
+
+$$Y_t = \beta_0 + \beta_1 X_t + z_t $$
+con $z_t \sim I(0)$.
+
+- Como $\nabla X_t$ y $\nabla Y_t$ son $I(0)$, podemos considerar la regresión de sus diferencias:
+
+$$\nabla Y_t = \beta_0 + \beta_1 \nabla X_t + \nabla z_t$$
+pero este modelo únicamente contempla su relación de corto plazo.
+
+- Es posible expresar dicha relación como:
+
+$$\nabla Y_t = \beta_0 + \beta_1 \nabla X_t - \gamma \hat{z}_{t-1} + z_t$$
+donde $\hat{z}_{t}=Y_t-\hat{\beta}_0-\hat{\beta}_1 X_t$ son los residuales obtenidos del modelo de regresión. 
+- En este caso, $\gamma$ es un coeficiente que mide la velocidad del ajuste y que tanto el desequilibrio es corregido.
+
+
+ 
+## Modelos de corrección del error
+
+- De manera general para dos series $X_t$ y $Y_t$ que son $I(1)$ cointegradas, El Modelo de corrección del error (ECM) tiene la representación:
+
+$$\begin{aligned}
+		\nabla Y_t &= \psi_0 + \gamma_1\hat{z}_{t-1} + \sum^{K_1}_{i=1}\psi_{1,i}\nabla X_{t-i} + \sum^{L_1}_{i=1} \psi_{2,i}\nabla Y_{t-i} + \epsilon_{1,t} \\
+		\nabla X_t &= \xi_0 + \gamma_2\hat{z}_{t-1} + \sum^{K_2}_{i=1}\xi_{1,i}\nabla Y_{t-i} + \sum^{L_2}_{i=1} \xi_{2,i}\nabla X_{t-i} + \epsilon_{2,t}
+	\end{aligned}$$
+
+donde   
+$\hat{z}_t$ es el error del modelo de regresión:
+
+$$Y_t = \beta_0 + \beta_1 X_t + z_t$$
+$\epsilon_{1,t}$ y $\epsilon_{2,t}$ son ruidos blancos.
+
+
+
+
+ 
+## Ejemplo
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Se tiene 3 series macroeconómicas (en logarítmo) del Reino Unido del cuarto trimestre, 1966 al segundo trimestre de 1991.
+
+- *lc*: Índice de consumo  
+- *li*: Nivel del ingreso   
+- *lw*: La riqueza del país  
+
+
+- Se ve claramente que no son series estacionarias.
+- Vamos a estudiar la relación de *lc* y *li*.
+
+:::
+
+::: {.column width="50%"}
+
+```{r echo=FALSE, fig.align="center", out.width = "100%"}
+data(Raotbl3)
+lc <- ts(Raotbl3$lc, start=c(1966,4), end=c(1991,2),
+         frequency=4)
+li <- ts(Raotbl3$li, start=c(1966,4), end=c(1991,2),
+         frequency=4)
+ukcons <- window(cbind(lc, li), start=c(1967, 2),
+                 end=c(1991,2))
+autoplot(ukcons)
+```
+:::
+::::
+ 
+## Ejemplo
+
+- Definimos 
+  - $x=lc$ (índice de consumo) y 
+  - $y=li$ (nivel de ingreso).
+
+- Ajustamos el modelo de regresión lineal:
+
+$$Y_t = \beta_0 + \beta_1 X_t + z_t $$
+
+- Confirmamos por medio de prueba de ADF, los residuales son I(0). $\tau=-2.6802< -1.95$ , valor crítico a un 5% de significancia.
+
+ 
+## Ejemplo
+
+- Se procede con el ajuste de un ECM para $Y_t$:
+
+```{r echo=FALSE, fig.align="center", out.width = "100%"}
+x<-lc
+y<-li
+reg <- lm(y ~ x)
+error <- residuals(reg)
+
+error.lagged <- error[-c(1, 99)]
+dy <- diff(y)
+dx <- diff(x)
+diff.dat <- data.frame(embed(cbind(dy, dx), 2))
+
+colnames(diff.dat) <- c('dy', 'dx', 'dyl1', 'dxl1')
+ecm.dy <- lm(dy ~ error.lagged + dyl1 + dxl1,
+              data=diff.dat)
+ecm.dy1 <- lm(dy ~ error.lagged,
+               data=diff.dat)
+summary(ecm.dy)
+```
+
+
+ 
+- Se procede con el ajuste de un ECM para $X_t$:
+
+```{r echo=FALSE, fig.align="center", out.width = "100%"}
+ecm.dx <- lm(dx ~ error.lagged + dyl1 + dxl1,
+             data=diff.dat)
+summary(ecm.dx)
+
+```
+- De esta forma, tenemos estas ecuaciones:
+
+$$\begin{aligned}
+		\nabla Y_t &= 0.008 -0.338 \hat{z}_{t-1} + \epsilon_{1,t} \\
+		\nabla X_t &= 0.007 -0.12 \hat{z}_{t-1} + 0.287 \nabla Y_{t-1} -0.32 \nabla X_{t-1} + \epsilon_{2,t}
+\end{aligned}$$
+
+ 
+- Los residuales de las dos ecuaciones:
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r echo=FALSE, fig.align="center", out.width = "70%"}
+ts.plot(ecm.dy1$residuals)
+acf(ecm.dy1$residuals)
+```
+:::
+
+::: {.column width="50%"}
+
+```{r echo=FALSE, fig.align="center", out.width = "70%"}
+ts.plot(ecm.dx$residuals)
+acf(ecm.dx$residuals)
+```
+:::
+::::
+
+ 
+## Modelos de corrección del error vectorial (VECM)
+
+
+- Recordando que para dos series $X_t$ y $Y_t$ que son $I(1)$ cointegradas, El Modelo de corrección del error (ECM) tiene la representación:
+
+$$\begin{aligned}
+		\nabla Y_t &= \psi_0 + \gamma_1\hat{z}_{t-1} + \sum^K_{i=1}\psi_{1,i}\nabla X_{t-i} + \sum^L_{i=1} \psi_{2,i}\nabla Y_{t-i} + \epsilon_{1,t} \\
+		\nabla X_t &= \xi_0 + \gamma_2\hat{z}_{t-1} + \sum^K_{i=1}\xi_{1,i}\nabla Y_{t-i} + \sum^L_{i=1} \xi_{2,i}\nabla X_{t-i} + \epsilon_{2,t}
+	\end{aligned}$$
+
+donde $\hat{z}_t =Y_t -\hat{\beta}_0 + \hat{\beta}_1 X_t$ es el error del modelo de regresión:
+
+- Se puede generalizar el modelo a un sistema de ECM, llamado VECM, en donde cada componente de una serie temporal $Y_t$ de $k$ dimensiones es I(d), y puede haber varias ecuaciones de cointegración.
+
+	
+ 
+## Consideraciones finales
+
+- Existe una extensa literatura de generalizaciones de VARMA, VECM y métodos de estimaciones alternativas.
+
+- Por ejemplo, el paquete BVAR
+https://cran.r-project.org/web/packages/BVAR/index.html
+
+
+	
+ 
+## En la próxima clase seguiremos
+
+## III. Modelos de Espacio de Estados.
+
+

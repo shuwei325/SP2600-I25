@@ -1,0 +1,421 @@
+---
+title: 'Tema 2: Análisis multivariado de series temporales-3'
+subtitle: 'Curso: Tópicos Avanzados de Series Temporales'
+format: clean-revealjs
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+author:
+  - name: Shu Wei Chou Chen
+    #orcid: 0000-0001-5495-2486
+    email: shuwei.chou@ucr.ac.cr
+    affiliations: Escuela de Estadística, Universidad de Costa Rica
+#date: last-modified
+lang: es  # español
+---
+
+
+```{r, include=FALSE}
+library(ggplot2)
+library(forecast)
+library(tidyverse)
+library(fpp2)
+library(astsa)
+library(sarima)
+library(car)
+library(fGarch)
+library(xts)
+library(vars)
+library(MASS)
+library(MTS)
+```
+
+En las clases anteriores vimos:
+
+1. Introducción
+2. Modelos ARMA vectoriales
+
+ 
+## Contenido
+
+<ol start="10">
+
+2. Modelos ARMA vectoriales <br>
+3. Causalidad de Granger <br>
+4. Raíz unitarias <br>
+5. Procesos cointegrados: definición y pruebas de hipótesis para cointegración y modelos de corrección del error. <br>
+</ol>
+
+ 
+## VARX(p)
+
+- Vamos a enfocar en el modelo VAR(p) con posibilidad de incluir covariables (variables exógenas):
+
+$$X_{t}=CD_t+\phi_1 X_{t-1}+...+\phi_pX_{t-p}+a_{t}$$
+donde $\phi_0$ es un vector de dimensión $k$, $\phi_i$ matrices $k \times k$ para $i=1,...,p$, $\phi_p \neq 0$ y $a_t$ es una secuencia de i.i.d. vectores aleatorios con media 0 y matriz de covariancias $\Sigma_a$, que es definida positiva, $C$ es la matriz de coeficientes de dimiensión $(k \times M)$ y $D_t$ es el vector columna de variables exógenas $(M \times 1)$.
+
+- Su representación con el operador autorregresivo.
+$$\phi(B) X_{t}=CD_t+a_{t}$$
+donde $\phi(B)=I_k- \phi_1 B-...- \phi_p B^p$ es el operador autorregresivo.
+
+- Si las soluciones de $|\phi(B)|$, están fuera del círculo unitario, entonces VARX(p) es estacionario.
+
+ 
+## VARX(1) 
+
+- VARX(1) con 3 series tepmorales y variables exógenas: intercepto y tendencia.
+
+$$X_{t}=C D_t+\phi X_{t-1}+a_{t},$$
+
+$$\text{donde}~~ C=\begin{bmatrix}\alpha_{1} & \beta_{1}  \\
+\alpha_{2} & \beta_{2} \\
+\alpha_{3} & \beta_{3}
+\end{bmatrix} ~~\text{y}~~ D_t= \begin{bmatrix}1  \\
+t \end{bmatrix}$$
+
+- Es decir,
+
+$$X_{1,t}=\alpha_1 + \beta_1 t+\phi_{11}X_{1,t-1}+\phi_{12}X_{2,t-1}+\phi_{13}X_{3,t-1}+a_{1,t}$$
+
+$$X_{2,t}=\alpha_2+ \beta_2 t+\phi_{21}X_{1,t-1}+\phi_{22}X_{2,t-1}+\phi_{23}X_{3,t-1}+a_{2,t}$$
+
+$$X_{3,t}=\alpha_3+ \beta_3 t+\phi_{31}X_{1,t-1}+\phi_{32}X_{2,t-1}+\phi_{33}X_{3,t-1}+a_{3,t}$$
+
+ 
+## Causalidad de Granger de un VAR(1)
+
+- Considere el modelo VAR(1):
+
+$$X_{t}=\phi_0+\phi_1 X_{t-1} + a_{t}$$
+- Expresando explícitamente la ecuación,
+
+$$\begin{bmatrix}X_{1,t}\\
+X_{2,t}
+\end{bmatrix} =\begin{bmatrix}\phi_{10}\\
+\phi_{20} \end{bmatrix} + \begin{bmatrix}\phi_{1,11} & \phi_{1,12} \\
+\phi_{1,21} & \phi_{1,22}
+\end{bmatrix} \begin{bmatrix}X_{1,t-1}\\
+X_{2,t-1}
+\end{bmatrix}  +\begin{bmatrix}a_{1,t}\\
+a_{2,t}
+\end{bmatrix}$$
+
+- o bien,
+
+$$X_{1,t}=\phi_{10}+\phi_{1,11}X_{t-1,1}+\phi_{1,12}X_{t-1,2}+a_{1,t}$$
+
+$$X_{2,t}=\phi_{20}+\phi_{1,21}X_{t-1,1}+\phi_{1,22}X_{t-1,2}+a_{2,t}$$
+- Habíamos discutido que $X_{1,t}$ causa a $X_{2,t}$ en el sentido de Granger si $\phi_{1,21} \neq 0$.
+
+
+ 
+## Causalidad de Granger de un VARX(p)
+
+- Recordemos que el modelo VARX(p) se puede representar por:
+
+$$X_{t}=CD_t+ \sum_{i=1}^p \phi_i X_{t-i}+a_{t}$$
+- Podemos representar este modelo por bloques. Considere dos subvectores de $X_t$, i.e. $X_t=(\dot{X}_{1,t},\dot{X}_{2,t})$ donde $\dot{X}_{1,t}$ de dimensión $k_1$ y $\dot{X}_{2,t}$ de dimensión $k_2$ y $k=k_1+k_2$.
+
+$$\begin{bmatrix}\dot{X}_{1,t}\\
+\dot{X}_{2,t}
+\end{bmatrix} = CD_t + \sum_{i=1}^p \begin{bmatrix}\Phi_{i,11} & \Phi_{i,12} \\
+\Phi_{i,21} & \Phi_{i,22}
+\end{bmatrix} \begin{bmatrix}\dot{X}_{1,t-i}\\
+\dot{X}_{2,t-i}
+\end{bmatrix}  +\begin{bmatrix}\dot{a}_{1,t}\\
+\dot{a}_{2,t}
+\end{bmatrix}$$
+
+- Note que ahora los elementos de la matriz de coeficientes $\Phi_{i,12},\Phi_{i,12},\Phi_{i,21},\Phi_{i,22},~i=1,...,p$ son matrices también.
+
+ 
+## Causalidad de Granger de VAR(1) con $k=3$
+
+
+$$\begin{bmatrix}X_{1,t}\\
+X_{2,t}\\
+X_{3,t}
+\end{bmatrix}=\begin{bmatrix}\alpha_{1}\\
+\alpha_{2}\\
+\alpha_{3}
+\end{bmatrix}+\begin{bmatrix}\phi_{1,11} & \phi_{1,12} & \phi_{1,13} \\
+\phi_{1,21} & \phi_{1,22} & \phi_{1,23}\\
+\phi_{1,31} & \phi_{1,32} & \phi_{1,33}
+\end{bmatrix} \begin{bmatrix}X_{1,t-1}\\
+X_{2,t-1}\\
+X_{3,t-1}
+\end{bmatrix}+a_{t}$$
+- Suponga que nos interesa ver la causalidad de Granger entre $X_{1,t}$ y $(X_{2,t},X_{3,t})$, i.e. $X_t=(\dot{X}_{1,t},\dot{X}_{2,t})$ donde $\dot{X}_{1,t}=X_{1,t}$ y $\dot{X}_{2,t}=(X_{2,t},X_{3,t})$ con $k_1=1$ y $k_2=2$.
+- En este caso,
+
+$$\Phi_{1,11}=\left[\phi_{1,11}\right],~~\Phi_{1,12}=\left[\phi_{1,12},\phi_{1,13}\right]$$     $$\Phi_{1,21}=\begin{bmatrix}\phi_{1,21}\\ \phi_{1,31} \end{bmatrix},~~~\Phi_{1,22}=\begin{bmatrix} \phi_{1,22} & \phi_{1,23}\\ \phi_{1,32} & \phi_{1,33}\end{bmatrix}$$
+
+ 
+## Causalidad de Granger
+
+$$\begin{bmatrix}\dot{X}_{1t}\\
+\dot{X}_{2t}
+\end{bmatrix} = CD_t + \sum_{i=1}^p \begin{bmatrix}\Phi_{i,11} & \Phi_{i,12} \\
+\Phi_{i,21} & \Phi_{i,22}
+\end{bmatrix} \begin{bmatrix}\dot{X}_{1,t-i}\\
+\dot{X}_{2,t-i}
+\end{bmatrix}  +\begin{bmatrix}a_{1t}\\
+a_{2t}
+\end{bmatrix}$$
+- Para probar la hipótesis de que el subvector $\dot{X}_{1t}$ no cause a $\dot{X}_{2t}$ en el sentido de Granger sería probar:
+
+$H_0:\Phi_{i,21}=0$ para todo $i=1,...,p$    
+$H_1:\Phi_{i,21} \neq 0$ para algún $i=1,...,p$.
+
+- Considere $\beta$ el conjunto de todos los parámetros de interés, i.e. todos los elementos de $\left[\phi_1,...,\phi_p,C\right]$, podemos escribir las restricciones en la siguiente ecuación
+$$\Gamma \beta=c$$
+en donde $\Gamma$ es una matriz $(N \times (k^2p+kM))$.
+
+
+
+ 
+## Causalidad de Granger
+
+
+- Para probar la causalidad de Granger, se utiliza el estadístico de Wald para probar la hipótesis. Este estadístico tiene una distribución asintótica de $F(pk_1k_2,kT-n^*)$ donde $n^*$ es la cantidad total de parámetros del modelo.
+
+- Por otro lado, para probar la causalidad instantánea, se utiliza el estadístico Wald pero con las hipótesis planteadas de la siguiente forma:    
+$H_0:\Gamma \Sigma_a=c$     
+$H_1:\Gamma \Sigma_a \neq c$.   
+donde $\Gamma$ es una matriz $(N \times K(K+1)/2)$
+
+- En este caso, el estadístico tiene una distribución asintótica de $\chi_{N}^2$.
+
+ 
+## Ejemplo simulado
+
+- Considere una realización de $T=1000$ de un VAR(1):
+
+$$\begin{bmatrix}X_{1t}\\
+X_{2t}
+\end{bmatrix} =\begin{bmatrix}5\\
+10 \end{bmatrix} + \begin{bmatrix} 0.5 & 0.3 \\
+0 & -0.5
+\end{bmatrix} \begin{bmatrix}X_{1,t-1}\\
+X_{2,t-1}
+\end{bmatrix}  +\begin{bmatrix}a_{1t}\\
+a_{2t}
+\end{bmatrix}$$
+donde $a_t \sim N(0,\Sigma_a)$ con $\Sigma_a=I_2$.
+
+```{r  echo=FALSE, fig.align="center", out.width = "50%"}
+Apoly   <- array(c(1.0, -0.5,
+                   0, 0, 
+                   0, -0.3, 
+                   1, 0.5) ,
+                 c(2, 2, 2))
+B <- diag(2)
+TRD <- c(5, 10)
+var1  <- ARMA(A = Apoly, B = B, TREND = TRD)
+varsim <- simulate(var1, sampleT = 500,
+                   noise = list(w = matrix(rnorm(1000),
+                                           nrow = 500, ncol = 2)), rng = list(seed = c(123456))) 
+vardat <- matrix(varsim$output, nrow = 500, ncol = 2)
+colnames(vardat) <- c("x1", "x2")
+plot.ts(vardat, main = "", xlab = "")
+```
+
+ 
+## Ejemplo simulado
+
+
+```{r  echo=FALSE, fig.align="center", out.width = "70%"}
+acf(vardat)
+```
+
+
+ 
+## Ejemplo simulado
+
+```{r fig.align="center", out.width = "70%"}
+infocrit <- VARselect(vardat, lag.max = 5,
+                      type = "const")
+infocrit
+```
+
+ 
+## Ejemplo simulado
+
+```{r fig.align="center", out.width = "70%"}
+varsimest <- vars::VAR(vardat, p = 1, type = "const",
+                 season = NULL, exogen = NULL)
+roots <- vars::roots(varsimest)
+roots
+
+```
+
+- Los módulos de los autovalores son menores a 1.
+
+
+ 
+## Ejemplo simulado: Diagnósticos
+
+```{r fig.align="center", out.width = "70%"}
+(var2c.serial <- serial.test(varsimest, lags.pt = 16, type = "PT.asymptotic"))
+
+(var2c.arch <- arch.test(varsimest, lags.multi = 5, multivariate.only = TRUE))
+(var2c.norm <- normality.test(varsimest, multivariate.only = TRUE))
+```
+
+
+ 
+## Ejemplo simulado: Diagnósticos
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- Para $\hat{a}_1$
+```{r echo=FALSE, fig.align="center", out.width = "120%"}
+plot(var2c.serial, names = "x1")
+```
+
+:::
+
+::: {.column width="50%"}
+- Para $\hat{a}_2$
+```{r  echo=FALSE, fig.align="center", out.width = "120%"}
+plot(var2c.serial, names = "x2")
+```
+:::
+::::
+
+ 
+## Ejemplo simulado: Causalidad de Granger
+
+```{r, fig.align="center", out.width = "120%"}
+(var.causal.x1<- causality(varsimest,cause="x2"))
+```
+
+ 
+## Ejemplo simulado: Causalidad de Granger
+
+```{r, fig.align="center", out.width = "120%"}
+(var.causal.x2<- causality(varsimest,cause="x1"))
+```
+
+
+ 
+## Pronóstico
+
+- Dadas las observaciones $X_1,...,X_T$, el pronóstico $h$ pasos para frente, $X_{T+h}$ es dado por
+
+$$X_{T}(h)=CD_{T+h}+\phi_1 X_{T+h-1}+...+\phi_pX_{T+h-p},$$
+donde $X_{T}(j)=X_{T+j}$ para $j\leq 0$.
+
+- El error de pronóstico de $h$ pasos para frente es dado por
+$$e_h(h)=X_{T+h}-X_{T}(h)$$
+
+- El cálculo del error de pronóstico de $X_{T}(h)$ es más conveniente usar la representación de MA, y el error de pronóstico es dado por
+
+$$X_{T}(h)= a_{T+h} + \phi_1 a_{T+h-1}+...+\phi_{h-1} a_{T+1},$$
+
+ 
+## Ejemplo
+
+
+```{r echo=FALSE, fig.align="center", out.width = "70%"}
+predictions <- predict(varsimest, n.ahead = 25,
+                       ci = 0.95)
+fanchart(predictions)
+
+```
+
+
+
+
+ 
+## El análisis del impulso-respuesta.
+
+- Para cualquier modelo VAR(p) estacionario, tiene la representación de MA:
+
+$$X_{t}= \theta_0 a_{t}+\theta_1 a_{t-1}+ \theta_{2} a_{t-2}+...$$
+- Se interpreta como una regresión en donde cada entrada $(i,j)$ de $\theta_m,~m=1,...$ representa el cambio del valor esperado de $X_{j}$ bajo un cambio de una unidad de $X_i$.
+
+- Por ejemplo, para el modelo: 
+
+$$\begin{bmatrix}X_{1t}\\
+X_{2t}
+\end{bmatrix} = \begin{bmatrix}\theta_{0,11} & \theta_{0,12} \\
+\theta_{0,21} & \theta_{0,22}
+\end{bmatrix} \begin{bmatrix}a_{1,t}\\
+a_{2,t}
+\end{bmatrix}  +\begin{bmatrix}\theta_{1,11} & \theta_{1,12} \\
+\theta_{1,21} & \theta_{1,22}
+\end{bmatrix} \begin{bmatrix}a_{1,t-1}\\
+a_{2,t-1}
+\end{bmatrix}+\dots$$
+
+$\theta_{1,21}$ representa el cambio del valor esperado de $X_{2,t+1}$ bajo un cambio de una unidad de $X_{1,t}$.   
+$\theta_{1,12}$ representa el cambio del valor esperado de $X_{1,t+1}$ bajo un cambio de una unidad de $X_{2,t}$.   
+ 
+ 
+ 
+ 
+## Ejemplo
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r echo=FALSE, fig.align="center", out.width = "100%"}
+irf.y1 <- irf(varsimest, impulse = "x1",
+              response = "x2", n.ahead = 10,
+              cumulative = FALSE)
+plot(irf.y1)
+```
+:::
+
+::: {.column width="50%"}
+```{r echo=FALSE, fig.align="center", out.width = "100%"}
+irf.y2 <- irf(varsimest, impulse = "x2",
+              response = "x1", n.ahead = 10,
+              cumulative = FALSE)
+plot(irf.y2)
+```
+:::
+::::
+
+ 
+## Ejemplo: series macroeconómicas en Canada
+
+- Se tienen 4 series de primer trimestre de 1980 al cuarto trimestre de 2000. Se puede interpretar las series como:
+  - *prod*: productividad laboral
+  - *e*: tasa de empleo
+  - *U*: tasa de desempleo
+  - *rw*: salario real
+- Se ajusta un VAR(2) con tendencia.
+```{r  echo=FALSE, fig.align="center", out.width = "40%"}
+data(Canada)
+plot(Canada)
+```
+
+ 
+## Ejemplo: series macroeconómicas en Canada
+
+**Predicciones**:
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r echo=FALSE, fig.align="center", out.width = "100%"}
+fitvar <- vars::VAR(Canada, p = 2, type = "both")
+predictions <- predict(fitvar, n.ahead = 25,
+                       ci = 0.95)
+fanchart(predictions, name= "e")
+```
+
+:::
+
+::: {.column width="50%"}
+```{r echo=FALSE, fig.align="center", out.width = "100%"}
+fanchart(predictions, name= "U")
+```
+
+:::
+::::
+
+ 
