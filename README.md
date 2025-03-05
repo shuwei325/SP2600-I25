@@ -35,4 +35,4 @@ aplicaciones.
 
 # Ejercicios
 
-[Enlace](https://shuwei325.github.io/series_ej/)
+[Enlace](https://shuwei325.github.io/series2_ej/)
