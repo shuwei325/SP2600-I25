@@ -1,21 +1,28 @@
 ---
-title: 'Tema 1: Análisis espectral de series temporales-3'
-subtitle: 'Curso: Tópicos Avanzados de Series Temporales'
+title: 'Tema 1: Análisis espectral de series temporales^(3)^'
+subtitle: '[Curso: Tópicos Avanzados de Series Temporales](https://shuwei325.github.io/SP2600-I25)'
 format: clean-revealjs
 html-math-method:
   method: mathjax
   url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 author:
   - name: Shu Wei Chou Chen
-    #orcid: 0000-0001-5495-2486
+    url: https://shuwei325.github.io
+    orcid: 0000-0001-5495-2486
     email: shuwei.chou@ucr.ac.cr
-    affiliations: Escuela de Estadística, Universidad de Costa Rica
+    affiliations: 
+    - name: Escuela de Estadística, Universidad de Costa Rica
+      url: https://www.estadistica.ucr.ac.cr/
 #date: last-modified
 lang: es  # español
+filters:
+  - reveal-auto-agenda
+auto-agenda:
+  bullets: numbered
+  heading: Contenido
 ---
 
-
-```{r, include=FALSE}
+```{r}
 library(ggplot2)
 library(forecast)
 library(fpp2)
@@ -25,50 +32,36 @@ library(tidyverse)
 
 
 
-En la clase anterior vimos:
 
-1. Introducción
-2. Ejemplos de motivación
-3. Comportamiento cíclico y periodicidad.
-4. Estimación y periodograma.
-
+# Representación espectral de procesos estacionarios
  
-## Contenido
-
-<ol start="10">
-
-5. Función de densidad espectral. <br>
-6. Representación espectral de procesos estacionarios <br>
-7. Periodograma y la Transformada Discreta de Fourier<br>
-8. Estimación de periodograma.<br>
-</ol>
-
- 
-## Representación espectral
+## Representación espectral de procesos estacionarios
 
 - Es necesario entender los fundamentos teóricos de los conceptos de frecuencia (poblacional) antes de entrar al caso cuando se tiene series observadas (muestral).
 
 - Empezamos a definir la densidad espectral y su relación con un proceso estacionario.
 
  
-## Representación espectral
+---
 
 
 **Propiedad 1: Representación espectral de una función de autocovariancia**
 
-Si $\left\lbrace x_t \right\rbrace$ es estacionario con función de autocovariancia $\gamma(h)=Cov(x_{t+h},x_t)$, entonces existe una única función monótonamente creciente $F(\omega)$, llamada **función de distribución espectral**, con 
-- $F(-\infty)=F(-1/2)=0$, y 
-- $F(\infty)=F(1/2)=\gamma(0)$
+Si $\left\lbrace x_t \right\rbrace$ es un proceso estacionario con función de autocovariancia $\gamma(h)=Cov(x_{t+h},x_t)$, entonces existe una única función monótonamente creciente $F(\omega)$, llamada [función de distribución espectral]{.alert}, con 
+
+- $F\left(-\infty\right)=F\left(-\frac{1}{2}\right)=0$ y 
+
+- $F(\infty)=F\left(\frac{1}{2}\right)=\gamma(0),$
 
 tal que
 
-$$\gamma(h)= \int_{-\frac{1}{2}}^{\frac{1}{2}} e^{2\pi i\omega h} dF(\omega)$$
+$$\gamma(h)= \int_{-\frac{1}{2}}^{\frac{1}{2}} e^{2\pi i\omega h} dF(\omega).$$
 
 **Nota:** Esta propiedad usa el concepto de integral de Riemann-Stieltjes (ver C.4, Shumway & Stoffer). Cuando la función de autocovariancia es absolutamente sumable, esa función de distribución espectral es absolutamente continua con $dF(\omega)=f(\omega)d\omega$.
 
 
  
-## Representación espectral
+---
 
 **Propiedad 2: Densidad espectral**
 
@@ -77,42 +70,43 @@ $$\sum_{h=-\infty}^{\infty} |\gamma(h)|< \infty$$
 entonces tiene la representación
 $$\gamma(h)= \int_{-\frac{1}{2}}^{\frac{1}{2}} e^{2\pi i\omega h} f(\omega)d\omega,~~~ h=0,\pm 1,\pm 2,...$$
 y la transformación inversa de la densidad espectral
-$$f(\omega) = \sum_{h=-\infty}^{\infty} \gamma(h) e^{-2 \pi i \omega h}, ~~~~~~ -\frac{1}{2} \leq \omega \leq \frac{1}{2}$$
+$$f(\omega) = \sum_{h=-\infty}^{\infty} \gamma(h) e^{-2 \pi i \omega h}, ~~~~~~ -\frac{1}{2} \leq \omega \leq \frac{1}{2}.$$
  
-## Representación espectral
+---
 
-Algunas propiedades de la densidad espectral:
+Algunas **propiedades de la densidad espectral**:
 
 - $f(\omega) \geq 0$ para todo $\omega$,
 
 debido a que $\gamma(h)$ es definida no negativa.
 
-- $f(\omega)=f(-\omega)$
+- $f(\omega)=f(-\omega)$.
 
-- $\gamma(0)= Var(x_t) = \int_{-\frac{1}{2}}^{\frac{1}{2}} f(\omega)d\omega$
+- $\gamma(0)= Var(x_t) = \int_{-\frac{1}{2}}^{\frac{1}{2}} f(\omega)d\omega$.
 
-**Nota:** 
+:::{.callout-note}
+
 - La función de autocovariancia y la función de distribución espectral contiene la misma información.
-- La FAC expresa la información en término de rezagos (tiempo), mientras que la distribución espectral expresa la misma información en término de ciclos (frecuencias).
 
+- La ACF expresa la información en término de rezagos (tiempo), mientras que la distribución espectral expresa la misma información en término de ciclos (frecuencias).
+:::
  
 ## Ruido blanco
 
 :::: {.columns}
 
 ::: {.column width="50%"}
-- Una colección de variables aleatorias no correlacionadas, $w_t$, con media 0 y variancia $\sigma_w^2$, denotado por $w_t \sim wn(0,\sigma_w^2)$.
+- Sea $w_t \sim wn(0,\sigma_w^2)$.
 
-- La FAC está dada por:
+- La ACF está dada por:
 
-$$
-\gamma_w(h)=\left\lbrace 
+$$\gamma_w(h)=\left\lbrace 
 \begin{aligned}
 \sigma_w^2, & & h = 0 \\
 0, & &  h \neq 0.
 \end{aligned}
-\right. 
-$$
+\right.$$
+
 - Su densidad espectral está dada por:
 $$f_w(\omega)=\sigma_w^2,$$
 para $-1/2 \leq \omega \leq 1/2$.
@@ -130,17 +124,18 @@ plot.ts(w, main="")
 :::
 ::::
 
- 
+# La densidad espectral de un modelo ARMA
+
 ## Proceso lineal
 
 - Como un proceso lineal es una herramienta que engloba varios modelos de series estacionarias (ej: ARMA), es importante presentar los resultados teóricos correspondientes. 
 
-- Un filtro lineal utiliza coeficientes $a_j, j=0,\pm1,...$, para transformar una serie *input* $x_t$ a una serie *ouput* $y_t$:
+- Un [filtro lineal]{.alert} utiliza coeficientes $a_j, j=0,\pm1,...$, para transformar una serie *input* $x_t$ a una serie *ouput* $y_t$:
 
 $$y_t=\sum_{j=-\infty}^{\infty}a_j x_{t-j},~~~ \sum_{j=-\infty}^{\infty}|a_j| < \infty.$$
 
  
-## Proceso lineal
+---
 
 **Propiedad: El espectro de una serie estacionaria filtrada**
 
@@ -148,20 +143,23 @@ Si $f_X(\omega)$ es la densidad espectral de $x_t$, una serie estacionaria. Ento
 $$f_Y(\omega)=|A(\omega)|^2 f_X(\omega),$$
 donde 
 $$A(\omega)=\sum_{j=-\infty}^{\infty} a_j e^{-2\pi i \omega j}$$
-es llamada la función respuesta de frecuencia.
+es llamada la [función respuesta de frecuencia]{.alert}.
 
-**Nota:** $A(\omega)$ es la transformada discreta de Fourier de $a_j$.
+:::{.callout-note}
 
+$A(\omega)$ es la transformada discreta de Fourier de $a_j$.
+
+:::
 
  
-## Proceso lineal
+---
 
-Un proceso ARMA es un caso particular de un proceso lineal. Recuerde que un proceso ARMA(p,q) se define como:
+- Un proceso ARMA es un caso particular de un proceso lineal. Recuerde que un proceso ARMA(p,q) se define como:
 
 $$x_t=\phi_1 x_{t-1}+\phi_2 x_{t-2}+...+\phi_p x_{t-p}$$
 $$+w_t-\theta_1 w_{t-1}-\theta_2 w_{t-2}-...-\theta_q w_{t-q}$$
 
-Utilizando los operadores de rezagos, el ARMA(p,q) se puede escribir como
+- Utilizando los operadores de rezagos, el ARMA(p,q) se puede escribir como
 
 $$\phi(B)x_t=\theta(B)w_t,$$
 donde:<br /> 
@@ -169,7 +167,7 @@ $\phi(B)=1-\phi_1 B -\phi_2  B^2-...-\phi_p B^p$ es **el operador autoregresivo*
 $\theta(B)=1-\theta_1 B-\theta_2 B^2-...-\theta_q B^q$ es **el operador de medias móviles**.
 
  
-## Proceso lineal
+---
 
 Un proceso ARMA(p,q) estacionario e invertible se puede escribir como:
 
@@ -184,79 +182,148 @@ Si $x_t$ es ARMA(p,q):
 Su densidad espectral es dada por
 
 $$f_X(\omega)=\sigma_w^2 \frac{|\theta(e^{-2 \pi i \omega})|^2}{|\phi(e^{-2 \pi i \omega})|^2}.$$
+
+## Conceptos de números complejos
+
+- No vamos a ver con detalles la teoría de los números complejos, pero una breve introducción de la definición y algunas propiedades son útiles para el curso.
+
+- Usualmente, se denota un número complejo como $z=x+iy$, donde $i^2=-1$.
+  - $x$: la parte real y $y$: la parte imaginaria.
+
+- Los [números complejos]{.alert} son pares de números reales:
+
+$$\mathbb{C} := \left\lbrace (x,y):  x,y \in \mathbb{R} \right\rbrace.$$
+
+con dos operaciones: 
+
+- **Adición**: $(x,y)+(a,b):= (x+a,y+b)$ y 
+- **Multiplicación**: $(x,y) \cdot (a,b) := (xa-yb, xb+ya)$.
+
+- $\mathbb{C}$ es una extensión de $\mathbb{R}$, pues los números complejos de forma $(x,0)$ se comporta de forma identica a los números reales.
+
+$$(x,0)+(a,0):= (x+a,0)~~, ~~\text{y} ~~ (x,0) \cdot (a,0) := (xa, 0).$$
+
+---
+
+### Algunas definiciones y propiedades
+
+Sean $z,z_1,z_2 \in \mathbb{C}$, y $\phi, \phi_1,\phi_2 \in \mathbb{R}$.
+
+- El [valor absoluto (módulo)]{.alert} de $z$: $|z|= \sqrt{x^2+y^2}$.
+- La [función exponencia]{.alert} de $z$: $e^{i\phi}=\cos \phi + i \sin \phi$.
+
+:::: {.columns}
+::: {.column width="50%"}
+- $e^{i\phi_1}e^{i\phi_2}=e^{i(\phi_1+\phi_2)}$.
+- $e^{i0}=1$.
+- $\frac{1}{e^{i\phi}}=e^{-i\phi}$.
+:::
+  
+::: {.column width="50%"}
+- $e^{i(\phi+2\pi)}= e^{i\phi}$
+- $\left| e^{i\phi} \right|=1$
+- $\frac{d}{d\phi}e^{i\phi} = i e^{i \phi}$
+:::
+::::
+
+- La [conjugada compleja]{.alert} de $z$: $\overline{z}=\overline{x+iy}=x-iy$.
+
+:::: {.columns}
+::: {.column width="50%"}
+- $\overline{z_1\pm z_2}=\overline{z_1} \pm \overline{z_2}$.
+- $\overline{z_1\cdot z_2}=\overline{z_1} \cdot \overline{z_2}$.
+- $\overline{\left(\frac{z_1}{z_2}\right)}=\frac{\overline{z_1}}{\overline{z_2}}$.
+- $\overline{\overline{z}}=z$
+:::
+  
+::: {.column width="50%"}
+- $|\overline{z}|=|z|$.
+- $|z|^2 = x^2+y^2 = (x+iy)(x-iy)|z|^2 = z \overline{z}$.
+- $\overline{e^{i\phi}}= e^{-i\phi}$.
+:::
+::::
+
+
  
 ## Ejemplos
 
-**MA(1):**
+#### MA(1):
+
 - Considere $X_t=w_t+0.5 w_{t-1}$. 
+
 - El operador de medias móviles es $\theta(B)=1+0.5 B$.
 - Entonces, 
 
 
-$$f_X(\omega)=\sigma_w^2 |\theta(e^{-2 \pi i \omega})|^2$$
-$$=\sigma_w^2 |1+0.5 e^{-2 \pi i \omega}|^2$$
+$$f_X(\omega)=\sigma_w^2 \left|\theta(e^{-2 \pi i \omega})\right|^2$$
+$$=\sigma_w^2 \left|1+0.5 e^{-2 \pi i \omega}\right|^2$$
 $$=\sigma_w^2 (1+0.5 e^{-2 \pi i \omega})(1+0.5 e^{2 \pi i \omega})$$
-$$=\sigma_w^2 \left[1.25 + 0.5 (e^{-2 \pi i \omega}+e^{2 \pi \omega})\right]$$
- 
-## Ejemplos
+$$=\sigma_w^2 \left[1.25 + 0.5 \left(e^{-2 \pi i \omega}+e^{2 \pi \omega}\right)\right]$$
+:::
+  
+---
 
-**AR(2):**
+#### AR(2):
+
 - Considere $X_t-X_{t-1}+0.9X_{t-2}=w_t$. 
 - El operador autorregresivo es $\phi(B)=1-B+0.9 B^2$.
 - Entonces, 
 $$|\phi(e^{-2 \pi i \omega})|^2=(1-e^{-2 \pi i \omega}+0.9 e^{-4 \pi i \omega})(1-e^{2 \pi i \omega}+0.9 e^{4 \pi i \omega})$$
-$$=2.81-3.8 cos(2\pi\omega)+1.8 cos(4\pi\omega).$$
+$$=2.81-3.8 \cos(2\pi\omega)+1.8 \cos(4\pi\omega).$$
+
 - De esta forma, 
 
-$$f_X(\omega)=\sigma_w^2 \frac{1}{2.81-3.8 cos(2\pi\omega)+1.8 cos(4\pi\omega)}.$$
+$$f_X(\omega)=\sigma_w^2 \frac{1}{2.81-3.8 \cos(2\pi\omega)+1.8 \cos(4\pi\omega)}.$$
 
  
-## Ejemplos
+---
 
-```{r echo=FALSE, out.width = "70%", fig.align="center"}
+```{r}
+#| fig-align: center
 par(mfrow=c(2,2))
 arma.spec(main="Ruido blanco", col=4)
-arma.spec(ma=.5, main="MA(1)", col=4)
-arma.spec(ar=c(1,-.9), main="AR(2)", col=4)
+arma.spec(ma=.5, main=expression(paste("MA(1)     ", theta, "=-0.5")), col=4)
+arma.spec(ar=c(1,-.9), main=expression(paste("AR(2)     ", phi[1], "=1, ", phi[2],"-0.9")), col=4)
 ```
 
+# Periodograma y la Transformada Discreta de Fourier
  
 ## Periodograma y la Transformada Discreta de Fourier
 
 - A continuación, presentamos los conceptos equivalentes de la representación espectral pero al caso de series temporales observadas de forma discreta.
 
-- Sea $x_1,...,x_T$ una serie temporal observada. Defina la **Transformada Discreta de Fourier (DFT)**:
-$$d(\omega_j)=T^{-1/2}\sum_{t=1}^T x_t e^{-2 \pi i \omega_j t},~~~ \text{para}~ j=0,1,...,T-1,$$
-donde frecuencias $\omega_j=j/n$ son llamadas frecuencias fundamentales o de Fourier.
+- Sea $x_1,...,x_T$ una serie temporal observada. Defina la [Transformada Discreta de Fourier (DFT)]{.alert}:
+$$d(\omega_j)= T^{-1/2}\sum_{t=1}^T x_t e^{-2 \pi i \omega_j t},~~~ \text{para}~ j=0,1,...,T-1,$$
+donde frecuencias $\omega_j=\frac{j}{n}$ son llamadas [frecuencias fundamentales]{.alert} o [de Fourier]{.alert}.
 
-- DFT requiere $T^2$ operaciones complejas. Cuando $T$ es grande, es más factible usar la Transformada Rápida de Fourier (FFT), propuesta por Cooley y Tukey que requiere únicamente $T ln T$ operaciones.
+- DFT requiere $T^2$ operaciones complejas. Cuando $T$ es grande, es más factible usar la [Transformada Rápida de Fourier (FFT)]{.alert}, propuesta por Cooley y Tukey que requiere únicamente $T \ln T$ operaciones.
 
-
- 
-## Periodograma y la Transformada Discreta de Fourier
+---
 
 - Esta transformada es una transformación lineal uno a uno, i.e.
 
-- Dada $x_1,...,x_T$ una serie temporal observada. Su **Transformada Discreta de Fourier (DFT)** es dada por:
+- Dada $x_1,...,x_T$ una serie temporal observada. Su [Transformada Discreta de Fourier (DFT)]{.alert} es dada por:
 $$d(\omega_j)=T^{-1/2}\sum_{t=1}^T x_t e^{-2 \pi i \omega_j t},~~~ \text{para}~ j=0,1,...,T-1,$$
 
-- Se puede definir la DFT inversa
+- Se puede definir la [DFT inversa]{.alert}
 
 $$x_t=T^{-1/2}\sum_{t=1}^{T-1} d(\omega_j) e^{2 \pi i \omega_j t},~~~ \text{para}~~ t=1,...,T.$$
  
-## Periodograma y la Transformada Discreta de Fourier
+---
 
-- Sea $x_1,...,x_T$ una serie temporal observada. Defina el **periodograma**:
+- Sea $x_1,...,x_T$ una serie temporal observada. Defina el [periodograma]{.alert}:
 
 $$I(\omega_j)=|d(\omega_j)|^2,~~~ \text{para}~ j=0,1,...,T-1,$$
+
 - Se puede comprobar que:
 
 $$I(\omega)=|d(\omega_j)|^2=\sum_{h=-(T-1)}^{T-1} \hat{\gamma}(h) e^{-2 \pi i \omega_j h},~~~ \text{para}~~ t= 1,...,T,$$
+
 donde $\hat{\gamma}(h)$ es la función de autocovariancia muestral.
+
 - Se puede interpretar el periodograma como la densidad espectral muestral de $x_t$.
 
 
- 
 ## Propiedades del periodograma
 
 - Se puede comprobar que:
@@ -267,15 +334,16 @@ $$E[I(\omega_j)]=\sum_{h=-(T-1)}^{T-1} \frac{T-|h|}{T} \gamma(h) e^{-2 \pi i \om
 
 
 $$E[I(\omega_{j:T})] \rightarrow f(\omega)=\sum_{h=-\infty}^{\infty} \gamma(h) e^{-2 \pi i h \omega},$$
-donde $\omega_{j:T}=j_T/T$ es una secuencia que tiende a $\omega$.
+donde $\omega_{j:T}=\frac{j_T}{T}$ es una secuencia que tiende a $\omega$.
 
  
-## Propiedades del periodograma
+---
+
 **Propiedad: Distribución del periodograma**
 
 - Sea
 $$x_t=\sum_{j=-\infty}^\infty \psi_j w_{t-j},~~~~~\sum_{j=-\infty}^\infty |\psi_j| < \infty,$$
-donde $w_t \sim iid(0,\sigma_w^2)$. Si $\sum_{h=-\infty}^\infty |h| |\gamma(h)| < \infty$, entonces para cualquier colección de $m$ frecuencias distintas $\omega_j \in \{0,1/2\}$ con $\omega_{j:T}\rightarrow \omega_j$
+donde $w_t \sim iid(0,\sigma_w^2)$. Si $\sum\limits_{h=-\infty}^\infty |h| |\gamma(h)| < \infty$, entonces para cualquier colección de $m$ frecuencias distintas $\omega_j \in \{0,1/2\}$ con $\omega_{j:T}\rightarrow \omega_j$
 
 $$\frac{2 I(\omega_{j:T})}{f(\omega_j)} \rightarrow \chi^2_2.$$
  
@@ -283,42 +351,38 @@ $$\frac{2 I(\omega_{j:T})}{f(\omega_j)} \rightarrow \chi^2_2.$$
 - Como consecuencia, se puede construir un intervalo de confianza de $100(1-\alpha)\%$, con
 $$\frac{2 I(\omega_{j:T})}{\chi^2_2(1-\alpha/2)}<f(\omega)<\frac{2 I(\omega_{j:T})}{\chi^2_2(\alpha/2)}$$
 
-## Consideraciones importantes
+# Ejemplos
+
+## Consideraciones importantes en la práctica
 
 - En la práctica, es común encontrar series con tendencias.
 - La presencia de tendencias produce frecuencias bajas extremas que ocultan la apariencia de frecuencias altas.
 - Por lo tanto, se debe eliminar la tendencia utilizando algún método (regresión lineal, cuadrática, medias móviles, etc.)
 
-
-
  
-## Ejemplo: El Niño y la población de peces (SOI y reclutamiento)
+## El Niño y la población de peces (SOI y reclutamiento)
 
 - Se tiene la serie ambiental de índice de oscilación del sur (SOI, *Southern Oscillation Index*), y la serie de número de peces nuevos (Reclutamiento) de 453 meses de 1950 a 1987.
 - SOI mide cambios en presión relacionada a la temperatura del superficie del mar en el oceano pacífico central, el cual se calienta cada 3-7 años por el efecto El Niño.
 
-```{r echo=FALSE,warning=FALSE, message=FALSE, fig.align="center", out.width = "40%"}
-par(mfrow = c(2,1))  # set up the graphics
+```{r}
+#| fig-align: center
+#| echo: true
+library(astsa)
+par(mfrow = c(2,1)) 
 tsplot(soi, ylab="", main="SOI")
 tsplot(rec, ylab="", main="Reclutamiento") 
 ```
 
 
-
- 
-## Ejemplo: SOI y reclutamiento 
+## SOI y reclutamiento 
 
 :::: {.columns}
 
 ::: {.column width="50%"}
-
-- El eje X muestra múltiplos de $\Delta=\frac{1}{12}$.
-- Ambos periodogramas muestran el principal pico cuando $\omega=1\Delta=\frac{1}{12}$.
-- Además, una posible potencia alrededor de $\omega=\frac{1}{4}\Delta=\frac{1}{48}.$, representando el efecto del Niño que tiene la característica de tener el ciclo irregular.
-:::
-
-::: {.column width="50%"}
-```{r echo=FALSE, fig.align="center", out.width = "100%"}
+```{r}
+#| fig-align: center
+#| echo: true
 par(mfrow=c(2,1))
 soi.per = mvspec(soi)             
 abline(v=1/4, lty="dotted")
@@ -326,38 +390,40 @@ rec.per = mvspec(rec)
 abline(v=1/4, lty="dotted")
 ```
 :::
+
+::: {.column width="50%"}
+
+- El eje X muestra múltiplos de $\Delta=\frac{1}{12}$.
+- Ambos periodogramas muestran el principal pico cuando $\omega=1\Delta=\frac{1}{12}$.
+- Además, una posible potencia alrededor de $\omega=\frac{1}{4}\Delta=\frac{1}{48}.$, representando el efecto del Niño que tiene la característica de tener el ciclo irregular.
+:::
 ::::
 
 
-## Ejemplo: SOI y reclutamiento 
-```{r}
-head(soi.per$details) 
-```
-
+---
 
 ```{r}
-tail(soi.per$details) 
+#| echo: true
+soi.per$details 
 ```
 
-- Recuerde que el dominio de frecuencia es $(0,0.5)$. El gráfico muestra las frecuencias transformadas que debe multiplicar por $12$, y por lo tanto, $(0 \times 12, 0.5 \times 12)$.
-
- 
-## Ejemplo: SOI y reclutamiento 
+- Recuerde que el dominio de frecuencia es $(0,0.5)$. El gráfico muestra las frecuencias transformadas que debe multiplicar por $12$, y por lo tanto, $(0 \times 12, 0.5 \times 12)=(0,6)$.
 
 - Las frecuencias más importantes:
 
 ```{r}
+#| echo: true
 soi.per$details[c(10,40),] 
 ```
 
 
- 
-## Ejemplo: SOI y reclutamiento 
+---
 
 - Recordando la propiedad del periodograma, se puede construir un intervalo de confianza de $100(1-\alpha)\%$, con
 $$\frac{2 I(\omega_{j:T})}{\chi^2_2(1-\alpha/2)}<f(\omega)<\frac{2 I(\omega_{j:T})}{\chi^2_2(\alpha/2)}$$
 
 ```{r}
+#| echo: true
 U = qchisq(.025,2)
 L = qchisq(.975,2)
 # para frecuencia= 1/4
@@ -367,7 +433,7 @@ c(2*soi.per$spec[40]/L,2*soi.per$spec[40]/U)
 ```
 
  
-## Ejemplo: SOI y reclutamiento 
+---
 
 - ¡Note que el intervalo es muy amplio y **la incertidumbre es muy grande**!
 
@@ -376,22 +442,34 @@ c(2*soi.per$spec[40]/L,2*soi.per$spec[40]/U)
 $$\frac{2 I(\omega_{j:T})}{f(\omega_j)} \rightarrow \chi^2_2.$$
 
 
-$\Rightarrow E\left[I(\omega)\right] \approx f(\omega)$ y $Var\left[I(\omega)\right] \approx f^2(\omega)$.
+- En otras palabras, cuando $T$ es grande, 
+$$\Rightarrow E\left[I(\omega)\right] \approx f(\omega), \text{   y    } Var\left[I(\omega)\right] \approx f^2(\omega).$$
 
 - Es decir, el periodograma no es un estimador consistente de la densidad espectral, i.e.
 
-$$Var\left[I(\omega)\right] \nrightarrow 0 ~~\text{cuando} ~~n \rightarrow \infty.$$
-- La solución es utilizar un **periodograma suavizado**
+$$Var\left[I(\omega)\right] \nrightarrow 0 ~~\text{cuando} ~~T \rightarrow \infty.$$
+- La solución es utilizar un [periodograma suavizado]{.alert}
 
  
 ## En la próxima clase veremos
 
-
-<ol start="9">
-9. Estimaciones en el dominio de frecuencia.<br>
-<p style="margin-left: 25px;">  &#9702; Estimación espectral no paramétrica </p>
-<p style="margin-left: 25px;">  &#9702; Estimación espectral paramétrica </p> <br>
+- Estimaciones en el dominio de frecuencia
+  - Estimación espectral no paramétrica 
+  - Estimación espectral paramétrica
   
-10. Aplicaciones del análisis espectral.<br>
-</ol>
+- Aplicaciones del análisis espectral.
+
+## Paquetes en R
+
+Para replicar los ejemplos de esta presentación, necesitan estos paquetes:
+
+```{r}
+#| echo: true
+library(ggplot2)
+library(forecast)
+library(fpp2)
+library(astsa)
+library(tidyverse)
+```
+
 

@@ -7,7 +7,13 @@ contributes:
     revealjs:
       theme: [default, clean.scss]
       menu:
-        side: left
+        side: right
+        width: wide
+        numbers: true
       slide-number: true
       date-format: long
-      scrollable: true
+      fig-width: 5
+      fig-height: 5
+
+    
+

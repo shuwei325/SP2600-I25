@@ -1,17 +1,25 @@
 ---
-title: 'Tema 2: Análisis multivariado de series temporales-4'
-subtitle: 'Curso: Tópicos Avanzados de Series Temporales'
+title: 'Tema 2: Análisis multivariado de series temporales^(4)^'
+subtitle: '[Curso: Tópicos Avanzados de Series Temporales](https://shuwei325.github.io/SP2600-I25)'
 format: clean-revealjs
 html-math-method:
   method: mathjax
   url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 author:
   - name: Shu Wei Chou Chen
-    #orcid: 0000-0001-5495-2486
+    url: https://shuwei325.github.io
+    orcid: 0000-0001-5495-2486
     email: shuwei.chou@ucr.ac.cr
-    affiliations: Escuela de Estadística, Universidad de Costa Rica
+    affiliations: 
+    - name: Escuela de Estadística, Universidad de Costa Rica
+      url: https://www.estadistica.ucr.ac.cr/
 #date: last-modified
 lang: es  # español
+filters:
+  - reveal-auto-agenda
+auto-agenda:
+  bullets: numbered
+  heading: Contenido
 ---
 
 
@@ -31,98 +39,84 @@ library(MTS)
 #library(dse)
 ```
 
-En las clases anteriores vimos:
+# Procesos integrados
 
-1. Introducción
-2. Modelos ARMA vectoriales
-3. Causalidad de Granger <br>
-
- 
-## Contenido
-
-<ol start="10">
-
-
-4. Raíz unitarias <br>
-5. Procesos cointegrados: definición y pruebas de hipótesis para cointegración y modelos de corrección del error. <br>
-</ol>
-
-
- 
 ## Procesos integrados
 
 Considere una serie **univariada** $X_t$. 
 
-**Definición:** Si $\nabla^d X_t$ es estacionario, decimos que $X_t$ es integrado de orden $d$, y es denotado por $X_t \sim I(d)$.
 
-- Ejemplo: Si $\nabla^d X_t \sim ARMA(p,q)$, decimos que $X_t$ es ARIMA(p,d,q), o bien $X_t \sim I(d)$.
+::: {#def-procesointegrado1}
+#### Proceso integrado
 
-- Ejemplo: Cualquier serie temporal estacionaria es $I(0)$.
+Si $\nabla^d X_t$ es estacionario, decimos que $X_t$ es integrado de orden $d$, y es denotado por $X_t \sim I(d)$.
+:::
+
+::: {#exm-procesointegrado}
+
+- Si $\nabla^d X_t \sim ARMA(p,q)$, decimos que $X_t$ es ARIMA(p,d,q), o bien $X_t \sim I(d)$.
+
+- Cualquier serie temporal estacionaria es $I(0)$.
+
+:::
+
+---
 
 Recuerde la diferenciación estacional $\nabla_s^D X_t=(1-B^s)^D X_t$
 
-**Definición:** Si $\nabla^d \nabla_s^D X_t$ es estacionario, decimos que $X_t$ es estacionalmente integrado de orden $d$ y $D$, y es denotado por $X_t \sim I(d,D)$.
 
-- Ejemplo: Si $\nabla^d \nabla_s^D X_t \sim ARMA(p,q)$, entonces $X_t$ es $SARIMA(p,d,q)(0,D,0)_s$. Decimos que $X_t \sim I(d,D)$.
+::: {#def-procesointegrado2}
+#### Proceso integrado estacionalmente
 
+Si $\nabla^d \nabla_s^D X_t$ es estacionario, decimos que $X_t$ es estacionalmente integrado de orden $d$ y $D$, y es denotado por $X_t \sim I(d,D)$.
+::: 
 
- 
-## Serie estacionaria por tendencia y por diferencia.
+::: {#exm-procesointegrado2}
+- Si $\nabla^d \nabla_s^D X_t \sim ARMA(p,q)$, entonces $X_t$ es $SARIMA(p,d,q)(0,D,0)_s$. Decimos que $X_t \sim I(d,D)$.
+:::
+
+# Serie estacionaria por tendencia y por diferencia
+
+## Serie estacionaria por tendencia y por diferencia
 
 Suponga que una serie temporal $\left\lbrace X_t \right\rbrace$ es una realización de una tendencia determinística y un componente estocástico:
-
-$$
-X_t=CD_t+ \eta_t,
-$$
+$$X_t=CD_t+ \eta_t,$$
 donde $CD_t=\beta_0+\beta_1 t$ y $\eta_t \sim ARMA(p,q)$ que no necesariamente es estacionario e invertible, i.e., tiene su representación 
 $$\phi(B)\eta_t=\theta(B)\epsilon_t$$
 
-**Caso 1:** Si todas las raíces de $\phi(B)$ están fuera del circulo unitario, $\left\lbrace X_t \right\rbrace$ es estacionaria alrededor de una tendencia determinística. Por lo tanto, se puede eliminar la tendencia de la serie original y ajustar un modelo ARMA a los residuales. Este caso se dice que el modelo es **estacionario por tendencia** (*trend-stationary*).
+**Caso 1:** Si todas las raíces de $\phi(B)$ están fuera del circulo unitario, $\left\lbrace X_t \right\rbrace$ es estacionaria alrededor de una tendencia determinística. Por lo tanto, se puede eliminar la tendencia de la serie original y ajustar un modelo ARMA a los residuales. Este caso se dice que el modelo es [estacionario por tendencia (*trend-stationary*)]{.alert}.
 
+--- 
 
- 
-## Serie estacionaria por tendencia y por diferencia.
-
-Suponga que una serie temporal $\left\lbrace X_t \right\rbrace$ es una realización de una tendencia determinística y un componente estocástico:
-
-$$
-X_t=CD_t+ \eta_t,
-$$
-donde $CD_t=\beta_0+\beta_1 t$ y $\eta_t \sim ARMA(p,q)$ que no necesariamente es estacionario e invertible, i.e., tiene su representación 
-$$\phi(B)\eta_t=\theta(B)\epsilon_t$$
-
-**Caso 2:** si existe una raíz que está exactamente en el círculo unitario y el resto de las raíces están fuera del círculo unitario, i.e. $\phi(B)=(1-B)\phi^*(B)$, y $\phi^*(B)\eta_t$ es estacionario. Por lo tanto, $\left\lbrace X_t \right\rbrace$ es estacionaria por diferencia. Por lo tanto, se puede realizar diferenciación para obtener una serie estacionaria. Caso más común es cuando $d=1$. Este caso se dice que el modelo es **estacionario por diferencia** (*difference-stationary*).
-
-
- 
-## Serie estacionaria por tendencia y por diferencia.
+**Caso 2:** si existe una raíz que está exactamente en el círculo unitario y el resto de las raíces están fuera del círculo unitario, i.e. $\phi(B)=(1-B)\phi^*(B)$, y $\phi^*(B)\eta_t$ es estacionario, por ende, $\left\lbrace X_t \right\rbrace$ es estacionaria por diferencia. Por lo tanto, se puede realizar diferenciación para obtener una serie estacionaria. Caso más común es cuando $d=1$. Este caso se dice que el modelo es [estacionario por diferencia (*difference-stationary*)]{.alert}.
 
 Note que el componente del error es $I(1)$, i.e. ARIMA(p,1,q):
 $$\phi^*(B)(1-B)\eta_t=\theta(B)\epsilon_t$$
 Si aplicamos la diferenciación a
-$$
-X_t=\beta_0+\beta_1 t+ \eta_t,
-$$
-Tenemos
+$$X_t=\beta_0+\beta_1 t+ \eta_t,$$
+Tenemos que $\nabla X_t$ es estacionario, pues
 
 $$X_t-X_{t-1}=\beta_0+\beta_1 t+ \eta_t - [\beta_0+\beta_1 (t-1)+ \eta_{t-1}]$$
 $$=\beta_1  + [\eta_t-\eta_{t-1}]$$
-y es estacionario.
 
- 
+
 ## Ejemplo: Tendencia determinística y estocástica
 
  
-```{r echo=FALSE, out.width = "50%", fig.align="center"}
+```{r}
+#| echo: true
 autoplot(austa) + xlab("Year") +
   ylab("millions of people") +
   ggtitle("Total annual international visitors to Australia")
 ```
 
  
-## Ejemplo: Tendencia determinística y estocástica
+---
 
-```{r, out.width = "50%", fig.align="center"}
+### Ajuste con tendencia determinística
+
+```{r}
+#| echo: true
 trend <- seq_along(austa)
 (fit1 <- auto.arima(austa, d=0, xreg=trend))
 ```
@@ -132,10 +126,12 @@ $$\eta_t=1.113\eta_{t-1}-0.380 \eta_{t-2}+\epsilon_t$$
 $$\epsilon_t \overset{iid}{\sim} N(0,0.03)$$
 
 
- 
-## Ejemplo: Tendencia determinística y estocástica
+---
 
-```{r, out.width = "50%", fig.align="center"}
+### Ajuste con tendencia estocástica
+
+```{r}
+#| echo: true
 (fit2 <- auto.arima(austa, d=1))
 ``` 
 
@@ -147,11 +143,11 @@ $$\eta_t=\eta_{t-1}+0.301\epsilon_{t-1}+\epsilon_t$$
 $$\epsilon_t \overset{iid}{\sim} N(0,0.034)$$
 
 
- 
-## Tendencia determinística y estocástica
+---
 
 
-```{r echo=FALSE, out.height = '500px', out.width = '700px', fig.align="center"}
+```{r}
+#| echo: true
 fc1 <- forecast::forecast(fit1,
   xreg = length(austa) + 1:10)
 fc2 <- forecast::forecast(fit2, h=10)
@@ -160,25 +156,23 @@ autoplot(austa) +
   autolayer(fc1, series="Deterministic trend") +
   ggtitle("Forecasts from trend models") +
   xlab("Year") + ylab("Visitors to Australia (millions)") +
-  guides(colour=guide_legend(title="Forecast"))
+  guides(colour=guide_legend(title="Forecast"))+
+  theme_bw()+ theme(legend.position="top")
 ``` 
 
 
 
- 
-## Serie estacionaria por tendencia y por diferencia.
+## Serie estacionaria por tendencia y por diferencia
 
 - Ejemplo de estos dos tipos de estacionariedad:
 
-**Tendencia determinística:**
+[Tendencia determinística:]{.alert}
 $$X_t=X_{t-1}+\mu=X_0+\mu t$$
-**Tendencia estocástica (acumulación de choques aleatorias):**
+[Tendencia estocástica (acumulación de choques aleatorias):]{.alert}
 $$X_t=X_{t-1}+\epsilon_t=X_0+\sum_{s=1}^t \epsilon_s$$
 donde $\mu$ es una constante y $\epsilon_t$ es ruido blanco.
 
-
- 
-## Serie estacionaria por tendencia y por diferencia.
+---
 
 - En síntesis, una serie temporal $\left\lbrace X_t \right\rbrace$ está compuesto por una tendencia determinística y un componente estocástico $\eta_t$ que es modelado por $ARIMA(p,d,q)$.
 - Se puede descomponer $\eta_t$ en dos componentes: tendencia estocástica (choques aleatorios) y el componente aleatorio "estacionario". 
@@ -190,14 +184,12 @@ donde $\mu$ es una constante y $\epsilon_t$ es ruido blanco.
 - Un modelo estacionario por tendencia, no tiene la tendencia estocástica, y el componente aleatorio es $ARMA(p,q)$.
 - En el caso de un modelo estacionario por diferencia, el polinomio autoregresivo del componente $\eta_t$ tiene al menos una raíz unitaria.
 
-
- 
-## Serie estacionaria por tendencia y por diferencia.
+---
 
 :::: {.columns}
 
 ::: {.column width="50%"}
-```{r echo=FALSE, out.width = "100%", fig.align="center"}
+```{r}
 set.seed(123456)
 e <- rnorm(200)
 ## pure random walk
@@ -228,10 +220,7 @@ legend("topright", legend=c( 'tend. estocast.'))
 :::
 ::::
 
-
-
- 
-## Serie estacionaria por tendencia y por diferencia.
+---
 
 - Vimos que si una serie temporal $\left\lbrace X_t \right\rbrace$ se puede descomponer en tres componentes: (1) tendencia determinística, (2) tendencia estocástica, y (3) el componente "aleatorio", i.e.,
 $$
@@ -243,14 +232,12 @@ $$\phi(B)\eta_t=\theta(B)\epsilon_t$$
 - El modelo se puede representar como
 $$X_t=CD_t+ \eta_t,$$
 $$\phi^*(B)(1-B)\eta_t=\theta(B)\epsilon_t$$
-
+# El contraste de raíz unitaria
  
 ## El contraste de raíz unitaria
 
 Para investigar si el proceso:
-$$
- \eta_t=X_t-CD_t,
-$$
+$$\eta_t=X_t-CD_t,$$
 contiene raíz unitaria, Dickey Fuller (1979) propuso la prueba de DF de la siguiente forma:
 
 

@@ -7,11 +7,12 @@
 <link href="presentacion2_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="presentacion2_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="presentacion2_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="presentacion2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="presentacion2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="presentacion2_files/libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Shu Wei Chou Chen">
-  <title>Tema 2: Análisis multivariado de series temporales-2</title>
+  <title>Tema 2: Análisis multivariado de series temporales(2)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,7 +30,92 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="presentacion2_files/libs/revealjs/dist/theme/quarto.css">
   <link href="presentacion2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="presentacion2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -244,7 +330,6 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
-      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -327,70 +412,141 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Tema 2: Análisis multivariado de series temporales-2</h1>
-  <p class="subtitle">Curso: Tópicos Avanzados de Series Temporales</p>
+  <h1 class="title">Tema 2: Análisis multivariado de series temporales<sup>(2)</sup></h1>
+  <p class="subtitle"><a href="https://shuwei325.github.io/SP2600-I25">Curso: Tópicos Avanzados de Series Temporales</a></p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Shu Wei Chou Chen 
+<a href="https://shuwei325.github.io">Shu Wei Chou Chen</a> <a href="https://orcid.org/0000-0001-5495-2486" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
 </div>
 <div class="quarto-title-author-email">
 <a href="mailto:shuwei.chou@ucr.ac.cr">shuwei.chou@ucr.ac.cr</a>
 </div>
         <p class="quarto-title-affiliation">
+            <a href="https://www.estadistica.ucr.ac.cr/">
             Escuela de Estadística, Universidad de Costa Rica
+            </a>
           </p>
     </div>
 </div>
 
 </section>
-<section id="contenido" class="slide level2 scrollable">
-<h2>Contenido</h2>
-<ol type="1">
-<li>Introducción</li>
-<li>Modelos ARMA vectoriales</li>
-<li>Causalidad de Granger</li>
-<li>Raíz unitarias</li>
-<li>Procesos cointegrados: definición y pruebas de hipótesis para cointegración y modelos de corrección del error.</li>
-</ol>
+<section id="paquetes-en-r" class="slide level2">
+<h2>Paquetes en R</h2>
+<p>Para replicar los ejemplos de esta presentación, necesitan estos paquetes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href=""></a><span class="fu">library</span>(astsa)</span>
+<span id="cb1-4"><a href=""></a><span class="fu">library</span>(MTS)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="varmapq" class="slide level2">
+<section>
+<section id="varmapq" class="title-slide slide level1 agenda-slide center">
+<h1>VARMA(p,q)</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>VARMA(p,q)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>VAR(p)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Causalidad de Granger</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estimación, selección de modelos y diagnósticos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>VMA(q)</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="varmapq-1" class="slide level2">
 <h2>VARMA(p,q)</h2>
 <ul>
 <li>Conocido como VARMA o MARMA.</li>
 <li>ARMA(p,q) vectorial de <span class="math inline">\(k\)</span> dimensiones se define como</li>
 </ul>
-<p><span class="math display">\[X_{t}=\phi_0+ \sum_{i=1}^p \phi_i X_{t-i}  - \sum_{j=1}^q \theta_j {a}_{t-j} +a_{t}\]</span> con <span class="math inline">\(\phi_p, \theta_q \neq 0\)</span> y <span class="math inline">\(\Sigma_w\)</span> definida positiva. - Los coeficientes <span class="math inline">\(\phi_i :i=1,...,p\)</span>, <span class="math inline">\(\theta_j:j=1,...,q\)</span> son matrices <span class="math inline">\(k \times k\)</span> y <span class="math inline">\(a_t\)</span> es ruido blanco.</p>
+<p><span class="math display">\[X_{t}=\phi_0+ \sum_{i=1}^p \phi_i X_{t-i}  - \sum_{j=1}^q \theta_j {a}_{t-j} +a_{t}\]</span> con <span class="math inline">\(\phi_p, \theta_q \neq 0\)</span> y <span class="math inline">\(\Sigma_w\)</span> definida positiva.</p>
+<ul>
+<li>Los coeficientes <span class="math inline">\(\phi_i :i=1,...,p\)</span>, <span class="math inline">\(\theta_j:j=1,...,q\)</span> son matrices <span class="math inline">\(k \times k\)</span> y <span class="math inline">\(a_t\)</span> es ruido blanco.</li>
+</ul>
 </section>
-<section id="varmapq-1" class="slide level2">
-<h2>VARMA(p,q)</h2>
+<section class="slide level2">
+
 <ul>
 <li><p>Si este modelo es estacionario: <span class="math display">\[X_t-\sum_{j=1}^p \phi_j X_{t-j}=\phi_0- \sum_{j=1}^q \theta_j {a}_{t-j} +a_t\]</span></p></li>
-<li><p>Calculemos la esperanza en ambos lados, se obtiene: <span class="math inline">\(\mu- \sum_{j=1}^p \phi_j \mu=\phi_0\)</span></p></li>
+<li><p>Aplicamos la esperanza en ambos lados, se obtiene: <span class="math inline">\(\mu- \sum\limits_{j=1}^p \phi_j \mu=\phi_0\)</span></p></li>
 <li><p>Sustituimos <span class="math inline">\(\phi_0\)</span> en la ecuación anterior</p></li>
 </ul>
 <p><span class="math display">\[X_t-\sum_{j=1}^p \phi_j X_{t-j}=\mu- \sum_{j=1}^p \phi_j \mu - \sum_{j=1}^q \theta_j {a}_{t-j} +a_t\]</span> <span class="math display">\[\Rightarrow  
 (X_t-\mu)-\sum_{j=1}^p \phi_j (X_{t-j}-\mu)=- \sum_{j=1}^q \theta_j {a}_{t-j} +a_t\]</span></p>
 </section>
-<section id="varmapq-2" class="slide level2">
-<h2>VARMA(p,q)</h2>
+<section class="slide level2">
+
 <ul>
-<li>De esta forma, podemos reescribir el modelo centrado como: <span class="math display">\[(X_t-\mu)-\sum_{j=1}^p \phi_j (X_{t-j}-\mu)=- \sum_{j=1}^q \theta_j {a}_{t-j} +a_t\]</span> o bien,</li>
+<li>De esta forma, podemos reescribir el modelo centrado como:</li>
 </ul>
-<p><span class="math display">\[\tilde{X_t}-\sum_{j=1}^p \phi_j \tilde{X}_{t-j}= a_t - \sum_{j=1}^q \theta_j {a}_{t-j}\]</span> donde <span class="math inline">\(\tilde{X_t}=X_t-\mu\)</span></p>
+<p><span class="math display">\[(X_t-\mu)-\sum_{j=1}^p \phi_j (X_{t-j}-\mu)=- \sum_{j=1}^q \theta_j {a}_{t-j} +a_t\]</span></p>
+<p>o bien,</p>
+<p><span class="math display">\[\tilde{X_t}-\sum_{j=1}^p \phi_j \tilde{X}_{t-j}= a_t - \sum_{j=1}^q \theta_j {a}_{t-j}\]</span> donde <span class="math inline">\(\tilde{X_t}=X_t-\mu\)</span>.</p>
 </section>
-<section id="varmapq-3" class="slide level2">
-<h2>VARMA(p,q)</h2>
+<section class="slide level2">
+
 <ul>
 <li><p>Entonces, si un VARMA es estacionario se puede expresar su versión centrada, o bien sin pérdida de generalidad suponer que <span class="math inline">\(\phi_0=0\)</span>.</p></li>
 <li><p>Además, su representación es similar al caso univariado</p></li>
 </ul>
 <p><span class="math display">\[\phi(B) X_{t}= \theta(B) a_{t}\]</span> en donde</p>
-<p><span class="math inline">\(\phi(B)=I- \phi_1 B-...- \phi_p B^p\)</span> es el operador autorregresivo y</p>
-<p><span class="math inline">\(\theta(B)=I-\theta_1 B-...- \theta_q B^q\)</span> es el operador de medias móviles.</p>
+<p><span class="math inline">\(\phi(B)=I- \phi_1 B-...- \phi_p B^p\)</span> es el <span class="alert">operador autorregresivo</span> y</p>
+<p><span class="math inline">\(\theta(B)=I-\theta_1 B-...- \theta_q B^q\)</span> es el <span class="alert">operador de medias móviles</span>.</p>
+</section></section>
+<section>
+<section id="varp" class="title-slide slide level1 agenda-slide center">
+<h1>VAR(p)</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>VARMA(p,q)</p>
+</div></li>
+<li><div class="agenda-active">
+<p>VAR(p)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Causalidad de Granger</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estimación, selección de modelos y diagnósticos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>VMA(q)</p>
+</div></li>
+</ol>
+</div>
 </section>
-<section id="varp" class="slide level2">
+<section id="varp-1" class="slide level2">
 <h2>VAR(p)</h2>
 <ul>
 <li><p>El modelo VAR(p): <span class="math display">\[X_{t}=\phi_0+\phi_1 X_{t-1}+...+\phi_pX_{t-p}+a_{t}\]</span> donde <span class="math inline">\(\phi_0\)</span> es un vector de dimensión <span class="math inline">\(k\)</span>, <span class="math inline">\(\phi_i\)</span> matrices <span class="math inline">\(k \times k\)</span> para <span class="math inline">\(i=1,...,p\)</span>, <span class="math inline">\(\phi_p \neq 0\)</span> y <span class="math inline">\(a_t\)</span> es una secuencia de i.i.d. vectores aleatorios con media 0 y matriz de covariancias <span class="math inline">\(\Sigma_a\)</span>, que es definida positiva.</p></li>
@@ -403,7 +559,10 @@ Shu Wei Chou Chen
 <ul>
 <li>Considere el modelo VAR(1) con <span class="math inline">\(k=2\)</span>:</li>
 </ul>
-<p><span class="math display">\[X_{t}=\phi_0+\phi_1 X_{t-1} + a_{t}\]</span> - Expresando explícitamente la ecuación,</p>
+<p><span class="math display">\[X_{t}=\phi_0+\phi_1 X_{t-1} + a_{t}\]</span></p>
+<ul>
+<li>Expresando explícitamente la ecuación,</li>
+</ul>
 <p><span class="math display">\[\begin{bmatrix}X_{1,t}\\
 X_{2,t}
 \end{bmatrix} =\begin{bmatrix}\phi_{10}\\
@@ -420,8 +579,8 @@ a_{2,t}
 <p><span class="math display">\[X_{1,t}=\phi_{10}+\phi_{1,11}X_{1,t-1}+\phi_{1,12}X_{2,t-1}+a_{1,t}\]</span></p>
 <p><span class="math display">\[X_{2,t}=\phi_{20}+\phi_{1,21}X_{1,t-1}+\phi_{1,22}X_{2,t-1}+a_{2,t}\]</span></p>
 </section>
-<section id="estructura-del-modelo-y-causalidad-de-granger" class="slide level2">
-<h2>Estructura del modelo y Causalidad de Granger</h2>
+<section class="slide level2">
+
 <ul>
 <li>Suponga que <span class="math inline">\(\phi_{1,12}=\phi_{1,21}=0\)</span>, entonces</li>
 </ul>
@@ -434,15 +593,18 @@ X_{2,t}
 X_{2,t-1}
 \end{bmatrix}  +\begin{bmatrix}a_{1,t}\\
 a_{2,t}
-\end{bmatrix}\]</span></p>
+\end{bmatrix}.\]</span></p>
 <ul>
-<li>evaluando cada ecuación:</li>
+<li>Evaluando cada ecuación:</li>
 </ul>
 <p><span class="math display">\[X_{t,1}=\phi_{10}+\phi_{1,11}X_{1,t-1}+a_{t,1}\]</span></p>
-<p><span class="math display">\[X_{t,2}=\phi_{20}+\phi_{1,22}X_{2,t-1}+a_{t,2}\]</span> - Tenemos simplemente dos AR(1).</p>
+<p><span class="math display">\[X_{t,2}=\phi_{20}+\phi_{1,22}X_{2,t-1}+a_{t,2}\]</span></p>
+<ul>
+<li>Tenemos simplemente dos procesos de AR(1).</li>
+</ul>
 </section>
-<section id="estructura-del-modelo-y-causalidad-de-granger-1" class="slide level2">
-<h2>Estructura del modelo y Causalidad de Granger</h2>
+<section class="slide level2">
+
 <ul>
 <li>Suponga que <span class="math inline">\(\phi_{1,12}=0\)</span> y <span class="math inline">\(\phi_{1,21} \neq 0\)</span>, entonces</li>
 </ul>
@@ -457,25 +619,60 @@ X_{2,t-1}
 a_{2,t}
 \end{bmatrix}\]</span></p>
 <ul>
-<li>evaluando cada ecuación:</li>
+<li>Evaluando cada ecuación:</li>
 </ul>
-<p><span class="math display">\[X_{1,t}=\phi_{10}+\phi_{1,11}X_{1,t-1}+a_{1,t}\]</span></p>
-<p><span class="math display">\[X_{2,t}=\phi_{20}+\phi_{1,21}X_{1,t-1}+\phi_{1,22}X_{2,t-1}+a_{2,t}\]</span> - Tenemos que <span class="math inline">\(X_{1,t}\)</span> no depende de los valores pasados de <span class="math inline">\(X_{2,t}\)</span>, pero <span class="math inline">\(X_{2,t}\)</span> depende de los valores pasados de <span class="math inline">\(X_{1,t}\)</span>. Se dice que <span class="math inline">\(X_{1,t}\)</span> y <span class="math inline">\(X_{2,t}\)</span> tienen <strong>una relación de función de transferencia</strong>.</p>
+<p><span class="math display">\[\begin{align}
+X_{1,t}=\phi_{10}+\phi_{1,11}X_{1,t-1}+a_{1,t} \\
+X_{2,t}=\phi_{20}+\phi_{1,21}X_{1,t-1}+\phi_{1,22}X_{2,t-1}+a_{2,t}
+\end{align}\]</span></p>
 <ul>
-<li>En econometría, se dice que <span class="math inline">\(X_{t,1}\)</span> causa a <span class="math inline">\(X_{t,2}\)</span> en el sentido de Granger, pero inversamente no: <span class="math inline">\(X_{t,2}\)</span> no causa a <span class="math inline">\(X_{t,1}\)</span> en el sentido de Granger.</li>
+<li><p>Tenemos que <span class="math inline">\(X_{1,t}\)</span> no depende de los valores pasados de <span class="math inline">\(X_{2,t}\)</span>, pero <span class="math inline">\(X_{2,t}\)</span> depende de los valores pasados de <span class="math inline">\(X_{1,t}\)</span>. Se dice que <span class="math inline">\(X_{1,t}\)</span> y <span class="math inline">\(X_{2,t}\)</span> tienen <span class="alert">una relación de función de transferencia</span>.</p></li>
+<li><p>En econometría, se dice que <span class="math inline">\(X_{t,1}\)</span> <span class="alert">causa</span> a <span class="math inline">\(X_{t,2}\)</span> en el sentido de <span class="alert">Granger</span>, pero inversamente no: <span class="math inline">\(X_{t,2}\)</span> <span class="alert">no causa</span> a <span class="math inline">\(X_{t,1}\)</span> en el sentido de <span class="alert">Granger</span>.</p></li>
 </ul>
+</section></section>
+<section>
+<section id="causalidad-de-granger" class="title-slide slide level1 agenda-slide center">
+<h1>Causalidad de Granger</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>VARMA(p,q)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>VAR(p)</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Causalidad de Granger</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estimación, selección de modelos y diagnósticos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>VMA(q)</p>
+</div></li>
+</ol>
+</div>
 </section>
-<section id="causalidad-de-granger" class="slide level2">
+<section id="causalidad-de-granger-1" class="slide level2">
 <h2>Causalidad de Granger</h2>
 <ul>
-<li>El concepto de causalidad de Granger fue introducido por Granger (1969) considerando una serie bivariada <span class="math inline">\((X_{1,t,},X_{2,t})\)</span> y el ajuste de un modelo VAR y los modelos univariados para realizar predicción.</li>
+<li>El concepto de causalidad de Granger fue introducido por <span class="citation" data-cites="Granger1969">Granger (<a href="#/en-la-próxima-clase" role="doc-biblioref" onclick="">1969</a>)</span> considerando una serie bivariada <span class="math inline">\((X_{1,t,},X_{2,t})\)</span> y el ajuste de un modelo VAR y los modelos univariados para realizar predicción.</li>
 <li>Se dice que <span class="math inline">\(X_{1,t}\)</span> causa a <span class="math inline">\(X_{2,t}\)</span> en el sentido de Granger, si la predicción usando modelo VAR es más precisa que la predicción utilizando el modelo univariado.</li>
 <li>Formalmente, sean:
 <ul>
 <li><span class="math inline">\(F_t\)</span> toda la información disponible hasta el tiempo t (inclusive),</li>
 <li><span class="math inline">\(F_{-i,t}\)</span> como toda la información <span class="math inline">\(F_t\)</span> pero sin el <span class="math inline">\(i-\)</span>ésimo componente <span class="math inline">\(X_{i,t}\)</span>.</li>
 </ul></li>
-<li>En término del VAR(1) <span class="math inline">\(2-\)</span>dimensional descrito anteriormente,
+<li>En término del VAR(1) bidimensional descrito anteriormente,
 <ul>
 <li><span class="math inline">\(F_t=\left\lbrace X_t,X_{t-1},X_{t-2},... \right\rbrace\)</span></li>
 <li><span class="math inline">\(F_{-1,t}=\left\lbrace X_{2,t},X_{2,t-1},X_{2,t-2},... \right\rbrace\)</span></li>
@@ -483,16 +680,19 @@ a_{2,t}
 </ul></li>
 </ul>
 </section>
-<section id="causalidad-de-granger-1" class="slide level2">
-<h2>Causalidad de Granger</h2>
+<section class="slide level2">
+
 <ul>
-<li><p>Sean:</p>
+<li>Sean:
 <ul>
 <li><span class="math inline">\(X_{j,t+h}|F_{t}\)</span>, <span class="math inline">\(j=1,2\)</span> como las predicciones <span class="math inline">\(h\)</span> pasos adelante basado en toda la información disponible <span class="math inline">\(F_{t}\)</span> y <span class="math inline">\(e_{j,t+h}|F_{t}\)</span> sus errores de pronósticos respectivos.</li>
 <li><span class="math inline">\(X_{j,t+h}|F_{-i,t}\)</span>, <span class="math inline">\(j=1,2\)</span> como las predicciones <span class="math inline">\(h\)</span> pasos adelante basado en <span class="math inline">\(F_{-i,t}\)</span> y <span class="math inline">\(e_{j,t+h}|F_{-i,t}\)</span> sus errores de pronósticos respectivos.</li>
 </ul></li>
-<li><p>Se dice que que <span class="math inline">\(X_{1,t}\)</span> causa a <span class="math inline">\(X_{2,t}\)</span> en el sentido de Granger, si <span class="math display">\[Var\left(e_{2,t+h}|F_{t}\right)&lt;Var\left(e_{2,t+h}|F_{-1,t}\right)\]</span></p></li>
-<li><p>Retomando el VAR(1), con</p></li>
+<li>Se dice que que <span class="math inline">\(X_{1,t}\)</span> <span class="alert">causa</span> a <span class="math inline">\(X_{2,t}\)</span> <span class="alert">en el sentido de Granger</span>, si</li>
+</ul>
+<p><span class="math display">\[Var\left(e_{2,t+h}|F_{t}\right)&lt; Var\left(e_{2,t+h}|F_{-1,t}\right)\]</span></p>
+<ul>
+<li>Retomando el VAR(1), con</li>
 </ul>
 <p><span class="math display">\[\begin{bmatrix}X_{1,t}\\
 X_{2,t}
@@ -503,32 +703,107 @@ X_{2,t}
 X_{2,t-1}
 \end{bmatrix}  +\begin{bmatrix}a_{1,t}\\
 a_{2,t}
-\end{bmatrix}\]</span> - Se dice que <span class="math inline">\(X_{1,t}\)</span> causa a <span class="math inline">\(X_{2,t}\)</span> en el sentido de Granger si <span class="math inline">\(\phi_{1,21} \neq 0\)</span>. Sin embargo, <span class="math inline">\(X_{1,t}\)</span> no causa a <span class="math inline">\(X_{2,t}\)</span> en el sentido de Granger.</p>
+\end{bmatrix}\]</span></p>
+<ul>
+<li>Se dice que <span class="math inline">\(X_{1,t}\)</span> causa a <span class="math inline">\(X_{2,t}\)</span> en el sentido de Granger si <span class="math inline">\(\phi_{1,21} \neq 0\)</span>. Sin embargo, <span class="math inline">\(X_{1,t}\)</span> no causa a <span class="math inline">\(X_{2,t}\)</span> en el sentido de Granger.</li>
+</ul>
 </section>
 <section id="causalidad-instantánea" class="slide level2">
 <h2>Causalidad instantánea</h2>
 <ul>
 <li><p>Recuerden que <span class="math inline">\(\Sigma_a\)</span> no necesariamente es una matriz diagonal.</p></li>
-<li><p>Si <span class="math inline">\(\Sigma_a\)</span> no es una matriz diagonal, se dice que <span class="math inline">\(X_{1,t}\)</span> y <span class="math inline">\(X_{2,t}\)</span> tienen <strong>causalidad instantánea en sentido de Granger</strong>.</p></li>
+<li><p>Si <span class="math inline">\(\Sigma_a\)</span> no es una matriz diagonal, se dice que <span class="math inline">\(X_{1,t}\)</span> y <span class="math inline">\(X_{2,t}\)</span> tienen <span class="alert">causalidad instantánea en sentido de Granger</span>.</p></li>
 </ul>
+</section></section>
+<section>
+<section id="invertibilidad" class="title-slide slide level1 agenda-slide center">
+<h1>Invertibilidad</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>VARMA(p,q)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>VAR(p)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Causalidad de Granger</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estimación, selección de modelos y diagnósticos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>VMA(q)</p>
+</div></li>
+</ol>
+</div>
 </section>
-<section id="estacionariedad" class="slide level2">
-<h2>Estacionariedad</h2>
+<section id="invertibilidad-1" class="slide level2">
+<h2>Invertibilidad</h2>
 <ul>
-<li>Sin pérdida de generalidad, suponga que el VAR(1) asume <span class="math inline">\(\phi_0=0\)</span>,</li>
+<li>Por definición VAR(p) es invertible ya que está expresada en término de sus valores pasados:</li>
 </ul>
-<p><span class="math display">\[\left. \begin{eqnarray}X_t &amp;=&amp; \phi_1 X_{t-1}+a_t\\
+<p><span class="math display">\[X_t=c+a_t+\sum_{j=0}^\infty \pi_j X_{t-j}\]</span></p>
+</section></section>
+<section>
+<section id="estacionariedad" class="title-slide slide level1 agenda-slide center">
+<h1>Estacionariedad</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>VARMA(p,q)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>VAR(p)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Causalidad de Granger</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estimación, selección de modelos y diagnósticos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>VMA(q)</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="estacionariedad-de-un-var1" class="slide level2">
+<h2>Estacionariedad de un VAR(1)</h2>
+<ul>
+<li><p>Empezamos con un VAR(1):</p></li>
+<li><p>Sin pérdida de generalidad, suponga que <span class="math inline">\(\phi_0=0\)</span>,</p></li>
+</ul>
+<p><span class="math display">\[\begin{eqnarray}X_t &amp;=&amp; \phi_1 X_{t-1}+a_t\\
 &amp;=&amp; \phi_1 (\phi_1 X_{t-2}+a_{t-1})+a_t \\
 &amp;=&amp; \phi_1^2 X_{t-2}+\phi_1 a_{t-1}+a_t \\
 &amp;=&amp; \phi_1^3 X_{t-3}+ \phi_1^2 a_{t-2}+\phi_1 a_{t-1}+a_t \\
 &amp;=&amp; \vdots \\
-&amp;=&amp; \phi_1^J X_{t-J}+ \sum_{j=0}^{J-1} \phi_1^j a_{t-j} \end{eqnarray}\right.\]</span></p>
+&amp;=&amp; \phi_1^J X_{t-J}+ \sum_{j=0}^{J-1} \phi_1^j a_{t-j} \end{eqnarray}\]</span></p>
 <ul>
 <li>Al igual que el caso univariado, para que el proceso esté bien definido, es necesario que <span class="math inline">\(\phi_1^{J}\rightarrow 0\)</span> cuando <span class="math inline">\(J \rightarrow \infty\)</span>.</li>
 </ul>
 </section>
-<section id="estacionariedad-1" class="slide level2">
-<h2>Estacionariedad</h2>
+<section class="slide level2">
+
 <ul>
 <li><p>La condición de <span class="math inline">\(\phi_1^{J}\rightarrow 0\)</span> cuando <span class="math inline">\(J \rightarrow \infty\)</span> significa que todos los autovalores de <span class="math inline">\(\lambda_i\)</span> de la matriz <span class="math inline">\(\phi_1\)</span> satisfacen la condición de que <span class="math inline">\(\lambda_i^{J}\rightarrow 0\)</span> cuando <span class="math inline">\(J \rightarrow \infty\)</span>.</p></li>
 <li><p>Y esto significa que el valor absoluto de todos los autovalores <span class="math inline">\(\lambda_i\)</span> de <span class="math inline">\(\phi_1\)</span> es menor que 1.</p></li>
@@ -537,21 +812,14 @@ a_{2,t}
 <li><p>Es decir, <span class="math inline">\(\left|I_k - \phi_1 x\right|=0\)</span> donde <span class="math inline">\(x=1/\lambda\)</span>. Los autovalores de <span class="math inline">\(\phi_1\)</span> son inversos de la solución de esta ecuación.</p></li>
 </ul>
 </section>
-<section id="estacionariedad-2" class="slide level2">
-<h2>Estacionariedad</h2>
+<section class="slide level2">
+
 <ul>
 <li><p>Como consecuencia, la condición necesaria y suficiente de la estacionariedad de un VAR(1) es que las soluciones de la ecuación <span class="math inline">\(\left|I_k - \phi_1 x\right|=0\)</span> tengan valor absoluto mayor a 1.</p></li>
 <li><p>Es decir, la condición de estacionariedad de un VAR(1) es que las soluciones de <span class="math inline">\(|\phi(B)|=0\)</span> estén fuera del círculo unitario.</p></li>
 </ul>
 </section>
-<section id="invertibilidad" class="slide level2">
-<h2>Invertibilidad</h2>
-<ul>
-<li>Por definición VAR(p) es invertible ya que está expresada en término de sus valores pasados:</li>
-</ul>
-<p><span class="math display">\[X_t=c+a_t+\sum_{j=0}^\infty \pi_j X_{t-j}\]</span></p>
-</section>
-<section id="varp-1" class="slide level2">
+<section id="varp-2" class="slide level2">
 <h2>VAR(p)</h2>
 <ul>
 <li><p>El modelo VAR(p): <span class="math display">\[X_{t}=\phi_0+\phi_1 X_{t-1}+...+\phi_pX_{t-p}+a_{t}\]</span> donde <span class="math inline">\(\phi_0\)</span> es un vector de dimensión <span class="math inline">\(k\)</span>, <span class="math inline">\(\phi_i\)</span> matrices <span class="math inline">\(k \times k\)</span> para <span class="math inline">\(i=1,...,p\)</span>, <span class="math inline">\(\phi_p \neq 0\)</span> y <span class="math inline">\(a_t\)</span> es una secuencia de i.i.d. vectores aleatorios con media 0 y matriz de covariancias <span class="math inline">\(\Sigma_a\)</span>, que es definida positiva.</p></li>
@@ -586,7 +854,7 @@ I &amp; 0 &amp; ... &amp; 0 &amp; 0 \\
 0
 \end{bmatrix}\]</span></p>
 <ul>
-<li>La matrix <span class="math inline">\(\Phi\)</span> es conocida como la matriz compañera del polinomio autorregresivo <span class="math inline">\(\phi(B)\)</span>.</li>
+<li>La matrix <span class="math inline">\(\Phi\)</span> es conocida como <span class="alert">la matriz compañera</span> del polinomio autorregresivo <span class="math inline">\(\phi(B)\)</span>.</li>
 </ul>
 </section>
 <section id="condición-de-estacionariedad-de-varp" class="slide level2">
@@ -595,6 +863,38 @@ I &amp; 0 &amp; ... &amp; 0 &amp; 0 \\
 <li><p>Como consecuencia de que <span class="math inline">\(\boldsymbol{X}_t\)</span> es VAR(1), la condición de estacionariedad es VAR(1) es que las soluciones de la ecuación <span class="math inline">\(\left|I_{kp} - \Phi B\right|=0\)</span> tengan valor absoluto mayor a 1.</p></li>
 <li><p>Utilizando resultados de matrices en bloques, se puede concluir que la condición de estacionariedad de VAR(p) es que todas las soluciones de <span class="math inline">\(\left|I_{kp} - \Phi B\right|=|\phi(B)|=0\)</span> estén fuera del círculo unitario.</p></li>
 </ul>
+</section></section>
+<section>
+<section id="estimación-selección-de-modelos-y-diagnósticos" class="title-slide slide level1 agenda-slide center">
+<h1>Estimación, selección de modelos y diagnósticos</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>VARMA(p,q)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>VAR(p)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Causalidad de Granger</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Estimación, selección de modelos y diagnósticos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>VMA(q)</p>
+</div></li>
+</ol>
+</div>
 </section>
 <section id="estimación" class="slide level2">
 <h2>Estimación</h2>
@@ -618,17 +918,20 @@ I &amp; 0 &amp; ... &amp; 0 &amp; 0 \\
 &amp;=&amp; \prod_{t=p+1}^T \frac{1}{(2\pi)^{k/2}|\Sigma_a|^{1/2}} \exp\left[ \frac{-1}{2}a_t'\Sigma_a^{-1} a_t \right] \\
 &amp;\propto&amp; |\Sigma_a|^{-(T-p)/2} \exp\left[ \frac{-1}{2} \sum_{t=p+1}^{T} tr(a_t'\Sigma_a^{-1} a_t) \right] \end{eqnarray}\right.\]</span></p>
 </section>
-<section id="estimación-de-máxima-verosimilitud-1" class="slide level2">
-<h2>Estimación de Máxima Verosimilitud</h2>
+<section class="slide level2">
+
 <ul>
 <li>la función de log-verosimlitud es: <span class="math display">\[\left. \begin{eqnarray}\ell \left(\beta,\Sigma_a \right) &amp;=&amp; c- \frac{T-p}{2} \log|\Sigma_a| -\frac{1}{2} \sum_{t=p+1}^{T} tr(a_t'\Sigma_a a_t) \\
 &amp;=&amp; c- \frac{T-p}{2} \log|\Sigma_a| -\frac{1}{2}tr\left(\Sigma_a^{-1} \sum_{t=p+1}^{T} a_t' a_t\right)
 \end{eqnarray}\right.\]</span></li>
 </ul>
-<p>donde <span class="math inline">\(c\)</span> es una constante que no influye en el proceso de optimización. - Note que las propiedades <span class="math inline">\(tr(CD)=tr(DC)\)</span> y <span class="math inline">\(tr(C+D)=tr(C)+tr(D)\)</span> son utilizadas.</p>
+<p>donde <span class="math inline">\(c\)</span> es una constante que no influye en el proceso de optimización.</p>
+<ul>
+<li>Note que las propiedades <span class="math inline">\(tr(CD)=tr(DC)\)</span> y <span class="math inline">\(tr(C+D)=tr(C)+tr(D)\)</span> son utilizadas.</li>
+</ul>
 </section>
-<section id="estimación-de-máxima-verosimilitud-2" class="slide level2">
-<h2>Estimación de Máxima Verosimilitud</h2>
+<section class="slide level2">
+
 <ul>
 <li><p>Se puede reescribir la función de log-verosimlitud como: <span class="math display">\[\ell \left(\beta,\Sigma_a \right) = c- \frac{T-p}{2} \log|\Sigma_a| -\frac{1}{2} S(\beta)\]</span> donde <span class="math inline">\(S(\beta)\)</span> es la cantidad a minimizar del método de mínimos cuadrados.</p></li>
 <li><p>No vamos a entrar a los detalles de la distribución muestral de los estimadores.</p></li>
@@ -640,16 +943,33 @@ I &amp; 0 &amp; ... &amp; 0 &amp; 0 \\
 <li>El producto interno bruto de Reino Unido, Canadá y Estados Unidos de segundo trimestre del 1980 al segundo trimestre del 2011.</li>
 <li>Los datos son ajustados estacionalmente.</li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a>da<span class="ot">=</span><span class="fu">read.table</span>(<span class="st">"q-gdp-ukcaus.txt"</span>,<span class="at">header=</span>T)</span>
+<span id="cb2-2"><a href=""></a><span class="fu">head</span>(da)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  year mon     uk     ca      us
+1 1980   1 172436 624794 5908500
+2 1980   4 169359 623433 5787400
+3 1980   7 169038 623215 5776600
+4 1980  10 167180 630215 5883500
+5 1981   1 166052 645957 6005700
+6 1981   4 166393 651954 5957800</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li>Serie original</li>
 </ul>
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">tsplot</span>(da[,<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>])</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
+<p><img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-3-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -658,34 +978,48 @@ I &amp; 0 &amp; ... &amp; 0 &amp; 0 \\
 <ul>
 <li>Transformación logarítmica</li>
 </ul>
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>gdp<span class="ot">=</span><span class="fu">log</span>(da[,<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb5-2"><a href=""></a><span class="fu">tsplot</span>(gdp)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
+<p><img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-4-1.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="ejemplo-1" class="slide level2">
-<h2>Ejemplo</h2>
+<section class="slide level2">
+
 <ul>
-<li>Suponga que <span class="math inline">\(X_t\)</span> es el valor de un activo en el tiempo <span class="math inline">\(t\)</span>, el retorno <span class="math inline">\(r_t\)</span> en el tiempo <span class="math inline">\(t\)</span> es:</li>
+<li>Suponga que <span class="math inline">\(X_t\)</span> es el valor de un activo en el tiempo <span class="math inline">\(t\)</span>, el retorno en el tiempo <span class="math inline">\(t\)</span>, <span class="math inline">\(r_t\)</span>, es:</li>
 </ul>
-<p><span class="math display">\[r_t=\frac{X_t-X_{t-1}}{X_{t-1}}\]</span> - Despejando la expresión anterior: <span class="math display">\[X_t=(1+r_t)X_{t-1}\]</span> <span class="math display">\[\Rightarrow \ln X_t=\ln (1+r_t)+ \ln X_{t-1}\]</span> <span class="math display">\[\Rightarrow \nabla \ln X_t = \ln X_t - \ln X_{t-1}=\ln (1+r_t) \approx r_t,\]</span> si <span class="math inline">\(r_t\)</span> son cambios porcentuales pequeños.</p>
+<p><span class="math display">\[r_t=\frac{X_t-X_{t-1}}{X_{t-1}}\]</span></p>
 <ul>
-<li>A partir de aquí, llamamos <span class="math inline">\(r_t\)</span> o <span class="math inline">\(\nabla \ln X_t\)</span> retornos y dicho valor es conocido como la tasa del crecimiento porcentual.</li>
+<li><p>Despejando la expresión anterior: <span class="math display">\[X_t=(1+r_t)X_{t-1}\]</span> <span class="math display">\[\Rightarrow \ln X_t=\ln (1+r_t)+ \ln X_{t-1}\]</span> <span class="math display">\[\Rightarrow \nabla \ln X_t = \ln X_t - \ln X_{t-1}=\ln (1+r_t) \approx r_t,\]</span> si <span class="math inline">\(r_t\)</span> son cambios porcentuales pequeños.</p></li>
+<li><p>A partir de aquí, llamamos <span class="math inline">\(r_t\)</span> o <span class="math inline">\(\nabla \ln X_t\)</span> retornos y dicho valor es conocido como la tasa del crecimiento porcentual.</p></li>
 </ul>
 </section>
-<section id="ejemplo-2" class="slide level2">
-<h2>Ejemplo</h2>
+<section class="slide level2">
+
 <ul>
 <li>Se calculan sus retornos en porcentajes, i.e.&nbsp;retornos*100:</li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>x<span class="ot">=</span>gdp[<span class="dv">2</span><span class="sc">:</span><span class="dv">126</span>,]<span class="sc">-</span>gdp[<span class="dv">1</span><span class="sc">:</span><span class="dv">125</span>,]</span>
+<span id="cb6-2"><a href=""></a>x<span class="ot">=</span>x<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb6-3"><a href=""></a><span class="fu">tsplot</span>(x)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:50.0%"><div class="cell">
+</div>
+<img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>m1<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VAR</span>(x,<span class="at">p=</span><span class="dv">1</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Constant term: 
 Estimates:  0.1713324 0.1182869 0.2785892 
@@ -714,6 +1048,8 @@ BIC =  -3.256196
 HQ  =  -3.377107 </code></pre>
 </div>
 </div>
+</div><div class="column" style="width:60%;">
+<p>El modelo estimado es:</p>
 <p><span class="math display">\[\begin{bmatrix}X_{1t}\\
 X_{2t}\\
 X_{3t}
@@ -730,19 +1066,20 @@ a_{2t} \\ a_{3t}
 0.02 &amp; 0.32 &amp; 0.17 \\
 0.07 &amp; 0.17 &amp; 0.39
 \end{bmatrix}\]</span></p>
+</div></div>
 </section>
 <section id="selección-del-orden-de-un-varp" class="slide level2">
 <h2>Selección del orden de un VAR(p)</h2>
 <ul>
-<li>¿Cómo se selecciona el orden de un VAR?
-<ul>
+<li><p>¿Cómo se selecciona el orden de un VAR?</p>
+<ol type="1">
 <li>Pruebas de razón de verosimilitud secuencial</li>
 <li>Criterio de información</li>
-</ul></li>
+</ol></li>
 </ul>
 </section>
 <section id="pruebas-de-razón-de-verosimilitud-secuencial" class="slide level2">
-<h2>Pruebas de razón de verosimilitud secuencial</h2>
+<h2>1. Pruebas de razón de verosimilitud secuencial</h2>
 <ul>
 <li><p>La idea básica es comparar un VAR(p) con un VAR(p-1).</p></li>
 <li><p>Formalmente, se plantean: <span class="math inline">\(H_0:\phi_p=0\)</span> <span class="math inline">\(H_1:\phi_p \neq 0\)</span></p></li>
@@ -751,18 +1088,19 @@ a_{2t} \\ a_{3t}
 </ul>
 <p><span class="math display">\[\Delta= \frac{\max L(\beta_{p-1},\Sigma_a)}{\max L(\beta_{p},\Sigma_a)}= \left( \frac{|\hat{\Sigma}_{a,p}|}{|\hat{\Sigma}_{a,p-1}|} \right)^{(T-p)/2}\]</span></p>
 </section>
-<section id="pruebas-de-razón-de-verosimilitud-secuencial-1" class="slide level2">
-<h2>Pruebas de razón de verosimilitud secuencial</h2>
+<section class="slide level2">
+
 <ul>
 <li>El estadístico es dado por</li>
 </ul>
-<p><span class="math display">\[M(p)= -(T-p-0.5-kp) \ln \left( \frac{|\hat{\Sigma}_{a,p}|}{|\hat{\Sigma}_{a,p-1}|} \right)\]</span> - Bajo el supuesto de que <span class="math inline">\(H_0\)</span> sea cierta, <span class="math inline">\(M(p) \sim \chi^2_{k^2}\)</span>.</p>
+<p><span class="math display">\[M(p)= -(T-p-0.5-kp) \ln \left( \frac{|\hat{\Sigma}_{a,p}|}{|\hat{\Sigma}_{a,p-1}|} \right)\]</span></p>
 <ul>
-<li>En la práctica, se preselecciona un rezago <span class="math inline">\(L\)</span> grande y se realiza secuencialmente probando <span class="math inline">\(p=0,...,L\)</span>.</li>
+<li><p>Bajo el supuesto de que <span class="math inline">\(H_0\)</span> sea cierta, <span class="math inline">\(M(p) \sim \chi^2_{k^2}\)</span>.</p></li>
+<li><p>En la práctica, se preselecciona un rezago <span class="math inline">\(L\)</span> grande y se realiza secuencialmente probando <span class="math inline">\(p=0,...,L\)</span>.</p></li>
 </ul>
 </section>
 <section id="criterio-de-información" class="slide level2">
-<h2>Criterio de información</h2>
+<h2>2. Criterio de información</h2>
 <ul>
 <li>Debido a la complejidad de selección del orden <span class="math inline">\(p\)</span>, en la práctica se usan los criterios de información: AIC, BIC o Schwarz y Hanna Quinn.</li>
 </ul>
@@ -770,9 +1108,12 @@ a_{2t} \\ a_{3t}
 <p><span class="math display">\[HQ(p)= \log |\tilde{\Sigma}_{a,p}|+\frac{2\log(\log(T))}{T}pk^2\]</span></p>
 <p>donde <span class="math inline">\(p\)</span> es el orden de rezago, <span class="math inline">\(\tilde{\Sigma}_{a,p}\)</span> es la estimación de <span class="math inline">\(\tilde{\Sigma}_{a*}\)</span> de acuerdo al VAR(p).</p>
 </section>
-<section id="ejemplo-3" class="slide level2">
+<section id="ejemplo-1" class="slide level2">
 <h2>Ejemplo</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>m3<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VARorder</span>(x,<span class="at">maxp=</span><span class="dv">15</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>selected order: aic =  2 
 selected order: bic =  1 
@@ -797,26 +1138,76 @@ Summary table:
 [16,] 15 -4.3520 -1.2974 -3.1111  24.8411  0.0032</code></pre>
 </div>
 </div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>CI<span class="ot">=</span><span class="fu">data.frame</span>(<span class="at">order=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">15</span>,<span class="at">AIC=</span>m3<span class="sc">$</span>aic,<span class="at">BIC=</span>m3<span class="sc">$</span>bic,<span class="at">HQ=</span>m3<span class="sc">$</span>hq)</span>
+<span id="cb11-2"><a href=""></a>CI<span class="sc">%&gt;%</span><span class="fu">gather</span>(</span>
+<span id="cb11-3"><a href=""></a>  <span class="at">key =</span> <span class="st">"C.Info"</span>,</span>
+<span id="cb11-4"><a href=""></a>  <span class="at">value =</span> <span class="st">"value"</span>,</span>
+<span id="cb11-5"><a href=""></a>  AIC,BIC,HQ</span>
+<span id="cb11-6"><a href=""></a>) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb11-7"><a href=""></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>(<span class="at">x =</span> order, <span class="at">y =</span> value, <span class="at">group=</span>C.Info,<span class="at">color=</span>C.Info)) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-8-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
 </section>
-<section id="ejemplo-4" class="slide level2">
-<h2>Ejemplo</h2>
-
-<img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%"></section>
 <section id="diagnósticos" class="slide level2">
 <h2>Diagnósticos</h2>
 <ul>
 <li><p>Denote <span class="math inline">\(R_j\)</span> como la matriz de correlaciones de <span class="math inline">\(j\)</span> rezago de los residuales. Se plantean las hipótesis:<br>
-<span class="math inline">\(H_0: R_1=...=R_m=0\)</span><br>
+<span class="math inline">\(H_0: R_1=\cdots=R_m=0\)</span><br>
 <span class="math inline">\(H_1: R_j \neq 0\)</span>, para algún <span class="math inline">\(1\leq j \leq m\)</span></p></li>
-<li><p>Recuerden que <strong>el estadístico de Portmanteau multivariado</strong> es la versión multivariada de la prueba de Ljung-Box. <span class="math display">\[Q_m=T^2 \sum_{l=1}^m \frac{1}{T-l} tr \left(\hat{R}'_l\hat{R}^{-1}_0\hat{R}_l\hat{R}^{-1}_0\right)\]</span></p></li>
+<li><p>Recuerden que <span class="alert">el estadístico de Portmanteau multivariado</span> es la versión multivariada de la prueba de Ljung-Box. <span class="math display">\[Q_m=T^2 \sum_{l=1}^m \frac{1}{T-l} tr \left(\hat{R}'_l\hat{R}^{-1}_0\hat{R}_l\hat{R}^{-1}_0\right)\]</span></p></li>
 <li><p>Bajo el supuesto de <span class="math inline">\(H_0\)</span>,i.e.&nbsp;<span class="math inline">\(R_l=0,~ l&gt;0\)</span>, y <span class="math inline">\(X_t\)</span> es distribuída normalmente, para <span class="math inline">\(T\)</span> y <span class="math inline">\(m\)</span> suficientemente grandes, el estadístico se aproxima a la distribución <span class="math inline">\(\chi^2_{mk^2}\)</span>.</p></li>
 <li><p>Para el caso de un VAR(p) se deben corregir los grados de libertad, es decir, <span class="math inline">\(\chi^2_{(m-p)k^2}\)</span>, i.e.&nbsp;el valor de corrección es <span class="math inline">\(pk^2\)</span>.</p></li>
 </ul>
 </section>
-<section id="ejemplo-5" class="slide level2">
-<h2>Ejemplo</h2>
-<p>Utilizando la prueba de Portmanteau multivariado</p>
+<section id="ejemplo-con-var1" class="slide level2 scrollable">
+<h2>Ejemplo con VAR(1)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>m1<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VAR</span>(x,<span class="at">p=</span><span class="dv">1</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Constant term: 
+Estimates:  0.1713324 0.1182869 0.2785892 
+Std.Error:  0.06790162 0.07193106 0.07877173 
+AR coefficient matrix 
+AR( 1 )-matrix 
+      [,1]  [,2]   [,3]
+[1,] 0.434 0.189 0.0373
+[2,] 0.185 0.245 0.3917
+[3,] 0.322 0.182 0.1674
+standard error 
+       [,1]   [,2]   [,3]
+[1,] 0.0811 0.0827 0.0872
+[2,] 0.0859 0.0877 0.0923
+[3,] 0.0940 0.0960 0.1011
+  
+Residuals cov-mtx: 
+           [,1]       [,2]       [,3]
+[1,] 0.28933472 0.01965508 0.06619853
+[2,] 0.01965508 0.32469319 0.16862723
+[3,] 0.06619853 0.16862723 0.38938665
+  
+det(SSE) =  0.02721916 
+AIC =  -3.459834 
+BIC =  -3.256196 
+HQ  =  -3.377107 </code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Utilizando la prueba de Portmanteau multivariado</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">mq</span>(m1<span class="sc">$</span>residuals,<span class="at">lag=</span><span class="dv">18</span>,<span class="at">adj=</span><span class="dv">9</span>) <span class="co">#pk^2=1*3^2</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ljung-Box Statistics:  
          m       Q(m)     df    p-value
@@ -839,39 +1230,158 @@ Summary table:
 [17,]  17.00    165.14  144.00     0.11
 [18,]  18.00    171.03  153.00     0.15</code></pre>
 </div>
-
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-10-1.png" width="480"></p>
+</figure>
 </div>
-<img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
-<section id="ejemplo-6" class="slide level2">
-<h2>Ejemplo</h2>
-<p>Utilizando la prueba de Portmanteau multivariado</p>
+</div>
+</div>
+</div></div>
+</section>
+<section id="ejemplo-con-var2" class="slide level2 scrollable">
+<h2>Ejemplo con VAR(2)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a>m2<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VAR</span>(x,<span class="at">p=</span><span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Constant term: 
+Estimates:  0.1258163 0.1231581 0.2895581 
+Std.Error:  0.07266338 0.07382941 0.0816888 
+AR coefficient matrix 
+AR( 1 )-matrix 
+      [,1]  [,2]   [,3]
+[1,] 0.393 0.103 0.0521
+[2,] 0.351 0.338 0.4691
+[3,] 0.491 0.240 0.2356
+standard error 
+       [,1]   [,2]   [,3]
+[1,] 0.0934 0.0984 0.0911
+[2,] 0.0949 0.1000 0.0926
+[3,] 0.1050 0.1106 0.1024
+AR( 2 )-matrix 
+        [,1]   [,2]     [,3]
+[1,]  0.0566  0.106  0.01889
+[2,] -0.1914 -0.175 -0.00868
+[3,] -0.3120 -0.131  0.08531
+standard error 
+       [,1]   [,2]   [,3]
+[1,] 0.0924 0.0876 0.0938
+[2,] 0.0939 0.0890 0.0953
+[3,] 0.1038 0.0984 0.1055
+  
+Residuals cov-mtx: 
+           [,1]       [,2]       [,3]
+[1,] 0.28244420 0.02654091 0.07435286
+[2,] 0.02654091 0.29158166 0.13948786
+[3,] 0.07435286 0.13948786 0.35696571
+  
+det(SSE) =  0.02258974 
+AIC =  -3.502259 
+BIC =  -3.094982 
+HQ  =  -3.336804 </code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Utilizando la prueba de Portmanteau multivariado</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">mq</span>(m2<span class="sc">$</span>residuals,<span class="at">lag=</span><span class="dv">18</span>,<span class="at">adj=</span><span class="dv">9</span>) <span class="co">#pk^2=1*3^2</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ljung-Box Statistics:  
           m       Q(m)     df    p-value
- [1,]   1.000     0.816  -9.000     1.00
- [2,]   2.000     3.978   0.000     1.00
- [3,]   3.000    16.665   9.000     0.05
- [4,]   4.000    35.122  18.000     0.01
- [5,]   5.000    38.189  27.000     0.07
- [6,]   6.000    41.239  36.000     0.25
- [7,]   7.000    47.621  45.000     0.37
- [8,]   8.000    61.677  54.000     0.22
- [9,]   9.000    67.366  63.000     0.33
-[10,]  10.000    76.930  72.000     0.32
-[11,]  11.000    81.567  81.000     0.46
-[12,]  12.000    93.112  90.000     0.39
-[13,]  13.000   105.327  99.000     0.31
-[14,]  14.000   116.279 108.000     0.28
-[15,]  15.000   128.974 117.000     0.21
-[16,]  16.000   134.704 126.000     0.28
-[17,]  17.000   138.552 135.000     0.40
-[18,]  18.000   146.256 144.000     0.43</code></pre>
+ [1,]   1.000     0.816   0.000     1.00
+ [2,]   2.000     3.978   9.000     0.91
+ [3,]   3.000    16.665  18.000     0.55
+ [4,]   4.000    35.122  27.000     0.14
+ [5,]   5.000    38.189  36.000     0.37
+ [6,]   6.000    41.239  45.000     0.63
+ [7,]   7.000    47.621  54.000     0.72
+ [8,]   8.000    61.677  63.000     0.52
+ [9,]   9.000    67.366  72.000     0.63
+[10,]  10.000    76.930  81.000     0.61
+[11,]  11.000    81.567  90.000     0.73
+[12,]  12.000    93.112  99.000     0.65
+[13,]  13.000   105.327 108.000     0.55
+[14,]  14.000   116.279 117.000     0.50
+[15,]  15.000   128.974 126.000     0.41
+[16,]  16.000   134.704 135.000     0.49
+[17,]  17.000   138.552 144.000     0.61
+[18,]  18.000   146.256 153.000     0.64</code></pre>
 </div>
-
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-12-1.png" width="480"></p>
+</figure>
 </div>
-<img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
-<section id="vmaq" class="slide level2">
+</div>
+</div>
+</div></div>
+</section>
+<section id="comparación-de-residuales" class="slide level2">
+<h2>Comparación de residuales</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">acf</span>(m1<span class="sc">$</span>residuals)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-13-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">acf</span>(m2<span class="sc">$</span>residuals)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-14-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="vmaq" class="title-slide slide level1 agenda-slide center">
+<h1>VMA(q)</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>VARMA(p,q)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>VAR(p)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Causalidad de Granger</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Estimación, selección de modelos y diagnósticos</p>
+</div></li>
+<li><div class="agenda-active">
+<p>VMA(q)</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="vmaq-1" class="slide level2">
 <h2>VMA(q)</h2>
 <ul>
 <li><p>El modelo VMA(q): <span class="math display">\[X_{t}=\mu+a_t -\theta_1 a_{t-1}-...-\theta_q a_{t-q}\]</span> donde <span class="math inline">\(\mu\)</span> es un vector de dimensión <span class="math inline">\(k\)</span> que es su media, <span class="math inline">\(\theta_i\)</span> matrices <span class="math inline">\(k \times k\)</span> para <span class="math inline">\(i=1,...,q\)</span>, <span class="math inline">\(\theta_q \neq 0\)</span> y <span class="math inline">\(a_t\)</span> es una secuencia de i.i.d. vectores aleatorios con media 0 y matriz de covariancias <span class="math inline">\(\Sigma_a\)</span>, que es definida positiva.</p></li>
@@ -879,7 +1389,7 @@ Summary table:
 <li><p>De la misma forma, se puede considerar su versión centrada: <span class="math display">\[X_{t}-\mu = \theta(B) a_{t}\]</span></p></li>
 </ul>
 </section>
-<section id="vmaq-1" class="slide level2">
+<section id="vmaq-2" class="slide level2">
 <h2>VMA(q)</h2>
 <ul>
 <li><p>El VMA(q) siempre es estacionario pero no siempre es invertible.</p></li>
@@ -887,7 +1397,7 @@ Summary table:
 <li><p>Un VMA(q) es invertible si todas las soluciones de <span class="math inline">\(|\theta(B)|=0\)</span> estén fuera del círculo unitario.</p></li>
 </ul>
 </section>
-<section id="varmapq-4" class="slide level2">
+<section id="varmapq-2" class="slide level2">
 <h2>VARMA(p,q)</h2>
 <ul>
 <li>El modelo VARMA(p,q):</li>
@@ -900,7 +1410,7 @@ Summary table:
 <li><p>La condición de invertibilidad es que todas las soluciones de <span class="math inline">\(|\theta(B)|=0\)</span> estén fuera del círculo unitario.</p></li>
 </ul>
 </section>
-<section id="varmapq-5" class="slide level2 scrollable">
+<section id="varmapq-3" class="slide level2">
 <h2>VARMA(p,q)</h2>
 <ul>
 <li><p>El VARMA tiene problemas de identificabilidad debido a que su representación no es única. Se requieren adicionalmente dos condiciones:</p>
@@ -910,17 +1420,17 @@ Summary table:
 </ol></li>
 </ul>
 </section>
-<section id="varmapq-6" class="slide level2">
+<section id="varmapq-4" class="slide level2">
 <h2>VARMA(p,q)</h2>
 <ul>
 <li>Algunos paquetes de R que estiman VARMA
 <ul>
-<li>MTS</li>
-<li>marima</li>
+<li><code>MTS</code></li>
+<li><code>marima</code></li>
 </ul></li>
 </ul>
 </section>
-<section id="en-la-próxima-clase" class="slide level2">
+<section id="en-la-próxima-clase" class="slide level2 smaller scrollable">
 <h2>En la próxima clase</h2>
 <h3 id="enfocamos-en-el-varp-y-veremos-con-más-detalles">Enfocamos en el VAR(p) y veremos con más detalles</h3>
 <ul>
@@ -928,12 +1438,18 @@ Summary table:
 <li>Raíz unitarias</li>
 <li>Procesos cointegrados</li>
 </ul>
+<h3 id="referencia">Referencia</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Granger1969" class="csl-entry" role="listitem">
+Granger, C. W. J. 1969. <span>«Investigating Causal Relations by Econometric Models and Cross-spectral Methods»</span>. <em>Econometrica</em> 37 (3): 424-38. <a href="http://www.jstor.org/stable/1912791">http://www.jstor.org/stable/1912791</a>.
+</div>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -964,7 +1480,7 @@ Summary table:
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"right","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"width":"wide","numbers":true},
 'smaller': false,
  
         // Display controls in the bottom right corner

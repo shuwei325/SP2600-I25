@@ -1,15 +1,18 @@
 ---
-title: 'Tema 4: Modelos no lineales-2'
-subtitle: 'Curso: Tópicos Avanzados de Series Temporales'
+title: 'Tema 4: Modelos no lineales^2^'
+subtitle: '[Curso: Tópicos Avanzados de Series Temporales](https://shuwei325.github.io/SP2600-I25)'
 format: clean-revealjs
 html-math-method:
   method: mathjax
   url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 author:
   - name: Shu Wei Chou Chen
-    #orcid: 0000-0001-5495-2486
+    url: https://shuwei325.github.io
+    orcid: 0000-0001-5495-2486
     email: shuwei.chou@ucr.ac.cr
-    affiliations: Escuela de Estadística, Universidad de Costa Rica
+    affiliations: 
+    - name: Escuela de Estadística, Universidad de Costa Rica
+      url: https://www.estadistica.ucr.ac.cr/
 #date: last-modified
 lang: es  # español
 ---

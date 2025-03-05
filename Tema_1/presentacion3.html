@@ -7,11 +7,12 @@
 <link href="presentacion3_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="presentacion3_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="presentacion3_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="presentacion3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="presentacion3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="presentacion3_files/libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Shu Wei Chou Chen">
-  <title>Tema 1: Análisis espectral de series temporales-3</title>
+  <title>Tema 1: Análisis espectral de series temporales(3)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="presentacion3_files/libs/revealjs/dist/theme/quarto.css">
   <link href="presentacion3_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -244,7 +310,6 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
-      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -327,94 +392,118 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Tema 1: Análisis espectral de series temporales-3</h1>
-  <p class="subtitle">Curso: Tópicos Avanzados de Series Temporales</p>
+  <h1 class="title">Tema 1: Análisis espectral de series temporales<sup>(3)</sup></h1>
+  <p class="subtitle"><a href="https://shuwei325.github.io/SP2600-I25">Curso: Tópicos Avanzados de Series Temporales</a></p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Shu Wei Chou Chen 
+<a href="https://shuwei325.github.io">Shu Wei Chou Chen</a> <a href="https://orcid.org/0000-0001-5495-2486" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
 </div>
 <div class="quarto-title-author-email">
 <a href="mailto:shuwei.chou@ucr.ac.cr">shuwei.chou@ucr.ac.cr</a>
 </div>
         <p class="quarto-title-affiliation">
+            <a href="https://www.estadistica.ucr.ac.cr/">
             Escuela de Estadística, Universidad de Costa Rica
+            </a>
           </p>
     </div>
 </div>
 
 </section>
-<section class="slide level2 scrollable">
-
-<p>En la clase anterior vimos:</p>
-<ol type="1">
-<li>Introducción</li>
-<li>Ejemplos de motivación</li>
-<li>Comportamiento cíclico y periodicidad.</li>
-<li>Estimación y periodograma.</li>
+<section>
+<section id="representación-espectral-de-procesos-estacionarios" class="title-slide slide level1 agenda-slide center">
+<h1>Representación espectral de procesos estacionarios</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>Representación espectral de procesos estacionarios</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>La densidad espectral de un modelo ARMA</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Periodograma y la Transformada Discreta de Fourier</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Ejemplos</p>
+</div></li>
 </ol>
+</div>
 </section>
-<section id="contenido" class="slide level2 scrollable">
-<h2>Contenido</h2>
-<ol start="10">
-<ol start="5" type="1">
-<li>Función de densidad espectral. <br></li>
-<li>Representación espectral de procesos estacionarios <br></li>
-<li>Periodograma y la Transformada Discreta de Fourier<br></li>
-<li>Estimación de periodograma.<br></li>
-</ol>
-</ol>
-</section>
-<section id="representación-espectral" class="slide level2">
-<h2>Representación espectral</h2>
+<section id="representación-espectral-de-procesos-estacionarios-1" class="slide level2">
+<h2>Representación espectral de procesos estacionarios</h2>
 <ul>
 <li><p>Es necesario entender los fundamentos teóricos de los conceptos de frecuencia (poblacional) antes de entrar al caso cuando se tiene series observadas (muestral).</p></li>
 <li><p>Empezamos a definir la densidad espectral y su relación con un proceso estacionario.</p></li>
 </ul>
 </section>
-<section id="representación-espectral-1" class="slide level2">
-<h2>Representación espectral</h2>
+<section class="slide level2">
+
 <p><strong>Propiedad 1: Representación espectral de una función de autocovariancia</strong></p>
-<p>Si <span class="math inline">\(\left\lbrace x_t \right\rbrace\)</span> es estacionario con función de autocovariancia <span class="math inline">\(\gamma(h)=Cov(x_{t+h},x_t)\)</span>, entonces existe una única función monótonamente creciente <span class="math inline">\(F(\omega)\)</span>, llamada <strong>función de distribución espectral</strong>, con - <span class="math inline">\(F(-\infty)=F(-1/2)=0\)</span>, y - <span class="math inline">\(F(\infty)=F(1/2)=\gamma(0)\)</span></p>
+<p>Si <span class="math inline">\(\left\lbrace x_t \right\rbrace\)</span> es un proceso estacionario con función de autocovariancia <span class="math inline">\(\gamma(h)=Cov(x_{t+h},x_t)\)</span>, entonces existe una única función monótonamente creciente <span class="math inline">\(F(\omega)\)</span>, llamada <span class="alert">función de distribución espectral</span>, con</p>
+<ul>
+<li><p><span class="math inline">\(F\left(-\infty\right)=F\left(-\frac{1}{2}\right)=0\)</span> y</p></li>
+<li><p><span class="math inline">\(F(\infty)=F\left(\frac{1}{2}\right)=\gamma(0),\)</span></p></li>
+</ul>
 <p>tal que</p>
-<p><span class="math display">\[\gamma(h)= \int_{-\frac{1}{2}}^{\frac{1}{2}} e^{2\pi i\omega h} dF(\omega)\]</span></p>
+<p><span class="math display">\[\gamma(h)= \int_{-\frac{1}{2}}^{\frac{1}{2}} e^{2\pi i\omega h} dF(\omega).\]</span></p>
 <p><strong>Nota:</strong> Esta propiedad usa el concepto de integral de Riemann-Stieltjes (ver C.4, Shumway &amp; Stoffer). Cuando la función de autocovariancia es absolutamente sumable, esa función de distribución espectral es absolutamente continua con <span class="math inline">\(dF(\omega)=f(\omega)d\omega\)</span>.</p>
 </section>
-<section id="representación-espectral-2" class="slide level2">
-<h2>Representación espectral</h2>
+<section class="slide level2">
+
 <p><strong>Propiedad 2: Densidad espectral</strong></p>
-<p>Si la función de autocovariancia <span class="math inline">\(\gamma(h)\)</span>, de un proceso estacionario satisface la condición <span class="math display">\[\sum_{h=-\infty}^{\infty} |\gamma(h)|&lt; \infty\]</span> entonces tiene la representación <span class="math display">\[\gamma(h)= \int_{-\frac{1}{2}}^{\frac{1}{2}} e^{2\pi i\omega h} f(\omega)d\omega,~~~ h=0,\pm 1,\pm 2,...\]</span> y la transformación inversa de la densidad espectral <span class="math display">\[f(\omega) = \sum_{h=-\infty}^{\infty} \gamma(h) e^{-2 \pi i \omega h}, ~~~~~~ -\frac{1}{2} \leq \omega \leq \frac{1}{2}\]</span></p>
+<p>Si la función de autocovariancia <span class="math inline">\(\gamma(h)\)</span>, de un proceso estacionario satisface la condición <span class="math display">\[\sum_{h=-\infty}^{\infty} |\gamma(h)|&lt; \infty\]</span> entonces tiene la representación <span class="math display">\[\gamma(h)= \int_{-\frac{1}{2}}^{\frac{1}{2}} e^{2\pi i\omega h} f(\omega)d\omega,~~~ h=0,\pm 1,\pm 2,...\]</span> y la transformación inversa de la densidad espectral <span class="math display">\[f(\omega) = \sum_{h=-\infty}^{\infty} \gamma(h) e^{-2 \pi i \omega h}, ~~~~~~ -\frac{1}{2} \leq \omega \leq \frac{1}{2}.\]</span></p>
 </section>
-<section id="representación-espectral-3" class="slide level2">
-<h2>Representación espectral</h2>
-<p>Algunas propiedades de la densidad espectral:</p>
+<section class="slide level2">
+
+<p>Algunas <strong>propiedades de la densidad espectral</strong>:</p>
 <ul>
 <li><span class="math inline">\(f(\omega) \geq 0\)</span> para todo <span class="math inline">\(\omega\)</span>,</li>
 </ul>
 <p>debido a que <span class="math inline">\(\gamma(h)\)</span> es definida no negativa.</p>
 <ul>
-<li><p><span class="math inline">\(f(\omega)=f(-\omega)\)</span></p></li>
-<li><p><span class="math inline">\(\gamma(0)= Var(x_t) = \int_{-\frac{1}{2}}^{\frac{1}{2}} f(\omega)d\omega\)</span></p></li>
+<li><p><span class="math inline">\(f(\omega)=f(-\omega)\)</span>.</p></li>
+<li><p><span class="math inline">\(\gamma(0)= Var(x_t) = \int_{-\frac{1}{2}}^{\frac{1}{2}} f(\omega)d\omega\)</span>.</p></li>
 </ul>
-<p><strong>Nota:</strong> - La función de autocovariancia y la función de distribución espectral contiene la misma información. - La FAC expresa la información en término de rezagos (tiempo), mientras que la distribución espectral expresa la misma información en término de ciclos (frecuencias).</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Nota</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><p>La función de autocovariancia y la función de distribución espectral contiene la misma información.</p></li>
+<li><p>La ACF expresa la información en término de rezagos (tiempo), mientras que la distribución espectral expresa la misma información en término de ciclos (frecuencias).</p></li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 <section id="ruido-blanco" class="slide level2">
 <h2>Ruido blanco</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li><p>Una colección de variables aleatorias no correlacionadas, <span class="math inline">\(w_t\)</span>, con media 0 y variancia <span class="math inline">\(\sigma_w^2\)</span>, denotado por <span class="math inline">\(w_t \sim wn(0,\sigma_w^2)\)</span>.</p></li>
-<li><p>La FAC está dada por:</p></li>
+<li><p>Sea <span class="math inline">\(w_t \sim wn(0,\sigma_w^2)\)</span>.</p></li>
+<li><p>La ACF está dada por:</p></li>
 </ul>
-<p><span class="math display">\[
-\gamma_w(h)=\left\lbrace
+<p><span class="math display">\[\gamma_w(h)=\left\lbrace
 \begin{aligned}
 \sigma_w^2, &amp; &amp; h = 0 \\
 0, &amp; &amp;  h \neq 0.
 \end{aligned}
-\right.
-\]</span> - Su densidad espectral está dada por: <span class="math display">\[f_w(\omega)=\sigma_w^2,\]</span> para <span class="math inline">\(-1/2 \leq \omega \leq 1/2\)</span>.</p>
+\right.\]</span></p>
+<ul>
+<li>Su densidad espectral está dada por: <span class="math display">\[f_w(\omega)=\sigma_w^2,\]</span> para <span class="math inline">\(-1/2 \leq \omega \leq 1/2\)</span>.</li>
+</ul>
 </div><div class="column" style="width:50%;">
 <ul>
 <li>Simulación de una colección de <span class="math inline">\(w_t \sim N(0,1)\)</span> con <span class="math inline">\(T=500\)</span>.</li>
@@ -429,30 +518,69 @@ Shu Wei Chou Chen
 </div>
 </div>
 </div></div>
+</section></section>
+<section>
+<section id="la-densidad-espectral-de-un-modelo-arma" class="title-slide slide level1 agenda-slide center">
+<h1>La densidad espectral de un modelo ARMA</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Representación espectral de procesos estacionarios</p>
+</div></li>
+<li><div class="agenda-active">
+<p>La densidad espectral de un modelo ARMA</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Periodograma y la Transformada Discreta de Fourier</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Ejemplos</p>
+</div></li>
+</ol>
+</div>
 </section>
 <section id="proceso-lineal" class="slide level2">
 <h2>Proceso lineal</h2>
 <ul>
 <li><p>Como un proceso lineal es una herramienta que engloba varios modelos de series estacionarias (ej: ARMA), es importante presentar los resultados teóricos correspondientes.</p></li>
-<li><p>Un filtro lineal utiliza coeficientes <span class="math inline">\(a_j, j=0,\pm1,...\)</span>, para transformar una serie <em>input</em> <span class="math inline">\(x_t\)</span> a una serie <em>ouput</em> <span class="math inline">\(y_t\)</span>:</p></li>
+<li><p>Un <span class="alert">filtro lineal</span> utiliza coeficientes <span class="math inline">\(a_j, j=0,\pm1,...\)</span>, para transformar una serie <em>input</em> <span class="math inline">\(x_t\)</span> a una serie <em>ouput</em> <span class="math inline">\(y_t\)</span>:</p></li>
 </ul>
 <p><span class="math display">\[y_t=\sum_{j=-\infty}^{\infty}a_j x_{t-j},~~~ \sum_{j=-\infty}^{\infty}|a_j| &lt; \infty.\]</span></p>
 </section>
-<section id="proceso-lineal-1" class="slide level2">
-<h2>Proceso lineal</h2>
+<section class="slide level2">
+
 <p><strong>Propiedad: El espectro de una serie estacionaria filtrada</strong></p>
-<p>Si <span class="math inline">\(f_X(\omega)\)</span> es la densidad espectral de <span class="math inline">\(x_t\)</span>, una serie estacionaria. Entonces, la densidad espectral <span class="math inline">\(f_Y(\omega)\)</span> de la serie filtrada (output) está dada por: <span class="math display">\[f_Y(\omega)=|A(\omega)|^2 f_X(\omega),\]</span> donde <span class="math display">\[A(\omega)=\sum_{j=-\infty}^{\infty} a_j e^{-2\pi i \omega j}\]</span> es llamada la función respuesta de frecuencia.</p>
-<p><strong>Nota:</strong> <span class="math inline">\(A(\omega)\)</span> es la transformada discreta de Fourier de <span class="math inline">\(a_j\)</span>.</p>
+<p>Si <span class="math inline">\(f_X(\omega)\)</span> es la densidad espectral de <span class="math inline">\(x_t\)</span>, una serie estacionaria. Entonces, la densidad espectral <span class="math inline">\(f_Y(\omega)\)</span> de la serie filtrada (output) está dada por: <span class="math display">\[f_Y(\omega)=|A(\omega)|^2 f_X(\omega),\]</span> donde <span class="math display">\[A(\omega)=\sum_{j=-\infty}^{\infty} a_j e^{-2\pi i \omega j}\]</span> es llamada la <span class="alert">función respuesta de frecuencia</span>.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Nota</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(A(\omega)\)</span> es la transformada discreta de Fourier de <span class="math inline">\(a_j\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="proceso-lineal-2" class="slide level2">
-<h2>Proceso lineal</h2>
-<p>Un proceso ARMA es un caso particular de un proceso lineal. Recuerde que un proceso ARMA(p,q) se define como:</p>
+<section class="slide level2">
+
+<ul>
+<li>Un proceso ARMA es un caso particular de un proceso lineal. Recuerde que un proceso ARMA(p,q) se define como:</li>
+</ul>
 <p><span class="math display">\[x_t=\phi_1 x_{t-1}+\phi_2 x_{t-2}+...+\phi_p x_{t-p}\]</span> <span class="math display">\[+w_t-\theta_1 w_{t-1}-\theta_2 w_{t-2}-...-\theta_q w_{t-q}\]</span></p>
-<p>Utilizando los operadores de rezagos, el ARMA(p,q) se puede escribir como</p>
+<ul>
+<li>Utilizando los operadores de rezagos, el ARMA(p,q) se puede escribir como</li>
+</ul>
 <p><span class="math display">\[\phi(B)x_t=\theta(B)w_t,\]</span> donde:<br> <span class="math inline">\(\phi(B)=1-\phi_1 B -\phi_2  B^2-...-\phi_p B^p\)</span> es <strong>el operador autoregresivo</strong>.<br> <span class="math inline">\(\theta(B)=1-\theta_1 B-\theta_2 B^2-...-\theta_q B^q\)</span> es <strong>el operador de medias móviles</strong>.</p>
 </section>
-<section id="proceso-lineal-3" class="slide level2">
-<h2>Proceso lineal</h2>
+<section class="slide level2">
+
 <p>Un proceso ARMA(p,q) estacionario e invertible se puede escribir como:</p>
 <p><span class="math display">\[x_t=\phi(B)^{-1}\theta(B)w_t,\]</span></p>
 <p><strong>Propiedad: La densidad espectral de un modelo ARMA</strong></p>
@@ -460,44 +588,145 @@ Shu Wei Chou Chen
 <p>Su densidad espectral es dada por</p>
 <p><span class="math display">\[f_X(\omega)=\sigma_w^2 \frac{|\theta(e^{-2 \pi i \omega})|^2}{|\phi(e^{-2 \pi i \omega})|^2}.\]</span></p>
 </section>
+<section id="conceptos-de-números-complejos" class="slide level2">
+<h2>Conceptos de números complejos</h2>
+<ul>
+<li><p>No vamos a ver con detalles la teoría de los números complejos, pero una breve introducción de la definición y algunas propiedades son útiles para el curso.</p></li>
+<li><p>Usualmente, se denota un número complejo como <span class="math inline">\(z=x+iy\)</span>, donde <span class="math inline">\(i^2=-1\)</span>.</p>
+<ul>
+<li><span class="math inline">\(x\)</span>: la parte real y <span class="math inline">\(y\)</span>: la parte imaginaria.</li>
+</ul></li>
+<li><p>Los <span class="alert">números complejos</span> son pares de números reales:</p></li>
+</ul>
+<p><span class="math display">\[\mathbb{C} := \left\lbrace (x,y):  x,y \in \mathbb{R} \right\rbrace.\]</span></p>
+<p>con dos operaciones:</p>
+<ul>
+<li><p><strong>Adición</strong>: <span class="math inline">\((x,y)+(a,b):= (x+a,y+b)\)</span> y</p></li>
+<li><p><strong>Multiplicación</strong>: <span class="math inline">\((x,y) \cdot (a,b) := (xa-yb, xb+ya)\)</span>.</p></li>
+<li><p><span class="math inline">\(\mathbb{C}\)</span> es una extensión de <span class="math inline">\(\mathbb{R}\)</span>, pues los números complejos de forma <span class="math inline">\((x,0)\)</span> se comporta de forma identica a los números reales.</p></li>
+</ul>
+<p><span class="math display">\[(x,0)+(a,0):= (x+a,0)~~, ~~\text{y} ~~ (x,0) \cdot (a,0) := (xa, 0).\]</span></p>
+</section>
+<section class="slide level2">
+
+<h3 id="algunas-definiciones-y-propiedades">Algunas definiciones y propiedades</h3>
+<p>Sean <span class="math inline">\(z,z_1,z_2 \in \mathbb{C}\)</span>, y <span class="math inline">\(\phi, \phi_1,\phi_2 \in \mathbb{R}\)</span>.</p>
+<ul>
+<li>El <span class="alert">valor absoluto (módulo)</span> de <span class="math inline">\(z\)</span>: <span class="math inline">\(|z|= \sqrt{x^2+y^2}\)</span>.</li>
+<li>La <span class="alert">función exponencia</span> de <span class="math inline">\(z\)</span>: <span class="math inline">\(e^{i\phi}=\cos \phi + i \sin \phi\)</span>.</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><span class="math inline">\(e^{i\phi_1}e^{i\phi_2}=e^{i(\phi_1+\phi_2)}\)</span>.</li>
+<li><span class="math inline">\(e^{i0}=1\)</span>.</li>
+<li><span class="math inline">\(\frac{1}{e^{i\phi}}=e^{-i\phi}\)</span>.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><span class="math inline">\(e^{i(\phi+2\pi)}= e^{i\phi}\)</span></li>
+<li><span class="math inline">\(\left| e^{i\phi} \right|=1\)</span></li>
+<li><span class="math inline">\(\frac{d}{d\phi}e^{i\phi} = i e^{i \phi}\)</span></li>
+</ul>
+</div></div>
+<ul>
+<li>La <span class="alert">conjugada compleja</span> de <span class="math inline">\(z\)</span>: <span class="math inline">\(\overline{z}=\overline{x+iy}=x-iy\)</span>.</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><span class="math inline">\(\overline{z_1\pm z_2}=\overline{z_1} \pm \overline{z_2}\)</span>.</li>
+<li><span class="math inline">\(\overline{z_1\cdot z_2}=\overline{z_1} \cdot \overline{z_2}\)</span>.</li>
+<li><span class="math inline">\(\overline{\left(\frac{z_1}{z_2}\right)}=\frac{\overline{z_1}}{\overline{z_2}}\)</span>.</li>
+<li><span class="math inline">\(\overline{\overline{z}}=z\)</span></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><span class="math inline">\(|\overline{z}|=|z|\)</span>.</li>
+<li><span class="math inline">\(|z|^2 = x^2+y^2 = (x+iy)(x-iy)|z|^2 = z \overline{z}\)</span>.</li>
+<li><span class="math inline">\(\overline{e^{i\phi}}= e^{-i\phi}\)</span>.</li>
+</ul>
+</div></div>
+</section>
 <section id="ejemplos" class="slide level2">
 <h2>Ejemplos</h2>
-<p><strong>MA(1):</strong> - Considere <span class="math inline">\(X_t=w_t+0.5 w_{t-1}\)</span>. - El operador de medias móviles es <span class="math inline">\(\theta(B)=1+0.5 B\)</span>. - Entonces,</p>
-<p><span class="math display">\[f_X(\omega)=\sigma_w^2 |\theta(e^{-2 \pi i \omega})|^2\]</span> <span class="math display">\[=\sigma_w^2 |1+0.5 e^{-2 \pi i \omega}|^2\]</span> <span class="math display">\[=\sigma_w^2 (1+0.5 e^{-2 \pi i \omega})(1+0.5 e^{2 \pi i \omega})\]</span> <span class="math display">\[=\sigma_w^2 \left[1.25 + 0.5 (e^{-2 \pi i \omega}+e^{2 \pi \omega})\right]\]</span></p>
-</section>
-<section id="ejemplos-1" class="slide level2">
-<h2>Ejemplos</h2>
-<p><strong>AR(2):</strong> - Considere <span class="math inline">\(X_t-X_{t-1}+0.9X_{t-2}=w_t\)</span>. - El operador autorregresivo es <span class="math inline">\(\phi(B)=1-B+0.9 B^2\)</span>. - Entonces, <span class="math display">\[|\phi(e^{-2 \pi i \omega})|^2=(1-e^{-2 \pi i \omega}+0.9 e^{-4 \pi i \omega})(1-e^{2 \pi i \omega}+0.9 e^{4 \pi i \omega})\]</span> <span class="math display">\[=2.81-3.8 cos(2\pi\omega)+1.8 cos(4\pi\omega).\]</span> - De esta forma,</p>
-<p><span class="math display">\[f_X(\omega)=\sigma_w^2 \frac{1}{2.81-3.8 cos(2\pi\omega)+1.8 cos(4\pi\omega)}.\]</span></p>
-</section>
-<section id="ejemplos-2" class="slide level2">
-<h2>Ejemplos</h2>
-
-<img data-src="presentacion3_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%"></section>
-<section id="periodograma-y-la-transformada-discreta-de-fourier" class="slide level2">
-<h2>Periodograma y la Transformada Discreta de Fourier</h2>
+<h4 id="ma1">MA(1):</h4>
 <ul>
-<li><p>A continuación, presentamos los conceptos equivalentes de la representación espectral pero al caso de series temporales observadas de forma discreta.</p></li>
-<li><p>Sea <span class="math inline">\(x_1,...,x_T\)</span> una serie temporal observada. Defina la <strong>Transformada Discreta de Fourier (DFT)</strong>: <span class="math display">\[d(\omega_j)=T^{-1/2}\sum_{t=1}^T x_t e^{-2 \pi i \omega_j t},~~~ \text{para}~ j=0,1,...,T-1,\]</span> donde frecuencias <span class="math inline">\(\omega_j=j/n\)</span> son llamadas frecuencias fundamentales o de Fourier.</p></li>
-<li><p>DFT requiere <span class="math inline">\(T^2\)</span> operaciones complejas. Cuando <span class="math inline">\(T\)</span> es grande, es más factible usar la Transformada Rápida de Fourier (FFT), propuesta por Cooley y Tukey que requiere únicamente <span class="math inline">\(T ln T\)</span> operaciones.</p></li>
+<li><p>Considere <span class="math inline">\(X_t=w_t+0.5 w_{t-1}\)</span>.</p></li>
+<li><p>El operador de medias móviles es <span class="math inline">\(\theta(B)=1+0.5 B\)</span>.</p></li>
+<li><p>Entonces,</p></li>
 </ul>
+<p><span class="math display">\[f_X(\omega)=\sigma_w^2 \left|\theta(e^{-2 \pi i \omega})\right|^2\]</span> <span class="math display">\[=\sigma_w^2 \left|1+0.5 e^{-2 \pi i \omega}\right|^2\]</span> <span class="math display">\[=\sigma_w^2 (1+0.5 e^{-2 \pi i \omega})(1+0.5 e^{2 \pi i \omega})\]</span> <span class="math display">\[=\sigma_w^2 \left[1.25 + 0.5 \left(e^{-2 \pi i \omega}+e^{2 \pi \omega}\right)\right]\]</span> :::</p>
+</section>
+<section class="slide level2">
+
+<h4 id="ar2">AR(2):</h4>
+<ul>
+<li><p>Considere <span class="math inline">\(X_t-X_{t-1}+0.9X_{t-2}=w_t\)</span>.</p></li>
+<li><p>El operador autorregresivo es <span class="math inline">\(\phi(B)=1-B+0.9 B^2\)</span>.</p></li>
+<li><p>Entonces, <span class="math display">\[|\phi(e^{-2 \pi i \omega})|^2=(1-e^{-2 \pi i \omega}+0.9 e^{-4 \pi i \omega})(1-e^{2 \pi i \omega}+0.9 e^{4 \pi i \omega})\]</span> <span class="math display">\[=2.81-3.8 \cos(2\pi\omega)+1.8 \cos(4\pi\omega).\]</span></p></li>
+<li><p>De esta forma,</p></li>
+</ul>
+<p><span class="math display">\[f_X(\omega)=\sigma_w^2 \frac{1}{2.81-3.8 \cos(2\pi\omega)+1.8 \cos(4\pi\omega)}.\]</span></p>
+</section>
+<section class="slide level2">
+
+
+<img data-src="presentacion3_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" width="480"></section></section>
+<section>
+<section id="periodograma-y-la-transformada-discreta-de-fourier" class="title-slide slide level1 agenda-slide center">
+<h1>Periodograma y la Transformada Discreta de Fourier</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Representación espectral de procesos estacionarios</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>La densidad espectral de un modelo ARMA</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Periodograma y la Transformada Discreta de Fourier</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Ejemplos</p>
+</div></li>
+</ol>
+</div>
 </section>
 <section id="periodograma-y-la-transformada-discreta-de-fourier-1" class="slide level2">
 <h2>Periodograma y la Transformada Discreta de Fourier</h2>
 <ul>
+<li><p>A continuación, presentamos los conceptos equivalentes de la representación espectral pero al caso de series temporales observadas de forma discreta.</p></li>
+<li><p>Sea <span class="math inline">\(x_1,...,x_T\)</span> una serie temporal observada. Defina la <span class="alert">Transformada Discreta de Fourier (DFT)</span>: <span class="math display">\[d(\omega_j)= T^{-1/2}\sum_{t=1}^T x_t e^{-2 \pi i \omega_j t},~~~ \text{para}~ j=0,1,...,T-1,\]</span> donde frecuencias <span class="math inline">\(\omega_j=\frac{j}{n}\)</span> son llamadas <span class="alert">frecuencias fundamentales</span> o <span class="alert">de Fourier</span>.</p></li>
+<li><p>DFT requiere <span class="math inline">\(T^2\)</span> operaciones complejas. Cuando <span class="math inline">\(T\)</span> es grande, es más factible usar la <span class="alert">Transformada Rápida de Fourier (FFT)</span>, propuesta por Cooley y Tukey que requiere únicamente <span class="math inline">\(T \ln T\)</span> operaciones.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
 <li><p>Esta transformada es una transformación lineal uno a uno, i.e.</p></li>
-<li><p>Dada <span class="math inline">\(x_1,...,x_T\)</span> una serie temporal observada. Su <strong>Transformada Discreta de Fourier (DFT)</strong> es dada por: <span class="math display">\[d(\omega_j)=T^{-1/2}\sum_{t=1}^T x_t e^{-2 \pi i \omega_j t},~~~ \text{para}~ j=0,1,...,T-1,\]</span></p></li>
-<li><p>Se puede definir la DFT inversa</p></li>
+<li><p>Dada <span class="math inline">\(x_1,...,x_T\)</span> una serie temporal observada. Su <span class="alert">Transformada Discreta de Fourier (DFT)</span> es dada por: <span class="math display">\[d(\omega_j)=T^{-1/2}\sum_{t=1}^T x_t e^{-2 \pi i \omega_j t},~~~ \text{para}~ j=0,1,...,T-1,\]</span></p></li>
+<li><p>Se puede definir la <span class="alert">DFT inversa</span></p></li>
 </ul>
 <p><span class="math display">\[x_t=T^{-1/2}\sum_{t=1}^{T-1} d(\omega_j) e^{2 \pi i \omega_j t},~~~ \text{para}~~ t=1,...,T.\]</span></p>
 </section>
-<section id="periodograma-y-la-transformada-discreta-de-fourier-2" class="slide level2">
-<h2>Periodograma y la Transformada Discreta de Fourier</h2>
+<section class="slide level2">
+
 <ul>
-<li>Sea <span class="math inline">\(x_1,...,x_T\)</span> una serie temporal observada. Defina el <strong>periodograma</strong>:</li>
+<li>Sea <span class="math inline">\(x_1,...,x_T\)</span> una serie temporal observada. Defina el <span class="alert">periodograma</span>:</li>
 </ul>
-<p><span class="math display">\[I(\omega_j)=|d(\omega_j)|^2,~~~ \text{para}~ j=0,1,...,T-1,\]</span> - Se puede comprobar que:</p>
-<p><span class="math display">\[I(\omega)=|d(\omega_j)|^2=\sum_{h=-(T-1)}^{T-1} \hat{\gamma}(h) e^{-2 \pi i \omega_j h},~~~ \text{para}~~ t= 1,...,T,\]</span> donde <span class="math inline">\(\hat{\gamma}(h)\)</span> es la función de autocovariancia muestral. - Se puede interpretar el periodograma como la densidad espectral muestral de <span class="math inline">\(x_t\)</span>.</p>
+<p><span class="math display">\[I(\omega_j)=|d(\omega_j)|^2,~~~ \text{para}~ j=0,1,...,T-1,\]</span></p>
+<ul>
+<li>Se puede comprobar que:</li>
+</ul>
+<p><span class="math display">\[I(\omega)=|d(\omega_j)|^2=\sum_{h=-(T-1)}^{T-1} \hat{\gamma}(h) e^{-2 \pi i \omega_j h},~~~ \text{para}~~ t= 1,...,T,\]</span></p>
+<p>donde <span class="math inline">\(\hat{\gamma}(h)\)</span> es la función de autocovariancia muestral.</p>
+<ul>
+<li>Se puede interpretar el periodograma como la densidad espectral muestral de <span class="math inline">\(x_t\)</span>.</li>
+</ul>
 </section>
 <section id="propiedades-del-periodograma" class="slide level2">
 <h2>Propiedades del periodograma</h2>
@@ -508,90 +737,344 @@ Shu Wei Chou Chen
 <ul>
 <li>Además, cuando <span class="math inline">\(T \rightarrow \infty\)</span>,</li>
 </ul>
-<p><span class="math display">\[E[I(\omega_{j:T})] \rightarrow f(\omega)=\sum_{h=-\infty}^{\infty} \gamma(h) e^{-2 \pi i h \omega},\]</span> donde <span class="math inline">\(\omega_{j:T}=j_T/T\)</span> es una secuencia que tiende a <span class="math inline">\(\omega\)</span>.</p>
+<p><span class="math display">\[E[I(\omega_{j:T})] \rightarrow f(\omega)=\sum_{h=-\infty}^{\infty} \gamma(h) e^{-2 \pi i h \omega},\]</span> donde <span class="math inline">\(\omega_{j:T}=\frac{j_T}{T}\)</span> es una secuencia que tiende a <span class="math inline">\(\omega\)</span>.</p>
 </section>
-<section id="propiedades-del-periodograma-1" class="slide level2">
-<h2>Propiedades del periodograma</h2>
+<section class="slide level2">
+
 <p><strong>Propiedad: Distribución del periodograma</strong></p>
 <ul>
-<li>Sea <span class="math display">\[x_t=\sum_{j=-\infty}^\infty \psi_j w_{t-j},~~~~~\sum_{j=-\infty}^\infty |\psi_j| &lt; \infty,\]</span> donde <span class="math inline">\(w_t \sim iid(0,\sigma_w^2)\)</span>. Si <span class="math inline">\(\sum_{h=-\infty}^\infty |h| |\gamma(h)| &lt; \infty\)</span>, entonces para cualquier colección de <span class="math inline">\(m\)</span> frecuencias distintas <span class="math inline">\(\omega_j \in \{0,1/2\}\)</span> con <span class="math inline">\(\omega_{j:T}\rightarrow \omega_j\)</span></li>
+<li>Sea <span class="math display">\[x_t=\sum_{j=-\infty}^\infty \psi_j w_{t-j},~~~~~\sum_{j=-\infty}^\infty |\psi_j| &lt; \infty,\]</span> donde <span class="math inline">\(w_t \sim iid(0,\sigma_w^2)\)</span>. Si <span class="math inline">\(\sum\limits_{h=-\infty}^\infty |h| |\gamma(h)| &lt; \infty\)</span>, entonces para cualquier colección de <span class="math inline">\(m\)</span> frecuencias distintas <span class="math inline">\(\omega_j \in \{0,1/2\}\)</span> con <span class="math inline">\(\omega_{j:T}\rightarrow \omega_j\)</span></li>
 </ul>
 <p><span class="math display">\[\frac{2 I(\omega_{j:T})}{f(\omega_j)} \rightarrow \chi^2_2.\]</span></p>
 <ul>
 <li>Como consecuencia, se puede construir un intervalo de confianza de <span class="math inline">\(100(1-\alpha)\%\)</span>, con <span class="math display">\[\frac{2 I(\omega_{j:T})}{\chi^2_2(1-\alpha/2)}&lt;f(\omega)&lt;\frac{2 I(\omega_{j:T})}{\chi^2_2(\alpha/2)}\]</span></li>
 </ul>
+</section></section>
+<section>
+<section id="ejemplos-1" class="title-slide slide level1 agenda-slide center">
+<h1>Ejemplos</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Representación espectral de procesos estacionarios</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>La densidad espectral de un modelo ARMA</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Periodograma y la Transformada Discreta de Fourier</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Ejemplos</p>
+</div></li>
+</ol>
+</div>
 </section>
-<section id="consideraciones-importantes" class="slide level2">
-<h2>Consideraciones importantes</h2>
+<section id="consideraciones-importantes-en-la-práctica" class="slide level2">
+<h2>Consideraciones importantes en la práctica</h2>
 <ul>
 <li>En la práctica, es común encontrar series con tendencias.</li>
 <li>La presencia de tendencias produce frecuencias bajas extremas que ocultan la apariencia de frecuencias altas.</li>
 <li>Por lo tanto, se debe eliminar la tendencia utilizando algún método (regresión lineal, cuadrática, medias móviles, etc.)</li>
 </ul>
 </section>
-<section id="ejemplo-el-niño-y-la-población-de-peces-soi-y-reclutamiento" class="slide level2">
-<h2>Ejemplo: El Niño y la población de peces (SOI y reclutamiento)</h2>
+<section id="el-niño-y-la-población-de-peces-soi-y-reclutamiento" class="slide level2">
+<h2>El Niño y la población de peces (SOI y reclutamiento)</h2>
 <ul>
 <li>Se tiene la serie ambiental de índice de oscilación del sur (SOI, <em>Southern Oscillation Index</em>), y la serie de número de peces nuevos (Reclutamiento) de 453 meses de 1950 a 1987.</li>
 <li>SOI mide cambios en presión relacionada a la temperatura del superficie del mar en el oceano pacífico central, el cual se calienta cada 3-7 años por el efecto El Niño.</li>
 </ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(astsa)</span>
+<span id="cb1-2"><a href=""></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>)) </span>
+<span id="cb1-3"><a href=""></a><span class="fu">tsplot</span>(soi, <span class="at">ylab=</span><span class="st">""</span>, <span class="at">main=</span><span class="st">"SOI"</span>)</span>
+<span id="cb1-4"><a href=""></a><span class="fu">tsplot</span>(rec, <span class="at">ylab=</span><span class="st">""</span>, <span class="at">main=</span><span class="st">"Reclutamiento"</span>) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<img data-src="presentacion3_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:40.0%"></section>
-<section id="ejemplo-soi-y-reclutamiento" class="slide level2">
-<h2>Ejemplo: SOI y reclutamiento</h2>
+</div>
+<img data-src="presentacion3_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" width="480"></section>
+<section id="soi-y-reclutamiento" class="slide level2">
+<h2>SOI y reclutamiento</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb2-2"><a href=""></a>soi.per <span class="ot">=</span> <span class="fu">mvspec</span>(soi)             </span>
+<span id="cb2-3"><a href=""></a><span class="fu">abline</span>(<span class="at">v=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="at">lty=</span><span class="st">"dotted"</span>)</span>
+<span id="cb2-4"><a href=""></a>rec.per <span class="ot">=</span> <span class="fu">mvspec</span>(rec) </span>
+<span id="cb2-5"><a href=""></a><span class="fu">abline</span>(<span class="at">v=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="at">lty=</span><span class="st">"dotted"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="presentacion3_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
 <ul>
 <li>El eje X muestra múltiplos de <span class="math inline">\(\Delta=\frac{1}{12}\)</span>.</li>
 <li>Ambos periodogramas muestran el principal pico cuando <span class="math inline">\(\omega=1\Delta=\frac{1}{12}\)</span>.</li>
 <li>Además, una posible potencia alrededor de <span class="math inline">\(\omega=\frac{1}{4}\Delta=\frac{1}{48}.\)</span>, representando el efecto del Niño que tiene la característica de tener el ciclo irregular.</li>
 </ul>
-</div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="presentacion3_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
 </div></div>
 </section>
-<section id="ejemplo-soi-y-reclutamiento-1" class="slide level2">
-<h2>Ejemplo: SOI y reclutamiento</h2>
+<section class="slide level2">
+
 <div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>soi.per<span class="sc">$</span>details </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     frequency  period spectrum
-[1,]     0.025 40.0000   0.0092
-[2,]     0.050 20.0000   0.0497
-[3,]     0.075 13.3333   0.0120
-[4,]     0.100 10.0000   0.0086
-[5,]     0.125  8.0000   0.0152
-[6,]     0.150  6.6667   0.0338</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>       frequency period spectrum
-[235,]     5.875 0.1702   0.0031
-[236,]     5.900 0.1695   0.0049
-[237,]     5.925 0.1688   0.0001
-[238,]     5.950 0.1681   0.0013
-[239,]     5.975 0.1674   0.0027
-[240,]     6.000 0.1667   0.0074</code></pre>
+<pre><code>       frequency  period spectrum
+  [1,]     0.025 40.0000   0.0092
+  [2,]     0.050 20.0000   0.0497
+  [3,]     0.075 13.3333   0.0120
+  [4,]     0.100 10.0000   0.0086
+  [5,]     0.125  8.0000   0.0152
+  [6,]     0.150  6.6667   0.0338
+  [7,]     0.175  5.7143   0.0239
+  [8,]     0.200  5.0000   0.1064
+  [9,]     0.225  4.4444   0.0309
+ [10,]     0.250  4.0000   0.0537
+ [11,]     0.275  3.6364   0.0754
+ [12,]     0.300  3.3333   0.0567
+ [13,]     0.325  3.0769   0.0142
+ [14,]     0.350  2.8571   0.0507
+ [15,]     0.375  2.6667   0.0222
+ [16,]     0.400  2.5000   0.0105
+ [17,]     0.425  2.3529   0.0270
+ [18,]     0.450  2.2222   0.0190
+ [19,]     0.475  2.1053   0.0519
+ [20,]     0.500  2.0000   0.0101
+ [21,]     0.525  1.9048   0.0102
+ [22,]     0.550  1.8182   0.0043
+ [23,]     0.575  1.7391   0.0266
+ [24,]     0.600  1.6667   0.0062
+ [25,]     0.625  1.6000   0.0241
+ [26,]     0.650  1.5385   0.0093
+ [27,]     0.675  1.4815   0.0133
+ [28,]     0.700  1.4286   0.0054
+ [29,]     0.725  1.3793   0.0086
+ [30,]     0.750  1.3333   0.0040
+ [31,]     0.775  1.2903   0.0111
+ [32,]     0.800  1.2500   0.0097
+ [33,]     0.825  1.2121   0.0009
+ [34,]     0.850  1.1765   0.0006
+ [35,]     0.875  1.1429   0.0046
+ [36,]     0.900  1.1111   0.0110
+ [37,]     0.925  1.0811   0.0044
+ [38,]     0.950  1.0526   0.0143
+ [39,]     0.975  1.0256   0.0167
+ [40,]     1.000  1.0000   0.9722
+ [41,]     1.025  0.9756   0.0054
+ [42,]     1.050  0.9524   0.0158
+ [43,]     1.075  0.9302   0.0027
+ [44,]     1.100  0.9091   0.0292
+ [45,]     1.125  0.8889   0.0099
+ [46,]     1.150  0.8696   0.0006
+ [47,]     1.175  0.8511   0.0045
+ [48,]     1.200  0.8333   0.0063
+ [49,]     1.225  0.8163   0.0008
+ [50,]     1.250  0.8000   0.0075
+ [51,]     1.275  0.7843   0.0118
+ [52,]     1.300  0.7692   0.0008
+ [53,]     1.325  0.7547   0.0062
+ [54,]     1.350  0.7407   0.0048
+ [55,]     1.375  0.7273   0.0110
+ [56,]     1.400  0.7143   0.0050
+ [57,]     1.425  0.7018   0.0010
+ [58,]     1.450  0.6897   0.0002
+ [59,]     1.475  0.6780   0.0014
+ [60,]     1.500  0.6667   0.0021
+ [61,]     1.525  0.6557   0.0016
+ [62,]     1.550  0.6452   0.0031
+ [63,]     1.575  0.6349   0.0002
+ [64,]     1.600  0.6250   0.0018
+ [65,]     1.625  0.6154   0.0061
+ [66,]     1.650  0.6061   0.0000
+ [67,]     1.675  0.5970   0.0050
+ [68,]     1.700  0.5882   0.0043
+ [69,]     1.725  0.5797   0.0098
+ [70,]     1.750  0.5714   0.0039
+ [71,]     1.775  0.5634   0.0014
+ [72,]     1.800  0.5556   0.0035
+ [73,]     1.825  0.5479   0.0010
+ [74,]     1.850  0.5405   0.0004
+ [75,]     1.875  0.5333   0.0001
+ [76,]     1.900  0.5263   0.0014
+ [77,]     1.925  0.5195   0.0026
+ [78,]     1.950  0.5128   0.0015
+ [79,]     1.975  0.5063   0.0002
+ [80,]     2.000  0.5000   0.0393
+ [81,]     2.025  0.4938   0.0178
+ [82,]     2.050  0.4878   0.0050
+ [83,]     2.075  0.4819   0.0246
+ [84,]     2.100  0.4762   0.0343
+ [85,]     2.125  0.4706   0.0053
+ [86,]     2.150  0.4651   0.0022
+ [87,]     2.175  0.4598   0.0035
+ [88,]     2.200  0.4545   0.0061
+ [89,]     2.225  0.4494   0.0138
+ [90,]     2.250  0.4444   0.0046
+ [91,]     2.275  0.4396   0.0106
+ [92,]     2.300  0.4348   0.0057
+ [93,]     2.325  0.4301   0.0017
+ [94,]     2.350  0.4255   0.0070
+ [95,]     2.375  0.4211   0.0031
+ [96,]     2.400  0.4167   0.0008
+ [97,]     2.425  0.4124   0.0035
+ [98,]     2.450  0.4082   0.0023
+ [99,]     2.475  0.4040   0.0021
+[100,]     2.500  0.4000   0.0049
+[101,]     2.525  0.3960   0.0041
+[102,]     2.550  0.3922   0.0030
+[103,]     2.575  0.3883   0.0123
+[104,]     2.600  0.3846   0.0073
+[105,]     2.625  0.3810   0.0084
+[106,]     2.650  0.3774   0.0064
+[107,]     2.675  0.3738   0.0016
+[108,]     2.700  0.3704   0.0012
+[109,]     2.725  0.3670   0.0030
+[110,]     2.750  0.3636   0.0016
+[111,]     2.775  0.3604   0.0058
+[112,]     2.800  0.3571   0.0025
+[113,]     2.825  0.3540   0.0014
+[114,]     2.850  0.3509   0.0095
+[115,]     2.875  0.3478   0.0149
+[116,]     2.900  0.3448   0.0034
+[117,]     2.925  0.3419   0.0018
+[118,]     2.950  0.3390   0.0055
+[119,]     2.975  0.3361   0.0007
+[120,]     3.000  0.3333   0.0472
+[121,]     3.025  0.3306   0.0026
+[122,]     3.050  0.3279   0.0086
+[123,]     3.075  0.3252   0.0194
+[124,]     3.100  0.3226   0.0019
+[125,]     3.125  0.3200   0.0019
+[126,]     3.150  0.3175   0.0018
+[127,]     3.175  0.3150   0.0001
+[128,]     3.200  0.3125   0.0095
+[129,]     3.225  0.3101   0.0015
+[130,]     3.250  0.3077   0.0035
+[131,]     3.275  0.3053   0.0014
+[132,]     3.300  0.3030   0.0002
+[133,]     3.325  0.3008   0.0073
+[134,]     3.350  0.2985   0.0037
+[135,]     3.375  0.2963   0.0019
+[136,]     3.400  0.2941   0.0003
+[137,]     3.425  0.2920   0.0102
+[138,]     3.450  0.2899   0.0138
+[139,]     3.475  0.2878   0.0062
+[140,]     3.500  0.2857   0.0003
+[141,]     3.525  0.2837   0.0010
+[142,]     3.550  0.2817   0.0029
+[143,]     3.575  0.2797   0.0077
+[144,]     3.600  0.2778   0.0073
+[145,]     3.625  0.2759   0.0069
+[146,]     3.650  0.2740   0.0007
+[147,]     3.675  0.2721   0.0047
+[148,]     3.700  0.2703   0.0049
+[149,]     3.725  0.2685   0.0111
+[150,]     3.750  0.2667   0.0133
+[151,]     3.775  0.2649   0.0054
+[152,]     3.800  0.2632   0.0017
+[153,]     3.825  0.2614   0.0103
+[154,]     3.850  0.2597   0.0032
+[155,]     3.875  0.2581   0.0034
+[156,]     3.900  0.2564   0.0007
+[157,]     3.925  0.2548   0.0038
+[158,]     3.950  0.2532   0.0028
+[159,]     3.975  0.2516   0.0027
+[160,]     4.000  0.2500   0.0055
+[161,]     4.025  0.2484   0.0063
+[162,]     4.050  0.2469   0.0019
+[163,]     4.075  0.2454   0.0022
+[164,]     4.100  0.2439   0.0026
+[165,]     4.125  0.2424   0.0053
+[166,]     4.150  0.2410   0.0056
+[167,]     4.175  0.2395   0.0002
+[168,]     4.200  0.2381   0.0050
+[169,]     4.225  0.2367   0.0012
+[170,]     4.250  0.2353   0.0067
+[171,]     4.275  0.2339   0.0042
+[172,]     4.300  0.2326   0.0033
+[173,]     4.325  0.2312   0.0030
+[174,]     4.350  0.2299   0.0002
+[175,]     4.375  0.2286   0.0002
+[176,]     4.400  0.2273   0.0049
+[177,]     4.425  0.2260   0.0027
+[178,]     4.450  0.2247   0.0107
+[179,]     4.475  0.2235   0.0023
+[180,]     4.500  0.2222   0.0016
+[181,]     4.525  0.2210   0.0000
+[182,]     4.550  0.2198   0.0045
+[183,]     4.575  0.2186   0.0016
+[184,]     4.600  0.2174   0.0142
+[185,]     4.625  0.2162   0.0026
+[186,]     4.650  0.2151   0.0006
+[187,]     4.675  0.2139   0.0001
+[188,]     4.700  0.2128   0.0057
+[189,]     4.725  0.2116   0.0001
+[190,]     4.750  0.2105   0.0005
+[191,]     4.775  0.2094   0.0023
+[192,]     4.800  0.2083   0.0059
+[193,]     4.825  0.2073   0.0070
+[194,]     4.850  0.2062   0.0057
+[195,]     4.875  0.2051   0.0032
+[196,]     4.900  0.2041   0.0026
+[197,]     4.925  0.2030   0.0037
+[198,]     4.950  0.2020   0.0028
+[199,]     4.975  0.2010   0.0001
+[200,]     5.000  0.2000   0.0064
+[201,]     5.025  0.1990   0.0023
+[202,]     5.050  0.1980   0.0016
+[203,]     5.075  0.1970   0.0042
+[204,]     5.100  0.1961   0.0029
+[205,]     5.125  0.1951   0.0049
+[206,]     5.150  0.1942   0.0010
+[207,]     5.175  0.1932   0.0047
+[208,]     5.200  0.1923   0.0016
+[209,]     5.225  0.1914   0.0006
+[210,]     5.250  0.1905   0.0014
+[211,]     5.275  0.1896   0.0024
+[212,]     5.300  0.1887   0.0038
+[213,]     5.325  0.1878   0.0049
+[214,]     5.350  0.1869   0.0055
+[215,]     5.375  0.1860   0.0103
+[216,]     5.400  0.1852   0.0002
+[217,]     5.425  0.1843   0.0006
+[218,]     5.450  0.1835   0.0044
+[219,]     5.475  0.1826   0.0002
+[220,]     5.500  0.1818   0.0022
+[221,]     5.525  0.1810   0.0010
+[222,]     5.550  0.1802   0.0028
+[223,]     5.575  0.1794   0.0071
+[224,]     5.600  0.1786   0.0037
+[225,]     5.625  0.1778   0.0042
+[226,]     5.650  0.1770   0.0018
+[227,]     5.675  0.1762   0.0002
+[228,]     5.700  0.1754   0.0020
+[229,]     5.725  0.1747   0.0123
+[230,]     5.750  0.1739   0.0013
+[231,]     5.775  0.1732   0.0003
+[232,]     5.800  0.1724   0.0057
+[233,]     5.825  0.1717   0.0018
+[234,]     5.850  0.1709   0.0009
+[235,]     5.875  0.1702   0.0031
+[236,]     5.900  0.1695   0.0049
+[237,]     5.925  0.1688   0.0001
+[238,]     5.950  0.1681   0.0013
+[239,]     5.975  0.1674   0.0027
+[240,]     6.000  0.1667   0.0074</code></pre>
 </div>
 </div>
 <ul>
-<li>Recuerde que el dominio de frecuencia es <span class="math inline">\((0,0.5)\)</span>. El gráfico muestra las frecuencias transformadas que debe multiplicar por <span class="math inline">\(12\)</span>, y por lo tanto, <span class="math inline">\((0 \times 12, 0.5 \times 12)\)</span>.</li>
-</ul>
-</section>
-<section id="ejemplo-soi-y-reclutamiento-2" class="slide level2">
-<h2>Ejemplo: SOI y reclutamiento</h2>
-<ul>
-<li>Las frecuencias más importantes:</li>
+<li><p>Recuerde que el dominio de frecuencia es <span class="math inline">\((0,0.5)\)</span>. El gráfico muestra las frecuencias transformadas que debe multiplicar por <span class="math inline">\(12\)</span>, y por lo tanto, <span class="math inline">\((0 \times 12, 0.5 \times 12)=(0,6)\)</span>.</p></li>
+<li><p>Las frecuencias más importantes:</p></li>
 </ul>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>soi.per<span class="sc">$</span>details[<span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">40</span>),] </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     frequency period spectrum
 [1,]      0.25      4   0.0537
@@ -599,54 +1082,66 @@ Shu Wei Chou Chen
 </div>
 </div>
 </section>
-<section id="ejemplo-soi-y-reclutamiento-3" class="slide level2">
-<h2>Ejemplo: SOI y reclutamiento</h2>
+<section class="slide level2">
+
 <ul>
 <li>Recordando la propiedad del periodograma, se puede construir un intervalo de confianza de <span class="math inline">\(100(1-\alpha)\%\)</span>, con <span class="math display">\[\frac{2 I(\omega_{j:T})}{\chi^2_2(1-\alpha/2)}&lt;f(\omega)&lt;\frac{2 I(\omega_{j:T})}{\chi^2_2(\alpha/2)}\]</span></li>
 </ul>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>U <span class="ot">=</span> <span class="fu">qchisq</span>(.<span class="dv">025</span>,<span class="dv">2</span>)</span>
+<span id="cb7-2"><a href=""></a>L <span class="ot">=</span> <span class="fu">qchisq</span>(.<span class="dv">975</span>,<span class="dv">2</span>)</span>
+<span id="cb7-3"><a href=""></a><span class="co"># para frecuencia= 1/4</span></span>
+<span id="cb7-4"><a href=""></a><span class="fu">c</span>(<span class="dv">2</span><span class="sc">*</span>soi.per<span class="sc">$</span>spec[<span class="dv">10</span>]<span class="sc">/</span>L,<span class="dv">2</span><span class="sc">*</span>soi.per<span class="sc">$</span>spec[<span class="dv">10</span>]<span class="sc">/</span>U)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0145653 2.1222066</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="co"># para frecuencia= 1</span></span>
+<span id="cb9-2"><a href=""></a><span class="fu">c</span>(<span class="dv">2</span><span class="sc">*</span>soi.per<span class="sc">$</span>spec[<span class="dv">40</span>]<span class="sc">/</span>L,<span class="dv">2</span><span class="sc">*</span>soi.per<span class="sc">$</span>spec[<span class="dv">40</span>]<span class="sc">/</span>U)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  0.2635573 38.4010800</code></pre>
 </div>
 </div>
 </section>
-<section id="ejemplo-soi-y-reclutamiento-4" class="slide level2">
-<h2>Ejemplo: SOI y reclutamiento</h2>
+<section class="slide level2">
+
 <ul>
 <li><p>¡Note que el intervalo es muy amplio y <strong>la incertidumbre es muy grande</strong>!</p></li>
 <li><p>De hecho, recordemos que:</p></li>
 </ul>
 <p><span class="math display">\[\frac{2 I(\omega_{j:T})}{f(\omega_j)} \rightarrow \chi^2_2.\]</span></p>
-<p><span class="math inline">\(\Rightarrow E\left[I(\omega)\right] \approx f(\omega)\)</span> y <span class="math inline">\(Var\left[I(\omega)\right] \approx f^2(\omega)\)</span>.</p>
 <ul>
-<li>Es decir, el periodograma no es un estimador consistente de la densidad espectral, i.e.</li>
+<li><p>En otras palabras, cuando <span class="math inline">\(T\)</span> es grande, <span class="math display">\[\Rightarrow E\left[I(\omega)\right] \approx f(\omega), \text{   y    } Var\left[I(\omega)\right] \approx f^2(\omega).\]</span></p></li>
+<li><p>Es decir, el periodograma no es un estimador consistente de la densidad espectral, i.e.</p></li>
 </ul>
-<p><span class="math display">\[Var\left[I(\omega)\right] \nrightarrow 0 ~~\text{cuando} ~~n \rightarrow \infty.\]</span> - La solución es utilizar un <strong>periodograma suavizado</strong></p>
+<p><span class="math display">\[Var\left[I(\omega)\right] \nrightarrow 0 ~~\text{cuando} ~~T \rightarrow \infty.\]</span> - La solución es utilizar un <span class="alert">periodograma suavizado</span></p>
 </section>
-<section id="en-la-próxima-clase-veremos" class="slide level2 scrollable">
+<section id="en-la-próxima-clase-veremos" class="slide level2">
 <h2>En la próxima clase veremos</h2>
-<ol start="9">
-<ol start="9" type="1">
-<li><p>Estimaciones en el dominio de frecuencia.<br></p>
-<p style="margin-left: 25px;">
-</p><p>◦ Estimación espectral no paramétrica</p>
-<p></p>
-<p style="margin-left: 25px;">
-</p><p>◦ Estimación espectral paramétrica</p>
-<p></p>
-<p><br></p></li>
-<li><p>Aplicaciones del análisis espectral.<br></p></li>
-</ol>
-</ol>
+<ul>
+<li>Estimaciones en el dominio de frecuencia
+<ul>
+<li>Estimación espectral no paramétrica</li>
+<li>Estimación espectral paramétrica</li>
+</ul></li>
+<li>Aplicaciones del análisis espectral.</li>
+</ul>
+</section>
+<section id="paquetes-en-r" class="slide level2">
+<h2>Paquetes en R</h2>
+<p>Para replicar los ejemplos de esta presentación, necesitan estos paquetes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb11-2"><a href=""></a><span class="fu">library</span>(forecast)</span>
+<span id="cb11-3"><a href=""></a><span class="fu">library</span>(fpp2)</span>
+<span id="cb11-4"><a href=""></a><span class="fu">library</span>(astsa)</span>
+<span id="cb11-5"><a href=""></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -677,7 +1172,7 @@ Shu Wei Chou Chen
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"right","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"width":"wide","numbers":true},
 'smaller': false,
  
         // Display controls in the bottom right corner

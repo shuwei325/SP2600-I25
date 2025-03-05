@@ -1,116 +1,134 @@
 ---
-title: 'Tema 2: Análisis multivariado de series temporales-1'
-subtitle: 'Curso: Tópicos Avanzados de Series Temporales'
+title: 'Tema 2: Análisis multivariado de series temporales^(1)^'
+subtitle: '[Curso: Tópicos Avanzados de Series Temporales](https://shuwei325.github.io/SP2600-I25)'
 format: clean-revealjs
 html-math-method:
   method: mathjax
   url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 author:
   - name: Shu Wei Chou Chen
-    #orcid: 0000-0001-5495-2486
+    url: https://shuwei325.github.io
+    orcid: 0000-0001-5495-2486
     email: shuwei.chou@ucr.ac.cr
-    affiliations: Escuela de Estadística, Universidad de Costa Rica
+    affiliations: 
+    - name: Escuela de Estadística, Universidad de Costa Rica
+      url: https://www.estadistica.ucr.ac.cr/
 #date: last-modified
 lang: es  # español
+filters:
+  - reveal-auto-agenda
+auto-agenda:
+  bullets: numbered
+  heading: Contenido
 ---
 
-```{r, include=FALSE}
+```{r}
 library(ggplot2)
-library(forecast)
-library(fpp2)
 library(astsa)
-library(sarima)
-library(car)
-library(fGarch)
-library(xts)
-library(vars)
 library(MASS)
 library(MTS)
 ```
 
-## Contenido
+# Introducción 
 
-1. Introducción
-2. Modelos ARMA vectoriales
-3. Causalidad de Granger
-4. Raíz unitarias
-5. Procesos cointegrados: definición y pruebas de hipótesis para cointegración y modelos de corrección del error.
-
- 
 ## Introducción 
 
 - En la práctica, es común enfrentar situaciones en donde se presentan varias series temporales.
 
 - **Objetivos:**
-1. Estudiar la relación dinámica de las variables de interés en el tiempo.
-2. Mejorar las predicciones.
+
+  1. Estudiar la relación dinámica de las variables de interés en el tiempo.
+  2. Mejorar las predicciones.
 
  
-## Introducción 
+---
 
-**Ejemplo 1: El Niño y la población de peces**
+### Ejemplo 1: El Niño y la población de peces
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
 
 - Se tiene la serie ambiental de índice de oscilación del sur (SOI, Southern Oscillation Index), y la serie de número de peces nuevos (Reclutamiento) de 453 meses de 1950 a 1987.
 - SOI mide cambios en presión relacionada a la temperatura del superficie del mar en el oceano pacífico central, el cual se calienta cada 3-7 años por el efecto El Niño.
 
 
-```{r echo=FALSE,warning=FALSE, message=FALSE, fig.align="center", out.width = "40%"}
-par(mfrow = c(2,1))  # set up the graphics
+:::
+  
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+par(mfrow = c(2,1)) 
 tsplot(soi, ylab="", main="SOI")
 tsplot(rec, ylab="", main="Reclutamiento") 
 ```
 
+:::
+::::
 
 
- 
-## Introducción 
+---
 
-**Ejemplo 2: Imagen por resonancia magnética**
+### Ejemplo 2: Imagen por resonancia magnética
+
+:::: {.columns}
+
+::: {.column width="50%"}
 
 - Un estímulo fue aplicado a cinco personas en la mano por 32 segundos y luego paró el estímulo por otros 32 segundos, sucesivamente.
 - Durante 256 segundos, cada 2 segundos se registró la intensidad del dependiente del nivel en la sangre (BOLD, blood oxygenation-level dependent signal intensity), la cual mide áreas de activación en el celebro $(T=128)$.
 
-```{r echo=FALSE,warning=FALSE, message=FALSE, fig.align="center", out.width = "40%"}
+:::
+  
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
 par(mfrow=c(2,1), mar=c(3,2,1,0)+.5, mgp=c(1.6,.6,0))  
 ts.plot(fmri1[,2:5], col=1:4, ylab="BOLD", xlab="", main="Corteza")
 ts.plot(fmri1[,6:9], col=1:4, ylab="BOLD", xlab="", main="Tálamo y cerebelo")
 mtext("Time (1 pt = 2 sec)", side=1, line=2) 
 ```
 
+:::
+::::
 
+# Medidas de dependencia (bivariada)
  
-## Medidas de dependencia (caso bivariada)
+## Medidas de dependencia (bivariada)
 
-- Recuerde que **la función de autocorrelación** es definida por
+- Recuerde que [la función de autocorrelación]{.alert} es definida por
 
 $$\rho_X(t,s)=\frac{\gamma(t,s)}{\sqrt{\gamma(t,t)\gamma(s,s)}}$$
 
-- Se puede generalizar estas medidas a dos series $X_t$ y $Y_t$. Defina:
-
-- **la función de autocovariancia cruzada**:
+- Se puede generalizar estas medidas a dos series $X_t$ y $Y_t$. Defina [la función de autocovariancia cruzada]{.alert}:
 
 $$\gamma_{XY}(t,s)= Cov(X_t,Y_s) =E\left[ (X_t-\mu_{Xt})(Y_s-\mu_{Ys}) \right]$$
 
 
-- **la función de autocorrelación cruzada**:
+- [la función de autocorrelación cruzada]{.alert}:
 
 $$\rho_{XY}(t,s)= \frac{\gamma_{XY}(t,s)}{\sqrt{\gamma_{X}(t,t)\gamma_{Y}(s,s)}}$$
 
+---
 
+::: {#def-estacionariedadconjunta1}
+### Estacionariedad conjunta (bivariada)
 
-
- 
-## Estacionariedad conjunta(caso bivariada)
-
-**Definición:**
-Dos series temporales, $X_t$ y $Y_t$ se dicen que son **conjuntamente estacionarias** si cada serie es estacionaria, y la función de covariancia cruzada
+Dos series temporales, $X_t$ y $Y_t$ se dicen que son [conjuntamente estacionarias]{.alert}, si cada serie es estacionaria, y la función de covariancia cruzada
 
 $$\gamma_{XY}(h)= Cov(X_{t+h},Y_t) =E\left[ (X_{t+h}-\mu_{X})(Y_t-\mu_{Y}) \right]$$
 es una función que solamente depende de $h$.
 
+:::
+
+
 De esta forma, podemos definir la función de correlación cruzada de dos series temporales conjuntamente estacionarias por $$\rho_{XY}(h)=\frac{\gamma_{XY}(h)}{\sqrt{\gamma_X(0),\gamma_Y(0)}}$$
 
 **Propiedades:**
+
 - $-1 \leq \rho_{XY}(h) \leq 1$
 - $\rho_{XY}(h) \neq \rho_{XY}(-h)$ pues $Cov(X_2,Y_1)$ y $Cov(X_1,Y_2)$ no siempre son iguales.
 - $\rho_{XY}(h) = \rho_{YX}(-h)$
@@ -118,13 +136,13 @@ De esta forma, podemos definir la función de correlación cruzada de dos series
  
 ## Estimación
 
-- **la función de autocovariancia cruzada muestral** es definida por
+- [la función de autocovariancia cruzada muestral]{.alert} es definida por
 $$\hat{\gamma}_{XY}(h)=\frac{1}{T}\sum_{t=1}^{T-h} (X_{t+h}-\bar{X})(Y_{t}-\bar{Y}),$$
 
 Note que $\hat{\gamma}_{XY}(-h)=\hat{\gamma}_{YX}(h)$ para $h=0,1,...,T-1$.
 
 
-- **La función de autocorrelación cruzada muestral** es definida por
+- [La función de autocorrelación cruzada muestral]{.alert} es definida por
 $$\hat{\rho}_{XY}(h)=\frac{\hat{\gamma}_{XY}(h)}{\sqrt{\hat{\gamma}_X(0)\hat{\gamma}_Y(0)}}$$
 **Propiedad:** La distribución de $\hat{\rho}_{XY}(h)$ para $T$ grande es aproximadamente normal con media cero y 
 $$\sigma_{\hat{\rho}_{XY}}=\frac{1}{\sqrt{T}}.$$
@@ -134,68 +152,91 @@ $$\sigma_{\hat{\rho}_{XY}}=\frac{1}{\sqrt{T}}.$$
  
 ## Ejemplo 1: El Niño y la población de peces
 
+:::: {.columns}
+
+::: {.column width="50%"}
+
+
 - Se tiene la serie ambiental de índice de oscilación del sur (SOI, Southern Oscillation Index), y la serie de número de peces nuevos (Reclutamiento) de 453 meses de 1950 a 1987.
 - SOI mide cambios en presión relacionada a la temperatura del superficie del mar en el oceano pacífico central, el cual se calienta cada 3-7 años por el efecto El Niño.
 
 
-```{r echo=FALSE,warning=FALSE, message=FALSE, fig.align="center", out.width = "40%"}
-par(mfrow = c(2,1))  # set up the graphics
+:::
+  
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+par(mfrow = c(2,1)) 
 tsplot(soi, ylab="", main="SOI")
 tsplot(rec, ylab="", main="Reclutamiento") 
 ```
 
+:::
+::::
 
- 
-## Ejemplo: El Niño y la población de peces
+---
 
-**Gráfico de dispersión de series rezagadas**
+:::: {.columns}
 
-```{r, results='hide',  echo=FALSE, out.width = "60%", fig.align="center"}
-(r = round(acf(soi, 6, plot=FALSE)$acf[-1], 3)) # first 6 sample acf values
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+(r = round(acf(soi, 6, plot=FALSE)$acf[-1], 3))
+(r = round(acf(rec, 6, plot=FALSE)$acf[-1], 3))
+```
+:::
+  
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
 par(mfrow=c(2,2))
 plot(lag(soi,-1), soi); legend('topleft', legend=r[1],cex=0.5 )
 plot(lag(soi,-6), soi); legend('topleft', legend=r[6],cex=0.5)
 
-(r = round(acf(rec, 6, plot=FALSE)$acf[-1], 3)) # first 6 sample acf values
 plot(lag(rec,-1), rec); legend('topleft', legend=r[1],cex=0.5)
 plot(lag(rec,-6), rec); legend('topleft', legend=r[6],cex=0.5)
 ```
 
+:::
+::::
 
- 
-## Ejemplo: El Niño y la población de peces:
+---
 
-```{r, results='hide', echo=FALSE,warning=FALSE, message=FALSE, fig.align="center", out.width = "60%"}
+```{r}
+#| echo: true
 par(mfrow=c(2,1))
 acf1(soi, 48, main="SOI")
 acf1(rec, 48, main="Recrutamiento")
 ```
 
 
- 
-## Ejemplo: El Niño y la población de peces
+---
 
-**Gráfico de dispersión de REC contra SOI rezagadas**
-
-```{r, results='hide',  echo=FALSE, out.width = "60%", fig.align="center"}
+```{r}
+#| echo: true
+#| fig-cap: 'Gráfico de dispersión de REC contra SOI rezagadas'
 lag2.plot (soi, rec, 8)
 ```
 
 
 
- 
-## Ejemplo: El Niño y la población de peces:
+---
 
-```{r, results='hide',warning=FALSE, message=FALSE, fig.align="center", out.width = "50%"}
+```{r}
+#| echo: true
 par(mfrow=c(2,1))
 ccf2(rec,soi, 36, main="función de correlación cruzada de Rec. contra SOI")
 ccf2(soi,rec, 36, main="función de correlación cruzada de SOI contra Rec.")
 ```
 
  
-## Ejemplo: El Niño y la población de peces:
+---
 
-```{r,warning=FALSE, message=FALSE, fig.align="center", out.width = "40%"}
+```{r}
+#| echo: true
 (r1=ccf(rec,soi, 5, plot=FALSE))
 (r2=ccf(soi,rec, 5, plot=FALSE))
 ```
@@ -203,32 +244,53 @@ ccf2(soi,rec, 36, main="función de correlación cruzada de SOI contra Rec.")
 - Note que $\hat{\rho}_{XY}(h) = \hat{\rho}_{YX}(-h)$.
 
 
- 
-## Medidas de dependencia (caso k-variada)
+# Medidas de dependencia (multivariada)
+
+## Medidas de dependencia (multivariada)
+
+
 
 La generalización a series temporales multivariadas con $k$ componentes, $X_{t1},...X_{tk}, t=1,...,T$, es intuitivo:
 
-- **la función de autocovariancia cruzada**:
+- [El vector de medias]{.alert} es función del tiempo $t$:
+$$\mu_t=E(X_t)=\left(\begin{array}{c} \mu_{t1}\\ \vdots \\ \mu_{tk} \end{array}\right).$$
 
-$$\gamma_{ij}(t,s)= Cov(X_{ti},X_{sj}) =E\left[ (X_{ti}-\mu_{it})(X_{sj}-\mu_{js}) \right]$$
+
+- [La función de autocovariancia cruzada]{.alert}:
+
+$$\gamma_{ij}(t,s)= Cov(X_{ti},X_{sj}) =E\left[ (X_{ti}-\mu_{ti})(X_{sj}-\mu_{sj}) \right]$$
 para $i,j=1,...,k.$
 
- 
-## Estacionariedad conjunta (caso k-variada)
 
-- Sea $X_t=(X_{t1},...,X_{tk})'$ un vector $k \times 1$ de series temporales. Se dice que $X_t$ es (débilmente) estacionario si el vector de medias es constante en el tiempo
+---
+
+- O bien, [la matriz de autocovariancias]{.alert}:
+$$\Gamma(t,s)= E[(X_{t}-\mu_{t})(X_{s}-\mu_s)']=E\left[ \left(  \begin{array}{c} X_{t1}-\mu_{t1}\\\vdots \\X_{tk}-\mu_{tk} \end{array} \right) \left( X_{t1}-\mu_{t1},\dots ,X_{tk}-\mu_{tk}  \right) \right]$$
+
+$$= E\left(  \begin{array}{c} (X_{t1}-\mu_{t1})^2 & \dots & (X_{t1}-\mu_{t1})(X_{tk}-\mu_{tk})\\ \vdots & \ddots & \vdots \\(X_{tk}-\mu_{tk})(X_{t1}-\mu_{t1}) & \dots & (X_{tk}-\mu_{tk})^2 \end{array} \right).$$
+
+ 
+# Estacionariedad
+
+::: {#def-estacionariedadconjunta2}
+### Estacionariedad débil
+
+Sea $X_t=(X_{t1},...,X_{tk})'$ un vector $k \times 1$ de series temporales. Se dice que $X_t$ es [débilmente estacionario]{.alert} si:
+
+- El vector de medias es constante en el tiempo
 $$\mu=E(X_t)=\left(\begin{array}{c} \mu_1\\ \vdots \\ \mu_k \end{array}\right)$$
 
 - Y la matriz de autocovariancia depende únicamente del rezago $h$, i.e.
-$$\Gamma(h)= E[(X_{t+h}-\mu)(X_{t}-\mu)' ]$$
+$$\Gamma(h)= E[(X_{t+h}-\mu)(X_{t}-\mu)']$$
 donde los elementos de la matriz son funciones de covariancia cruzada, $\gamma_{ij}(h)= Cov(X_{t+h,i},X_{t,j}) =E\left[ (X_{t+h,i}-\mu_{i})(X_{tj}-\mu_{j}) \right]$ para $i,j=1,...,k$. 
+
+::: 
+
+---
 
 - Note que como $\gamma_{ij}(h)=\gamma_{ji}(-h)$, entonces
 
 $$\Gamma(-h)=\Gamma'(h)$$
-
- 
-## Estacionariedad conjunta (caso k-variada)
 
 -  la matriz de autocorrelaciones también depende únicamente del rezago $h$, i.e.
 $$\boldsymbol{\rho}(h)= D^{-1}\Gamma(h) D^{-1}=\left[ \rho_{h,ij} \right]$$
@@ -237,22 +299,33 @@ donde $D=diag\left\lbrace \sigma_1,...,\sigma_k \right\rbrace$ es la matriz diag
 - Al igual que $\Gamma(h)$, se tiene que $$\boldsymbol{\rho}(-h)=\boldsymbol{\rho}'(h)$$
 
  
-## Estacionariedad estricta conjunta
+## Estacionariedad estricta
 
-- Sea $X_t=(X_{t1},...,X_{tk})'$ un vector $k \times 1$ de series temporales. Se dice que $X_t$ es estrictamente estacionario si la distribución conjunta multivariada de una colección de m tiempos:
+
+::: {#def-estacionariedadconjunta3}
+### Estacionariedad estricta
+
+Sea $X_t=(X_{t1},...,X_{tk})'$ un vector $k \times 1$ de series temporales. Se dice que $X_t$ es estrictamente estacionario, si la distribución conjunta multivariada de una colección de m tiempos:
 $$\left\lbrace X_{t_1},...,X_{t_m} \right\rbrace$$
 es igual a 
 $$\left\lbrace X_{t_1+h},...,X_{t_m+h} \right\rbrace$$
-donde $m,j$ y $(t_1,...,t_m)$ son enteros positivos arbitrarios.
+donde $m,j$ y $t_1,...,t_m$ son enteros positivos arbitrarios.
+
+::: 
+
+:::{.callout-note}
 
 - Una serie temporal estrictamente estacionaria es débilmente estacionaria, si sus primeros dos momentos existen.
 
-
+:::
  
 ## Ruido blanco
 
+::: {#def-wn}
 
-- Es una colección de variables aleatorias no correlacionadas, $a_t$, con media $0$ y matriz de covariancias $\Sigma_a$.
+#### Ruido blanco
+
+- Es una colección de vectores de variables aleatorias no correlacionadas, $a_t$, con media $0$ y matriz de covariancias $\Sigma_a$.
 
 - Denotado por $a_t \sim wn(0,\Sigma_a)$.
 
@@ -260,16 +333,16 @@ donde $m,j$ y $(t_1,...,t_m)$ son enteros positivos arbitrarios.
 
 - Sin embargo, si un ruido blanco es Gaussiano, entonces $a_t \overset{iid}{\sim} N(0,\Sigma_a)$.
 
+:::
 
- 
 
-## Ruido blanco
+---
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 - Considere un ruido blanco Gaussiano:
-$$a_t \sim N\left(0, 
+$$a_t \sim N\left( \left( \begin{array}{c} 0\\ 0 \end{array}\right)   , 
 \begin{bmatrix}1.5 & 0.8 \\
  0.8 & 1
 \end{bmatrix} \right).$$
@@ -279,8 +352,8 @@ $$\Gamma(h)=\left\lbrace
 \begin{aligned}
 \begin{bmatrix}1.5 & 0.8 \\
  0.8 & 1
-\end{bmatrix}  & & h = 0 \\
-0, & &  h \neq 0,
+\end{bmatrix}  & & h = 0, \\
+0, & &  h \neq 0.
 \end{aligned}
 \right.$$
 
@@ -288,7 +361,8 @@ $$\Gamma(h)=\left\lbrace
 
 ::: {.column width="50%"}
 - Simulación con $T=500$.
-```{r echo=FALSE, out.width = "90%"}
+```{r}
+#| echo: true
 aa<-mvrnorm(n = 500, mu=c(0,0), Sigma=matrix(c(1.5,0.8,0.8,1),nrow=2))
 colnames(aa)<-c("a1","a2")
 aa<-data.frame(aa)
@@ -297,36 +371,34 @@ tsplot(aa)
 :::
 ::::
 
+---
 
- 
+```{r}
+#| echo: true
 
-## Ruido blanco
-
-```{r echo=FALSE, fig.align="center", out.width = "60%"}
-acf(aa)
+stats::acf(aa)
 ```
 
+# Linealidad
  
 ## Linealidad
 
 - En la práctica, la mayoría de las series temporales multivariadas no son lineales pero pueden ser aproximada por modelos lineales.
 
-- Defina el modelo lineal (multivariado):
+- Defina [el modelo lineal (multivariado)]{.alert}:
 
 $$X_t=\mu+\sum_{i=0}^\infty \psi_i a_{t-i}=\mu+ a_{t}+\sum_{i=1}^\infty \psi_i a_{t-i}$$
 donde $\mu$ es un vector constante,
 $\psi_0=I_k$ es una matriz de identidad de $k\times k$, 
-$\psi_i,~i>0$ matrices constantes, y
-$\left\lbrace a_{t}\right\rbrace$, denominado como **innovación**, es una secuencia de i.i.d. vectores aleatorias con media 0 y matriz de covariancias $\Sigma_a$, una matriz definitva positiva.
+$\psi_i,~i=0,1,...$ matrices constantes, y
+$\left\lbrace a_{t}\right\rbrace$, denominado como [innovación]{.alert}, es una secuencia de i.i.d. vectores aleatorias con media 0 y matriz de covariancias $\Sigma_a$, una matriz definitva positiva.
 
 - El modelo lineal también se puede escribir como:
   - $X_t=\mu+ a_{t} + \psi_1 a_{t-1}+ \psi_2 a_{t-2} + \dots$
   - $X_t=\mu+\psi(B) a_{t}$,   
-  donde $\psi(B)=1+\psi_1 B+\psi_2 B^2+\dots$ es el polinomio de medias móviles de orden infinito.
+  donde $\psi(B)=1+\psi_1 B+\psi_2 B^2+\dots$ es el [polinomio de medias móviles de orden infinito]{.alert} y $1$ se entiende como $I_k$.
 
-
- 
-## Linealidad
+---
 
 - Un modelo lineal es estacionario si los componentes $\psi_i$ es absolutamente sumable, i.e.
 
@@ -339,58 +411,60 @@ donde $||A||$ denota la norma de la matriz $A$. Un ejemplo es la norma Frobenius
 $$E(X_t)=\mu,~~ \Gamma(h)=\sum_{i=0}^\infty \psi_{i+h} \Sigma_a \psi_i'$$
 - Similar al caso univariado, tanto AR, MA y ARMA forman casos particulares de un modelo lineal.
 
+# Invertibilidad
  
 ## Invertibilidad
 
 - El interés es expresar una serie tepmoral $X_t$ en término de sus valores pasados $X_{t-i}$ para $i>0$.
 
-- Una serie temporal $X_t$ es invertible si se puede expresar como:
+- Una serie temporal $X_t$ es [invertible]{.alert} si se puede expresar como:
 $$X_t=c+a_t+\sum_{j=0}^\infty \pi_j X_{t-j}$$
 donde $c$ es un vector constante,
 $\pi_j,~j>0$ matrices constantes $k\times k$, y
-$\left\lbrace a_{t}\right\rbrace$ es una secuencia de i.i.d. vectores aleatorias con media 0 y matriz de covariancias $\Sigma_a$.
+$\left\lbrace a_{t}\right\rbrace \sim wn(0,\Sigma_a)$.
 
 - Un modelo invertible también se puede expresar como:
 
   - $X_t-\sum\limits_{j=0}^\infty \pi_j X_{t-j}=c+a_t$, o
   - $\pi(B)X_t =c+a_t$,   
-  donde $\pi(B)=1-\sum\limits_{j=0}^\infty \pi_j B$ es el polinomio autorregresivo de orden infinito.
+  donde $\pi(B)=1-\sum\limits_{j=0}^\infty \pi_j B$ es el [polinomio autorregresivo de orden infinito]{.alert}.
 
-
+# Estimación
  
 ## Estimación de matrices de covariancia cruzada y correlación cruzada
 
-- **la matriz de covariancia cruzada muestral** es definida por
+- La [matriz de covariancia cruzada muestral]{.alert} es definida por
 $$\hat{\Gamma}(h)=\frac{1}{T}\sum_{t=1}^{T-h} (X_{t+h}-\bar{X})(X_{t}-\bar{X})',$$
 donde $\bar{X}=\frac{1}{T}\sum\limits_{t=1}^{T} X_{t}$ es el vector de media muestral.
 
 
-- **la matriz de correlación cruzada muestral (CCM)** es definida por
+- La [matriz de correlación cruzada muestral (CCM)]{.alert} es definida por
 
 $$\hat{\boldsymbol{\rho}}(h)= \hat{D}^{-1}\hat{\Gamma}(h) \hat{D}^{-1}$$
-donde $\hat{D}=diag\left\lbrace \hat{\gamma}_{0,11}^{1/2},...,\hat{\gamma}_{0,kk}^{1/2} \right\rbrace$ y $\hat{\gamma}_{0,ii}$ es el i-ésimo elemento de $\hat{\Gamma(0)}$.
+donde $\hat{D}=diag\left\lbrace \hat{\gamma}_{0,11}^{1/2},...,\hat{\gamma}_{0,kk}^{1/2} \right\rbrace$ con $\left\lbrace\hat{\gamma}_{0,ii}\right\rbrace$ es el i-ésimo elemento de la diagonal de $\hat{\Gamma(0)}$.
 
 - Se puede comprobar que $\hat{\Gamma}(-h)=\hat{\Gamma}(h)'$ y $\hat{\boldsymbol{\rho}}(-h)=\hat{\boldsymbol{\rho}}(h)'$
 
- 
-## Estimación de matrices de covariancia cruzada y correlación cruzada
+---
 
-- Si $X_t$ es ruido blanco, entonces
+- Si $X_t$ es ruido blanco, entonces para $T$ suficientemente grande,
+
 $$Var(\hat{\rho}_{h,ij}) \approx \frac{1}{T},~~ h>0$$
+
 $$Var(\hat{\rho}_{0,ij}) \approx \frac{(1-\rho_{h,ij})^2}{T},~~ i \neq j$$
+
 $$Cov(\hat{\rho}_{h,ij},\hat{\rho}_{-h,ij}) \approx \frac{\rho_{0,ij}^2}{T}$$
+
 $$Cov(\hat{\rho}_{h,ij},\hat{\rho}_{l,uv}) \approx 0, h \neq l$$
 
- 
-## Estimación de matrices de covariancia cruzada y correlación cruzada
+---
 
 - Si $X_t$ es VMA(q), entonces
 $$Var(\hat{\rho}_{h,ij}) \approx \frac{1}{T} \left( 1+2\sum_{v=1}^{q} \rho_{v,ii}\rho_{v,jj} \right),~~ |h|>q$$
 
-- En la práctica, cuando k es grande, es complicado estudiar $k^2$ correlaciones cruzadas simultáneamente.
+- En la práctica, cuando $k$ es grande, es complicado estudiar $k^2$ correlaciones cruzadas simultáneamente.
 
- 
-## Estimación de matrices de covariancia cruzada y correlación cruzada
+---
 
 - La matriz simplificada de CCM:
 
@@ -421,11 +495,13 @@ $$\Gamma(h)=\left\lbrace
 \end{aligned}
 \right.$$
 
+- Simulación con $T=500$.
 :::
 
 ::: {.column width="50%"}
-- Simulación con $T=500$.
-```{r echo=FALSE, out.width = "90%"}
+
+```{r}
+#| echo: true
 aa<-mvrnorm(n = 500, mu=c(0,0), Sigma=matrix(c(1.5,0.8,0.8,1),nrow=2))
 colnames(aa)<-c("a1","a2")
 aa<-data.frame(aa)
@@ -434,43 +510,42 @@ tsplot(aa)
 :::
 ::::
 
- 
-
-## Ruido blanco
-
-```{r eval=TRUE, include=TRUE}
-ccm(aa, lags= 4) 
+## Ruido blanco {.scrollable}
+```{r}
+#| echo: true
+MTS::ccm(aa, lags= 4) 
 ```
 
- 
-## Estimación de matrices de covariancia cruzada y correlación cruzada
+---
 
 - Otra posibilidad es usar correlograma y función de autocorrelación cruzada.
 
 
-```{r echo=FALSE, fig.align="center", out.width = "50%"}
-acf(aa)
+```{r}
+#| echo: true
+stats::acf(aa)
 ```
 
 
- 
+# Prueba de hipótesis para la correlación serial con CCM
+
 ## Prueba de hipótesis para la correlación serial con CCM
 
 - Al igual que el caso univariado, se plantean las hipótesis:   
 
-$H_0: \boldsymbol{\Gamma}_1=...=\boldsymbol{\Gamma}_m=0$  
-$H_1: \boldsymbol{\Gamma}_i \neq 0$, para algún $1\leq i \leq m$
+$$H_0: \boldsymbol{\Gamma}_1=...=\boldsymbol{\Gamma}_m=0$$  
+
+$$H_1: \boldsymbol{\Gamma}_i \neq 0$, para algún $1\leq i \leq m$$
 
 o bien,
 
-$H_0: \boldsymbol{\rho}_1=...=\boldsymbol{\rho}_m=0$  
-$H_1: \boldsymbol{\rho}_i \neq 0$, para algún $1\leq i \leq m$
+$$H_0: \boldsymbol{\rho}_1=...=\boldsymbol{\rho}_m=0$$  
 
- 
-## Prueba de hipótesis para la correlación serial con CCM
+$$H_1: \boldsymbol{\rho}_i \neq 0$, para algún $1\leq i \leq m$$
 
+---
 
-- **El estadístico de Portmanteau multivariado:** la versión multivariada de la prueba de Ljung-Box.
+- [El estadístico de Portmanteau multivariado]{.alert}: la versión multivariada de la prueba de Ljung-Box.
 $$Q_m=T^2 \sum_{l=1}^m \frac{1}{T-l} tr \left(\hat{\boldsymbol{\Gamma}}'_l\hat{\boldsymbol{\Gamma}}^{-1}_0\hat{\boldsymbol{\Gamma}}_l\hat{\boldsymbol{\Gamma}}^{-1}_0\right)$$
 
 donde $tr(A)$ es la traza de la matriz A. 
@@ -478,15 +553,18 @@ donde $tr(A)$ es la traza de la matriz A.
 - Bajo el supuesto de $H_0$,i.e. $\boldsymbol{\Gamma}_l=0,~ l>0$, y $X_t$ es distribuída normalmente, para $T$ y $l$ suficientemente grandes, el estadístico se aproxima a la distribución $\chi^2_{(mk^2)}$.
 
  
-## Ruido blanco
+## Ruido blanco {.scrollable}
 
-```{r, out.width = "40%"}
+```{r}
+#| echo: true
 sig=diag(3)
 z=mvrnorm(200,rep(0,3),sig)
 mq(z,4)
 ```
 
- 
+
+# VARMA(p,q)
+
 ## VARMA(p,q)
 
 - Conocido como VARMA o MARMA.
@@ -494,11 +572,10 @@ mq(z,4)
 
 $$X_{t}=\phi_0+ \sum_{i=1}^p \phi_i X_{t-i}  - \sum_{j=1}^q \theta_j {w}_{t-j} +a_{t}$$
 con $\phi_p, \theta_q \neq 0$ y $\Sigma_w$ definida positiva.
+
 - Los coeficientes $\phi_i :i=1,...,p$, $\theta_j:j=1,...,q$ son matrices $k \times k$
 
-
- 
-## VARMA(p,q)
+---
 
 - Al igual que el caso univariado, si un VARMA es estacionario se puede expresar su versión centrada, o bien sin pérdida de generalidad suponer que $\phi_0=0$.
 
@@ -507,12 +584,12 @@ con $\phi_p, \theta_q \neq 0$ y $\Sigma_w$ definida positiva.
 $$\phi(B) X_{t}= \theta(B) a_{t}$$
 en donde
 
-$\phi(B)=I- \phi_1 B-...- \phi_p B^p$ es el operador autorregresivo y
+$\phi(B)=I- \phi_1 B-...- \phi_p B^p$ es el [operador autorregresivo]{.alert} y
 
-$\theta(B)=I-\theta_1 B-...- \theta_q B^q$ es el operador de medias móviles.
+$\theta(B)=I-\theta_1 B-...- \theta_q B^q$ es el [operador de medias móviles]{.alert}.
 
  
-## VARMA(p,q)
+---
 
 - El modelo VARMA se dice que es:
   - **Causal (estacionario)** si las raíces de $|\phi(B)|$, están fuera del círculo unitario.
@@ -520,9 +597,14 @@ $\theta(B)=I-\theta_1 B-...- \theta_q B^q$ es el operador de medias móviles.
 
 - De la misma forma, si se satisfacen estas condiciones, el modelo tiene su representación $AR$ y $MA$ de orden infinito.
 
- 
-## En la próxima clase veremos
+## Paquetes en R
 
-### VAR(p)
+Para replicar los ejemplos de esta presentación, necesitan estos paquetes:
 
- 
+```{r}
+#| echo: true
+library(ggplot2)
+library(astsa)
+library(MASS)
+library(MTS)
+```

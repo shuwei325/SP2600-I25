@@ -7,11 +7,12 @@
 <link href="presentacion4_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="presentacion4_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="presentacion4_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="presentacion4_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="presentacion4_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="presentacion4_files/libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Shu Wei Chou Chen">
-  <title>Tema 1: Análisis espectral de series temporales-4</title>
+  <title>Tema 1: Análisis espectral de series temporales(4)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -309,7 +310,6 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
-      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -392,93 +392,95 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Tema 1: Análisis espectral de series temporales-4</h1>
-  <p class="subtitle">Curso: Tópicos Avanzados de Series Temporales</p>
+  <h1 class="title">Tema 1: Análisis espectral de series temporales<sup>(4)</sup></h1>
+  <p class="subtitle"><a href="https://shuwei325.github.io/SP2600-I25">Curso: Tópicos Avanzados de Series Temporales</a></p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Shu Wei Chou Chen <a href="https://orcid.org/0000-0001-5495-2486" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+<a href="https://shuwei325.github.io">Shu Wei Chou Chen</a> <a href="https://orcid.org/0000-0001-5495-2486" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
 </div>
 <div class="quarto-title-author-email">
 <a href="mailto:shuwei.chou@ucr.ac.cr">shuwei.chou@ucr.ac.cr</a>
 </div>
         <p class="quarto-title-affiliation">
+            <a href="https://www.estadistica.ucr.ac.cr/">
             Escuela de Estadística, Universidad de Costa Rica
+            </a>
           </p>
     </div>
 </div>
 
 </section>
-<section class="slide level2 scrollable">
-
-<p>En las clases anteriores vimos:</p>
-<ol type="1">
-<li>Introducción</li>
-<li>Ejemplos de motivación</li>
-<li>Comportamiento cíclico y periodicidad.</li>
-<li>Estimación y periodograma.</li>
-<li>Función de densidad espectral. <br></li>
-<li>Representación espectral de procesos estacionarios <br></li>
-<li>Periodograma y la Transformada Discreta de Fourier<br></li>
-<li>Estimación de periodograma.<br></li>
+<section>
+<section id="estimación-espectral-no-paramétrica" class="title-slide slide level1 agenda-slide center">
+<h1>Estimación espectral no paramétrica</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>Estimación espectral no paramétrica</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estimación espectral no paramétrica (extensión)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estimación espectral paramétrica</p>
+</div></li>
 </ol>
-</section>
-<section id="contenido" class="slide level2 scrollable">
-<h2>Contenido</h2>
-<ol start="3">
-<ol start="9" type="1">
-<li>Estimaciones en el dominio de frecuencia.<br>
-<p style="margin-left: 25px;">
-◦ Estimación espectral no paramétrica
-</p>
-<p style="margin-left: 25px;">
-◦ Estimación espectral paramétrica
-</p>
-<br></li>
-<li>Aplicaciones del análisis espectral.<br></li>
-</ol>
-</ol>
-</section>
-<section id="estimación-espectral-no-paramétrica" class="slide level2">
-<h2>Estimación espectral no paramétrica</h2>
-<ul>
-<li><p>Para introducir la estimación espectral no paramétrica, introducimos el concepto de una banda en el dominio de frecuencia <span class="math inline">\(\mathcal{B}\)</span>, de <span class="math inline">\(L \ll T\)</span> contiguas frecuencias fundamentales, que estén centrado alrededor de la frecuencia de interés <span class="math inline">\(\omega_j=j/T\)</span> (cercano a <span class="math inline">\(\omega\)</span> de interés).</p></li>
-<li><p>Para frecuencias de la forma <span class="math inline">\(\omega^*=w_j+k/T\)</span>, sea</p></li>
-</ul>
-<p><span class="math display">\[\mathcal{B} = \left\lbrace \omega^*: \omega_j-\frac{m}{T} \leq \omega^*  \leq \omega_j+\frac{m}{T}\right\rbrace,\]</span> donde <span class="math inline">\(L=2m+1\)</span> (número impar), selecionado de tal forma que el valor espectral en el intervalo <span class="math inline">\(\mathcal{B}\)</span> <span class="math display">\[f(\omega_j+k/T),~~k=-m,...,0,...,m\]</span> sea similar a <span class="math inline">\(f(\omega)\)</span>.</p>
+</div>
 </section>
 <section id="estimación-espectral-no-paramétrica-1" class="slide level2">
 <h2>Estimación espectral no paramétrica</h2>
 <ul>
-<li>Podemos definir <strong>el periodograma suavizado (promediado)</strong> como:</li>
+<li><p>Para introducir la estimación espectral no paramétrica, es necesario definir el concepto de una <strong>banda</strong> en el dominio de frecuencia <span class="math inline">\(\mathcal{B}\)</span>, de <span class="math inline">\(L \ll T\)</span> contiguas frecuencias fundamentales, que estén centrado alrededor de la frecuencia de interés <span class="math inline">\(\omega_j=\frac{j}{T}\)</span> (cercano a <span class="math inline">\(\omega\)</span> de interés).</p></li>
+<li><p>Para frecuencias de la forma <span class="math inline">\(\omega^*=w_j+\frac{k}{T}\)</span>, sea</p></li>
 </ul>
-<p><span class="math display">\[\bar{f}(\omega)=\frac{1}{L}\sum_{k=-m}^{m}I(\omega_j+k/T)\]</span> - Bajo ciertas condiciones de regularidad, se puede obtener resultados asintóticos similares a propiedades de la distribución del periodograma (no suavizado), i.e.&nbsp;cuando <span class="math inline">\(T \rightarrow \infty\)</span>,</p>
-<p><span class="math display">\[\frac{2 L~ \bar{f}(\omega)}{f(\omega)} \rightarrow \chi^2_{2L}.\]</span> - Note que las bandas de frecuencias <span class="math inline">\(\mathcal{B}\)</span> tienen tamaño <span class="math inline">\(B=\frac{L}{T}\)</span>.</p>
+<p><span class="math display">\[\mathcal{B} = \left\lbrace \omega^*: \omega_j-\frac{m}{T} \leq \omega^*  \leq \omega_j+\frac{m}{T}\right\rbrace,\]</span> donde <span class="math inline">\(L=2m+1\)</span> (número impar), selecionado de tal forma que el valor espectral en el intervalo <span class="math inline">\(\mathcal{B}\)</span> <span class="math display">\[f\left(\omega_j+\frac{k}{T}\right),~~k=-m,...,0,...,m.\]</span> sea similar a <span class="math inline">\(f(\omega)\)</span>.</p>
+</section>
+<section class="slide level2">
+
 <ul>
-<li>Finalmente, se puede construir un intervalo de confianza de <span class="math inline">\(100(1-\alpha)\%\)</span>, con <span class="math display">\[\frac{2L \bar{f}(\omega)}{\chi^2_{2L}(1-\alpha/2)}&lt;f(\omega)&lt;\frac{2L \bar{f}(\omega)}{\chi^2_{2L}(\alpha/2)}\]</span></li>
+<li>Podemos definir <span class="alert">el periodograma suavizado</span> (promediado) como:</li>
+</ul>
+<p><span class="math display">\[\bar{f}(\omega)=\frac{1}{L}\sum_{k=-m}^{m}I\left(\omega_j+\frac{k}{T}\right).\]</span></p>
+<ul>
+<li>Bajo ciertas condiciones de regularidad, se puede obtener resultados asintóticos similares a propiedades de la distribución del periodograma (no suavizado), i.e.&nbsp;cuando <span class="math inline">\(T \rightarrow \infty\)</span>,</li>
+</ul>
+<p><span class="math display">\[\frac{2 L~ \bar{f}(\omega)}{f(\omega)} \rightarrow \chi^2_{2L}.\]</span></p>
+<ul>
+<li><p>Note que las bandas de frecuencias <span class="math inline">\(\mathcal{B}\)</span> tienen tamaño <span class="math inline">\(B=\frac{L}{T}\)</span>.</p></li>
+<li><p>Finalmente, se puede construir un intervalo de confianza de <span class="math inline">\(100(1-\alpha)\%\)</span>, con <span class="math display">\[\frac{2L \bar{f}(\omega)}{\chi^2_{2L}(1-\alpha/2)}&lt;f(\omega)&lt;\frac{2L \bar{f}(\omega)}{\chi^2_{2L}(\alpha/2)}.\]</span></p></li>
 </ul>
 </section>
-<section id="estimación-espectral-no-paramétrica-2" class="slide level2">
-<h2>Estimación espectral no paramétrica</h2>
+<section class="slide level2">
+
 <ul>
 <li><p>Debido a la asimetría de la distribución del periodograma, se puede utilizar el logarítmo del espectro para facilitar la visualización.</p></li>
-<li><p>Es decir, se puede construir un intervalo de confianza de <span class="math inline">\(100(1-\alpha)\%\)</span> con escala logarítmica, usando <span class="math display">\[\left[ \log \bar{f}(\omega)-a_L~,~\log \bar{f}(\omega) + b_L \right]\]</span> donde <span class="math inline">\(a_L = - \log 2L + \log \chi^2_{2L} (1-\alpha/2)\)</span> y <span class="math inline">\(b_L = \log 2L + \log \chi^2_{2L} (\alpha/2)\)</span></p></li>
+<li><p>Es decir, se puede construir un intervalo de confianza de <span class="math inline">\(100(1-\alpha)\%\)</span> con escala logarítmica, usando <span class="math display">\[\left[ \log \bar{f}(\omega)-a_L~,~\log \bar{f}(\omega) + b_L \right]\]</span> donde</p></li>
+<li><p><span class="math inline">\(a_L = - \log 2L + \log \chi^2_{2L} (1-\alpha/2)\)</span> y</p></li>
+<li><p><span class="math inline">\(b_L = \log 2L + \log \chi^2_{2L} (\alpha/2)\)</span>.</p></li>
 </ul>
 </section>
-<section id="estimación-espectral-no-paramétrica-3" class="slide level2">
-<h2>Estimación espectral no paramétrica</h2>
+<section class="slide level2">
+
 <ul>
-<li>Si <span class="math inline">\(L\)</span> es muy cercano a cero, puede producir problema en la computación. Se utiliza una aproximación reemplazando <span class="math inline">\(2L\)</span> por <span class="math inline">\(2Ln/n'\)</span>. De esta forma, se define <strong>los grados de libertad ajustados</strong> como <span class="math display">\[df=\frac{2Ln}{n'}\]</span></li>
+<li>Si <span class="math inline">\(L\)</span> es muy cercano a cero, puede producir problema en la computación. Se utiliza una aproximación reemplazando <span class="math inline">\(2L\)</span> por <span class="math inline">\(2Ln/n'\)</span>. De esta forma, se define <span class="alert">los grados de libertad ajustados</span> como <span class="math display">\[df=\frac{2Ln}{n'}\]</span></li>
 <li>Finalmente, el intervalo de confianza de <span class="math inline">\(100(1-\alpha)\%\)</span> queda: <span class="math display">\[\frac{df~ \bar{f}(\omega)}{\chi^2_{df}(1-\alpha/2)}&lt;f(\omega)&lt;\frac{df~ \bar{f}(\omega)}{\chi^2_{df}(\alpha/2)}.\]</span></li>
 </ul>
 </section>
 <section id="núcleo-de-danniell" class="slide level2">
 <h2>Núcleo de Danniell</h2>
+<ul>
+<li><p>Más adelante, veremos que “promediando” las frecuencias de una banda se trata del uso del <span class="alert">núcleo de Danniell</span>.</p></li>
+<li><p>Utilizando <span class="math inline">\(m=4\)</span> y <span class="math inline">\(L=2m+1=9\)</span> como ejemplo:</p></li>
+</ul>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Utilizando <span class="math inline">\(m=4\)</span> y <span class="math inline">\(L=2m+1=9\)</span>,</p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">kernel</span>(<span class="st">'daniell'</span>,<span class="dv">4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Daniell(4) 
 coef[-4] = 0.1111
@@ -493,12 +495,12 @@ coef[ 4] = 0.1111</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">plot</span>(<span class="fu">kernel</span>(<span class="st">"daniell"</span>, <span class="dv">4</span>)) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">plot</span>(<span class="fu">kernel</span>(<span class="st">"daniell"</span>, <span class="dv">4</span>)) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-3-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -510,17 +512,31 @@ coef[ 4] = 0.1111</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Espectro</strong></p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb4-2"><a href=""></a>soi.ave <span class="ot">=</span> <span class="fu">mvspec</span>(soi, <span class="fu">kernel</span>(<span class="st">'daniell'</span>,<span class="dv">4</span>))           </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Bandwidth: 0.225 | Degrees of Freedom: 16.99 | split taper: 0% </code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Bandwidth: 0.225 | Degrees of Freedom: 16.99 | split taper: 0% </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">c</span>(.<span class="dv">25</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">lty=</span><span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-4-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>soi.rec <span class="ot">=</span> <span class="fu">mvspec</span>(rec, <span class="fu">kernel</span>(<span class="st">'daniell'</span>,<span class="dv">4</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Bandwidth: 0.225 | Degrees of Freedom: 16.99 | split taper: 0% </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">c</span>(.<span class="dv">25</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">lty=</span><span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-5-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -537,47 +553,73 @@ coef[ 4] = 0.1111</code></pre>
 </ul>
 </div></div>
 </section>
-<section id="ejemplo-soi-y-reclutamiento-1" class="slide level2">
-<h2>Ejemplo: SOI y reclutamiento</h2>
+<section class="slide level2">
+
 <div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>df  <span class="ot">=</span> soi.ave<span class="sc">$</span>df     </span>
+<span id="cb10-2"><a href=""></a>U   <span class="ot">=</span> <span class="fu">qchisq</span>(.<span class="dv">025</span>, df) </span>
+<span id="cb10-3"><a href=""></a>L   <span class="ot">=</span> <span class="fu">qchisq</span>(.<span class="dv">975</span>, df) </span>
+<span id="cb10-4"><a href=""></a>soi.ave<span class="sc">$</span>spec[<span class="dv">10</span>]       </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.04952026</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>soi.ave<span class="sc">$</span>spec[<span class="dv">40</span>]       </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.11908</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="co"># para frecuencia= 1/4</span></span>
+<span id="cb14-2"><a href=""></a><span class="fu">round</span>(<span class="fu">c</span>(df<span class="sc">*</span>soi.ave<span class="sc">$</span>spec[<span class="dv">10</span>]<span class="sc">/</span>L,df<span class="sc">*</span>soi.ave<span class="sc">$</span>spec[<span class="dv">10</span>]<span class="sc">/</span>U),<span class="dv">4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0279 0.1113</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="co"># para frecuencia= 1</span></span>
+<span id="cb16-2"><a href=""></a><span class="fu">round</span>(<span class="fu">c</span>(df<span class="sc">*</span>soi.ave<span class="sc">$</span>spec[<span class="dv">40</span>]<span class="sc">/</span>L,df<span class="sc">*</span>soi.ave<span class="sc">$</span>spec[<span class="dv">40</span>]<span class="sc">/</span>U),<span class="dv">4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0670 0.2677</code></pre>
 </div>
 </div>
 </section>
-<section id="ejemplo-soi-y-reclutamiento-2" class="slide level2">
-<h2>Ejemplo: SOI y reclutamiento</h2>
+<section class="slide level2">
+
+<h3 id="espectro-logarítmico">Espectro logarítmico</h3>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><strong>Espectro logarítmico</strong></p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb18-2"><a href=""></a>soi.ave <span class="ot">=</span> <span class="fu">mvspec</span>(soi, <span class="fu">kernel</span>(<span class="st">'daniell'</span>,<span class="dv">4</span>),<span class="at">log=</span><span class="st">"yes"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Bandwidth: 0.225 | Degrees of Freedom: 16.99 | split taper: 0% </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">c</span>(.<span class="dv">25</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb20-2"><a href=""></a>soi.ave <span class="ot">=</span> <span class="fu">mvspec</span>(rec, <span class="fu">kernel</span>(<span class="st">'daniell'</span>,<span class="dv">4</span>),<span class="at">log=</span><span class="st">"yes"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Bandwidth: 0.225 | Degrees of Freedom: 16.99 | split taper: 0% </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">c</span>(.<span class="dv">25</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">lty=</span><span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-7-1.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Nota</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li>El ancho de la cruz representa el ancho de la banda y el largo representa el intervalo de confianza.</li>
 </ul>
+</div>
+</div>
+</div>
 </div></div>
 </section>
 <section id="ejemplo-armónicos" class="slide level2">
@@ -586,26 +628,49 @@ coef[ 4] = 0.1111</code></pre>
 <div class="column" style="width:50%;">
 <ul>
 <li>Considere <span class="math display">\[x_t=\sin(2\pi2t)+0.5\sin(2\pi4t)\]</span> <span class="math display">\[+0.4\sin(2\pi6t)+0.3\sin(2\pi10t)\]</span> <span class="math display">\[+0.1\sin(2\pi12t)\]</span></li>
-<li>Esta función es no sinusoidal pero periódica.</li>
+<li>Esta función es periódica, pero no es sinusoidal.</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-8-1.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
+</section></section>
+<section>
+<section id="estimación-espectral-no-paramétrica-extensión" class="title-slide slide level1 agenda-slide center">
+<h1>Estimación espectral no paramétrica (extensión)</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Estimación espectral no paramétrica</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Estimación espectral no paramétrica (extensión)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estimación espectral paramétrica</p>
+</div></li>
+</ol>
+</div>
 </section>
-<section id="estimación-espectral-no-paramétrica-4" class="slide level2">
-<h2>Estimación espectral no paramétrica</h2>
+<section id="estimación-espectral-no-paramétrica-extensión-1" class="slide level2">
+<h2>Estimación espectral no paramétrica (extensión)</h2>
 <ul>
 <li>Se puede extender <strong>el periodograma suavizado (promediado)</strong> con:</li>
 </ul>
-<p><span class="math display">\[\hat{f}(\omega)=\sum_{k=-m}^{m} h_k I(\omega_j+k/T)\]</span> donde los pesos <span class="math inline">\(h_k&gt;0\)</span> y cumple la condición <span class="math display">\[\sum_{k=-m}^{m} h_k&gt;0.\]</span> - Es posible obtener resultados asintóticos pero no vamos a entrar en detalles.</p>
+<p><span class="math display">\[\hat{f}(\omega)=\sum_{k=-m}^{m} h_k I(\omega_j+k/T)\]</span> donde los pesos <span class="math inline">\(h_k&gt;0\)</span> y cumple la condición <span class="math display">\[\sum_{k=-m}^{m} h_k&gt;0.\]</span></p>
+<ul>
+<li>Es posible obtener resultados asintóticos pero no vamos a entrar en detalles.</li>
+</ul>
 </section>
 <section id="alternativas-de-núcleos" class="slide level2">
 <h2>Alternativas de núcleos</h2>
@@ -614,20 +679,25 @@ coef[ 4] = 0.1111</code></pre>
 <li>Considere una secuencia de valores <span class="math inline">\(u_t\)</span>, el núcleo de Daniell con <span class="math inline">\(m=1\)</span> es: <span class="math display">\[\hat{u}_{t}=\frac{1}{3}u_{t-1}+\frac{1}{3}u_{t}+\frac{1}{3}u_{t+1}\]</span></li>
 <li>Aplicamos nuevamente el núcleo de Daniell con <span class="math inline">\(k=1\)</span>:</li>
 </ul>
-<p><span class="math display">\[\hat{\hat{u}}_{t}=\frac{1}{3}\hat{u}_{t-1}+\frac{1}{3}\hat{u}_{t}+\frac{1}{3}\hat{u}_{t+1}\]</span> - Se obtiene</p>
+<p><span class="math display">\[\hat{\hat{u}}_{t}=\frac{1}{3}\hat{u}_{t-1}+\frac{1}{3}\hat{u}_{t}+\frac{1}{3}\hat{u}_{t+1}\]</span></p>
+<ul>
+<li>Se obtiene</li>
+</ul>
 <p><span class="math display">\[\hat{\hat{u}}_{t}=\frac{1}{9}u_{t-2}+\frac{2}{9}u_{t-1}+\frac{3}{9}u_{t}+\frac{2}{9}u_{t+1}+\frac{1}{9}u_{t+2}\]</span></p>
 </section>
-<section id="alternativas-de-núcleos-1" class="slide level2">
-<h2>Alternativas de núcleos</h2>
+<section class="slide level2">
+
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">kernel</span>(<span class="st">"daniell"</span>, <span class="fu">c</span>(<span class="dv">1</span>))   </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Daniell(1) 
 coef[-1] = 0.3333
 coef[ 0] = 0.3333
 coef[ 1] = 0.3333</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">kernel</span>(<span class="st">"daniell"</span>, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>)) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Daniell(1,1) 
 coef[-2] = 0.1111
@@ -638,24 +708,27 @@ coef[ 2] = 0.1111</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">plot</span>(<span class="fu">kernel</span>(<span class="st">"daniell"</span>, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>)))  </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">plot</span>(<span class="fu">kernel</span>(<span class="st">"daniell"</span>, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>)))  </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-10-1.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="alternativas-de-núcleos-2" class="slide level2">
-<h2>Alternativas de núcleos</h2>
-<p><strong>El núcleo (kernel) de Daniell modificado</strong> asigna mitad del peso en los extremos.</p>
+<section class="slide level2">
+
+<ul>
+<li>El <span class="alert">núcleo (kernel) de Daniell modificado</span> asigna mitad del peso en los extremos.</li>
+</ul>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="fu">kernel</span>(<span class="st">"modified.daniell"</span>, <span class="fu">c</span>(<span class="dv">1</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>mDaniell(1) 
 coef[-1] = 0.25
@@ -664,31 +737,32 @@ coef[ 1] = 0.25</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">plot</span>(<span class="fu">kernel</span>(<span class="st">"modified.daniell"</span>, <span class="fu">c</span>(<span class="dv">1</span>)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="fu">plot</span>(<span class="fu">kernel</span>(<span class="st">"modified.daniell"</span>, <span class="fu">c</span>(<span class="dv">1</span>)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-12-1.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="alternativas-de-núcleos-3" class="slide level2">
-<h2>Alternativas de núcleos</h2>
+<section class="slide level2">
+
 <ul>
 <li>Considere una secuencia de valores <span class="math inline">\(u_t\)</span>, el núcleo de Daniell modificado con <span class="math inline">\(m=1\)</span> es: <span class="math display">\[\hat{u}_{t}=\frac{1}{4}u_{t-1}+\frac{1}{2}u_{t}+\frac{1}{4}u_{t+1}\]</span></li>
 <li>Aplicamos nuevamente el núcleo de Daniell modificado con <span class="math inline">\(k=1\)</span>, se obtiene</li>
 </ul>
 <p><span class="math display">\[\hat{\hat{u}}_{t}=\frac{1}{16}u_{t-2}+\frac{4}{16}u_{t-1}+\frac{6}{16}u_{t}+\frac{4}{16}u_{t+1}+\frac{1}{16}u_{t+2}\]</span></p>
 </section>
-<section id="alternativas-de-núcleos-4" class="slide level2">
-<h2>Alternativas de núcleos</h2>
+<section class="slide level2">
+
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a><span class="fu">kernel</span>(<span class="st">"modified.daniell"</span>, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>mDaniell(1,1) 
 coef[-2] = 0.0625
@@ -699,51 +773,87 @@ coef[ 2] = 0.0625</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">plot</span>(<span class="fu">kernel</span>(<span class="st">"modified.daniell"</span>, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">plot</span>(<span class="fu">kernel</span>(<span class="st">"modified.daniell"</span>, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-14-1.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="estimación-espectral-no-paramétrica-5" class="slide level2">
-<h2>Estimación espectral no paramétrica</h2>
-<p><strong>El núcleo (kernel) de Daniell modificado</strong></p>
-<div class="cell" data-layout-align="center">
+<section id="ejemplo-soi-y-reclutamiento-1" class="slide level2">
+<h2>Ejemplo: SOI y reclutamiento</h2>
+<p>Aaplicando <span class="alert">el núcleo (kernel) de Daniell modificado</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a>k        <span class="ot">=</span> <span class="fu">kernel</span>(<span class="st">"modified.daniell"</span>, <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb34-2"><a href=""></a>soi.smo  <span class="ot">=</span> <span class="fu">mvspec</span>(soi, <span class="at">kernel=</span>k, <span class="at">taper=</span><span class="dv">0</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Bandwidth: 0.231 | Degrees of Freedom: 17.43 | split taper: 0% </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">c</span>(.<span class="dv">25</span>,<span class="dv">1</span>), <span class="at">lty=</span><span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-14-1.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-15-1.png" width="288"></p>
 </figure>
 </div>
 </div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>soi.smo<span class="sc">$</span>df           <span class="co"># df = 17.42618</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 17.42618</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a>soi.smo<span class="sc">$</span>bandwidth    <span class="co"># B  = 0.2308103</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2308103</code></pre>
 </div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="co"># Otra forma de hacer es con el argumento `spans`</span></span>
+<span id="cb41-2"><a href=""></a>soi.smo1 <span class="ot">=</span> <span class="fu">mvspec</span>(soi, <span class="at">spans=</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">7</span>), <span class="at">taper=</span><span class="dv">0</span>)  <span class="co">#7=3*2+1</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Bandwidth: 0.231 | Degrees of Freedom: 17.43 | split taper: 0% </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="co"># El ciclo del Niño</span></span>
+<span id="cb43-2"><a href=""></a><span class="fu">rect</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">7</span>, <span class="sc">-</span><span class="fl">1e5</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="fl">1e5</span>, <span class="at">density=</span><span class="cn">NA</span>, <span class="at">col=</span><span class="fu">gray</span>(.<span class="dv">5</span>,.<span class="dv">2</span>))</span>
+<span id="cb43-3"><a href=""></a><span class="fu">mtext</span>(<span class="st">"1/4"</span>, <span class="at">side=</span><span class="dv">1</span>, <span class="at">line=</span><span class="dv">0</span>, <span class="at">at=</span>.<span class="dv">25</span>, <span class="at">cex=</span>.<span class="dv">75</span>)   </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-14-2.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-16-1.png" width="288"></p>
 </figure>
 </div>
 </div>
 </div>
+</div></div>
+</section></section>
+<section>
+<section id="estimación-espectral-paramétrica" class="title-slide slide level1 agenda-slide center">
+<h1>Estimación espectral paramétrica</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Estimación espectral no paramétrica</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Estimación espectral no paramétrica (extensión)</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Estimación espectral paramétrica</p>
+</div></li>
+</ol>
+</div>
 </section>
-<section id="estimación-espectral-paramétrica" class="slide level2">
+<section id="estimación-espectral-paramétrica-1" class="slide level2">
 <h2>Estimación espectral paramétrica</h2>
 <ul>
 <li>Consiste en construir la función espectral utilizando las estimaciones de un modelo ARIMA(p,q).</li>
@@ -752,8 +862,8 @@ coef[ 2] = 0.0625</code></pre>
 </ul>
 <p><span class="math display">\[\hat{f}_X(\omega)= \frac{\hat{\sigma}_w^2}{|\hat{\phi}(e^{-2 \pi i \omega})|^2}.\]</span> donde <span class="math inline">\(\hat{\phi}(B)=1-\hat{\phi}_1 B -\hat{\phi}_2  B^2-...-\hat{\phi}_p B^p\)</span>.</p>
 </section>
-<section id="estimación-espectral-paramétrica-1" class="slide level2">
-<h2>Estimación espectral paramétrica</h2>
+<section class="slide level2">
+
 <ul>
 <li><p>Bajo condiciones <span class="math inline">\(p \rightarrow \infty, p^3/T \rightarrow 0\)</span> cuando <span class="math inline">\(p,T \rightarrow \infty\)</span>, el intervalo de confianza de <span class="math inline">\(100(1-\alpha)\%\)</span> queda: <span class="math display">\[\frac{\hat{f}(\omega)}{1+C z_{\alpha/2}}&lt;f_X(\omega)&lt;\frac{\hat{f}(\omega)}{1-Cz_{\alpha/2}},\]</span> donde <span class="math inline">\(C=\sqrt{2p/T}\)</span> y <span class="math inline">\(z_{\alpha/2}\)</span> es el percentil <span class="math inline">\(1-\alpha/2\)</span> de la distribución normal estándar.</p></li>
 <li><p>¿Por qué con AR(p)? La densidad espectral de cualquier proceso estacionario puede ser aproximado por la densidad espectral de AR(p) (ver Propiedad 4.7 de Shumway &amp; Stoffer).</p></li>
@@ -766,28 +876,138 @@ coef[ 2] = 0.0625</code></pre>
 <ul>
 <li>En R, el comando <code>spec.ic</code> escoge el mejor rezago de acuerdo a AIC.</li>
 </ul>
-</div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a>param.spec <span class="ot">&lt;-</span> <span class="fu">spec.ic</span>(soi,  <span class="at">detrend=</span><span class="cn">TRUE</span>, <span class="at">col=</span><span class="dv">4</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">nxm=</span><span class="dv">4</span>) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-17-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a><span class="fu">head</span>(param.spec[[<span class="dv">1</span>]]) <span class="co"># AIC y BIC de acuerdo con el orden</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     ORDER       AIC       BIC
+[1,]     0 272.69370 210.95532
+[2,]     1  82.14840  24.52591
+[3,]     2  84.14419  30.63759
+[4,]     3  85.59263  36.20192
+[5,]     4  80.47156  35.19675
+[6,]     5  70.78220  29.62328</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a><span class="fu">head</span>(param.spec[[<span class="dv">2</span>]]) <span class="co"># El mejor modelo</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           freq       spec
+[1,] 0.00000000 0.02544881
+[2,] 0.01202405 0.02550050
+[3,] 0.02404810 0.02565601
+[4,] 0.03607214 0.02591669
+[5,] 0.04809619 0.02628472
+[6,] 0.06012024 0.02676306</code></pre>
+</div>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+
+<p><strong>Bondad de ajuste de los modelos AR según el orden p basado en AIC y BIC</strong></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>En R, el comando <code>spec.ic</code> escoge el mejor rezago de acuerdo a AIC.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a>C.info<span class="ot">&lt;-</span><span class="fu">data.frame</span>(param.spec[[<span class="dv">1</span>]])</span>
+<span id="cb49-2"><a href=""></a><span class="fu">colnames</span>(C.info)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"t"</span>,<span class="st">"AIC"</span>,<span class="st">"BIC"</span>)</span>
+<span id="cb49-3"><a href=""></a>C.info</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    t         AIC        BIC
+1   0 272.6937023 210.955320
+2   1  82.1484043  24.525915
+3   2  84.1441892  30.637592
+4   3  85.5926277  36.201922
+5   4  80.4715619  35.196749
+6   5  70.7822012  29.623280
+7   6  69.5898661  32.546837
+8   7  71.5718647  38.644728
+9   8  71.4320021  42.620757
+10  9  63.2815353  38.586183
+11 10  49.9872355  29.407775
+12 11  40.7220194  24.258451
+13 12  41.0928139  28.745138
+14 13  37.0833413  28.851557
+15 14   8.7779160   4.662024
+16 15   0.0000000   0.000000
+17 16   0.4321663   4.548058
+18 17   0.8834736   9.115258
+19 18   0.9605224  13.308199
+20 19   2.9348253  19.398394
+21 20   4.7475516  25.327012
+22 21   6.7012637  31.396616
+23 22   7.1553956  35.966641
+24 23   4.6428297  37.569967
+25 24   5.8610042  42.904033
+26 25   6.5000325  47.658954
+27 26   2.8918549  48.166668
+28 27   4.2581518  53.648857
+29 28   5.5960927  59.102690
+30 29   6.3765400  63.999030
+31 30   2.6978096  64.436191
+32 31   4.6243480  70.478622
+33 32   5.9246340  75.894800
+34 33   7.6085953  81.694654
+35 34   7.6354835  85.837434
+36 35   4.8817282  87.199571
+37 36   3.9962278  90.429962
+38 37   5.9223121  96.471939
+39 38   6.7647416 101.430260
+40 39   3.8167034 102.598114
+41 40   4.9371390 107.834442
+42 41   6.9361882 113.949383
+43 42   6.6242894 117.753377
+44 43   8.5812482 123.826228
+45 44  10.3970778 129.757949
+46 45  12.2889991 135.765763
+47 46  14.0998243 141.692480</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a>C.info <span class="sc">%&gt;%</span> <span class="fu">gather</span>(</span>
+<span id="cb51-2"><a href=""></a>  <span class="at">key =</span> <span class="st">"C.Info"</span>,</span>
+<span id="cb51-3"><a href=""></a>  <span class="at">value =</span> <span class="st">"value"</span>,</span>
+<span id="cb51-4"><a href=""></a>  AIC,BIC</span>
+<span id="cb51-5"><a href=""></a>) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb51-6"><a href=""></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>(<span class="at">x =</span> t, <span class="at">y =</span> value, <span class="at">group=</span>C.Info,<span class="at">color=</span>C.Info)) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-20-1.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="ejemplo-1" class="slide level2">
-<h2>Ejemplo</h2>
-<p><strong>Bondad de ajuste de los modelos AR según el orden p basado en AIC y BIC</strong></p>
-
-<img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%"><div class="quarto-auto-generated-content">
+<section id="paquetes-en-r" class="slide level2">
+<h2>Paquetes en R</h2>
+<p>Para replicar los ejemplos de esta presentación, necesitan estos paquetes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb52-2"><a href=""></a><span class="fu">library</span>(forecast)</span>
+<span id="cb52-3"><a href=""></a><span class="fu">library</span>(fpp2)</span>
+<span id="cb52-4"><a href=""></a><span class="fu">library</span>(astsa)</span>
+<span id="cb52-5"><a href=""></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -818,7 +1038,7 @@ coef[ 2] = 0.0625</code></pre>
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"right","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"width":"wide","numbers":true},
 'smaller': false,
  
         // Display controls in the bottom right corner

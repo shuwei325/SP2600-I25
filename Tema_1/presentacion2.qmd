@@ -1,17 +1,25 @@
 ---
-title: 'Tema 1: Análisis espectral de series temporales-2'
-subtitle: 'Curso: Tópicos Avanzados de Series Temporales'
+title: 'Tema 1: Análisis espectral de series temporales^(2)^'
+subtitle: '[Curso: Tópicos Avanzados de Series Temporales](https://shuwei325.github.io/SP2600-I25)'
 format: clean-revealjs
 html-math-method:
   method: mathjax
   url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 author:
   - name: Shu Wei Chou Chen
-    #orcid: 0000-0001-5495-2486
+    url: https://shuwei325.github.io
+    orcid: 0000-0001-5495-2486
     email: shuwei.chou@ucr.ac.cr
-    affiliations: Escuela de Estadística, Universidad de Costa Rica
+    affiliations: 
+    - name: Escuela de Estadística, Universidad de Costa Rica
+      url: https://www.estadistica.ucr.ac.cr/
 #date: last-modified
 lang: es  # español
+filters:
+  - reveal-auto-agenda
+auto-agenda:
+  bullets: numbered
+  heading: Contenido
 ---
 
 
@@ -22,91 +30,173 @@ library(fpp2)
 library(astsa)
 library(tidyverse)
 library(TSA)
+library(kableExtra)
 ```
 
+# Introducción
 
-## Contenido
-
-1. Introducción
-2. Ejemplos de motivación
-3. Comportamiento cíclico y periodicidad.
-4. Estimación y periodograma.
-
- 
 ## Introducción
 
-- Hasta el momento hemos centrado el análisis de series temporales en el **dominio de tiempo**.
-- Vamos a enfocar el estudio de series temporales en el **dominio de frecuencias**.
+- Hasta el momento hemos centrado el análisis de series temporales en el [dominio de tiempo]{.alert}.
+- Vamos a enfocar el estudio de series temporales en el [dominio de frecuencias]{.alert}.
 - Es decir, expresar las características de las series en término de las variaciones periódicas.
-- Por ejemplo, 
-  - para datos trimestrales que presentan un ciclo por año, i.e. periodicidad de 4, o $\omega=0.25$ ciclos por observación.
-  - para datos mensuales que presentan un ciclo por año, i.e. periodicidad de 12, o $\omega=1/12=0.083$ ciclos por observación.
-- Existen muchas escalas de frecuencia.
-- Nosotros vamos a utilizar la frecuencia como $\omega$. Alternativamente, se puede definir $\lambda=2 \pi \omega$, que está dado por radianes por observación.
+- Por ejemplo: 
+  - Para datos trimestrales que presentan un ciclo por año, i.e. periodicidad de 4, o $\omega=1/4=0.25$ ciclos por observación.
+  - Para datos mensuales que presentan un ciclo por año, i.e. periodicidad de 12, o $\omega=1/12=0.083$ ciclos por observación.
+- Existen muchas escalas de frecuencia, pero vamos a utilizar la frecuencia como $\omega$. Alternativamente, se puede definir $\lambda=2 \pi \omega$, que está dado por radianes por observación.
 
  
 ## Ejemplo 1: pasajeros
 
-- La base de datos "AirPassenger" en R proporciona total de pasajeros mensuales de una aerolínea estadounidense de 1949 a 1960. 
+:::: {.columns}
 
-```{r echo=FALSE, out.width = "35%", fig.align="center"}
+::: {.column width="50%"}
+
+- La base de datos `AirPassenger` en R proporciona total de pasajeros mensuales de una aerolínea estadounidense de 1949 a 1960. 
+
+```{r}
+#| fig-align: center
 data(AirPassengers)
-autoplot(AirPassengers)
+autoplot(AirPassengers) + theme_bw()
 ```
+:::
+  
+::: {.column width="50%"}
 
-- En este caso, la periodicidad dominante de esta serie es $1/\omega=12$ periodos por ciclo, o la frecuencia dominante es $\omega=0.083$.
+- En este caso, el ciclo se completa cada $12$ observaciones.
+  - Es decir, la [periodicidad dominante]{.alert} de esta serie es $1/\omega=12$.  
+- Alternativamente, se dice que recorre $\omega=0.083$ ciclo por cada observación.
+  - Es decir, la [frecuencia dominante]{.alert} es $\omega=0.083$.
 
 - ¿Hay alguna manera formal de detectar esta periodicidad?
 
 
- 
-## Ejemplo 1: pasajeros
+:::
+::::
+
+---
 
 - Aplicamos el logarítmo para estabilizar la variabilidad y quitamos la tendencia lineal de los datos. 
 
-```{r echo=FALSE, out.width = "30%"}
+```{r}
+#| echo: true
 autoplot(log(AirPassengers))+ 
   geom_smooth(method='lm', formula= y~x)
 mod<-tslm(log(AirPassengers)~trend)
-autoplot(mod$residuals)
-autoplot(acf(mod$residuals,lag.max=50,plot=FALSE))
 ```
 
+--- 
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+autoplot(mod$residuals)
+```
+
+:::
+  
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+ggAcf(mod$residuals,lag.max=50)
+```
+
+:::
+::::
 
 - Note que la ACF nos da indicación de que al quitar la tendencia, puede haber periodicidad de 12 meses.
 
+---
 
 
- 
-## Ejemplo 1: pasajeros
+- El [periodograma]{.alert} nos indica las frecuencias que domina una serie.
 
-**Periodograma:**
-
-```{r echo=FALSE, out.width = "40%", fig.align="center"}
+```{r fig.align="center"}
+#| echo: true
 turista.per = mvspec(mod$residuals) 
+frequency(mod$residuals)
 ```
 
+---
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r fig.align="center"}
+#| echo: true
+
+res_numeric <- as.numeric(mod$residuals)
+frequency(res_numeric)
+turista.per = mvspec(res_numeric) 
+
+```
+
+:::
+  
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+turista.per$details
+```
+
+
  
+ 
+ 
+:::
+::::
+
+
 ## Ejemplo 2: Corriente de rio
 
 - El flujo mensual del rio de Iowa medido en Wapello, Iowa de septiembre 1958 a agosto 2006.
 
-```{r echo=FALSE, out.width = "30%"}
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
 data(flow)
 autoplot(flow,ylab='River Flow')
-autoplot(acf(flow,lag.max=50,plot=FALSE))
+```
+
+:::
+  
+::: {.column width="50%"}
+
+
+```{r}
+#| echo: true
+ggAcf(flow,lag.max=50)
+```
+
+
+:::
+::::
+
+--- 
+
+```{r}
+#| echo: true
 rio.per = mvspec(flow) 
 ```
 
  
-## Ejemplo 3: Producción de leche
+## Ejemplo 3: Producción de leche {.scrollable}
 
 - Producción de leche promedio por vaca en Estados Unidos de enero 1994 a diciembre 2005.
 
 :::: {.columns}
 
 ::: {.column width="50%"}
-```{r echo=FALSE, out.width = "50%", fig.align="center"}
+```{r out.width = "50%", fig.align="center"}
+#| echo: true
 data(milk)
 autoplot(milk)+ 
   geom_smooth(method='lm', formula= y~x)
@@ -117,14 +207,17 @@ autoplot(mod$residuals)
 
 ::: {.column width="50%"}
 ```{r echo=FALSE, out.width = "50%", fig.align="center"}
-autoplot(acf(mod$residuals,lag.max=50,plot=FALSE))
+#| echo: true
+ggAcf(mod$residuals,lag.max=50)
 milk.per = mvspec(mod$residuals) 
 ```
 :::
 ::::
 
 
- 
+# Comportamiento cíclico y periodicidad
+
+
 ## Comportamiento cíclico y periodicidad
 
 
@@ -132,55 +225,69 @@ milk.per = mvspec(mod$residuals)
 
 ::: {.column width="50%"}
 
-- Considere $x_t=2 \cos \left( 2 \pi \frac{t+15}{50} \right)+ w_t$ para $t=1,...,500$.
+- Considere 
+$$x_t=2 \cos \left( 2 \pi \frac{t+15}{50} \right)+ w_t$$ 
+para $t=1,...,500.$
 
-- El modelo general $A cos(2\pi \omega t + \phi)$ con amplitud $A$, frecuencia $\omega$, y fase $\phi$.
 
-- El ejemplo anterior considera $A=2$, $\omega=1/50$ (un ciclo cada 50 puntos en el tiempo) y $\phi=2 \pi 15/50=0.6 \pi$.
+- El modelo general 
+$$x_t = A \cos(2\pi \omega t + \phi) + w_t$$ 
+con amplitud $A$, frecuencia $\omega$, y fase $\phi$.
+
+- El ejemplo anterior considera:
+  - $A=2$, 
+  - $\omega=1/50$ (un ciclo cada 50 puntos en el tiempo) y 
+  - $\phi=\frac{2 \pi 15}{50}=0.6 \pi$.
 
 :::
 
 ::: {.column width="50%"}
-```{r echo=FALSE, fig.align="center", out.width = "100%"}
-cs = 2*cos(2*pi*1:500/50 + .6*pi); w = rnorm(500,0,1)
-par(mfrow=c(3,1), mar=c(3,2,2,1), cex.main=1.5)
+```{r fig.align="center"}
+#| echo: true
+t = 1:500 ; w = rnorm(500,0,1)
+cs = 2*cos(2*pi*t/50 + .6*pi) 
+par(mfrow=c(3,1))
 plot.ts(cs, main=expression(2*cos(2*pi*t/50+.6*pi)))
+abline(v = 0.6*pi, col= 2)
 plot.ts(cs+w, main=expression(2*cos(2*pi*t/50+.6*pi) + N(0,1)))
 plot.ts(cs+5*w, main=expression(2*cos(2*pi*t/50+.6*pi) + N(0,25)))
 ```
+
 :::
 ::::
 
-
- 
-## Comportamiento cíclico y periodicidad
+---
 
 - Ahora considere el modelo: 
-$$x_t=A cos(2\pi \omega t + \phi)$$ 
+$$x_t=A \cos(2\pi \omega t + \phi)$$ 
 con amplitud $A$, frecuencia $\omega$, y fase $\phi$ (que determina dónde inicia la función coseno).
 
-- Usando la identidad trigonométrica $cos(\alpha\pm\beta)=cos(\alpha)cos(\beta)\mp sin(\alpha)sin(\beta)$, se puede reescribir el modelo como:
-$$x_t=U_1 cos(2\pi \omega t )+U_2 sin(2\pi \omega t ),$$
-donde $U_1=A cos\phi$ y $U_2=-A sin\phi$.
+- Usando la identidad trigonométrica 
+$$\cos(\alpha\pm\beta)=\cos(\alpha)\cos(\beta)\mp \sin(\alpha)\sin(\beta),$$ 
+se puede reescribir el modelo como:
+$$x_t=U_1 \cos(2\pi \omega t )+U_2 \sin(2\pi \omega t ),$$
+donde $U_1=A \cos\phi$ y $U_2=-A \sin\phi$.
 
 
  
-## Comportamiento cíclico y periodicidad
+---
 
-- Vamos a concentrar en este modelo:
+- Vamos a concentrarnos en este modelo:
 
-$$x_t=U_1 cos(2\pi \omega t )+U_2 sin(2\pi \omega t ),$$
-donde $U_1=A cos\phi$ y $U_2=-A sin\phi$.
+$$x_t=U_1 \cos(2\pi \omega t )+U_2 \sin(2\pi \omega t ),$$
+donde $U_1=A \cos\phi$ y $U_2=-A \sin\phi$.
 
 
 
-- Suponga que $U_1$ y $U_2$ son variables aleatorias no correlacionadas con media $0$ y variancia $\sigma^2$. Se puede comprobar que el proceso estocástico $x_t$ es estacionario con media $0$ y su función de autocovariancia es dada por:
+- Suponga que $U_1$ y $U_2$ son variables aleatorias no correlacionadas con media $0$ y variancia $\sigma^2$. 
 
-$$\gamma_X(h)=Cov(x_{t+h},x_t)=\sigma^2 cos(2 \pi \omega h).$$
+- Se puede comprobar que el proceso estocástico $x_t$ es estacionario con media $0$ y su función de autocovariancia es dada por:
+
+$$\gamma_X(h)=Cov(x_{t+h},x_t)=\sigma^2 \cos(2 \pi \omega h).$$
+
 - Note que $Var(x_t)=\gamma_X(0)=\sigma^2$.
 
- 
-## Comportamiento cíclico y periodicidad
+---
 
 - Note que el modelo
 $$x_t=U_1 cos(2\pi \omega t )+U_2 sin(2\pi \omega t ),$$
@@ -193,38 +300,38 @@ es función de su frecuencia, $\omega$.
 - En la práctica, al observar tiempos discretos, necesitamos por lo menos 2 puntos para determinar un ciclo, entonces nos interesa frecuencia máxima de 0.5 ciclos por unidad de tiempo.
 
 
- 
-## Comportamiento cíclico y periodicidad
+---
 
-- vamos a generalizar el modelo anterior a $q$ mezclas de series periódicas.
+- Vamos a generalizar el modelo anterior a $q$ mezclas de series periódicas.
 
 $$x_t=\sum_{k=1}^q U_{k1} cos(2\pi \omega_k t )+U_{k2} sin(2\pi \omega_k t ),$$
 donde $U_{k1},U_{k2}$, para $k=1,...,q$ son v.a. con media cero con variancia $\sigma_k^2$ y no correlacionadas, y $\omega_k$ son frecuencias distintas.
 
 - Se puede comprobar que 
 $$\gamma_X(h)=\sum_{k=1}^q \sigma_k^2 cos(2 \pi \omega_k h).$$
-- De esta forma, $x_t$ es estacionario con media $0$ y variancia $\gamma_X(0)=\sum_{k=1}^q \sigma_k^2$.
+- De esta forma, $x_t$ es estacionario con media $0$ y variancia $\gamma_X(0)=\sum\limits_{k=1}^q \sigma_k^2$.
 
- 
-## Comportamiento cíclico y periodicidad
+# Ejemplo
 
-Ejemplo: 
-- Considere
+## Una serie periódica (determinística)
 
-$$x_t=\sum_{k=1}^q U_{k1} cos(2\pi \omega_k t )+U_{k2} sin(2\pi \omega_k t )$$
-con $q=3$
+- Considere $q=3$ y $U_{k1},U_{k1}$ fijos, es decir:
+
+$$x_t=\sum\limits_{k=1}^q U_{k1} \cos(2\pi \omega_k t )+U_{k2} \sin(2\pi \omega_k t)= x_{t1}+x_{t2}+x_{t3}.$$
 
 - Cada término está dado por:
-$$x_{t1}= 2 cos(2\pi t 6/100)+3 sin(2\pi t 6/100)$$
-$$x_{t2}= 4 cos(2\pi t 10/100)+5 sin(2\pi t 10/100)$$
-$$x_{t3}= 6 cos(2\pi t 40/100)+7 sin(2\pi t 40/100)$$
+$$x_{t1}= 2 \cos\left(2\pi t \frac{6}{100} \right)+3 \sin\left(2\pi t \frac{6}{100}\right)$$
+$$x_{t2}= 4 \cos\left(2\pi t \frac{10}{100}\right)+5 \sin\left(2\pi t \frac{10}{100}\right)$$
+$$x_{t3}= 6 \cos\left(2\pi t \frac{40}{100}\right)+7 \sin\left(2\pi t \frac{40}{100}\right)$$
 
 - Interprete la frecuencia $\omega$ y el ciclo $1/\omega$ de cada componente.
 
  
-## Comportamiento cíclico y periodicidad
+---
 
-```{r echo=FALSE, fig.align="center", out.width = "70%"}
+```{r}
+#| fig-align: center
+#| echo: true
 x1 = 2*cos(2*pi*1:100*6/100)  + 3*sin(2*pi*1:100*6/100)
 x2 = 4*cos(2*pi*1:100*10/100) + 5*sin(2*pi*1:100*10/100)
 x3 = 6*cos(2*pi*1:100*40/100) + 7*sin(2*pi*1:100*40/100)
@@ -234,59 +341,64 @@ par(mfrow=c(2,2))
 tsplot(x1, ylim=c(-10,10), main = expression(omega==6/100~~~A^2==13))
 tsplot(x2, ylim=c(-10,10), main = expression(omega==10/100~~~A^2==41))
 tsplot(x3, ylim=c(-10,10), main = expression(omega==40/100~~~A^2==85))
-tsplot(x, ylim=c(-16,16), main="sum")
+tsplot(x, ylim=c(-16,16), main="suma")
 ```
 
- 
-## Estimación y el periodograma
 
-- Sea una serie temporal $x_1,...,x_T$ con $T$ impar. Se puede escribir $x_t$ como
+## Estimación del periodograma (intuición)
 
-$$x_t = a_0 + \sum_{j=1}^{(T-1)/2} \left[ a_j \cos(2\pi t~j/T)+b_j \sin(2\pi t~j/T) \right].$$
-- Si $T$ es par, se puede modificar la ecuación sumando a $(T/2-1)$ y agregar un componente adicional por $a_{T/2} \cos(2\pi t~\frac{1}{2})=a_{T/2}(-1)^t$.
+- Sea una serie temporal $x_1,...,x_T$ con $T$ impar. 
+
+- Se puede escribir $x_t$ como
+
+$$x_t = a_0 + \sum_{j=1}^{(T-1)/2} \left[ a_j \cos\left(2\pi t \frac{j}{T}\right)+b_j \sin\left(2\pi t \frac{j}{T}\right) \right].$$
+
+- Si $T$ es par, se puede modificar la ecuación sumando a $\left(\frac{T}{2}-1\right)$ y agregar un componente adicional por $a_{T/2} \cos\left(2\pi t~\frac{1}{2}\right)=a_{T/2}(-1)^t$.
 
 - Note que $a_0$, $a_j$ y $b_j$ son desconocidos y requieren ser estimados. Considerando como un modelo de regresión, los coeficientes pueden ser calculados por: $a_0=\bar{x}$
 
-$$a_j=\frac{2}{T}\sum_{t=1}^T x_t \cos(2\pi t~j/T),~~~\text{y}~~~ b_j=\frac{2}{T}\sum_{t=1}^T x_t \sin(2\pi t~j/T)$$
+$$a_j=\frac{2}{T}\sum_{t=1}^T x_t \cos\left(2\pi t\frac{j}{T}\right),~~~\text{y}~~~ b_j=\frac{2}{T}\sum_{t=1}^T x_t \sin\left(2\pi t\frac{j}{T}\right).$$
  
-## Estimación y el periodograma
+---
 
-- Los coeficientes $a_j$ y $b_j$ tienen el significado de cuán grande es la amplitud de cada componente de frecuencias $j/T$.
+- Los coeficientes $a_j$ y $b_j$ tienen el significado de cuán grande es la amplitud de cada componente de frecuencias $\frac{j}{T}$.
 
-- Por consiguiente, podemos definir el **periodograma** como
-$$P(j/T)=a_j^2+b_j^2,~ \text{para}~~ j=1,...,(T-1)/2$$
+- Por consiguiente, podemos definir el [periodograma]{.alert} como
+$$P\left(\frac{j}{T}\right)=a_j^2+b_j^2,~ \text{para}~~ j=1,...,\frac{(T-1)}{2}.$$
 - Note que el periodograma expresa la serie temporal $x_t$ en sumas de los componentes de frecuencias (oscilación sinusoidal) multiplicado por su variancia $\sigma_j^2$.
 
-- Valores altos de $P(j/T)$ implica que la contribución de la frecuencia $\omega_j=j/T$ es importante. Valores pequeños implica que son ruidos.
+- Valores altos de $P\left(\frac{j}{T}\right)$ implica que la contribución de la frecuencia $\omega_j=\frac{j}{T}$ es importante. Valores pequeños implica que son ruidos.
 
 
- 
-## Estimación y el periodograma
+---
 
 - En la práctica, es común enfrentar series largas y el uso computacional del enfoque de regresión no es eficiente.
 
-- Se utiliza la **Transformada Discreta de Fourier (TDF)** que se discutirá con más detalles:
+- Se utiliza la [Transformada Discreta de Fourier (TDF)]{.alert} que se discutirá con más detalles:
 
-$$d(j/T)=\frac{1}{T^{1/2}}\sum_{t=1}^T x_t \exp{(-2 \pi it~j/T)}$$
-$$= \frac{1}{T^{1/2}}\sum_{t=1}^T x_t \cos(2\pi t~j/T)- i \sum_{t=1}^T x_t \sin(2\pi t~j/T)$$
+$$d\left(\frac{j}{T}\right)=\frac{1}{T^{1/2}}\sum_{t=1}^T x_t \exp{\left(-2 \pi it\frac{j}{T}\right)}$$
+$$= \frac{1}{T^{1/2}}\sum_{t=1}^T x_t \cos\left(2\pi t~\frac{j}{T}\right)- i \sum_{t=1}^T x_t \sin\left(2\pi t\frac{j}{T}\right).$$
 
- 
-## Ejemplo simulado
+---
 
-- Recuerde que
+- Recuerde la serie 
 
-$$x_t=\sum_{k=1}^3 U_{k1} cos(2\pi \omega_k t )+U_{k2} sin(2\pi \omega_k t )$$
+$$x_t=\sum\limits_{k=1}^q U_{k1} \cos(2\pi \omega_k t )+U_{k2} \sin(2\pi \omega_k t)= x_{t1}+x_{t2}+x_{t3}.$$
 
 - Cada término está dado por:
-$$x_{t1}= 2 cos(2\pi t 6/100)+3 sin(2\pi t 6/100)$$
-$$x_{t2}= 4 cos(2\pi t 10/100)+5 sin(2\pi t 10/100)$$
-$$x_{t3}= 6 cos(2\pi t 40/100)+7 sin(2\pi t 40/100)$$
+
+$$x_{t1}= 2 \cos\left(2\pi t \frac{6}{100} \right)+3 \sin\left(2\pi t \frac{6}{100}\right)$$
+
+$$x_{t2}= 4 \cos\left(2\pi t \frac{10}{100}\right)+5 \sin\left(2\pi t \frac{10}{100}\right)$$
+
+$$x_{t3}= 6 \cos\left(2\pi t \frac{40}{100}\right)+7 \sin\left(2\pi t \frac{40}{100}\right)$$
 
 
- 
-## Ejemplo simulado
+---
 
-```{r echo=FALSE, fig.align="center", out.width = "60%"}
+```{r}
+#| fig-align: center
+#| echo: true
 x1 = 2*cos(2*pi*1:100*6/100)  + 3*sin(2*pi*1:100*6/100)
 x2 = 4*cos(2*pi*1:100*10/100) + 5*sin(2*pi*1:100*10/100)
 x3 = 6*cos(2*pi*1:100*40/100) + 7*sin(2*pi*1:100*40/100)
@@ -296,49 +408,117 @@ par(mfrow=c(2,2))
 tsplot(x1, ylim=c(-10,10), main = expression(omega==6/100~~~A^2==13))
 tsplot(x2, ylim=c(-10,10), main = expression(omega==10/100~~~A^2==41))
 tsplot(x3, ylim=c(-10,10), main = expression(omega==40/100~~~A^2==85))
-tsplot(x, ylim=c(-16,16), main="sum")
+tsplot(x, ylim=c(-16,16), main="suma")
 ```
 
- 
-## Ejemplo simulado
+---
 
-```{r echo=FALSE, fig.align="center", out.width = "30%"}
+
+:::: {.columns}
+
+::: {.column width="30%"}
+
+```{r}
+#| echo: true
 P = abs(2*fft(x)/100)^2
 Fr = 0:99/100                    
-tsplot(Fr, P, type="o", xlab="frequency", ylab="periodogram")
-abline(v=.5, lty=2)
+cbind(Fr, P) %>% round(4)
+```
 
+:::
+  
+::: {.column width="30%"}
+
+
+```{r}
+#| fig-align: center
+#| echo: true
+tsplot(Fr, P, type="o", xlab="frequencia", ylab="periodograma")
+abline(v=.5, lty=2)
 ```
 
 
-- Note que:
-$P\left(\frac{6}{100}\right)=P\left(\frac{94}{100}\right)=13$, $P\left(\frac{10}{100}\right)=P\left(\frac{90}{100}\right)=41$  
-$P\left(\frac{40}{100}\right)=P\left(\frac{60}{100}\right)=85$  
+:::
+  
+::: {.column width="30%"}
 
-- Si consideramos $x_t$ como un color (en forma de ondas), que está compuesto por 3 colores distintos con su intensidad (amplitud), podemos considerar el periodograma como un prisma que descompone el color $x_t$ en los colores primarios (espectro).
+- Note que:
+  - $P\left(\frac{6}{100}\right)=P\left(\frac{94}{100}\right)=13=2^2+3^2$ 
+  - $P\left(\frac{10}{100}\right)=P\left(\frac{90}{100}\right)=41=4^2+5^2$  
+  - $P\left(\frac{40}{100}\right)=P\left(\frac{60}{100}\right)=85=6^2+7^2$  
+
+- Si consideramos $x_t$ como un color (en forma de ondas), que está compuesto por 3 colores distintos con su intensidad (amplitud), podemos considerar el [periodograma]{.alert} como un prisma que descompone el color $x_t$ en los colores primarios (espectro).
+
+:::
+::::
 
  
-## Ejemplo: Magnitud de estrella
+## Magnitud de estrella 
 
 - Considere la serie temporal de la magnitud de una estrella a las 00:00 (medianoche) de 600 días consecutivos. Su gráfico y el periodograma de frecuencias menores que 0.08 se muestran a continuación.
 
-```{r echo=FALSE, fig.align="center", out.width = "35%"}
-n    = length(star)
-par(mfrow=c(2,1))
+```{r}
+#| fig-align: center
+#| echo: true
+data(star)
 tsplot(star, ylab="star magnitude", xlab="day")
-Per   = Mod(fft(star-mean(star)))^2/n
-Freq  = (1:n -1)/n
+```
+
+---
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+#| fig-align: center
+#| echo: true
+n  <- length(star)
+Per <- Mod(fft(star-mean(star)))^2/n
+Freq <- (1:n -1)/n
+cbind(Freq, 1/Freq, Per) %>% round(4)
+```
+
+:::
+  
+::: {.column width="50%"}
+
+```{r}
+#| fig-align: center
+#| echo: true
+tsplot(Freq, Per, type='h', lwd=3, ylab="Periodogram", xlab="Frequency")
+```
+:::
+::::
+
+---
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+#| fig-align: center
+#| echo: true
 tsplot(Freq[1:50], Per[1:50], type='h', lwd=3, ylab="Periodogram", xlab="Frequency")
 text(.05,  7000, "24 day cycle") 
 text(.027, 9000, "29 day cycle")
 
 ```
+:::
+  
+::: {.column width="50%"}
 
-- El periodograma muestra ciclos de 29 $(\approx 1/0.035)$ y 24  $(\approx 1/0.041)$ días.
+- El periodograma muestra ciclos de:
+  - 29 $(\approx 1/0.035)$ y 
+  - 24 $(\approx 1/0.041)$ días.
 
-- Esto ocurre debido a un ruido de observación de la frecuencia real $\omega \pm \delta$. Ver el ejemplo 4.3 de Shumway & Stoffer. La solución es usar periodograma suavizado.
+- Esto ocurre debido a un ruido de observación de la frecuencia real $\omega \pm \delta$. Ver el ejemplo 4.3 de Shumway & Stoffer. La solución es usar [periodograma suavizado]{.alert}.
 
- 
+
+
+:::
+::::
+
+
 ## En la próxima clase veremos
 
 **Representación espectral de procesos estacionarios.**
@@ -346,4 +526,19 @@ text(.027, 9000, "29 day cycle")
 - Es necesario entender los fundamentos teóricos de los conceptos de frecuencia (poblacional) antes de entrar al caso cuando se tiene series observadas (muestral).
 
 - Vamos a ver la definición de la densidad espectral y su relación con un proceso estacionario.
+
+
+## Paquetes en R
+
+Para replicar los ejemplos de esta presentación, necesitan estos paquetes:
+
+```{r}
+#| echo: true
+library(ggplot2)
+library(forecast)
+library(fpp2)
+library(astsa)
+library(tidyverse)
+library(TSA)
+```
 

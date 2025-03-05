@@ -7,11 +7,12 @@
 <link href="presentacion4_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="presentacion4_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="presentacion4_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="presentacion4_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="presentacion4_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="presentacion4_files/libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Shu Wei Chou Chen">
-  <title>Tema 2: Análisis multivariado de series temporales-4</title>
+  <title>Tema 2: Análisis multivariado de series temporales(4)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="presentacion4_files/libs/revealjs/dist/theme/quarto.css">
   <link href="presentacion4_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -244,7 +310,6 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
-      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -327,86 +392,113 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Tema 2: Análisis multivariado de series temporales-4</h1>
-  <p class="subtitle">Curso: Tópicos Avanzados de Series Temporales</p>
+  <h1 class="title">Tema 2: Análisis multivariado de series temporales<sup>(4)</sup></h1>
+  <p class="subtitle"><a href="https://shuwei325.github.io/SP2600-I25">Curso: Tópicos Avanzados de Series Temporales</a></p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Shu Wei Chou Chen 
+<a href="https://shuwei325.github.io">Shu Wei Chou Chen</a> <a href="https://orcid.org/0000-0001-5495-2486" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
 </div>
 <div class="quarto-title-author-email">
 <a href="mailto:shuwei.chou@ucr.ac.cr">shuwei.chou@ucr.ac.cr</a>
 </div>
         <p class="quarto-title-affiliation">
+            <a href="https://www.estadistica.ucr.ac.cr/">
             Escuela de Estadística, Universidad de Costa Rica
+            </a>
           </p>
     </div>
 </div>
 
 </section>
-<section class="slide level2 scrollable">
-
-<p>En las clases anteriores vimos:</p>
-<ol type="1">
-<li>Introducción</li>
-<li>Modelos ARMA vectoriales</li>
-<li>Causalidad de Granger <br></li>
+<section>
+<section id="procesos-integrados" class="title-slide slide level1 agenda-slide center">
+<h1>Procesos integrados</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>Procesos integrados</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Serie estacionaria por tendencia y por diferencia</p>
+</div></li>
 </ol>
+</div>
 </section>
-<section id="contenido" class="slide level2 scrollable">
-<h2>Contenido</h2>
-<ol start="10">
-<ol start="4" type="1">
-<li>Raíz unitarias <br></li>
-<li>Procesos cointegrados: definición y pruebas de hipótesis para cointegración y modelos de corrección del error. <br></li>
-</ol>
-</ol>
-</section>
-<section id="procesos-integrados" class="slide level2">
+<section id="procesos-integrados-1" class="slide level2">
 <h2>Procesos integrados</h2>
 <p>Considere una serie <strong>univariada</strong> <span class="math inline">\(X_t\)</span>.</p>
-<p><strong>Definición:</strong> Si <span class="math inline">\(\nabla^d X_t\)</span> es estacionario, decimos que <span class="math inline">\(X_t\)</span> es integrado de orden <span class="math inline">\(d\)</span>, y es denotado por <span class="math inline">\(X_t \sim I(d)\)</span>.</p>
+<div id="def-procesointegrado1" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 1 (Proceso integrado)</strong></span> Si <span class="math inline">\(\nabla^d X_t\)</span> es estacionario, decimos que <span class="math inline">\(X_t\)</span> es integrado de orden <span class="math inline">\(d\)</span>, y es denotado por <span class="math inline">\(X_t \sim I(d)\)</span>.</p>
+</div>
+<div id="exm-procesointegrado" class="theorem example">
+<p><span class="theorem-title"><strong>Ejemplo 1</strong></span> &nbsp;</p>
 <ul>
-<li><p>Ejemplo: Si <span class="math inline">\(\nabla^d X_t \sim ARMA(p,q)\)</span>, decimos que <span class="math inline">\(X_t\)</span> es ARIMA(p,d,q), o bien <span class="math inline">\(X_t \sim I(d)\)</span>.</p></li>
-<li><p>Ejemplo: Cualquier serie temporal estacionaria es <span class="math inline">\(I(0)\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(\nabla^d X_t \sim ARMA(p,q)\)</span>, decimos que <span class="math inline">\(X_t\)</span> es ARIMA(p,d,q), o bien <span class="math inline">\(X_t \sim I(d)\)</span>.</p></li>
+<li><p>Cualquier serie temporal estacionaria es <span class="math inline">\(I(0)\)</span>.</p></li>
 </ul>
+</div>
+</section>
+<section class="slide level2">
+
 <p>Recuerde la diferenciación estacional <span class="math inline">\(\nabla_s^D X_t=(1-B^s)^D X_t\)</span></p>
-<p><strong>Definición:</strong> Si <span class="math inline">\(\nabla^d \nabla_s^D X_t\)</span> es estacionario, decimos que <span class="math inline">\(X_t\)</span> es estacionalmente integrado de orden <span class="math inline">\(d\)</span> y <span class="math inline">\(D\)</span>, y es denotado por <span class="math inline">\(X_t \sim I(d,D)\)</span>.</p>
+<div id="def-procesointegrado2" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2 (Proceso integrado estacionalmente)</strong></span> Si <span class="math inline">\(\nabla^d \nabla_s^D X_t\)</span> es estacionario, decimos que <span class="math inline">\(X_t\)</span> es estacionalmente integrado de orden <span class="math inline">\(d\)</span> y <span class="math inline">\(D\)</span>, y es denotado por <span class="math inline">\(X_t \sim I(d,D)\)</span>.</p>
+</div>
+<div id="exm-procesointegrado2" class="theorem example">
+<p><span class="theorem-title"><strong>Ejemplo 2</strong></span> &nbsp;</p>
 <ul>
-<li>Ejemplo: Si <span class="math inline">\(\nabla^d \nabla_s^D X_t \sim ARMA(p,q)\)</span>, entonces <span class="math inline">\(X_t\)</span> es <span class="math inline">\(SARIMA(p,d,q)(0,D,0)_s\)</span>. Decimos que <span class="math inline">\(X_t \sim I(d,D)\)</span>.</li>
+<li>Si <span class="math inline">\(\nabla^d \nabla_s^D X_t \sim ARMA(p,q)\)</span>, entonces <span class="math inline">\(X_t\)</span> es <span class="math inline">\(SARIMA(p,d,q)(0,D,0)_s\)</span>. Decimos que <span class="math inline">\(X_t \sim I(d,D)\)</span>.</li>
 </ul>
+</div>
+</section></section>
+<section>
+<section id="serie-estacionaria-por-tendencia-y-por-diferencia" class="title-slide slide level1 agenda-slide center">
+<h1>Serie estacionaria por tendencia y por diferencia</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Procesos integrados</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Serie estacionaria por tendencia y por diferencia</p>
+</div></li>
+</ol>
+</div>
 </section>
-<section id="serie-estacionaria-por-tendencia-y-por-diferencia." class="slide level2">
-<h2>Serie estacionaria por tendencia y por diferencia.</h2>
-<p>Suponga que una serie temporal <span class="math inline">\(\left\lbrace X_t \right\rbrace\)</span> es una realización de una tendencia determinística y un componente estocástico:</p>
-<p><span class="math display">\[
-X_t=CD_t+ \eta_t,
-\]</span> donde <span class="math inline">\(CD_t=\beta_0+\beta_1 t\)</span> y <span class="math inline">\(\eta_t \sim ARMA(p,q)\)</span> que no necesariamente es estacionario e invertible, i.e., tiene su representación <span class="math display">\[\phi(B)\eta_t=\theta(B)\epsilon_t\]</span></p>
-<p><strong>Caso 1:</strong> Si todas las raíces de <span class="math inline">\(\phi(B)\)</span> están fuera del circulo unitario, <span class="math inline">\(\left\lbrace X_t \right\rbrace\)</span> es estacionaria alrededor de una tendencia determinística. Por lo tanto, se puede eliminar la tendencia de la serie original y ajustar un modelo ARMA a los residuales. Este caso se dice que el modelo es <strong>estacionario por tendencia</strong> (<em>trend-stationary</em>).</p>
+<section id="serie-estacionaria-por-tendencia-y-por-diferencia-1" class="slide level2">
+<h2>Serie estacionaria por tendencia y por diferencia</h2>
+<p>Suponga que una serie temporal <span class="math inline">\(\left\lbrace X_t \right\rbrace\)</span> es una realización de una tendencia determinística y un componente estocástico: <span class="math display">\[X_t=CD_t+ \eta_t,\]</span> donde <span class="math inline">\(CD_t=\beta_0+\beta_1 t\)</span> y <span class="math inline">\(\eta_t \sim ARMA(p,q)\)</span> que no necesariamente es estacionario e invertible, i.e., tiene su representación <span class="math display">\[\phi(B)\eta_t=\theta(B)\epsilon_t\]</span></p>
+<p><strong>Caso 1:</strong> Si todas las raíces de <span class="math inline">\(\phi(B)\)</span> están fuera del circulo unitario, <span class="math inline">\(\left\lbrace X_t \right\rbrace\)</span> es estacionaria alrededor de una tendencia determinística. Por lo tanto, se puede eliminar la tendencia de la serie original y ajustar un modelo ARMA a los residuales. Este caso se dice que el modelo es <span class="alert">estacionario por tendencia (<em>trend-stationary</em>)</span>.</p>
 </section>
-<section id="serie-estacionaria-por-tendencia-y-por-diferencia.-1" class="slide level2">
-<h2>Serie estacionaria por tendencia y por diferencia.</h2>
-<p>Suponga que una serie temporal <span class="math inline">\(\left\lbrace X_t \right\rbrace\)</span> es una realización de una tendencia determinística y un componente estocástico:</p>
-<p><span class="math display">\[
-X_t=CD_t+ \eta_t,
-\]</span> donde <span class="math inline">\(CD_t=\beta_0+\beta_1 t\)</span> y <span class="math inline">\(\eta_t \sim ARMA(p,q)\)</span> que no necesariamente es estacionario e invertible, i.e., tiene su representación <span class="math display">\[\phi(B)\eta_t=\theta(B)\epsilon_t\]</span></p>
-<p><strong>Caso 2:</strong> si existe una raíz que está exactamente en el círculo unitario y el resto de las raíces están fuera del círculo unitario, i.e.&nbsp;<span class="math inline">\(\phi(B)=(1-B)\phi^*(B)\)</span>, y <span class="math inline">\(\phi^*(B)\eta_t\)</span> es estacionario. Por lo tanto, <span class="math inline">\(\left\lbrace X_t \right\rbrace\)</span> es estacionaria por diferencia. Por lo tanto, se puede realizar diferenciación para obtener una serie estacionaria. Caso más común es cuando <span class="math inline">\(d=1\)</span>. Este caso se dice que el modelo es <strong>estacionario por diferencia</strong> (<em>difference-stationary</em>).</p>
-</section>
-<section id="serie-estacionaria-por-tendencia-y-por-diferencia.-2" class="slide level2">
-<h2>Serie estacionaria por tendencia y por diferencia.</h2>
-<p>Note que el componente del error es <span class="math inline">\(I(1)\)</span>, i.e.&nbsp;ARIMA(p,1,q): <span class="math display">\[\phi^*(B)(1-B)\eta_t=\theta(B)\epsilon_t\]</span> Si aplicamos la diferenciación a <span class="math display">\[
-X_t=\beta_0+\beta_1 t+ \eta_t,
-\]</span> Tenemos</p>
-<p><span class="math display">\[X_t-X_{t-1}=\beta_0+\beta_1 t+ \eta_t - [\beta_0+\beta_1 (t-1)+ \eta_{t-1}]\]</span> <span class="math display">\[=\beta_1  + [\eta_t-\eta_{t-1}]\]</span> y es estacionario.</p>
+<section class="slide level2">
+
+<p><strong>Caso 2:</strong> si existe una raíz que está exactamente en el círculo unitario y el resto de las raíces están fuera del círculo unitario, i.e.&nbsp;<span class="math inline">\(\phi(B)=(1-B)\phi^*(B)\)</span>, y <span class="math inline">\(\phi^*(B)\eta_t\)</span> es estacionario, por ende, <span class="math inline">\(\left\lbrace X_t \right\rbrace\)</span> es estacionaria por diferencia. Por lo tanto, se puede realizar diferenciación para obtener una serie estacionaria. Caso más común es cuando <span class="math inline">\(d=1\)</span>. Este caso se dice que el modelo es <span class="alert">estacionario por diferencia (<em>difference-stationary</em>)</span>.</p>
+<p>Note que el componente del error es <span class="math inline">\(I(1)\)</span>, i.e.&nbsp;ARIMA(p,1,q): <span class="math display">\[\phi^*(B)(1-B)\eta_t=\theta(B)\epsilon_t\]</span> Si aplicamos la diferenciación a <span class="math display">\[X_t=\beta_0+\beta_1 t+ \eta_t,\]</span> Tenemos que <span class="math inline">\(\nabla X_t\)</span> es estacionario, pues</p>
+<p><span class="math display">\[X_t-X_{t-1}=\beta_0+\beta_1 t+ \eta_t - [\beta_0+\beta_1 (t-1)+ \eta_{t-1}]\]</span> <span class="math display">\[=\beta_1  + [\eta_t-\eta_{t-1}]\]</span></p>
 </section>
 <section id="ejemplo-tendencia-determinística-y-estocástica" class="slide level2">
 <h2>Ejemplo: Tendencia determinística y estocástica</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">autoplot</span>(austa) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span></span>
+<span id="cb1-2"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">"millions of people"</span>) <span class="sc">+</span></span>
+<span id="cb1-3"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Total annual international visitors to Australia"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:50.0%"></section>
-<section id="ejemplo-tendencia-determinística-y-estocástica-1" class="slide level2">
-<h2>Ejemplo: Tendencia determinística y estocástica</h2>
-<div class="cell" data-layout-align="center">
+</div>
+<img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-2-1.png" width="480" class="r-stretch"></section>
+<section class="slide level2">
+
+<h3 id="ajuste-con-tendencia-determinística">Ajuste con tendencia determinística</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a>trend <span class="ot">&lt;-</span> <span class="fu">seq_along</span>(austa)</span>
+<span id="cb2-2"><a href=""></a>(fit1 <span class="ot">&lt;-</span> <span class="fu">auto.arima</span>(austa, <span class="at">d=</span><span class="dv">0</span>, <span class="at">xreg=</span>trend))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: austa 
 Regression with ARIMA(2,0,0) errors 
@@ -422,9 +514,11 @@ AIC=-17.2   AICc=-15.2   BIC=-9.28</code></pre>
 </div>
 <p><span class="math display">\[X_t=0.416+0.171t+\eta_t\]</span> <span class="math display">\[\eta_t=1.113\eta_{t-1}-0.380 \eta_{t-2}+\epsilon_t\]</span> <span class="math display">\[\epsilon_t \overset{iid}{\sim} N(0,0.03)\]</span></p>
 </section>
-<section id="ejemplo-tendencia-determinística-y-estocástica-2" class="slide level2">
-<h2>Ejemplo: Tendencia determinística y estocástica</h2>
-<div class="cell" data-layout-align="center">
+<section class="slide level2">
+
+<h3 id="ajuste-con-tendencia-estocástica">Ajuste con tendencia estocástica</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>(fit2 <span class="ot">&lt;-</span> <span class="fu">auto.arima</span>(austa, <span class="at">d=</span><span class="dv">1</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: austa 
 ARIMA(0,1,1) with drift 
@@ -441,27 +535,31 @@ AIC=-15.24   AICc=-14.46   BIC=-10.57</code></pre>
 <p><span class="math display">\[X_t-X_{t-1}=0.173+\eta'_t,\]</span> o de otra forma,</p>
 <p><span class="math display">\[X_t=X_0+0.173t+\eta_t\]</span> <span class="math display">\[\eta_t=\eta_{t-1}+0.301\epsilon_{t-1}+\epsilon_t\]</span> <span class="math display">\[\epsilon_t \overset{iid}{\sim} N(0,0.034)\]</span></p>
 </section>
-<section id="tendencia-determinística-y-estocástica" class="slide level2">
-<h2>Tendencia determinística y estocástica</h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" width="700" height="500"></p>
-</figure>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>fc1 <span class="ot">&lt;-</span> forecast<span class="sc">::</span><span class="fu">forecast</span>(fit1,</span>
+<span id="cb6-2"><a href=""></a>  <span class="at">xreg =</span> <span class="fu">length</span>(austa) <span class="sc">+</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb6-3"><a href=""></a>fc2 <span class="ot">&lt;-</span> forecast<span class="sc">::</span><span class="fu">forecast</span>(fit2, <span class="at">h=</span><span class="dv">10</span>)</span>
+<span id="cb6-4"><a href=""></a><span class="fu">autoplot</span>(austa) <span class="sc">+</span></span>
+<span id="cb6-5"><a href=""></a>  <span class="fu">autolayer</span>(fc2, <span class="at">series=</span><span class="st">"Stochastic trend"</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href=""></a>  <span class="fu">autolayer</span>(fc1, <span class="at">series=</span><span class="st">"Deterministic trend"</span>) <span class="sc">+</span></span>
+<span id="cb6-7"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Forecasts from trend models"</span>) <span class="sc">+</span></span>
+<span id="cb6-8"><a href=""></a>  <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Visitors to Australia (millions)"</span>) <span class="sc">+</span></span>
+<span id="cb6-9"><a href=""></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">"Forecast"</span>))<span class="sc">+</span></span>
+<span id="cb6-10"><a href=""></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"top"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
-</div>
-</div>
-</section>
-<section id="serie-estacionaria-por-tendencia-y-por-diferencia.-3" class="slide level2">
-<h2>Serie estacionaria por tendencia y por diferencia.</h2>
+<img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" class="r-stretch"></section>
+<section id="serie-estacionaria-por-tendencia-y-por-diferencia-2" class="slide level2">
+<h2>Serie estacionaria por tendencia y por diferencia</h2>
 <ul>
 <li>Ejemplo de estos dos tipos de estacionariedad:</li>
 </ul>
-<p><strong>Tendencia determinística:</strong> <span class="math display">\[X_t=X_{t-1}+\mu=X_0+\mu t\]</span> <strong>Tendencia estocástica (acumulación de choques aleatorias):</strong> <span class="math display">\[X_t=X_{t-1}+\epsilon_t=X_0+\sum_{s=1}^t \epsilon_s\]</span> donde <span class="math inline">\(\mu\)</span> es una constante y <span class="math inline">\(\epsilon_t\)</span> es ruido blanco.</p>
+<p><span class="alert">Tendencia determinística:</span> <span class="math display">\[X_t=X_{t-1}+\mu=X_0+\mu t\]</span> <span class="alert">Tendencia estocástica (acumulación de choques aleatorias):</span> <span class="math display">\[X_t=X_{t-1}+\epsilon_t=X_0+\sum_{s=1}^t \epsilon_s\]</span> donde <span class="math inline">\(\mu\)</span> es una constante y <span class="math inline">\(\epsilon_t\)</span> es ruido blanco.</p>
 </section>
-<section id="serie-estacionaria-por-tendencia-y-por-diferencia.-4" class="slide level2 scrollable">
-<h2>Serie estacionaria por tendencia y por diferencia.</h2>
+<section class="slide level2">
+
 <ul>
 <li>En síntesis, una serie temporal <span class="math inline">\(\left\lbrace X_t \right\rbrace\)</span> está compuesto por una tendencia determinística y un componente estocástico <span class="math inline">\(\eta_t\)</span> que es modelado por <span class="math inline">\(ARIMA(p,d,q)\)</span>.</li>
 <li>Se puede descomponer <span class="math inline">\(\eta_t\)</span> en dos componentes: tendencia estocástica (choques aleatorios) y el componente aleatorio “estacionario”.</li>
@@ -475,15 +573,15 @@ AIC=-15.24   AICc=-14.46   BIC=-10.57</code></pre>
 <li>En el caso de un modelo estacionario por diferencia, el polinomio autoregresivo del componente <span class="math inline">\(\eta_t\)</span> tiene al menos una raíz unitaria.</li>
 </ul>
 </section>
-<section id="serie-estacionaria-por-tendencia-y-por-diferencia.-5" class="slide level2">
-<h2>Serie estacionaria por tendencia y por diferencia.</h2>
+<section class="slide level2">
+
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-6-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -500,21 +598,19 @@ AIC=-15.24   AICc=-14.46   BIC=-10.57</code></pre>
 </div>
 </div></div>
 </section>
-<section id="serie-estacionaria-por-tendencia-y-por-diferencia.-6" class="slide level2">
-<h2>Serie estacionaria por tendencia y por diferencia.</h2>
+<section class="slide level2">
+
 <ul>
 <li>Vimos que si una serie temporal <span class="math inline">\(\left\lbrace X_t \right\rbrace\)</span> se puede descomponer en tres componentes: (1) tendencia determinística, (2) tendencia estocástica, y (3) el componente “aleatorio”, i.e., <span class="math display">\[
 X_t=CD_t+ \eta_t,
 \]</span> donde <span class="math inline">\(CD_t=\beta_0+\beta_1 t\)</span> y <span class="math inline">\(\eta_t \sim ARMA(p,q)\)</span> que no necesariamente es estacionario e invertible, i.e., tiene su representación <span class="math display">\[\phi(B)\eta_t=\theta(B)\epsilon_t\]</span></li>
 <li>Si existe una raíz que está exactamente en el círculo unitario y el resto de las raíces están fuera del círculo unitario, i.e.&nbsp;<span class="math inline">\(\phi(B)=(1-B)\phi^*(B)\)</span>, y <span class="math inline">\(\phi^*(B)\eta_t\)</span> es estacionario. Por lo tanto, <span class="math inline">\(\left\lbrace X_t \right\rbrace\)</span> es estacionaria por diferencia. Por lo tanto, se puede realizar diferenciación para obtener una serie estacionaria.</li>
-<li>El modelo se puede representar como <span class="math display">\[X_t=CD_t+ \eta_t,\]</span> <span class="math display">\[\phi^*(B)(1-B)\eta_t=\theta(B)\epsilon_t\]</span></li>
+<li>El modelo se puede representar como <span class="math display">\[X_t=CD_t+ \eta_t,\]</span> <span class="math display">\[\phi^*(B)(1-B)\eta_t=\theta(B)\epsilon_t\]</span> # El contraste de raíz unitaria</li>
 </ul>
 </section>
 <section id="el-contraste-de-raíz-unitaria" class="slide level2">
 <h2>El contraste de raíz unitaria</h2>
-<p>Para investigar si el proceso: <span class="math display">\[
-\eta_t=X_t-CD_t,
-\]</span> contiene raíz unitaria, Dickey Fuller (1979) propuso la prueba de DF de la siguiente forma:</p>
+<p>Para investigar si el proceso: <span class="math display">\[\eta_t=X_t-CD_t,\]</span> contiene raíz unitaria, Dickey Fuller (1979) propuso la prueba de DF de la siguiente forma:</p>
 <ul>
 <li>Suponiendo que <span class="math inline">\(\eta_t\)</span> es un AR(1):</li>
 </ul>
@@ -653,7 +749,7 @@ phi3 | 8.73 | 6.49 | 5.47 | 2.5972 |</div>
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -684,7 +780,7 @@ phi3 | 8.73 | 6.49 | 5.47 | 2.5972 |</div>
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"right","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"width":"wide","numbers":true},
 'smaller': false,
  
         // Display controls in the bottom right corner

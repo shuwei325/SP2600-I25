@@ -1,45 +1,39 @@
 ---
-title: 'Tema 2: Análisis multivariado de series temporales-2'
-subtitle: 'Curso: Tópicos Avanzados de Series Temporales'
+title: 'Tema 2: Análisis multivariado de series temporales^(2)^'
+subtitle: '[Curso: Tópicos Avanzados de Series Temporales](https://shuwei325.github.io/SP2600-I25)'
 format: clean-revealjs
 html-math-method:
   method: mathjax
   url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 author:
   - name: Shu Wei Chou Chen
-    #orcid: 0000-0001-5495-2486
+    url: https://shuwei325.github.io
+    orcid: 0000-0001-5495-2486
     email: shuwei.chou@ucr.ac.cr
-    affiliations: Escuela de Estadística, Universidad de Costa Rica
+    affiliations: 
+    - name: Escuela de Estadística, Universidad de Costa Rica
+      url: https://www.estadistica.ucr.ac.cr/
 #date: last-modified
 lang: es  # español
+filters:
+  - reveal-auto-agenda
+auto-agenda:
+  bullets: numbered
+  heading: Contenido
+bibliography: references.bib
+bibliographystyle: apa
 ---
 
-
-```{r, include=FALSE}
+```{r}
 library(ggplot2)
-library(forecast)
 library(tidyverse)
-library(fpp2)
 library(astsa)
-library(sarima)
-library(car)
-library(fGarch)
-library(xts)
-library(vars)
-library(MASS)
 library(MTS)
 ```
 
 
-## Contenido
 
-1. Introducción
-2. Modelos ARMA vectoriales
-3. Causalidad de Granger
-4. Raíz unitarias
-5. Procesos cointegrados: definición y pruebas de hipótesis para cointegración y modelos de corrección del error.
-
-
+# VARMA(p,q)
  
 ## VARMA(p,q)
 
@@ -48,33 +42,34 @@ library(MTS)
 
 $$X_{t}=\phi_0+ \sum_{i=1}^p \phi_i X_{t-i}  - \sum_{j=1}^q \theta_j {a}_{t-j} +a_{t}$$
 con $\phi_p, \theta_q \neq 0$ y $\Sigma_w$ definida positiva.
+
 - Los coeficientes $\phi_i :i=1,...,p$, $\theta_j:j=1,...,q$ son matrices $k \times k$ y $a_t$ es ruido blanco.
 
  
-## VARMA(p,q)
+---
 
 - Si este modelo es estacionario: 
 $$X_t-\sum_{j=1}^p \phi_j X_{t-j}=\phi_0- \sum_{j=1}^q \theta_j {a}_{t-j} +a_t$$
 
-- Calculemos la esperanza en ambos lados, se obtiene: $\mu- \sum_{j=1}^p \phi_j \mu=\phi_0$
+- Aplicamos la esperanza en ambos lados, se obtiene: $\mu- \sum\limits_{j=1}^p \phi_j \mu=\phi_0$
 - Sustituimos $\phi_0$ en la ecuación anterior 
 
 $$X_t-\sum_{j=1}^p \phi_j X_{t-j}=\mu- \sum_{j=1}^p \phi_j \mu - \sum_{j=1}^q \theta_j {a}_{t-j} +a_t$$
 $$\Rightarrow  
 (X_t-\mu)-\sum_{j=1}^p \phi_j (X_{t-j}-\mu)=- \sum_{j=1}^q \theta_j {a}_{t-j} +a_t$$
 
- 
-## VARMA(p,q)
+---
 
 - De esta forma, podemos reescribir el modelo centrado como:
+
 $$(X_t-\mu)-\sum_{j=1}^p \phi_j (X_{t-j}-\mu)=- \sum_{j=1}^q \theta_j {a}_{t-j} +a_t$$
+
 o bien,
 
 $$\tilde{X_t}-\sum_{j=1}^p \phi_j \tilde{X}_{t-j}= a_t - \sum_{j=1}^q \theta_j {a}_{t-j}$$
-donde $\tilde{X_t}=X_t-\mu$
+donde $\tilde{X_t}=X_t-\mu$.
 
- 
-## VARMA(p,q)
+---
 
 - Entonces, si un VARMA es estacionario se puede expresar su versión centrada, o bien sin pérdida de generalidad suponer que $\phi_0=0$.
 
@@ -83,11 +78,13 @@ donde $\tilde{X_t}=X_t-\mu$
 $$\phi(B) X_{t}= \theta(B) a_{t}$$
 en donde
 
-$\phi(B)=I- \phi_1 B-...- \phi_p B^p$ es el operador autorregresivo y
+$\phi(B)=I- \phi_1 B-...- \phi_p B^p$ es el [operador autorregresivo]{.alert} y
 
-$\theta(B)=I-\theta_1 B-...- \theta_q B^q$ es el operador de medias móviles.
+$\theta(B)=I-\theta_1 B-...- \theta_q B^q$ es el [operador de medias móviles]{.alert}.
 
- 
+
+# VAR(p)
+
 ## VAR(p)
 
 - El modelo VAR(p):
@@ -102,12 +99,12 @@ donde $\phi(B)=I_k- \phi_1 B-...- \phi_p B^p$ es el operador autorregresivo.
 - De la misma forma, se puede considerar su versión centrada (si es estacionario):
 $$\phi(B) \tilde{X}_{t}= a_{t}$$
 
- 
 ## VAR(1)
 
 - Considere el modelo VAR(1) con $k=2$:
 
 $$X_{t}=\phi_0+\phi_1 X_{t-1} + a_{t}$$
+
 - Expresando explícitamente la ecuación,
 
 $$\begin{bmatrix}X_{1,t}\\
@@ -123,15 +120,11 @@ a_{2,t}
 
 - o bien,
 
-
-
 $$X_{1,t}=\phi_{10}+\phi_{1,11}X_{1,t-1}+\phi_{1,12}X_{2,t-1}+a_{1,t}$$
 
 $$X_{2,t}=\phi_{20}+\phi_{1,21}X_{1,t-1}+\phi_{1,22}X_{2,t-1}+a_{2,t}$$
 
-
- 
-## Estructura del modelo y Causalidad de Granger
+---
 
 - Suponga que $\phi_{1,12}=\phi_{1,21}=0$, entonces
 
@@ -144,18 +137,19 @@ X_{2,t}
 X_{2,t-1}
 \end{bmatrix}  +\begin{bmatrix}a_{1,t}\\
 a_{2,t}
-\end{bmatrix}$$
+\end{bmatrix}.$$
 
-- evaluando cada ecuación:
+- Evaluando cada ecuación:
 
 
 $$X_{t,1}=\phi_{10}+\phi_{1,11}X_{1,t-1}+a_{t,1}$$
 
 $$X_{t,2}=\phi_{20}+\phi_{1,22}X_{2,t-1}+a_{t,2}$$
-- Tenemos simplemente dos AR(1).
+
+- Tenemos simplemente dos procesos de AR(1).
 
  
-## Estructura del modelo y Causalidad de Granger
+---
 
 - Suponga que $\phi_{1,12}=0$ y $\phi_{1,21} \neq 0$, entonces
 
@@ -170,37 +164,40 @@ X_{2,t-1}
 a_{2,t}
 \end{bmatrix}$$
 
-- evaluando cada ecuación:
+- Evaluando cada ecuación:
 
 
-$$X_{1,t}=\phi_{10}+\phi_{1,11}X_{1,t-1}+a_{1,t}$$
+$$\begin{align}
+X_{1,t}=\phi_{10}+\phi_{1,11}X_{1,t-1}+a_{1,t} \\
+X_{2,t}=\phi_{20}+\phi_{1,21}X_{1,t-1}+\phi_{1,22}X_{2,t-1}+a_{2,t}
+\end{align}$$
 
-$$X_{2,t}=\phi_{20}+\phi_{1,21}X_{1,t-1}+\phi_{1,22}X_{2,t-1}+a_{2,t}$$
-- Tenemos que $X_{1,t}$ no depende de los valores pasados de $X_{2,t}$, pero $X_{2,t}$ depende de los valores pasados de $X_{1,t}$. Se dice que $X_{1,t}$ y $X_{2,t}$ tienen **una relación de función de transferencia**.
+- Tenemos que $X_{1,t}$ no depende de los valores pasados de $X_{2,t}$, pero $X_{2,t}$ depende de los valores pasados de $X_{1,t}$. Se dice que $X_{1,t}$ y $X_{2,t}$ tienen [una relación de función de transferencia]{.alert}.
 
-- En econometría, se dice que $X_{t,1}$ causa a $X_{t,2}$ en el sentido de Granger, pero inversamente no: $X_{t,2}$ no causa a $X_{t,1}$ en el sentido de Granger.
+- En econometría, se dice que $X_{t,1}$ [causa]{.alert} a $X_{t,2}$ en el sentido de [Granger]{.alert}, pero inversamente no: $X_{t,2}$ [no causa]{.alert} a $X_{t,1}$ en el sentido de [Granger]{.alert}.
 
+# Causalidad de Granger 
  
 ## Causalidad de Granger
 
-- El concepto de causalidad de Granger fue introducido por Granger (1969) considerando una serie bivariada $(X_{1,t,},X_{2,t})$ y el ajuste de un modelo VAR y los modelos univariados para realizar predicción. 
+- El concepto de causalidad de Granger fue introducido por @Granger1969 considerando una serie bivariada $(X_{1,t,},X_{2,t})$ y el ajuste de un modelo VAR y los modelos univariados para realizar predicción. 
 - Se dice que $X_{1,t}$ causa a $X_{2,t}$ en el sentido de Granger, si la predicción usando modelo VAR es más precisa que la predicción utilizando el modelo univariado.
 - Formalmente, sean: 
   - $F_t$ toda la información disponible hasta el tiempo t (inclusive),
   - $F_{-i,t}$ como toda la información $F_t$ pero sin el $i-$ésimo componente $X_{i,t}$.
-- En término del VAR(1) $2-$dimensional descrito anteriormente,
+- En término del VAR(1) bidimensional descrito anteriormente,
   - $F_t=\left\lbrace X_t,X_{t-1},X_{t-2},... \right\rbrace$
   - $F_{-1,t}=\left\lbrace X_{2,t},X_{2,t-1},X_{2,t-2},... \right\rbrace$
   - $F_{-2,t}=\left\lbrace X_{1,t},X_{1,t-1},X_{1,t-2},... \right\rbrace$
   
- 
-## Causalidad de Granger
+---
 
 - Sean:
   - $X_{j,t+h}|F_{t}$, $j=1,2$ como las predicciones $h$ pasos adelante basado en toda la información disponible $F_{t}$ y $e_{j,t+h}|F_{t}$ sus errores de pronósticos respectivos.
   - $X_{j,t+h}|F_{-i,t}$, $j=1,2$ como las predicciones $h$ pasos adelante basado en $F_{-i,t}$ y $e_{j,t+h}|F_{-i,t}$ sus errores de pronósticos respectivos.
-- Se dice que que $X_{1,t}$ causa a $X_{2,t}$ en el sentido de Granger, si
-$$Var\left(e_{2,t+h}|F_{t}\right)<Var\left(e_{2,t+h}|F_{-1,t}\right)$$
+- Se dice que que $X_{1,t}$ [causa]{.alert} a $X_{2,t}$ [en el sentido de Granger]{.alert}, si 
+
+$$Var\left(e_{2,t+h}|F_{t}\right)< Var\left(e_{2,t+h}|F_{-1,t}\right)$$
 
 - Retomando el VAR(1), con
 
@@ -214,6 +211,7 @@ X_{2,t-1}
 \end{bmatrix}  +\begin{bmatrix}a_{1,t}\\
 a_{2,t}
 \end{bmatrix}$$
+
 - Se dice que $X_{1,t}$ causa a $X_{2,t}$ en el sentido de Granger si $\phi_{1,21} \neq 0$. Sin embargo, $X_{1,t}$ no causa a $X_{2,t}$ en el sentido de Granger.
 
  
@@ -221,26 +219,36 @@ a_{2,t}
 
 - Recuerden que $\Sigma_a$ no necesariamente es una matriz diagonal. 
 
-- Si $\Sigma_a$ no es una matriz diagonal, se dice que $X_{1,t}$ y $X_{2,t}$ tienen **causalidad instantánea en sentido de Granger**.
+- Si $\Sigma_a$ no es una matriz diagonal, se dice que $X_{1,t}$ y $X_{2,t}$ tienen [causalidad instantánea en sentido de Granger]{.alert}.
 
 
-
+# Invertibilidad
  
-## Estacionariedad
+## Invertibilidad
 
-- Sin pérdida de generalidad, suponga que el VAR(1) asume $\phi_0=0$,
+- Por definición VAR(p) es invertible ya que está expresada en término de sus valores pasados: 
 
-$$\left. \begin{eqnarray}X_t &=& \phi_1 X_{t-1}+a_t\\ 
+$$X_t=c+a_t+\sum_{j=0}^\infty \pi_j X_{t-j}$$
+
+# Estacionariedad
+ 
+## Estacionariedad de un VAR(1)
+
+- Empezamos con un VAR(1):
+
+- Sin pérdida de generalidad, suponga que $\phi_0=0$,
+
+$$\begin{eqnarray}X_t &=& \phi_1 X_{t-1}+a_t\\ 
 &=& \phi_1 (\phi_1 X_{t-2}+a_{t-1})+a_t \\ 
 &=& \phi_1^2 X_{t-2}+\phi_1 a_{t-1}+a_t \\
 &=& \phi_1^3 X_{t-3}+ \phi_1^2 a_{t-2}+\phi_1 a_{t-1}+a_t \\
 &=& \vdots \\
-&=& \phi_1^J X_{t-J}+ \sum_{j=0}^{J-1} \phi_1^j a_{t-j} \end{eqnarray}\right.$$
+&=& \phi_1^J X_{t-J}+ \sum_{j=0}^{J-1} \phi_1^j a_{t-j} \end{eqnarray}$$
 
 - Al igual que el caso univariado, para que el proceso esté bien definido, es necesario que $\phi_1^{J}\rightarrow 0$ cuando $J \rightarrow \infty$.
 
  
-## Estacionariedad
+---
 
 - La condición de $\phi_1^{J}\rightarrow 0$ cuando $J \rightarrow \infty$ significa que todos los autovalores de $\lambda_i$ de la matriz $\phi_1$ satisfacen la condición de que $\lambda_i^{J}\rightarrow 0$ cuando $J \rightarrow \infty$.
 
@@ -254,21 +262,12 @@ $$\lambda^k \left|I_k - \phi_1\frac{1}{\lambda}\right|=0.$$
 - Es decir, $\left|I_k - \phi_1 x\right|=0$ donde $x=1/\lambda$. Los autovalores de $\phi_1$ son inversos de la solución de esta ecuación.
 
  
-## Estacionariedad
+---
 
 - Como consecuencia, la condición necesaria y suficiente de la estacionariedad de un VAR(1) es que las soluciones de la ecuación
 $\left|I_k - \phi_1 x\right|=0$ tengan valor absoluto mayor a 1.
 
 - Es decir, la condición de estacionariedad de un VAR(1) es que las soluciones de $|\phi(B)|=0$ estén fuera del círculo unitario.
-
- 
-## Invertibilidad
-
-- Por definición VAR(p) es invertible ya que está expresada en término de sus valores pasados: 
-
-$$X_t=c+a_t+\sum_{j=0}^\infty \pi_j X_{t-j}$$
-
-
  
 ## VAR(p)
 
@@ -283,7 +282,6 @@ $$\phi(B) \tilde{X}_{t}= a_{t}$$
 donde $\phi(B)=I_k- \phi_1 B-...- \phi_p B^p$ es el operador autorregresivo, y $\tilde{X}_{t}={X}_{t}-\mu_X$.
 
 
- 
 ## VAR(p) como representación de VAR(1)
 
 - Sin pérdida de generalidad, asuma $\phi_0=0$. Defina $\boldsymbol{X}_t=\left(X_t',X_{t-1}',...,X_{t-p+1}' \right)'$ una serie temporal $pk-$dimensional.
@@ -314,7 +312,7 @@ $$\underset{(Kp \times 1)}{\boldsymbol{b}_{t}}=
 0
 \end{bmatrix}$$
 
-- La matrix $\Phi$ es conocida como la matriz compañera del polinomio autorregresivo $\phi(B)$.
+- La matrix $\Phi$ es conocida como [la matriz compañera]{.alert} del polinomio autorregresivo $\phi(B)$.
 
  
 ## Condición de estacionariedad de VAR(p)
@@ -326,6 +324,8 @@ $\left|I_{kp} - \Phi B\right|=0$ tengan valor absoluto mayor a 1.
 - Utilizando resultados de matrices en bloques, se puede concluir que la condición de estacionariedad de VAR(p) es que todas las soluciones de $\left|I_{kp} - \Phi B\right|=|\phi(B)|=0$ estén fuera del círculo unitario.
 
 
+ 
+# Estimación, selección de modelos y diagnósticos
  
 ## Estimación
 
@@ -345,8 +345,7 @@ $$\left. \begin{eqnarray}L\left(X_{(p+1):T}|X_{1:p},\beta,\Sigma_a \right) &=& \
 &=& \prod_{t=p+1}^T \frac{1}{(2\pi)^{k/2}|\Sigma_a|^{1/2}} \exp\left[ \frac{-1}{2}a_t'\Sigma_a^{-1} a_t \right] \\
 &\propto& |\Sigma_a|^{-(T-p)/2} \exp\left[ \frac{-1}{2} \sum_{t=p+1}^{T} tr(a_t'\Sigma_a^{-1} a_t) \right] \end{eqnarray}\right.$$
 
- 
-## Estimación de Máxima Verosimilitud
+---
 
 - la función de log-verosimlitud es:
 $$\left. \begin{eqnarray}\ell \left(\beta,\Sigma_a \right) &=& c- \frac{T-p}{2} \log|\Sigma_a| -\frac{1}{2} \sum_{t=p+1}^{T} tr(a_t'\Sigma_a a_t) \\ 
@@ -354,11 +353,11 @@ $$\left. \begin{eqnarray}\ell \left(\beta,\Sigma_a \right) &=& c- \frac{T-p}{2} 
 \end{eqnarray}\right.$$
 
 donde $c$ es una constante que no influye en el proceso de optimización.
+
 - Note que las propiedades $tr(CD)=tr(DC)$ y $tr(C+D)=tr(C)+tr(D)$ son utilizadas.
 
 
- 
-## Estimación de Máxima Verosimilitud
+---
 
 - Se puede reescribir la función de log-verosimlitud como:
 $$\ell \left(\beta,\Sigma_a \right) = c- \frac{T-p}{2} \log|\Sigma_a| -\frac{1}{2} S(\beta)$$
@@ -367,18 +366,29 @@ donde $S(\beta)$ es la cantidad a minimizar del método de mínimos cuadrados.
 - No vamos a entrar a los detalles de la distribución muestral de los estimadores.
 
 
- 
 ## Ejemplo
 
 - El producto interno bruto de Reino Unido, Canadá y Estados Unidos de segundo trimestre del 1980 al segundo trimestre del 2011.
 - Los datos son ajustados estacionalmente.
 
+
+```{r}
+#| echo: true
+da=read.table("q-gdp-ukcaus.txt",header=T)
+head(da)
+```
+
+
+---
+
 :::: {.columns}
 
 ::: {.column width="50%"}
+
 - Serie original
-```{r echo=FALSE, fig.align="center", out.width = "90%"}
-da=read.table("q-gdp-ukcaus.txt",header=T)
+
+```{r}
+#| echo: true
 tsplot(da[,3:5])
 ```
 
@@ -386,7 +396,8 @@ tsplot(da[,3:5])
 
 ::: {.column width="50%"}
 - Transformación logarítmica
-```{r  echo=FALSE, fig.align="center", out.width = "90%"}
+```{r}
+#| echo: true
 gdp=log(da[,3:5])
 tsplot(gdp)
 ```
@@ -394,11 +405,12 @@ tsplot(gdp)
 ::::
 
  
-## Ejemplo
+---
 
-- Suponga que $X_t$ es el valor de un activo en el tiempo $t$, el retorno $r_t$ en el tiempo $t$ es:
+- Suponga que $X_t$ es el valor de un activo en el tiempo $t$, el retorno en el tiempo $t$, $r_t$, es:
 
 $$r_t=\frac{X_t-X_{t-1}}{X_{t-1}}$$
+
 - Despejando la expresión anterior:
 $$X_t=(1+r_t)X_{t-1}$$
 $$\Rightarrow \ln X_t=\ln (1+r_t)+ \ln X_{t-1}$$
@@ -407,24 +419,36 @@ si $r_t$ son cambios porcentuales pequeños.
 
 - A partir de aquí, llamamos $r_t$ o $\nabla \ln X_t$ retornos y dicho valor es conocido como la tasa del crecimiento porcentual.
 
- 
-## Ejemplo
+---
 
 - Se calculan sus retornos en porcentajes, i.e. retornos*100:
 
-```{r echo=FALSE, fig.align="center", out.width = "50%"}
+```{r}
+#| echo: true
 x=gdp[2:126,]-gdp[1:125,]
 x=x*100
 tsplot(x)
 ```
 
- 
 
+
+---
+
+
+:::: {.columns}
+
+::: {.column width="40%"}
 ```{r}
+#| echo: true
 m1=MTS::VAR(x,p=1)
 ```
 
  
+:::
+  
+::: {.column width="60%"}
+
+El modelo estimado es:
 
 $$\begin{bmatrix}X_{1t}\\
 X_{2t}\\
@@ -444,15 +468,18 @@ $$\text{donde}~~a_t \sim N\left(0, \Sigma_a \right), ~\text{con}~ \Sigma_a=\begi
 0.07 & 0.17 & 0.39
 \end{bmatrix}$$
 
+:::
+::::
  
 ## Selección del orden de un VAR(p)
 
 - ¿Cómo se selecciona el orden de un VAR?
-  - Pruebas de razón de verosimilitud secuencial
-  - Criterio de información
+
+  1. Pruebas de razón de verosimilitud secuencial
+  2. Criterio de información
 
  
-## Pruebas de razón de verosimilitud secuencial
+## 1. Pruebas de razón de verosimilitud secuencial
 
 - La idea básica es comparar un VAR(p) con un VAR(p-1).
 
@@ -466,19 +493,20 @@ $H_0:\phi_p=0$ $H_1:\phi_p \neq 0$
 $$\Delta= \frac{\max L(\beta_{p-1},\Sigma_a)}{\max L(\beta_{p},\Sigma_a)}= \left( \frac{|\hat{\Sigma}_{a,p}|}{|\hat{\Sigma}_{a,p-1}|} \right)^{(T-p)/2}$$
 
  
-## Pruebas de razón de verosimilitud secuencial
+---
 
 
 - El estadístico es dado por
 
 $$M(p)= -(T-p-0.5-kp) \ln \left( \frac{|\hat{\Sigma}_{a,p}|}{|\hat{\Sigma}_{a,p-1}|} \right)$$
+
 - Bajo el supuesto de que $H_0$ sea cierta, $M(p) \sim \chi^2_{k^2}$.
 
 - En la práctica, se preselecciona un rezago $L$ grande y se realiza secuencialmente probando $p=0,...,L$.
 
 
  
-## Criterio de información
+## 2. Criterio de información
 
 - Debido a la complejidad de selección del orden $p$, en la práctica se usan los criterios de información: AIC, BIC o Schwarz y Hanna Quinn.
 
@@ -493,33 +521,42 @@ donde $p$ es el orden de rezago, $\tilde{\Sigma}_{a,p}$ es la estimación de $\t
  
 ## Ejemplo
 
+:::: {.columns}
+
+::: {.column width="50%"}
+
 ```{r}
+#| echo: true
 m3=MTS::VARorder(x,maxp=15)
 ```
 
- 
-## Ejemplo
+:::
+  
+::: {.column width="50%"}
 
-```{r echo=FALSE, fig.align="center", out.width = "70%"}
+```{r}
+#| echo: true
 CI=data.frame(order=0:15,AIC=m3$aic,BIC=m3$bic,HQ=m3$hq)
 CI%>%gather(
   key = "C.Info",
   value = "value",
   AIC,BIC,HQ
 ) %>% ggplot() +
-  geom_line( aes(x = order, y = value, group=C.Info,color=C.Info))
+  geom_line( aes(x = order, y = value, group=C.Info,color=C.Info)) + theme_bw()
 
 ```
 
 
- 
+:::
+::::
+
 ## Diagnósticos
 
 - Denote $R_j$ como la matriz de correlaciones de $j$ rezago de los residuales. Se plantean las hipótesis:   
-$H_0: R_1=...=R_m=0$    
+$H_0: R_1=\cdots=R_m=0$    
 $H_1: R_j \neq 0$, para algún $1\leq j \leq m$
 
-- Recuerden que **el estadístico de Portmanteau multivariado** es la versión multivariada de la prueba de Ljung-Box.
+- Recuerden que [el estadístico de Portmanteau multivariado]{.alert} es la versión multivariada de la prueba de Ljung-Box.
 $$Q_m=T^2 \sum_{l=1}^m \frac{1}{T-l} tr \left(\hat{R}'_l\hat{R}^{-1}_0\hat{R}_l\hat{R}^{-1}_0\right)$$
 
 - Bajo el supuesto de $H_0$,i.e. $R_l=0,~ l>0$, y $X_t$ es distribuída normalmente, para $T$ y $m$ suficientemente grandes, el estadístico se aproxima a la distribución $\chi^2_{mk^2}$.
@@ -529,27 +566,72 @@ $$Q_m=T^2 \sum_{l=1}^m \frac{1}{T-l} tr \left(\hat{R}'_l\hat{R}^{-1}_0\hat{R}_l\
 
 
  
-## Ejemplo
+## Ejemplo con VAR(1){.scrollable}
 
-Utilizando la prueba de Portmanteau multivariado
+:::: {.columns}
 
+::: {.column width="50%"}
+```{r}
+#| echo: true
+m1=MTS::VAR(x,p=1)
+```
+
+:::
+  
+::: {.column width="50%"}
+- Utilizando la prueba de Portmanteau multivariado
 
 ```{r}
-m1=MTS::VAR(x,p=1,output=FALSE)
+#| echo: true
 mq(m1$residuals,lag=18,adj=9) #pk^2=1*3^2
 ```
+:::
+::::
 
- 
-## Ejemplo
 
+## Ejemplo con VAR(2){.scrollable}
 
-Utilizando la prueba de Portmanteau multivariado
+:::: {.columns}
 
+::: {.column width="50%"}
 ```{r}
-m2=MTS::VAR(x,p=2,output=FALSE)
-mq(m2$residuals,lag=18,adj=18) #pk^2=2*3^2
+#| echo: true
+m2=MTS::VAR(x,p=2)
 ```
 
+:::
+  
+::: {.column width="50%"}
+- Utilizando la prueba de Portmanteau multivariado
+
+```{r}
+#| echo: true
+mq(m2$residuals,lag=18,adj=9) #pk^2=1*3^2
+```
+:::
+::::
+ 
+## Comparación de residuales
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+acf(m1$residuals)
+```
+
+:::
+  
+::: {.column width="50%"}
+```{r}
+#| echo: true
+acf(m2$residuals)
+```
+:::
+::::
+
+# VMA(q)
  
 ## VMA(q)
 
@@ -604,8 +686,8 @@ $\theta(B)=I-\theta_1 B-...- \theta_q B^q$ es el operador de medias móviles.
 ## VARMA(p,q)
 
 - Algunos paquetes de R que estiman VARMA
-  - MTS
-  - marima
+  - `MTS`
+  - `marima`
 
  
 ## En la próxima clase
@@ -615,5 +697,23 @@ $\theta(B)=I-\theta_1 B-...- \theta_q B^q$ es el operador de medias móviles.
 - Causalidad de Granger
 - Raíz unitarias
 - Procesos cointegrados
+
+## Paquetes en R
+
+Para replicar los ejemplos de esta presentación, necesitan estos paquetes:
+
+```{r}
+#| echo: true
+library(ggplot2)
+library(tidyverse)
+library(astsa)
+library(MTS)
+```
+
+
+### Referencia
+
+::: {#refs}
+:::
 
 

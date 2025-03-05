@@ -7,11 +7,12 @@
 <link href="presentacion1_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="presentacion1_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="presentacion1_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="presentacion1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="presentacion1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="presentacion1_files/libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Shu Wei Chou Chen">
-  <title>Tema 2: Análisis multivariado de series temporales-1</title>
+  <title>Tema 2: Análisis multivariado de series temporales(1)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="presentacion1_files/libs/revealjs/dist/theme/quarto.css">
   <link href="presentacion1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -244,7 +310,6 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
-      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -327,125 +392,297 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Tema 2: Análisis multivariado de series temporales-1</h1>
-  <p class="subtitle">Curso: Tópicos Avanzados de Series Temporales</p>
+  <h1 class="title">Tema 2: Análisis multivariado de series temporales<sup>(1)</sup></h1>
+  <p class="subtitle"><a href="https://shuwei325.github.io/SP2600-I25">Curso: Tópicos Avanzados de Series Temporales</a></p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Shu Wei Chou Chen 
+<a href="https://shuwei325.github.io">Shu Wei Chou Chen</a> <a href="https://orcid.org/0000-0001-5495-2486" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
 </div>
 <div class="quarto-title-author-email">
 <a href="mailto:shuwei.chou@ucr.ac.cr">shuwei.chou@ucr.ac.cr</a>
 </div>
         <p class="quarto-title-affiliation">
+            <a href="https://www.estadistica.ucr.ac.cr/">
             Escuela de Estadística, Universidad de Costa Rica
+            </a>
           </p>
     </div>
 </div>
 
 </section>
-<section id="contenido" class="slide level2 scrollable">
-<h2>Contenido</h2>
-<ol type="1">
-<li>Introducción</li>
-<li>Modelos ARMA vectoriales</li>
-<li>Causalidad de Granger</li>
-<li>Raíz unitarias</li>
-<li>Procesos cointegrados: definición y pruebas de hipótesis para cointegración y modelos de corrección del error.</li>
+<section>
+<section id="introducción" class="title-slide slide level1 agenda-slide center">
+<h1>Introducción</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>Introducción</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Medidas de dependencia (bivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Medidas de dependencia (multivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Linealidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estimación</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Prueba de hipótesis para la correlación serial con CCM</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>VARMA(p,q)</p>
+</div></li>
 </ol>
-</section>
-<section id="introducción" class="slide level2 scrollable">
-<h2>Introducción</h2>
-<ul>
-<li><p>En la práctica, es común enfrentar situaciones en donde se presentan varias series temporales.</p></li>
-<li><p><strong>Objetivos:</strong></p></li>
-</ul>
-<ol type="1">
-<li>Estudiar la relación dinámica de las variables de interés en el tiempo.</li>
-<li>Mejorar las predicciones.</li>
-</ol>
+</div>
 </section>
 <section id="introducción-1" class="slide level2">
 <h2>Introducción</h2>
-<p><strong>Ejemplo 1: El Niño y la población de peces</strong></p>
+<ul>
+<li><p>En la práctica, es común enfrentar situaciones en donde se presentan varias series temporales.</p></li>
+<li><p><strong>Objetivos:</strong></p>
+<ol type="1">
+<li>Estudiar la relación dinámica de las variables de interés en el tiempo.</li>
+<li>Mejorar las predicciones.</li>
+</ol></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="ejemplo-1-el-niño-y-la-población-de-peces">Ejemplo 1: El Niño y la población de peces</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
 <li>Se tiene la serie ambiental de índice de oscilación del sur (SOI, Southern Oscillation Index), y la serie de número de peces nuevos (Reclutamiento) de 453 meses de 1950 a 1987.</li>
 <li>SOI mide cambios en presión relacionada a la temperatura del superficie del mar en el oceano pacífico central, el cual se calienta cada 3-7 años por el efecto El Niño.</li>
 </ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>)) </span>
+<span id="cb1-2"><a href=""></a><span class="fu">tsplot</span>(soi, <span class="at">ylab=</span><span class="st">""</span>, <span class="at">main=</span><span class="st">"SOI"</span>)</span>
+<span id="cb1-3"><a href=""></a><span class="fu">tsplot</span>(rec, <span class="at">ylab=</span><span class="st">""</span>, <span class="at">main=</span><span class="st">"Reclutamiento"</span>) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-2-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
 
-<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:40.0%"></section>
-<section id="introducción-2" class="slide level2">
-<h2>Introducción</h2>
-<p><strong>Ejemplo 2: Imagen por resonancia magnética</strong></p>
+<h3 id="ejemplo-2-imagen-por-resonancia-magnética">Ejemplo 2: Imagen por resonancia magnética</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
 <li>Un estímulo fue aplicado a cinco personas en la mano por 32 segundos y luego paró el estímulo por otros 32 segundos, sucesivamente.</li>
 <li>Durante 256 segundos, cada 2 segundos se registró la intensidad del dependiente del nivel en la sangre (BOLD, blood oxygenation-level dependent signal intensity), la cual mide áreas de activación en el celebro <span class="math inline">\((T=128)\)</span>.</li>
 </ul>
-
-<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:40.0%"></section>
-<section id="medidas-de-dependencia-caso-bivariada" class="slide level2">
-<h2>Medidas de dependencia (caso bivariada)</h2>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>)<span class="sc">+</span>.<span class="dv">5</span>, <span class="at">mgp=</span><span class="fu">c</span>(<span class="fl">1.6</span>,.<span class="dv">6</span>,<span class="dv">0</span>))  </span>
+<span id="cb2-2"><a href=""></a><span class="fu">ts.plot</span>(fmri1[,<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">ylab=</span><span class="st">"BOLD"</span>, <span class="at">xlab=</span><span class="st">""</span>, <span class="at">main=</span><span class="st">"Corteza"</span>)</span>
+<span id="cb2-3"><a href=""></a><span class="fu">ts.plot</span>(fmri1[,<span class="dv">6</span><span class="sc">:</span><span class="dv">9</span>], <span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">ylab=</span><span class="st">"BOLD"</span>, <span class="at">xlab=</span><span class="st">""</span>, <span class="at">main=</span><span class="st">"Tálamo y cerebelo"</span>)</span>
+<span id="cb2-4"><a href=""></a><span class="fu">mtext</span>(<span class="st">"Time (1 pt = 2 sec)"</span>, <span class="at">side=</span><span class="dv">1</span>, <span class="at">line=</span><span class="dv">2</span>) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-3-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="medidas-de-dependencia-bivariada" class="title-slide slide level1 agenda-slide center">
+<h1>Medidas de dependencia (bivariada)</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Introducción</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Medidas de dependencia (bivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Medidas de dependencia (multivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Linealidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estimación</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Prueba de hipótesis para la correlación serial con CCM</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>VARMA(p,q)</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="medidas-de-dependencia-bivariada-1" class="slide level2">
+<h2>Medidas de dependencia (bivariada)</h2>
 <ul>
-<li>Recuerde que <strong>la función de autocorrelación</strong> es definida por</li>
+<li>Recuerde que <span class="alert">la función de autocorrelación</span> es definida por</li>
 </ul>
 <p><span class="math display">\[\rho_X(t,s)=\frac{\gamma(t,s)}{\sqrt{\gamma(t,t)\gamma(s,s)}}\]</span></p>
 <ul>
-<li><p>Se puede generalizar estas medidas a dos series <span class="math inline">\(X_t\)</span> y <span class="math inline">\(Y_t\)</span>. Defina:</p></li>
-<li><p><strong>la función de autocovariancia cruzada</strong>:</p></li>
+<li>Se puede generalizar estas medidas a dos series <span class="math inline">\(X_t\)</span> y <span class="math inline">\(Y_t\)</span>. Defina <span class="alert">la función de autocovariancia cruzada</span>:</li>
 </ul>
 <p><span class="math display">\[\gamma_{XY}(t,s)= Cov(X_t,Y_s) =E\left[ (X_t-\mu_{Xt})(Y_s-\mu_{Ys}) \right]\]</span></p>
 <ul>
-<li><strong>la función de autocorrelación cruzada</strong>:</li>
+<li><span class="alert">la función de autocorrelación cruzada</span>:</li>
 </ul>
 <p><span class="math display">\[\rho_{XY}(t,s)= \frac{\gamma_{XY}(t,s)}{\sqrt{\gamma_{X}(t,t)\gamma_{Y}(s,s)}}\]</span></p>
 </section>
-<section id="estacionariedad-conjuntacaso-bivariada" class="slide level2">
-<h2>Estacionariedad conjunta(caso bivariada)</h2>
-<p><strong>Definición:</strong> Dos series temporales, <span class="math inline">\(X_t\)</span> y <span class="math inline">\(Y_t\)</span> se dicen que son <strong>conjuntamente estacionarias</strong> si cada serie es estacionaria, y la función de covariancia cruzada</p>
+<section class="slide level2">
+
+<div id="def-estacionariedadconjunta1" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 1 (Estacionariedad conjunta (bivariada))</strong></span> Dos series temporales, <span class="math inline">\(X_t\)</span> y <span class="math inline">\(Y_t\)</span> se dicen que son <span class="alert">conjuntamente estacionarias</span>, si cada serie es estacionaria, y la función de covariancia cruzada</p>
 <p><span class="math display">\[\gamma_{XY}(h)= Cov(X_{t+h},Y_t) =E\left[ (X_{t+h}-\mu_{X})(Y_t-\mu_{Y}) \right]\]</span> es una función que solamente depende de <span class="math inline">\(h\)</span>.</p>
+</div>
 <p>De esta forma, podemos definir la función de correlación cruzada de dos series temporales conjuntamente estacionarias por <span class="math display">\[\rho_{XY}(h)=\frac{\gamma_{XY}(h)}{\sqrt{\gamma_X(0),\gamma_Y(0)}}\]</span></p>
-<p><strong>Propiedades:</strong> - <span class="math inline">\(-1 \leq \rho_{XY}(h) \leq 1\)</span> - <span class="math inline">\(\rho_{XY}(h) \neq \rho_{XY}(-h)\)</span> pues <span class="math inline">\(Cov(X_2,Y_1)\)</span> y <span class="math inline">\(Cov(X_1,Y_2)\)</span> no siempre son iguales. - <span class="math inline">\(\rho_{XY}(h) = \rho_{YX}(-h)\)</span></p>
+<p><strong>Propiedades:</strong></p>
+<ul>
+<li><span class="math inline">\(-1 \leq \rho_{XY}(h) \leq 1\)</span></li>
+<li><span class="math inline">\(\rho_{XY}(h) \neq \rho_{XY}(-h)\)</span> pues <span class="math inline">\(Cov(X_2,Y_1)\)</span> y <span class="math inline">\(Cov(X_1,Y_2)\)</span> no siempre son iguales.</li>
+<li><span class="math inline">\(\rho_{XY}(h) = \rho_{YX}(-h)\)</span></li>
+</ul>
 </section>
 <section id="estimación" class="slide level2">
 <h2>Estimación</h2>
 <ul>
-<li><strong>la función de autocovariancia cruzada muestral</strong> es definida por <span class="math display">\[\hat{\gamma}_{XY}(h)=\frac{1}{T}\sum_{t=1}^{T-h} (X_{t+h}-\bar{X})(Y_{t}-\bar{Y}),\]</span></li>
+<li><span class="alert">la función de autocovariancia cruzada muestral</span> es definida por <span class="math display">\[\hat{\gamma}_{XY}(h)=\frac{1}{T}\sum_{t=1}^{T-h} (X_{t+h}-\bar{X})(Y_{t}-\bar{Y}),\]</span></li>
 </ul>
 <p>Note que <span class="math inline">\(\hat{\gamma}_{XY}(-h)=\hat{\gamma}_{YX}(h)\)</span> para <span class="math inline">\(h=0,1,...,T-1\)</span>.</p>
 <ul>
-<li><strong>La función de autocorrelación cruzada muestral</strong> es definida por <span class="math display">\[\hat{\rho}_{XY}(h)=\frac{\hat{\gamma}_{XY}(h)}{\sqrt{\hat{\gamma}_X(0)\hat{\gamma}_Y(0)}}\]</span> <strong>Propiedad:</strong> La distribución de <span class="math inline">\(\hat{\rho}_{XY}(h)\)</span> para <span class="math inline">\(T\)</span> grande es aproximadamente normal con media cero y <span class="math display">\[\sigma_{\hat{\rho}_{XY}}=\frac{1}{\sqrt{T}}.\]</span></li>
+<li><span class="alert">La función de autocorrelación cruzada muestral</span> es definida por <span class="math display">\[\hat{\rho}_{XY}(h)=\frac{\hat{\gamma}_{XY}(h)}{\sqrt{\hat{\gamma}_X(0)\hat{\gamma}_Y(0)}}\]</span> <strong>Propiedad:</strong> La distribución de <span class="math inline">\(\hat{\rho}_{XY}(h)\)</span> para <span class="math inline">\(T\)</span> grande es aproximadamente normal con media cero y <span class="math display">\[\sigma_{\hat{\rho}_{XY}}=\frac{1}{\sqrt{T}}.\]</span></li>
 </ul>
 </section>
-<section id="ejemplo-1-el-niño-y-la-población-de-peces" class="slide level2">
+<section id="ejemplo-1-el-niño-y-la-población-de-peces-1" class="slide level2">
 <h2>Ejemplo 1: El Niño y la población de peces</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
 <li>Se tiene la serie ambiental de índice de oscilación del sur (SOI, Southern Oscillation Index), y la serie de número de peces nuevos (Reclutamiento) de 453 meses de 1950 a 1987.</li>
 <li>SOI mide cambios en presión relacionada a la temperatura del superficie del mar en el oceano pacífico central, el cual se calienta cada 3-7 años por el efecto El Niño.</li>
 </ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>)) </span>
+<span id="cb3-2"><a href=""></a><span class="fu">tsplot</span>(soi, <span class="at">ylab=</span><span class="st">""</span>, <span class="at">main=</span><span class="st">"SOI"</span>)</span>
+<span id="cb3-3"><a href=""></a><span class="fu">tsplot</span>(rec, <span class="at">ylab=</span><span class="st">""</span>, <span class="at">main=</span><span class="st">"Reclutamiento"</span>) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-4-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
 
-<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:40.0%"></section>
-<section id="ejemplo-el-niño-y-la-población-de-peces" class="slide level2">
-<h2>Ejemplo: El Niño y la población de peces</h2>
-<p><strong>Gráfico de dispersión de series rezagadas</strong></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>(<span class="at">r =</span> <span class="fu">round</span>(<span class="fu">acf</span>(soi, <span class="dv">6</span>, <span class="at">plot=</span><span class="cn">FALSE</span>)<span class="sc">$</span>acf[<span class="sc">-</span><span class="dv">1</span>], <span class="dv">3</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  0.604  0.374  0.214  0.050 -0.107 -0.187</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>(<span class="at">r =</span> <span class="fu">round</span>(<span class="fu">acf</span>(rec, <span class="dv">6</span>, <span class="at">plot=</span><span class="cn">FALSE</span>)<span class="sc">$</span>acf[<span class="sc">-</span><span class="dv">1</span>], <span class="dv">3</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.922 0.783 0.627 0.477 0.355 0.259</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb8-2"><a href=""></a><span class="fu">plot</span>(<span class="fu">lag</span>(soi,<span class="sc">-</span><span class="dv">1</span>), soi); <span class="fu">legend</span>(<span class="st">'topleft'</span>, <span class="at">legend=</span>r[<span class="dv">1</span>],<span class="at">cex=</span><span class="fl">0.5</span> )</span>
+<span id="cb8-3"><a href=""></a><span class="fu">plot</span>(<span class="fu">lag</span>(soi,<span class="sc">-</span><span class="dv">6</span>), soi); <span class="fu">legend</span>(<span class="st">'topleft'</span>, <span class="at">legend=</span>r[<span class="dv">6</span>],<span class="at">cex=</span><span class="fl">0.5</span>)</span>
+<span id="cb8-4"><a href=""></a></span>
+<span id="cb8-5"><a href=""></a><span class="fu">plot</span>(<span class="fu">lag</span>(rec,<span class="sc">-</span><span class="dv">1</span>), rec); <span class="fu">legend</span>(<span class="st">'topleft'</span>, <span class="at">legend=</span>r[<span class="dv">1</span>],<span class="at">cex=</span><span class="fl">0.5</span>)</span>
+<span id="cb8-6"><a href=""></a><span class="fu">plot</span>(<span class="fu">lag</span>(rec,<span class="sc">-</span><span class="dv">6</span>), rec); <span class="fu">legend</span>(<span class="st">'topleft'</span>, <span class="at">legend=</span>r[<span class="dv">6</span>],<span class="at">cex=</span><span class="fl">0.5</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-6-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
 
-<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%"></section>
-<section id="ejemplo-el-niño-y-la-población-de-peces-1" class="slide level2">
-<h2>Ejemplo: El Niño y la población de peces:</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb9-2"><a href=""></a><span class="fu">acf1</span>(soi, <span class="dv">48</span>, <span class="at">main=</span><span class="st">"SOI"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  0.60  0.37  0.21  0.05 -0.11 -0.19 -0.18 -0.10  0.05  0.22  0.36  0.41
+[13]  0.31  0.10 -0.06 -0.17 -0.29 -0.37 -0.32 -0.19 -0.04  0.15  0.31  0.35
+[25]  0.25  0.10 -0.03 -0.16 -0.28 -0.37 -0.32 -0.16 -0.02  0.17  0.33  0.39
+[37]  0.30  0.16  0.00 -0.13 -0.24 -0.27 -0.25 -0.13  0.06  0.21  0.38  0.40</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">acf1</span>(rec, <span class="dv">48</span>, <span class="at">main=</span><span class="st">"Recrutamiento"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%"></section>
-<section id="ejemplo-el-niño-y-la-población-de-peces-2" class="slide level2">
-<h2>Ejemplo: El Niño y la población de peces</h2>
-<p><strong>Gráfico de dispersión de REC contra SOI rezagadas</strong></p>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  0.92  0.78  0.63  0.48  0.36  0.26  0.18  0.13  0.09  0.07  0.06  0.02
+[13] -0.04 -0.12 -0.19 -0.24 -0.27 -0.27 -0.24 -0.19 -0.11 -0.03  0.03  0.06
+[25]  0.06  0.02 -0.02 -0.06 -0.09 -0.12 -0.13 -0.11 -0.05  0.02  0.08  0.12
+[37]  0.10  0.06  0.01 -0.02 -0.03 -0.03 -0.02  0.01  0.06  0.12  0.17  0.20</code></pre>
+</div>
+</div>
+<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-7-1.png" width="480" class="r-stretch"></section>
+<section class="slide level2">
 
-<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%"></section>
-<section id="ejemplo-el-niño-y-la-población-de-peces-3" class="slide level2">
-<h2>Ejemplo: El Niño y la población de peces:</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">lag2.plot</span> (soi, rec, <span class="dv">8</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:50.0%"></section>
-<section id="ejemplo-el-niño-y-la-población-de-peces-4" class="slide level2">
-<h2>Ejemplo: El Niño y la población de peces:</h2>
-<div class="cell" data-layout-align="center">
+</div>
+<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-8-1.png" width="480" class="r-stretch quarto-figure-center"><p class="caption">Gráfico de dispersión de REC contra SOI rezagadas</p></section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb14-2"><a href=""></a><span class="fu">ccf2</span>(rec,soi, <span class="dv">36</span>, <span class="at">main=</span><span class="st">"función de correlación cruzada de Rec. contra SOI"</span>)</span>
+<span id="cb14-3"><a href=""></a><span class="fu">ccf2</span>(soi,rec, <span class="dv">36</span>, <span class="at">main=</span><span class="st">"función de correlación cruzada de SOI contra Rec."</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-9-1.png" width="480" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>(<span class="at">r1=</span><span class="fu">ccf</span>(rec,soi, <span class="dv">5</span>, <span class="at">plot=</span><span class="cn">FALSE</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Autocorrelations of series 'X', by lag
@@ -455,6 +692,7 @@ Autocorrelations of series 'X', by lag
  0.4167 
  -0.527 </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>(<span class="at">r2=</span><span class="fu">ccf</span>(soi,rec, <span class="dv">5</span>, <span class="at">plot=</span><span class="cn">FALSE</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Autocorrelations of series 'X', by lag
@@ -468,53 +706,156 @@ Autocorrelations of series 'X', by lag
 <ul>
 <li>Note que <span class="math inline">\(\hat{\rho}_{XY}(h) = \hat{\rho}_{YX}(-h)\)</span>.</li>
 </ul>
+</section></section>
+<section>
+<section id="medidas-de-dependencia-multivariada" class="title-slide slide level1 agenda-slide center">
+<h1>Medidas de dependencia (multivariada)</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Introducción</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de dependencia (bivariada)</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Medidas de dependencia (multivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Linealidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estimación</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Prueba de hipótesis para la correlación serial con CCM</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>VARMA(p,q)</p>
+</div></li>
+</ol>
+</div>
 </section>
-<section id="medidas-de-dependencia-caso-k-variada" class="slide level2">
-<h2>Medidas de dependencia (caso k-variada)</h2>
+<section id="medidas-de-dependencia-multivariada-1" class="slide level2">
+<h2>Medidas de dependencia (multivariada)</h2>
 <p>La generalización a series temporales multivariadas con <span class="math inline">\(k\)</span> componentes, <span class="math inline">\(X_{t1},...X_{tk}, t=1,...,T\)</span>, es intuitivo:</p>
 <ul>
-<li><strong>la función de autocovariancia cruzada</strong>:</li>
+<li><p><span class="alert">El vector de medias</span> es función del tiempo <span class="math inline">\(t\)</span>: <span class="math display">\[\mu_t=E(X_t)=\left(\begin{array}{c} \mu_{t1}\\ \vdots \\ \mu_{tk} \end{array}\right).\]</span></p></li>
+<li><p><span class="alert">La función de autocovariancia cruzada</span>:</p></li>
 </ul>
-<p><span class="math display">\[\gamma_{ij}(t,s)= Cov(X_{ti},X_{sj}) =E\left[ (X_{ti}-\mu_{it})(X_{sj}-\mu_{js}) \right]\]</span> para <span class="math inline">\(i,j=1,...,k.\)</span></p>
+<p><span class="math display">\[\gamma_{ij}(t,s)= Cov(X_{ti},X_{sj}) =E\left[ (X_{ti}-\mu_{ti})(X_{sj}-\mu_{sj}) \right]\]</span> para <span class="math inline">\(i,j=1,...,k.\)</span></p>
 </section>
-<section id="estacionariedad-conjunta-caso-k-variada" class="slide level2">
-<h2>Estacionariedad conjunta (caso k-variada)</h2>
+<section class="slide level2">
+
 <ul>
-<li><p>Sea <span class="math inline">\(X_t=(X_{t1},...,X_{tk})'\)</span> un vector <span class="math inline">\(k \times 1\)</span> de series temporales. Se dice que <span class="math inline">\(X_t\)</span> es (débilmente) estacionario si el vector de medias es constante en el tiempo <span class="math display">\[\mu=E(X_t)=\left(\begin{array}{c} \mu_1\\ \vdots \\ \mu_k \end{array}\right)\]</span></p></li>
-<li><p>Y la matriz de autocovariancia depende únicamente del rezago <span class="math inline">\(h\)</span>, i.e. <span class="math display">\[\Gamma(h)= E[(X_{t+h}-\mu)(X_{t}-\mu)' ]\]</span> donde los elementos de la matriz son funciones de covariancia cruzada, <span class="math inline">\(\gamma_{ij}(h)= Cov(X_{t+h,i},X_{t,j}) =E\left[ (X_{t+h,i}-\mu_{i})(X_{tj}-\mu_{j}) \right]\)</span> para <span class="math inline">\(i,j=1,...,k\)</span>.</p></li>
-<li><p>Note que como <span class="math inline">\(\gamma_{ij}(h)=\gamma_{ji}(-h)\)</span>, entonces</p></li>
+<li>O bien, <span class="alert">la matriz de autocovariancias</span>: <span class="math display">\[\Gamma(t,s)= E[(X_{t}-\mu_{t})(X_{s}-\mu_s)']=E\left[ \left(  \begin{array}{c} X_{t1}-\mu_{t1}\\\vdots \\X_{tk}-\mu_{tk} \end{array} \right) \left( X_{t1}-\mu_{t1},\dots ,X_{tk}-\mu_{tk}  \right) \right]\]</span></li>
+</ul>
+<p><span class="math display">\[= E\left(  \begin{array}{c} (X_{t1}-\mu_{t1})^2 &amp; \dots &amp; (X_{t1}-\mu_{t1})(X_{tk}-\mu_{tk})\\ \vdots &amp; \ddots &amp; \vdots \\(X_{tk}-\mu_{tk})(X_{t1}-\mu_{t1}) &amp; \dots &amp; (X_{tk}-\mu_{tk})^2 \end{array} \right).\]</span></p>
+</section></section>
+<section>
+<section id="estacionariedad" class="title-slide slide level1 agenda-slide center">
+<h1>Estacionariedad</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Introducción</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de dependencia (bivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de dependencia (multivariada)</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Linealidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estimación</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Prueba de hipótesis para la correlación serial con CCM</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>VARMA(p,q)</p>
+</div></li>
+</ol>
+</div>
+<div id="def-estacionariedadconjunta2" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2 (Estacionariedad débil)</strong></span> Sea <span class="math inline">\(X_t=(X_{t1},...,X_{tk})'\)</span> un vector <span class="math inline">\(k \times 1\)</span> de series temporales. Se dice que <span class="math inline">\(X_t\)</span> es <span class="alert">débilmente estacionario</span> si:</p>
+<ul>
+<li><p>El vector de medias es constante en el tiempo <span class="math display">\[\mu=E(X_t)=\left(\begin{array}{c} \mu_1\\ \vdots \\ \mu_k \end{array}\right)\]</span></p></li>
+<li><p>Y la matriz de autocovariancia depende únicamente del rezago <span class="math inline">\(h\)</span>, i.e. <span class="math display">\[\Gamma(h)= E[(X_{t+h}-\mu)(X_{t}-\mu)']\]</span> donde los elementos de la matriz son funciones de covariancia cruzada, <span class="math inline">\(\gamma_{ij}(h)= Cov(X_{t+h,i},X_{t,j}) =E\left[ (X_{t+h,i}-\mu_{i})(X_{tj}-\mu_{j}) \right]\)</span> para <span class="math inline">\(i,j=1,...,k\)</span>.</p></li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Note que como <span class="math inline">\(\gamma_{ij}(h)=\gamma_{ji}(-h)\)</span>, entonces</li>
 </ul>
 <p><span class="math display">\[\Gamma(-h)=\Gamma'(h)\]</span></p>
-</section>
-<section id="estacionariedad-conjunta-caso-k-variada-1" class="slide level2">
-<h2>Estacionariedad conjunta (caso k-variada)</h2>
 <ul>
 <li><p>la matriz de autocorrelaciones también depende únicamente del rezago <span class="math inline">\(h\)</span>, i.e. <span class="math display">\[\boldsymbol{\rho}(h)= D^{-1}\Gamma(h) D^{-1}=\left[ \rho_{h,ij} \right]\]</span> donde <span class="math inline">\(D=diag\left\lbrace \sigma_1,...,\sigma_k \right\rbrace\)</span> es la matriz diagonal de desviaciones estándares de los componentes de <span class="math inline">\(X_t\)</span>.</p></li>
 <li><p>Al igual que <span class="math inline">\(\Gamma(h)\)</span>, se tiene que <span class="math display">\[\boldsymbol{\rho}(-h)=\boldsymbol{\rho}'(h)\]</span></p></li>
 </ul>
 </section>
-<section id="estacionariedad-estricta-conjunta" class="slide level2">
-<h2>Estacionariedad estricta conjunta</h2>
+<section id="estacionariedad-estricta" class="slide level2">
+<h2>Estacionariedad estricta</h2>
+<div id="def-estacionariedadconjunta3" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 3 (Estacionariedad estricta)</strong></span> Sea <span class="math inline">\(X_t=(X_{t1},...,X_{tk})'\)</span> un vector <span class="math inline">\(k \times 1\)</span> de series temporales. Se dice que <span class="math inline">\(X_t\)</span> es estrictamente estacionario, si la distribución conjunta multivariada de una colección de m tiempos: <span class="math display">\[\left\lbrace X_{t_1},...,X_{t_m} \right\rbrace\]</span> es igual a <span class="math display">\[\left\lbrace X_{t_1+h},...,X_{t_m+h} \right\rbrace\]</span> donde <span class="math inline">\(m,j\)</span> y <span class="math inline">\(t_1,...,t_m\)</span> son enteros positivos arbitrarios.</p>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Nota</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li><p>Sea <span class="math inline">\(X_t=(X_{t1},...,X_{tk})'\)</span> un vector <span class="math inline">\(k \times 1\)</span> de series temporales. Se dice que <span class="math inline">\(X_t\)</span> es estrictamente estacionario si la distribución conjunta multivariada de una colección de m tiempos: <span class="math display">\[\left\lbrace X_{t_1},...,X_{t_m} \right\rbrace\]</span> es igual a <span class="math display">\[\left\lbrace X_{t_1+h},...,X_{t_m+h} \right\rbrace\]</span> donde <span class="math inline">\(m,j\)</span> y <span class="math inline">\((t_1,...,t_m)\)</span> son enteros positivos arbitrarios.</p></li>
-<li><p>Una serie temporal estrictamente estacionaria es débilmente estacionaria, si sus primeros dos momentos existen.</p></li>
+<li>Una serie temporal estrictamente estacionaria es débilmente estacionaria, si sus primeros dos momentos existen.</li>
 </ul>
+</div>
+</div>
+</div>
 </section>
 <section id="ruido-blanco" class="slide level2">
 <h2>Ruido blanco</h2>
+<div id="def-wn" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 4 (Ruido blanco)</strong></span> &nbsp;</p>
 <ul>
-<li><p>Es una colección de variables aleatorias no correlacionadas, <span class="math inline">\(a_t\)</span>, con media <span class="math inline">\(0\)</span> y matriz de covariancias <span class="math inline">\(\Sigma_a\)</span>.</p></li>
+<li><p>Es una colección de vectores de variables aleatorias no correlacionadas, <span class="math inline">\(a_t\)</span>, con media <span class="math inline">\(0\)</span> y matriz de covariancias <span class="math inline">\(\Sigma_a\)</span>.</p></li>
 <li><p>Denotado por <span class="math inline">\(a_t \sim wn(0,\Sigma_a)\)</span>.</p></li>
 <li><p>Si una secuencia de variables es i.i.d., i.e.&nbsp;<span class="math inline">\(a_t \sim iid(0,\Sigma_a)\)</span>, entonces <span class="math inline">\(a_t \sim wn(0,\Sigma_a)\)</span>.</p></li>
 <li><p>Sin embargo, si un ruido blanco es Gaussiano, entonces <span class="math inline">\(a_t \overset{iid}{\sim} N(0,\Sigma_a)\)</span>.</p></li>
 </ul>
+</div>
 </section>
-<section id="ruido-blanco-1" class="slide level2">
-<h2>Ruido blanco</h2>
+<section class="slide level2">
+
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li><p>Considere un ruido blanco Gaussiano: <span class="math display">\[a_t \sim N\left(0,
+<li><p>Considere un ruido blanco Gaussiano: <span class="math display">\[a_t \sim N\left( \left( \begin{array}{c} 0\\ 0 \end{array}\right)   ,
 \begin{bmatrix}1.5 &amp; 0.8 \\
 0.8 &amp; 1
 \end{bmatrix} \right).\]</span></p></li>
@@ -522,8 +863,8 @@ Autocorrelations of series 'X', by lag
 \begin{aligned}
 \begin{bmatrix}1.5 &amp; 0.8 \\
 0.8 &amp; 1
-\end{bmatrix}  &amp; &amp; h = 0 \\
-0, &amp; &amp;  h \neq 0,
+\end{bmatrix}  &amp; &amp; h = 0, \\
+0, &amp; &amp;  h \neq 0.
 \end{aligned}
 \right.\]</span></p></li>
 </ul>
@@ -532,38 +873,83 @@ Autocorrelations of series 'X', by lag
 <li>Simulación con <span class="math inline">\(T=500\)</span>.</li>
 </ul>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a>aa<span class="ot">&lt;-</span><span class="fu">mvrnorm</span>(<span class="at">n =</span> <span class="dv">500</span>, <span class="at">mu=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">Sigma=</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">1.5</span>,<span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="dv">1</span>),<span class="at">nrow=</span><span class="dv">2</span>))</span>
+<span id="cb19-2"><a href=""></a><span class="fu">colnames</span>(aa)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"a1"</span>,<span class="st">"a2"</span>)</span>
+<span id="cb19-3"><a href=""></a>aa<span class="ot">&lt;-</span><span class="fu">data.frame</span>(aa)</span>
+<span id="cb19-4"><a href=""></a><span class="fu">tsplot</span>(aa)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-10-1.png" style="width:90.0%"></p>
+<p><img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-11-1.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="ruido-blanco-2" class="slide level2">
-<h2>Ruido blanco</h2>
+<section class="slide level2">
 
-<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%"></section>
-<section id="linealidad" class="slide level2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>stats<span class="sc">::</span><span class="fu">acf</span>(aa)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-12-1.png" width="480" class="r-stretch"></section></section>
+<section>
+<section id="linealidad" class="title-slide slide level1 agenda-slide center">
+<h1>Linealidad</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Introducción</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de dependencia (bivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de dependencia (multivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Linealidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estimación</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Prueba de hipótesis para la correlación serial con CCM</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>VARMA(p,q)</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="linealidad-1" class="slide level2">
 <h2>Linealidad</h2>
 <ul>
 <li><p>En la práctica, la mayoría de las series temporales multivariadas no son lineales pero pueden ser aproximada por modelos lineales.</p></li>
-<li><p>Defina el modelo lineal (multivariado):</p></li>
+<li><p>Defina <span class="alert">el modelo lineal (multivariado)</span>:</p></li>
 </ul>
-<p><span class="math display">\[X_t=\mu+\sum_{i=0}^\infty \psi_i a_{t-i}=\mu+ a_{t}+\sum_{i=1}^\infty \psi_i a_{t-i}\]</span> donde <span class="math inline">\(\mu\)</span> es un vector constante, <span class="math inline">\(\psi_0=I_k\)</span> es una matriz de identidad de <span class="math inline">\(k\times k\)</span>, <span class="math inline">\(\psi_i,~i&gt;0\)</span> matrices constantes, y <span class="math inline">\(\left\lbrace a_{t}\right\rbrace\)</span>, denominado como <strong>innovación</strong>, es una secuencia de i.i.d. vectores aleatorias con media 0 y matriz de covariancias <span class="math inline">\(\Sigma_a\)</span>, una matriz definitva positiva.</p>
+<p><span class="math display">\[X_t=\mu+\sum_{i=0}^\infty \psi_i a_{t-i}=\mu+ a_{t}+\sum_{i=1}^\infty \psi_i a_{t-i}\]</span> donde <span class="math inline">\(\mu\)</span> es un vector constante, <span class="math inline">\(\psi_0=I_k\)</span> es una matriz de identidad de <span class="math inline">\(k\times k\)</span>, <span class="math inline">\(\psi_i,~i=0,1,...\)</span> matrices constantes, y <span class="math inline">\(\left\lbrace a_{t}\right\rbrace\)</span>, denominado como <span class="alert">innovación</span>, es una secuencia de i.i.d. vectores aleatorias con media 0 y matriz de covariancias <span class="math inline">\(\Sigma_a\)</span>, una matriz definitva positiva.</p>
 <ul>
 <li>El modelo lineal también se puede escribir como:
 <ul>
 <li><span class="math inline">\(X_t=\mu+ a_{t} + \psi_1 a_{t-1}+ \psi_2 a_{t-2} + \dots\)</span></li>
 <li><span class="math inline">\(X_t=\mu+\psi(B) a_{t}\)</span>,<br>
-donde <span class="math inline">\(\psi(B)=1+\psi_1 B+\psi_2 B^2+\dots\)</span> es el polinomio de medias móviles de orden infinito.</li>
+donde <span class="math inline">\(\psi(B)=1+\psi_1 B+\psi_2 B^2+\dots\)</span> es el <span class="alert">polinomio de medias móviles de orden infinito</span> y <span class="math inline">\(1\)</span> se entiende como <span class="math inline">\(I_k\)</span>.</li>
 </ul></li>
 </ul>
 </section>
-<section id="linealidad-1" class="slide level2">
-<h2>Linealidad</h2>
+<section class="slide level2">
+
 <ul>
 <li>Un modelo lineal es estacionario si los componentes <span class="math inline">\(\psi_i\)</span> es absolutamente sumable, i.e.</li>
 </ul>
@@ -573,46 +959,126 @@ donde <span class="math inline">\(\psi(B)=1+\psi_1 B+\psi_2 B^2+\dots\)</span> e
 <li><p>Y tenemos que si <span class="math inline">\(X_t\)</span> es estacionario, entonces <span class="math display">\[E(X_t)=\mu,~~ \Gamma(h)=\sum_{i=0}^\infty \psi_{i+h} \Sigma_a \psi_i'\]</span></p></li>
 <li><p>Similar al caso univariado, tanto AR, MA y ARMA forman casos particulares de un modelo lineal.</p></li>
 </ul>
+</section></section>
+<section>
+<section id="invertibilidad" class="title-slide slide level1 agenda-slide center">
+<h1>Invertibilidad</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Introducción</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de dependencia (bivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de dependencia (multivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Linealidad</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Estimación</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Prueba de hipótesis para la correlación serial con CCM</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>VARMA(p,q)</p>
+</div></li>
+</ol>
+</div>
 </section>
-<section id="invertibilidad" class="slide level2">
+<section id="invertibilidad-1" class="slide level2">
 <h2>Invertibilidad</h2>
 <ul>
 <li><p>El interés es expresar una serie tepmoral <span class="math inline">\(X_t\)</span> en término de sus valores pasados <span class="math inline">\(X_{t-i}\)</span> para <span class="math inline">\(i&gt;0\)</span>.</p></li>
-<li><p>Una serie temporal <span class="math inline">\(X_t\)</span> es invertible si se puede expresar como: <span class="math display">\[X_t=c+a_t+\sum_{j=0}^\infty \pi_j X_{t-j}\]</span> donde <span class="math inline">\(c\)</span> es un vector constante, <span class="math inline">\(\pi_j,~j&gt;0\)</span> matrices constantes <span class="math inline">\(k\times k\)</span>, y <span class="math inline">\(\left\lbrace a_{t}\right\rbrace\)</span> es una secuencia de i.i.d. vectores aleatorias con media 0 y matriz de covariancias <span class="math inline">\(\Sigma_a\)</span>.</p></li>
+<li><p>Una serie temporal <span class="math inline">\(X_t\)</span> es <span class="alert">invertible</span> si se puede expresar como: <span class="math display">\[X_t=c+a_t+\sum_{j=0}^\infty \pi_j X_{t-j}\]</span> donde <span class="math inline">\(c\)</span> es un vector constante, <span class="math inline">\(\pi_j,~j&gt;0\)</span> matrices constantes <span class="math inline">\(k\times k\)</span>, y <span class="math inline">\(\left\lbrace a_{t}\right\rbrace \sim wn(0,\Sigma_a)\)</span>.</p></li>
 <li><p>Un modelo invertible también se puede expresar como:</p>
 <ul>
 <li><span class="math inline">\(X_t-\sum\limits_{j=0}^\infty \pi_j X_{t-j}=c+a_t\)</span>, o</li>
 <li><span class="math inline">\(\pi(B)X_t =c+a_t\)</span>,<br>
-donde <span class="math inline">\(\pi(B)=1-\sum\limits_{j=0}^\infty \pi_j B\)</span> es el polinomio autorregresivo de orden infinito.</li>
+donde <span class="math inline">\(\pi(B)=1-\sum\limits_{j=0}^\infty \pi_j B\)</span> es el <span class="alert">polinomio autorregresivo de orden infinito</span>.</li>
 </ul></li>
 </ul>
+</section></section>
+<section>
+<section id="estimación-1" class="title-slide slide level1 agenda-slide center">
+<h1>Estimación</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Introducción</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de dependencia (bivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de dependencia (multivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Linealidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Estimación</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Prueba de hipótesis para la correlación serial con CCM</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>VARMA(p,q)</p>
+</div></li>
+</ol>
+</div>
 </section>
 <section id="estimación-de-matrices-de-covariancia-cruzada-y-correlación-cruzada" class="slide level2">
 <h2>Estimación de matrices de covariancia cruzada y correlación cruzada</h2>
 <ul>
-<li><p><strong>la matriz de covariancia cruzada muestral</strong> es definida por <span class="math display">\[\hat{\Gamma}(h)=\frac{1}{T}\sum_{t=1}^{T-h} (X_{t+h}-\bar{X})(X_{t}-\bar{X})',\]</span> donde <span class="math inline">\(\bar{X}=\frac{1}{T}\sum\limits_{t=1}^{T} X_{t}\)</span> es el vector de media muestral.</p></li>
-<li><p><strong>la matriz de correlación cruzada muestral (CCM)</strong> es definida por</p></li>
+<li><p>La <span class="alert">matriz de covariancia cruzada muestral</span> es definida por <span class="math display">\[\hat{\Gamma}(h)=\frac{1}{T}\sum_{t=1}^{T-h} (X_{t+h}-\bar{X})(X_{t}-\bar{X})',\]</span> donde <span class="math inline">\(\bar{X}=\frac{1}{T}\sum\limits_{t=1}^{T} X_{t}\)</span> es el vector de media muestral.</p></li>
+<li><p>La <span class="alert">matriz de correlación cruzada muestral (CCM)</span> es definida por</p></li>
 </ul>
-<p><span class="math display">\[\hat{\boldsymbol{\rho}}(h)= \hat{D}^{-1}\hat{\Gamma}(h) \hat{D}^{-1}\]</span> donde <span class="math inline">\(\hat{D}=diag\left\lbrace \hat{\gamma}_{0,11}^{1/2},...,\hat{\gamma}_{0,kk}^{1/2} \right\rbrace\)</span> y <span class="math inline">\(\hat{\gamma}_{0,ii}\)</span> es el i-ésimo elemento de <span class="math inline">\(\hat{\Gamma(0)}\)</span>.</p>
+<p><span class="math display">\[\hat{\boldsymbol{\rho}}(h)= \hat{D}^{-1}\hat{\Gamma}(h) \hat{D}^{-1}\]</span> donde <span class="math inline">\(\hat{D}=diag\left\lbrace \hat{\gamma}_{0,11}^{1/2},...,\hat{\gamma}_{0,kk}^{1/2} \right\rbrace\)</span> con <span class="math inline">\(\left\lbrace\hat{\gamma}_{0,ii}\right\rbrace\)</span> es el i-ésimo elemento de la diagonal de <span class="math inline">\(\hat{\Gamma(0)}\)</span>.</p>
 <ul>
 <li>Se puede comprobar que <span class="math inline">\(\hat{\Gamma}(-h)=\hat{\Gamma}(h)'\)</span> y <span class="math inline">\(\hat{\boldsymbol{\rho}}(-h)=\hat{\boldsymbol{\rho}}(h)'\)</span></li>
 </ul>
 </section>
-<section id="estimación-de-matrices-de-covariancia-cruzada-y-correlación-cruzada-1" class="slide level2">
-<h2>Estimación de matrices de covariancia cruzada y correlación cruzada</h2>
+<section class="slide level2">
+
 <ul>
-<li>Si <span class="math inline">\(X_t\)</span> es ruido blanco, entonces <span class="math display">\[Var(\hat{\rho}_{h,ij}) \approx \frac{1}{T},~~ h&gt;0\]</span> <span class="math display">\[Var(\hat{\rho}_{0,ij}) \approx \frac{(1-\rho_{h,ij})^2}{T},~~ i \neq j\]</span> <span class="math display">\[Cov(\hat{\rho}_{h,ij},\hat{\rho}_{-h,ij}) \approx \frac{\rho_{0,ij}^2}{T}\]</span> <span class="math display">\[Cov(\hat{\rho}_{h,ij},\hat{\rho}_{l,uv}) \approx 0, h \neq l\]</span></li>
+<li>Si <span class="math inline">\(X_t\)</span> es ruido blanco, entonces para <span class="math inline">\(T\)</span> suficientemente grande,</li>
 </ul>
+<p><span class="math display">\[Var(\hat{\rho}_{h,ij}) \approx \frac{1}{T},~~ h&gt;0\]</span></p>
+<p><span class="math display">\[Var(\hat{\rho}_{0,ij}) \approx \frac{(1-\rho_{h,ij})^2}{T},~~ i \neq j\]</span></p>
+<p><span class="math display">\[Cov(\hat{\rho}_{h,ij},\hat{\rho}_{-h,ij}) \approx \frac{\rho_{0,ij}^2}{T}\]</span></p>
+<p><span class="math display">\[Cov(\hat{\rho}_{h,ij},\hat{\rho}_{l,uv}) \approx 0, h \neq l\]</span></p>
 </section>
-<section id="estimación-de-matrices-de-covariancia-cruzada-y-correlación-cruzada-2" class="slide level2">
-<h2>Estimación de matrices de covariancia cruzada y correlación cruzada</h2>
+<section class="slide level2">
+
 <ul>
 <li><p>Si <span class="math inline">\(X_t\)</span> es VMA(q), entonces <span class="math display">\[Var(\hat{\rho}_{h,ij}) \approx \frac{1}{T} \left( 1+2\sum_{v=1}^{q} \rho_{v,ii}\rho_{v,jj} \right),~~ |h|&gt;q\]</span></p></li>
-<li><p>En la práctica, cuando k es grande, es complicado estudiar <span class="math inline">\(k^2\)</span> correlaciones cruzadas simultáneamente.</p></li>
+<li><p>En la práctica, cuando <span class="math inline">\(k\)</span> es grande, es complicado estudiar <span class="math inline">\(k^2\)</span> correlaciones cruzadas simultáneamente.</p></li>
 </ul>
 </section>
-<section id="estimación-de-matrices-de-covariancia-cruzada-y-correlación-cruzada-3" class="slide level2">
-<h2>Estimación de matrices de covariancia cruzada y correlación cruzada</h2>
+<section class="slide level2">
+
 <ul>
 <li>La matriz simplificada de CCM:</li>
 </ul>
@@ -621,7 +1087,7 @@ donde <span class="math inline">\(\pi(B)=1-\sum\limits_{j=0}^\infty \pi_j B\)</s
 <li>Nos indican cuáles son significativos a un 5% de significancia bajo el supuesto de un ruido blanco.</li>
 </ul>
 </section>
-<section id="ruido-blanco-3" class="slide level2">
+<section id="ruido-blanco-2" class="slide level2">
 <h2>Ruido blanco</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -638,34 +1104,37 @@ donde <span class="math inline">\(\pi(B)=1-\sum\limits_{j=0}^\infty \pi_j B\)</s
 0, &amp; &amp;  h \neq 0,
 \end{aligned}
 \right.\]</span></p></li>
+<li><p>Simulación con <span class="math inline">\(T=500\)</span>.</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<ul>
-<li>Simulación con <span class="math inline">\(T=500\)</span>.</li>
-</ul>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>aa<span class="ot">&lt;-</span><span class="fu">mvrnorm</span>(<span class="at">n =</span> <span class="dv">500</span>, <span class="at">mu=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">Sigma=</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">1.5</span>,<span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="dv">1</span>),<span class="at">nrow=</span><span class="dv">2</span>))</span>
+<span id="cb21-2"><a href=""></a><span class="fu">colnames</span>(aa)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"a1"</span>,<span class="st">"a2"</span>)</span>
+<span id="cb21-3"><a href=""></a>aa<span class="ot">&lt;-</span><span class="fu">data.frame</span>(aa)</span>
+<span id="cb21-4"><a href=""></a><span class="fu">tsplot</span>(aa)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-12-1.png" style="width:90.0%"></p>
+<p><img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-13-1.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="ruido-blanco-4" class="slide level2">
+<section id="ruido-blanco-3" class="slide level2 scrollable">
 <h2>Ruido blanco</h2>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>MTS<span class="sc">::</span><span class="fu">ccm</span>(aa, <span class="at">lags=</span> <span class="dv">4</span>) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Covariance matrix:"
       a1    a2
-a1 1.439 0.832
-a2 0.832 1.045
+a1 1.438 0.778
+a2 0.778 0.989
 CCM at lag:  0 
       [,1]  [,2]
-[1,] 1.000 0.678
-[2,] 0.678 1.000
+[1,] 1.000 0.652
+[2,] 0.652 1.000
 Simplified matrix: 
 CCM at lag:  1 
 . . 
@@ -674,8 +1143,8 @@ CCM at lag:  2
 . . 
 . . 
 CCM at lag:  3 
-- . 
-. . 
+. - 
+. - 
 CCM at lag:  4 
 . . 
 . . </code></pre>
@@ -683,7 +1152,7 @@ CCM at lag:  4
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+<p><img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-14-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -693,74 +1162,159 @@ CCM at lag:  4
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-13-2.png" width="960"></p>
+<p><img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-14-2.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="estimación-de-matrices-de-covariancia-cruzada-y-correlación-cruzada-4" class="slide level2">
-<h2>Estimación de matrices de covariancia cruzada y correlación cruzada</h2>
+<section class="slide level2">
+
 <ul>
 <li>Otra posibilidad es usar correlograma y función de autocorrelación cruzada.</li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a>stats<span class="sc">::</span><span class="fu">acf</span>(aa)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-14-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:50.0%"></section>
-<section id="prueba-de-hipótesis-para-la-correlación-serial-con-ccm" class="slide level2">
-<h2>Prueba de hipótesis para la correlación serial con CCM</h2>
-<ul>
-<li>Al igual que el caso univariado, se plantean las hipótesis:</li>
-</ul>
-<p><span class="math inline">\(H_0: \boldsymbol{\Gamma}_1=...=\boldsymbol{\Gamma}_m=0\)</span><br>
-<span class="math inline">\(H_1: \boldsymbol{\Gamma}_i \neq 0\)</span>, para algún <span class="math inline">\(1\leq i \leq m\)</span></p>
-<p>o bien,</p>
-<p><span class="math inline">\(H_0: \boldsymbol{\rho}_1=...=\boldsymbol{\rho}_m=0\)</span><br>
-<span class="math inline">\(H_1: \boldsymbol{\rho}_i \neq 0\)</span>, para algún <span class="math inline">\(1\leq i \leq m\)</span></p>
+</div>
+<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-15-1.png" width="480" class="r-stretch"></section></section>
+<section>
+<section id="prueba-de-hipótesis-para-la-correlación-serial-con-ccm" class="title-slide slide level1 agenda-slide center">
+<h1>Prueba de hipótesis para la correlación serial con CCM</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Introducción</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de dependencia (bivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de dependencia (multivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Linealidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Estimación</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Prueba de hipótesis para la correlación serial con CCM</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>VARMA(p,q)</p>
+</div></li>
+</ol>
+</div>
 </section>
 <section id="prueba-de-hipótesis-para-la-correlación-serial-con-ccm-1" class="slide level2">
 <h2>Prueba de hipótesis para la correlación serial con CCM</h2>
 <ul>
-<li><strong>El estadístico de Portmanteau multivariado:</strong> la versión multivariada de la prueba de Ljung-Box. <span class="math display">\[Q_m=T^2 \sum_{l=1}^m \frac{1}{T-l} tr \left(\hat{\boldsymbol{\Gamma}}'_l\hat{\boldsymbol{\Gamma}}^{-1}_0\hat{\boldsymbol{\Gamma}}_l\hat{\boldsymbol{\Gamma}}^{-1}_0\right)\]</span></li>
+<li>Al igual que el caso univariado, se plantean las hipótesis:</li>
+</ul>
+<p><span class="math display">\[H_0: \boldsymbol{\Gamma}_1=...=\boldsymbol{\Gamma}_m=0\]</span></p>
+<p><span class="math display">\[H_1: \boldsymbol{\Gamma}_i \neq 0$, para algún $1\leq i \leq m\]</span></p>
+<p>o bien,</p>
+<p><span class="math display">\[H_0: \boldsymbol{\rho}_1=...=\boldsymbol{\rho}_m=0\]</span></p>
+<p><span class="math display">\[H_1: \boldsymbol{\rho}_i \neq 0$, para algún $1\leq i \leq m\]</span></p>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><span class="alert">El estadístico de Portmanteau multivariado</span>: la versión multivariada de la prueba de Ljung-Box. <span class="math display">\[Q_m=T^2 \sum_{l=1}^m \frac{1}{T-l} tr \left(\hat{\boldsymbol{\Gamma}}'_l\hat{\boldsymbol{\Gamma}}^{-1}_0\hat{\boldsymbol{\Gamma}}_l\hat{\boldsymbol{\Gamma}}^{-1}_0\right)\]</span></li>
 </ul>
 <p>donde <span class="math inline">\(tr(A)\)</span> es la traza de la matriz A.</p>
 <ul>
 <li>Bajo el supuesto de <span class="math inline">\(H_0\)</span>,i.e.&nbsp;<span class="math inline">\(\boldsymbol{\Gamma}_l=0,~ l&gt;0\)</span>, y <span class="math inline">\(X_t\)</span> es distribuída normalmente, para <span class="math inline">\(T\)</span> y <span class="math inline">\(l\)</span> suficientemente grandes, el estadístico se aproxima a la distribución <span class="math inline">\(\chi^2_{(mk^2)}\)</span>.</li>
 </ul>
 </section>
-<section id="ruido-blanco-5" class="slide level2">
+<section id="ruido-blanco-4" class="slide level2 scrollable">
 <h2>Ruido blanco</h2>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>sig<span class="ot">=</span><span class="fu">diag</span>(<span class="dv">3</span>)</span>
+<span id="cb26-2"><a href=""></a>z<span class="ot">=</span><span class="fu">mvrnorm</span>(<span class="dv">200</span>,<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">3</span>),sig)</span>
+<span id="cb26-3"><a href=""></a><span class="fu">mq</span>(z,<span class="dv">4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ljung-Box Statistics:  
        m       Q(m)     df    p-value
-[1,]   1.0       3.9     9.0     0.92
-[2,]   2.0      18.0    18.0     0.46
-[3,]   3.0      24.8    27.0     0.58
-[4,]   4.0      35.6    36.0     0.48</code></pre>
+[1,]  1.00      7.47    9.00     0.59
+[2,]  2.00     11.99   18.00     0.85
+[3,]  3.00     16.14   27.00     0.95
+[4,]  4.00     18.91   36.00     0.99</code></pre>
 </div>
 
 </div>
-<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:40.0%" class="r-stretch"></section>
-<section id="varmapq" class="slide level2">
+<img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-16-1.png" width="480" class="r-stretch"></section></section>
+<section>
+<section id="varmapq" class="title-slide slide level1 agenda-slide center">
+<h1>VARMA(p,q)</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Introducción</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de dependencia (bivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de dependencia (multivariada)</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Estacionariedad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Linealidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Invertibilidad</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Estimación</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Prueba de hipótesis para la correlación serial con CCM</p>
+</div></li>
+<li><div class="agenda-active">
+<p>VARMA(p,q)</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="varmapq-1" class="slide level2">
 <h2>VARMA(p,q)</h2>
 <ul>
 <li>Conocido como VARMA o MARMA.</li>
 <li>ARMA(p,q) vectorial de <span class="math inline">\(k\)</span> dimensiones se define como</li>
 </ul>
-<p><span class="math display">\[X_{t}=\phi_0+ \sum_{i=1}^p \phi_i X_{t-i}  - \sum_{j=1}^q \theta_j {w}_{t-j} +a_{t}\]</span> con <span class="math inline">\(\phi_p, \theta_q \neq 0\)</span> y <span class="math inline">\(\Sigma_w\)</span> definida positiva. - Los coeficientes <span class="math inline">\(\phi_i :i=1,...,p\)</span>, <span class="math inline">\(\theta_j:j=1,...,q\)</span> son matrices <span class="math inline">\(k \times k\)</span></p>
+<p><span class="math display">\[X_{t}=\phi_0+ \sum_{i=1}^p \phi_i X_{t-i}  - \sum_{j=1}^q \theta_j {w}_{t-j} +a_{t}\]</span> con <span class="math inline">\(\phi_p, \theta_q \neq 0\)</span> y <span class="math inline">\(\Sigma_w\)</span> definida positiva.</p>
+<ul>
+<li>Los coeficientes <span class="math inline">\(\phi_i :i=1,...,p\)</span>, <span class="math inline">\(\theta_j:j=1,...,q\)</span> son matrices <span class="math inline">\(k \times k\)</span></li>
+</ul>
 </section>
-<section id="varmapq-1" class="slide level2">
-<h2>VARMA(p,q)</h2>
+<section class="slide level2">
+
 <ul>
 <li><p>Al igual que el caso univariado, si un VARMA es estacionario se puede expresar su versión centrada, o bien sin pérdida de generalidad suponer que <span class="math inline">\(\phi_0=0\)</span>.</p></li>
 <li><p>Además, su representación es similar al caso univariado</p></li>
 </ul>
 <p><span class="math display">\[\phi(B) X_{t}= \theta(B) a_{t}\]</span> en donde</p>
-<p><span class="math inline">\(\phi(B)=I- \phi_1 B-...- \phi_p B^p\)</span> es el operador autorregresivo y</p>
-<p><span class="math inline">\(\theta(B)=I-\theta_1 B-...- \theta_q B^q\)</span> es el operador de medias móviles.</p>
+<p><span class="math inline">\(\phi(B)=I- \phi_1 B-...- \phi_p B^p\)</span> es el <span class="alert">operador autorregresivo</span> y</p>
+<p><span class="math inline">\(\theta(B)=I-\theta_1 B-...- \theta_q B^q\)</span> es el <span class="alert">operador de medias móviles</span>.</p>
 </section>
-<section id="varmapq-2" class="slide level2">
-<h2>VARMA(p,q)</h2>
+<section class="slide level2">
+
 <ul>
 <li>El modelo VARMA se dice que es:
 <ul>
@@ -770,15 +1324,21 @@ CCM at lag:  4
 <li>De la misma forma, si se satisfacen estas condiciones, el modelo tiene su representación <span class="math inline">\(AR\)</span> y <span class="math inline">\(MA\)</span> de orden infinito.</li>
 </ul>
 </section>
-<section id="en-la-próxima-clase-veremos" class="slide level2">
-<h2>En la próxima clase veremos</h2>
-<h3 id="varp">VAR(p)</h3>
+<section id="paquetes-en-r" class="slide level2">
+<h2>Paquetes en R</h2>
+<p>Para replicar los ejemplos de esta presentación, necesitan estos paquetes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb28-2"><a href=""></a><span class="fu">library</span>(astsa)</span>
+<span id="cb28-3"><a href=""></a><span class="fu">library</span>(MASS)</span>
+<span id="cb28-4"><a href=""></a><span class="fu">library</span>(MTS)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -809,7 +1369,7 @@ CCM at lag:  4
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"right","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"width":"wide","numbers":true},
 'smaller': false,
  
         // Display controls in the bottom right corner

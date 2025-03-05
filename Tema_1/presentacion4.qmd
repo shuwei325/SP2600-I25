@@ -1,17 +1,25 @@
 ---
-title: 'Tema 1: Análisis espectral de series temporales-4'
-subtitle: 'Curso: Tópicos Avanzados de Series Temporales'
+title: 'Tema 1: Análisis espectral de series temporales^(4)^'
+subtitle: '[Curso: Tópicos Avanzados de Series Temporales](https://shuwei325.github.io/SP2600-I25)'
 format: clean-revealjs
 html-math-method:
   method: mathjax
   url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 author:
   - name: Shu Wei Chou Chen
-    #orcid: 0000-0001-5495-2486
+    url: https://shuwei325.github.io
+    orcid: 0000-0001-5495-2486
     email: shuwei.chou@ucr.ac.cr
-    affiliations: Escuela de Estadística, Universidad de Costa Rica
+    affiliations: 
+    - name: Escuela de Estadística, Universidad de Costa Rica
+      url: https://www.estadistica.ucr.ac.cr/
 #date: last-modified
 lang: es  # español
+filters:
+  - reveal-auto-agenda
+auto-agenda:
+  bullets: numbered
+  heading: Contenido
 ---
 
 
@@ -24,60 +32,38 @@ library(tidyverse)
 ```
 
 
-En las clases anteriores vimos:
 
-1. Introducción
-2. Ejemplos de motivación
-3. Comportamiento cíclico y periodicidad.
-4. Estimación y periodograma.
-5. Función de densidad espectral. <br>
-6. Representación espectral de procesos estacionarios <br>
-7. Periodograma y la Transformada Discreta de Fourier<br>
-8. Estimación de periodograma.<br>
+# Estimación espectral no paramétrica 
 
-
- 
-## Contenido
-
-<ol start="3">
-9. Estimaciones en el dominio de frecuencia.<br>
-<p style="margin-left: 25px;">  &#9702; Estimación espectral no paramétrica </p>
-<p style="margin-left: 25px;">  &#9702; Estimación espectral paramétrica </p> <br>
-10. Aplicaciones del análisis espectral.<br>
-</ol>
-
- 
 ## Estimación espectral no paramétrica
 
-- Para introducir la estimación espectral no paramétrica, introducimos el concepto de una banda en el dominio de frecuencia $\mathcal{B}$, de $L \ll T$ contiguas frecuencias fundamentales, que estén centrado alrededor de la frecuencia de interés $\omega_j=j/T$ (cercano a $\omega$ de interés). 
+- Para introducir la estimación espectral no paramétrica, es necesario definir el concepto de una **banda** en el dominio de frecuencia $\mathcal{B}$, de $L \ll T$ contiguas frecuencias fundamentales, que estén centrado alrededor de la frecuencia de interés $\omega_j=\frac{j}{T}$ (cercano a $\omega$ de interés). 
 
-- Para frecuencias de la forma $\omega^*=w_j+k/T$, sea
-
+- Para frecuencias de la forma $\omega^*=w_j+\frac{k}{T}$, sea
 
 $$\mathcal{B} = \left\lbrace \omega^*: \omega_j-\frac{m}{T} \leq \omega^*  \leq \omega_j+\frac{m}{T}\right\rbrace,$$
 donde $L=2m+1$ (número impar), selecionado de tal forma que el valor espectral en el intervalo $\mathcal{B}$
-$$f(\omega_j+k/T),~~k=-m,...,0,...,m$$
+$$f\left(\omega_j+\frac{k}{T}\right),~~k=-m,...,0,...,m.$$
 sea similar a $f(\omega)$.
 
+---
 
+- Podemos definir [el periodograma suavizado]{.alert} (promediado) como:
 
- 
-## Estimación espectral no paramétrica
+$$\bar{f}(\omega)=\frac{1}{L}\sum_{k=-m}^{m}I\left(\omega_j+\frac{k}{T}\right).$$
 
-- Podemos definir **el periodograma suavizado (promediado)** como:
-
-$$\bar{f}(\omega)=\frac{1}{L}\sum_{k=-m}^{m}I(\omega_j+k/T)$$
 - Bajo ciertas condiciones de regularidad, se puede obtener resultados asintóticos similares a propiedades de la distribución del periodograma (no suavizado), i.e. cuando $T \rightarrow \infty$,
 
 $$\frac{2 L~ \bar{f}(\omega)}{f(\omega)} \rightarrow \chi^2_{2L}.$$
+
 - Note que las bandas de frecuencias $\mathcal{B}$ tienen tamaño
 $B=\frac{L}{T}$.
 
 - Finalmente, se puede construir un intervalo de confianza de $100(1-\alpha)\%$, con
-$$\frac{2L \bar{f}(\omega)}{\chi^2_{2L}(1-\alpha/2)}<f(\omega)<\frac{2L \bar{f}(\omega)}{\chi^2_{2L}(\alpha/2)}$$
+$$\frac{2L \bar{f}(\omega)}{\chi^2_{2L}(1-\alpha/2)}<f(\omega)<\frac{2L \bar{f}(\omega)}{\chi^2_{2L}(\alpha/2)}.$$
 
  
-## Estimación espectral no paramétrica
+---
 
 
 - Debido a la asimetría de la distribución del periodograma, se puede utilizar el logarítmo del espectro para facilitar la visualización.
@@ -85,13 +71,16 @@ $$\frac{2L \bar{f}(\omega)}{\chi^2_{2L}(1-\alpha/2)}<f(\omega)<\frac{2L \bar{f}(
 - Es decir, se puede construir un intervalo de confianza de $100(1-\alpha)\%$ con escala logarítmica, usando
 $$\left[ \log \bar{f}(\omega)-a_L~,~\log \bar{f}(\omega) + b_L \right]$$
 donde
-$a_L = - \log 2L + \log \chi^2_{2L} (1-\alpha/2)$ y $b_L = \log 2L + \log \chi^2_{2L} (\alpha/2)$
+
+- $a_L = - \log 2L + \log \chi^2_{2L} (1-\alpha/2)$ y 
+
+- $b_L = \log 2L + \log \chi^2_{2L} (\alpha/2)$.
 
  
-## Estimación espectral no paramétrica
+---
 
 - Si $L$ es muy cercano a cero, puede producir problema en la computación. Se utiliza una aproximación reemplazando
-$2L$ por $2Ln/n'$. De esta forma, se define **los grados de libertad ajustados** como
+$2L$ por $2Ln/n'$. De esta forma, se define [los grados de libertad ajustados]{.alert} como
 $$df=\frac{2Ln}{n'}$$
 - Finalmente, el intervalo de confianza de $100(1-\alpha)\%$ queda:
 $$\frac{df~ \bar{f}(\omega)}{\chi^2_{df}(1-\alpha/2)}<f(\omega)<\frac{df~ \bar{f}(\omega)}{\chi^2_{df}(\alpha/2)}.$$
@@ -99,27 +88,29 @@ $$\frac{df~ \bar{f}(\omega)}{\chi^2_{df}(1-\alpha/2)}<f(\omega)<\frac{df~ \bar{f
  
 ## Núcleo de Danniell
 
+- Más adelante, veremos que "promediando" las frecuencias de una banda se trata del uso del [núcleo de Danniell]{.alert}.
+
+- Utilizando $m=4$ y $L=2m+1=9$ como ejemplo:
+
+
 :::: {.columns}
 
 ::: {.column width="50%"}
 
-Utilizando $m=4$ y $L=2m+1=9$,
-```{r, fig.align="center", out.width = "80%"}
+```{r}
+#| echo: true
 kernel('daniell',4)
 ```
 :::
 
 ::: {.column width="50%"}
-```{r, echo=TRUE, fig.align="center", out.width = "80%"}
+```{r}
+#| echo: true
 plot(kernel("daniell", 4)) 
 ```
 :::
 ::::
 
-
-
-
- 
 ## Ejemplo: SOI y reclutamiento 
 
 
@@ -128,10 +119,16 @@ plot(kernel("daniell", 4))
 ::: {.column width="50%"}
 
 **Espectro**
-```{r, fig.align="center", out.width = "80%"}
+```{r}
+#| echo: true
 par(mfrow=c(2,1))
 soi.ave = mvspec(soi, kernel('daniell',4))           
 abline(v = c(.25,1,2,3), lty=2)
+```
+
+
+```{r}
+#| echo: true
 soi.rec = mvspec(rec, kernel('daniell',4))
 abline(v=c(.25,1,2,3), lty=2)
 ```
@@ -147,10 +144,10 @@ abline(v=c(.25,1,2,3), lty=2)
 ::::
 
 
- 
-## Ejemplo: SOI y reclutamiento 
+---
 
 ```{r}
+#| echo: true
 df  = soi.ave$df     
 U   = qchisq(.025, df) 
 L   = qchisq(.975, df) 
@@ -163,18 +160,17 @@ round(c(df*soi.ave$spec[40]/L,df*soi.ave$spec[40]/U),4)
 ```
 
 
+---
 
- 
-## Ejemplo: SOI y reclutamiento 
-
-
+### Espectro logarítmico
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 
-**Espectro logarítmico**
-```{r echo=FALSE, fig.align="center", out.width = "100%"}
+
+```{r}
+#| echo: true
 par(mfrow=c(2,1))
 soi.ave = mvspec(soi, kernel('daniell',4),log="yes")
 abline(v = c(.25,1,2,3), lty=2)
@@ -185,7 +181,11 @@ abline(v=c(.25,1,2,3), lty=2)
 :::
 
 ::: {.column width="50%"}
+
+:::{.callout-note}
 - El ancho de la cruz representa el ancho de la banda y el largo representa el intervalo de confianza.
+:::
+
 :::
 ::::
 
@@ -200,11 +200,12 @@ abline(v=c(.25,1,2,3), lty=2)
 $$x_t=\sin(2\pi2t)+0.5\sin(2\pi4t)$$
 $$+0.4\sin(2\pi6t)+0.3\sin(2\pi10t)$$
 $$+0.1\sin(2\pi12t)$$
-- Esta función es no sinusoidal pero periódica.
+- Esta función es periódica, pero no es sinusoidal.
+
 :::
 
 ::: {.column width="50%"}
-```{r echo=FALSE, fig.align="center", out.width = "100%"}
+```{r}
 t = seq(0, 1, by=1/200) 
 amps = c(1, .5, .4, .3, .2, .1)
 x = matrix(0, 201, 6)
@@ -215,25 +216,23 @@ tsplot(x, lty=c(1:6, 1), lwd=c(rep(1,6), 2), ylab="Sinusoids", col=1:6, spaghett
 names = c("Fundamental","2nd Harmonic","3rd Harmonic","4th Harmonic","5th Harmonic", 
           "6th Harmonic","Formed Signal")
 legend("topright", names, lty=c(1:6, 1), lwd=c(rep(1,6), 2), col=1:6)
-rm(t)                    
 ```
 :::
 ::::
 
-
+# Estimación espectral no paramétrica (extensión)
  
-## Estimación espectral no paramétrica
+## Estimación espectral no paramétrica (extensión)
 
 - Se puede extender **el periodograma suavizado (promediado)** con:
 
 $$\hat{f}(\omega)=\sum_{k=-m}^{m} h_k I(\omega_j+k/T)$$
 donde los pesos $h_k>0$ y cumple la condición 
 $$\sum_{k=-m}^{m} h_k>0.$$ 
+
 - Es posible obtener resultados asintóticos pero no vamos a entrar en detalles.
 
 
-
- 
 ## Alternativas de núcleos
 
 - Una forma de crear pesos diferentes es repetir varias veces el núcleo de Daniell.
@@ -242,58 +241,57 @@ $$\hat{u}_{t}=\frac{1}{3}u_{t-1}+\frac{1}{3}u_{t}+\frac{1}{3}u_{t+1}$$
 - Aplicamos nuevamente el núcleo de Daniell con $k=1$:
 
 $$\hat{\hat{u}}_{t}=\frac{1}{3}\hat{u}_{t-1}+\frac{1}{3}\hat{u}_{t}+\frac{1}{3}\hat{u}_{t+1}$$
+
 - Se obtiene
 
 $$\hat{\hat{u}}_{t}=\frac{1}{9}u_{t-2}+\frac{2}{9}u_{t-1}+\frac{3}{9}u_{t}+\frac{2}{9}u_{t+1}+\frac{1}{9}u_{t+2}$$
 
-
- 
-## Alternativas de núcleos
-
+---
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 
-```{r, fig.align="center", out.width = "80%"}
+```{r}
+#| echo: true
 kernel("daniell", c(1))   
 kernel("daniell", c(1,1)) 
 ```
 :::
 
 ::: {.column width="50%"}
-```{r, echo=TRUE, fig.align="center", out.width = "80%"}
+```{r}
+#| echo: true
 plot(kernel("daniell", c(1,1)))  
 ```
 :::
 ::::
 
 
- 
-## Alternativas de núcleos
+---
 
-**El núcleo (kernel) de Daniell modificado** asigna mitad del peso en los extremos.
+- El [núcleo (kernel) de Daniell modificado]{.alert} asigna mitad del peso en los extremos.
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 
-```{r, fig.align="center", out.width = "80%"}
+```{r}
+#| echo: true
 kernel("modified.daniell", c(1))
 ```
 :::
 
 ::: {.column width="50%"}
-```{r, echo=TRUE, fig.align="center", out.width = "80%"}
+```{r}
+#| echo: true
 plot(kernel("modified.daniell", c(1)))
 ```
 :::
 ::::
 
 
- 
-## Alternativas de núcleos
-
+---
 
 - Considere una secuencia de valores $u_t$, el núcleo de Daniell modificado con $m=1$ es:
 $$\hat{u}_{t}=\frac{1}{4}u_{t-1}+\frac{1}{2}u_{t}+\frac{1}{4}u_{t+1}$$
@@ -301,49 +299,65 @@ $$\hat{u}_{t}=\frac{1}{4}u_{t-1}+\frac{1}{2}u_{t}+\frac{1}{4}u_{t+1}$$
 
 $$\hat{\hat{u}}_{t}=\frac{1}{16}u_{t-2}+\frac{4}{16}u_{t-1}+\frac{6}{16}u_{t}+\frac{4}{16}u_{t+1}+\frac{1}{16}u_{t+2}$$
 
-
- 
-## Alternativas de núcleos
+---
 
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 
-```{r, fig.align="center", out.width = "80%"}
+```{r}
+#| echo: true
 kernel("modified.daniell", c(1,1))
 ```
 :::
 
 ::: {.column width="50%"}
-```{r, echo=TRUE, fig.align="center", out.width = "80%"}
+```{r}
+#| echo: true
 plot(kernel("modified.daniell", c(1,1)))
 ```
 :::
 ::::
  
 
- 
-## Estimación espectral no paramétrica
+## Ejemplo: SOI y reclutamiento 
 
-**El núcleo (kernel) de Daniell modificado**
-```{r, fig.align="center", out.width = "50%"}
+Aaplicando [el núcleo (kernel) de Daniell modificado]{.alert}
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| fig-width: 3
+#| fig-height: 3
 k        = kernel("modified.daniell", c(3,3))
 soi.smo  = mvspec(soi, kernel=k, taper=0)
 abline(v = c(.25,1), lty=2)
-## Repeat above lines with rec replacing soi 
 soi.smo$df           # df = 17.42618
 soi.smo$bandwidth    # B  = 0.2308103
-
-# An easier way to obtain soi.smo:
-soi.smo = mvspec(soi, spans=c(7,7), taper=0, nxm=4)
-
-# hightlight El Nino cycle
-rect(1/7, -1e5, 1/3, 1e5, density=NA, col=gray(.5,.2))
-mtext("1/4", side=1, line=0, at=.25, cex=.75)    
 ```
+:::
 
+::: {.column width="50%"}
+```{r}
+#| echo: true
+#| fig-width: 3
+#| fig-height: 3
+# Otra forma de hacer es con el argumento `spans`
+soi.smo1 = mvspec(soi, spans=c(7,7), taper=0)  #7=3*2+1
 
+# El ciclo del Niño
+rect(1/7, -1e5, 1/3, 1e5, density=NA, col=gray(.5,.2))
+mtext("1/4", side=1, line=0, at=.25, cex=.75)   
+```
+:::
+::::
+ 
+# Estimación espectral paramétrica
  
 ## Estimación espectral paramétrica
 
@@ -355,8 +369,7 @@ $$\hat{f}_X(\omega)= \frac{\hat{\sigma}_w^2}{|\hat{\phi}(e^{-2 \pi i \omega})|^2
 donde $\hat{\phi}(B)=1-\hat{\phi}_1 B -\hat{\phi}_2  B^2-...-\hat{\phi}_p B^p$.
 
 
- 
-## Estimación espectral paramétrica
+---
 
 - Bajo condiciones $p \rightarrow \infty, p^3/T \rightarrow 0$ cuando $p,T \rightarrow \infty$, el intervalo de confianza de $100(1-\alpha)\%$ queda:
 $$\frac{\hat{f}(\omega)}{1+C z_{\alpha/2}}<f_X(\omega)<\frac{\hat{f}(\omega)}{1-Cz_{\alpha/2}},$$
@@ -365,7 +378,6 @@ donde $C=\sqrt{2p/T}$ y $z_{\alpha/2}$ es el percentil $1-\alpha/2$ de la distri
 - ¿Por qué con AR(p)? La densidad espectral de cualquier proceso estacionario puede ser aproximado por la densidad espectral de AR(p) (ver Propiedad 4.7 de Shumway & Stoffer).
 
 
- 
 ## Ejemplo
 
 :::: {.columns}
@@ -373,29 +385,67 @@ donde $C=\sqrt{2p/T}$ y $z_{\alpha/2}$ es el percentil $1-\alpha/2$ de la distri
 ::: {.column width="50%"}
 
 - En R, el comando `spec.ic` escoge el mejor rezago de acuerdo a AIC.
+
+```{r }
+#| echo: true
+param.spec <- spec.ic(soi,  detrend=TRUE, col=4, lwd=2, nxm=4) 
+```
+
 :::
 
 ::: {.column width="50%"}
-```{r , fig.align="center", out.width = "100%"}
-param.spec <- spec.ic(soi,  detrend=TRUE, col=4, lwd=2, nxm=4) 
+```{r}
+#| echo: true
+head(param.spec[[1]]) # AIC y BIC de acuerdo con el orden
+head(param.spec[[2]]) # El mejor modelo
 ```
+
 :::
 ::::
  
-
- 
-## Ejemplo
+---
 
 **Bondad de ajuste de los modelos AR según el orden p basado en AIC y BIC**
-```{r echo=FALSE, fig.align="center", out.width = "60%"}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- En R, el comando `spec.ic` escoge el mejor rezago de acuerdo a AIC.
+
+```{r }
+#| echo: true
 C.info<-data.frame(param.spec[[1]])
 colnames(C.info)<-c("t","AIC","BIC")
+C.info
+```
+
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
 C.info %>% gather(
   key = "C.Info",
   value = "value",
   AIC,BIC
 ) %>% ggplot() +
-  geom_line( aes(x = t, y = value, group=C.Info,color=C.Info))
+  geom_line( aes(x = t, y = value, group=C.Info,color=C.Info)) + theme_bw()
+```
 
+:::
+::::
+
+## Paquetes en R
+
+Para replicar los ejemplos de esta presentación, necesitan estos paquetes:
+
+```{r}
+#| echo: true
+library(ggplot2)
+library(forecast)
+library(fpp2)
+library(astsa)
+library(tidyverse)
 ```
 
