@@ -1,3 +1,4 @@
 
 *.Rmd
 *.qmd
+.Rhistory
