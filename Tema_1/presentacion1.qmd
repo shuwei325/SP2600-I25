@@ -173,11 +173,11 @@ $$F_{X_{t_1},...,X_{t_n}}(c_{1},...,c_{n} \mid t_1,...,t_n) = P\left(X_{t_1}\leq
 
 - Si una secuencia de variables es i.i.d., i.e. $w_t \sim iid(0,\sigma_w^2)$, entonces $w_t \sim wn(0,\sigma_w^2)$. ¡El inverso no es cierto!
 
-- Sin embargo, si un ruido blanco es Gaussiano, entonces $w_t \overset{iid}{\sim} N(0,\sigma_w^2)$.
-
 :::: {.columns}
 
 ::: {.column width="50%"}
+- Sin embargo, si un ruido blanco es Gaussiano, entonces $w_t \overset{iid}{\sim} N(0,\sigma_w^2)$.
+
 - Simulación de una colección de $w_t \sim N(0,1)$ con $T=500$.
 :::
 
@@ -624,6 +624,7 @@ summary(mod1)
 ## Modelo lineal {.scrollable}
 
 ```{r}
+#| echo: true
 #ARMA(2,1)
 phi=c(0.4,0.2)
 theta=c(-0.6)
