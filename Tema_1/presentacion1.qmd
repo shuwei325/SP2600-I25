@@ -157,7 +157,7 @@ $$F_{X_{t_1},...,X_{t_n}}(c_{1},...,c_{n} \mid t_1,...,t_n) = P\left(X_{t_1}\leq
 
 - El proceso estocástico $\left\lbrace X(t), ~t \in \mathcal{T} \right\rbrace$ será especificado si conocemos todas las distribuciones de dimensión finita de todo $n\geq 1$.
 
-- En este caso, se trata de la especificación de un [modelos de series temporales]{.alert}.
+- En este caso, se trata de la especificación de un [modelo de series temporales]{.alert}.
 
 - Por ejemplo, 
 
