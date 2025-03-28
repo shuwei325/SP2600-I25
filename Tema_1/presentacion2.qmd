@@ -376,8 +376,12 @@ $$P\left(\frac{j}{T}\right)=a_j^2+b_j^2,~ \text{para}~~ j=1,...,\frac{(T-1)}{2}.
 
 - Se utiliza la [Transformada Discreta de Fourier (TDF)]{.alert} que se discutirá con más detalles:
 
-$$d\left(\frac{j}{T}\right)=\frac{1}{T^{1/2}}\sum_{t=1}^T x_t \exp{\left(-2 \pi it\frac{j}{T}\right)}$$
-$$= \frac{1}{T^{1/2}}\sum_{t=1}^T x_t \cos\left(2\pi t~\frac{j}{T}\right)- i \sum_{t=1}^T x_t \sin\left(2\pi t\frac{j}{T}\right).$$
+
+\begin{align}
+d\left(\frac{j}{T}\right)&=\frac{1}{T^{1/2}}\sum_{t=1}^T x_t \exp{\left(-2 \pi it\frac{j}{T}\right)}\\
+&= \frac{1}{T^{1/2}}\sum_{t=1}^T x_t \cos\left(2\pi t~\frac{j}{T}\right)- i \sum_{t=1}^T x_t \sin\left(2\pi t\frac{j}{T}\right).
+\end{align}
+
 
 ---
 
@@ -455,7 +459,7 @@ abline(v=.5, lty=2)
  
 ## Magnitud de estrella 
 
-- Considere la serie temporal de la magnitud de una estrella a las 00:00 (medianoche) de 600 días consecutivos. Su gráfico y el periodograma de frecuencias menores que 0.08 se muestran a continuación.
+- Considere la serie temporal de la magnitud de una estrella a las 00:00 (medianoche) de 600 días consecutivos. 
 
 ```{r}
 #| fig-align: center
@@ -465,6 +469,8 @@ tsplot(star, ylab="star magnitude", xlab="day")
 ```
 
 ---
+
+- Su gráfico y el periodograma de frecuencias menores que 0.08 se muestran a continuación.
 
 :::: {.columns}
 

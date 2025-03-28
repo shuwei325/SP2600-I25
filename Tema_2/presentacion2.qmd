@@ -698,6 +698,8 @@ $\theta(B)=I-\theta_1 B-...- \theta_q B^q$ es el operador de medias móviles.
 - Raíz unitarias
 - Procesos cointegrados
 
+
+
 ## Paquetes en R
 
 Para replicar los ejemplos de esta presentación, necesitan estos paquetes:
@@ -710,6 +712,7 @@ library(astsa)
 library(MTS)
 ```
 
+  
 
 ### Referencia
 

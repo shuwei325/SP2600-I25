@@ -69,12 +69,12 @@ $$\frac{2L \bar{f}(\omega)}{\chi^2_{2L}(1-\alpha/2)}<f(\omega)<\frac{2L \bar{f}(
 - Debido a la asimetría de la distribución del periodograma, se puede utilizar el logarítmo del espectro para facilitar la visualización.
 
 - Es decir, se puede construir un intervalo de confianza de $100(1-\alpha)\%$ con escala logarítmica, usando
-$$\left[ \log \bar{f}(\omega)-a_L~,~\log \bar{f}(\omega) + b_L \right]$$
+$$\left[ \log \bar{f}(\omega)+a_L~,~\log \bar{f}(\omega) + b_L \right]$$
 donde
 
-- $a_L = - \log 2L + \log \chi^2_{2L} (1-\alpha/2)$ y 
+- $a_L = \log 2L - \log \chi^2_{2L} (1-\alpha/2)$ y 
 
-- $b_L = \log 2L + \log \chi^2_{2L} (\alpha/2)$.
+- $b_L = \log 2L - \log \chi^2_{2L} (\alpha/2)$.
 
  
 ---
@@ -146,6 +146,8 @@ abline(v=c(.25,1,2,3), lty=2)
 
 ---
 
+El intervalo de confianza se obtiene a continuación:
+
 ```{r}
 #| echo: true
 df  = soi.ave$df     
@@ -184,6 +186,8 @@ abline(v=c(.25,1,2,3), lty=2)
 
 :::{.callout-note}
 - El ancho de la cruz representa el ancho de la banda y el largo representa el intervalo de confianza.
+
+- Se notan picos del periodograma en los múltiplos de $\Delta$. Esto es debido a que el comportamiento cíclico no es sinusoidal perfecto.
 :::
 
 :::
@@ -196,6 +200,7 @@ abline(v=c(.25,1,2,3), lty=2)
 
 ::: {.column width="50%"}
 
+- Para ilustrar un comportamiento ciclico que no es sinusoidal, pero se puede formarlo con armónicas fundamentales.
 - Considere
 $$x_t=\sin(2\pi2t)+0.5\sin(2\pi4t)$$
 $$+0.4\sin(2\pi6t)+0.3\sin(2\pi10t)$$

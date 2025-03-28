@@ -891,7 +891,10 @@
 <li><p>En la práctica, es común enfrentar series largas y el uso computacional del enfoque de regresión no es eficiente.</p></li>
 <li><p>Se utiliza la <span class="alert">Transformada Discreta de Fourier (TDF)</span> que se discutirá con más detalles:</p></li>
 </ul>
-<p><span class="math display">\[d\left(\frac{j}{T}\right)=\frac{1}{T^{1/2}}\sum_{t=1}^T x_t \exp{\left(-2 \pi it\frac{j}{T}\right)}\]</span> <span class="math display">\[= \frac{1}{T^{1/2}}\sum_{t=1}^T x_t \cos\left(2\pi t~\frac{j}{T}\right)- i \sum_{t=1}^T x_t \sin\left(2\pi t\frac{j}{T}\right).\]</span></p>
+<p><span class="math display">\[\begin{align}
+d\left(\frac{j}{T}\right)&amp;=\frac{1}{T^{1/2}}\sum_{t=1}^T x_t \exp{\left(-2 \pi it\frac{j}{T}\right)}\\
+&amp;= \frac{1}{T^{1/2}}\sum_{t=1}^T x_t \cos\left(2\pi t~\frac{j}{T}\right)- i \sum_{t=1}^T x_t \sin\left(2\pi t\frac{j}{T}\right).
+\end{align}\]</span></p>
 </section>
 <section class="slide level2">
 
@@ -1062,7 +1065,7 @@
 <section id="magnitud-de-estrella" class="slide level2">
 <h2>Magnitud de estrella</h2>
 <ul>
-<li>Considere la serie temporal de la magnitud de una estrella a las 00:00 (medianoche) de 600 días consecutivos. Su gráfico y el periodograma de frecuencias menores que 0.08 se muestran a continuación.</li>
+<li>Considere la serie temporal de la magnitud de una estrella a las 00:00 (medianoche) de 600 días consecutivos.</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">data</span>(star)</span>
@@ -1072,6 +1075,9 @@
 <img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-19-1.png" class="quarto-figure quarto-figure-center r-stretch" width="480"></section>
 <section class="slide level2">
 
+<ul>
+<li>Su gráfico y el periodograma de frecuencias menores que 0.08 se muestran a continuación.</li>
+</ul>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">

@@ -459,9 +459,9 @@
 
 <ul>
 <li><p>Debido a la asimetría de la distribución del periodograma, se puede utilizar el logarítmo del espectro para facilitar la visualización.</p></li>
-<li><p>Es decir, se puede construir un intervalo de confianza de <span class="math inline">\(100(1-\alpha)\%\)</span> con escala logarítmica, usando <span class="math display">\[\left[ \log \bar{f}(\omega)-a_L~,~\log \bar{f}(\omega) + b_L \right]\]</span> donde</p></li>
-<li><p><span class="math inline">\(a_L = - \log 2L + \log \chi^2_{2L} (1-\alpha/2)\)</span> y</p></li>
-<li><p><span class="math inline">\(b_L = \log 2L + \log \chi^2_{2L} (\alpha/2)\)</span>.</p></li>
+<li><p>Es decir, se puede construir un intervalo de confianza de <span class="math inline">\(100(1-\alpha)\%\)</span> con escala logarítmica, usando <span class="math display">\[\left[ \log \bar{f}(\omega)+a_L~,~\log \bar{f}(\omega) + b_L \right]\]</span> donde</p></li>
+<li><p><span class="math inline">\(a_L = \log 2L - \log \chi^2_{2L} (1-\alpha/2)\)</span> y</p></li>
+<li><p><span class="math inline">\(b_L = \log 2L - \log \chi^2_{2L} (\alpha/2)\)</span>.</p></li>
 </ul>
 </section>
 <section class="slide level2">
@@ -555,6 +555,7 @@ coef[ 4] = 0.1111</code></pre>
 </section>
 <section class="slide level2">
 
+<p>El intervalo de confianza se obtiene a continuación:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>df  <span class="ot">=</span> soi.ave<span class="sc">$</span>df     </span>
 <span id="cb10-2"><a href=""></a>U   <span class="ot">=</span> <span class="fu">qchisq</span>(.<span class="dv">025</span>, df) </span>
@@ -615,7 +616,8 @@ coef[ 4] = 0.1111</code></pre>
 </div>
 <div class="callout-content">
 <ul>
-<li>El ancho de la cruz representa el ancho de la banda y el largo representa el intervalo de confianza.</li>
+<li><p>El ancho de la cruz representa el ancho de la banda y el largo representa el intervalo de confianza.</p></li>
+<li><p>Se notan picos del periodograma en los múltiplos de <span class="math inline">\(\Delta\)</span>. Esto es debido a que el comportamiento cíclico no es sinusoidal perfecto.</p></li>
 </ul>
 </div>
 </div>
@@ -627,6 +629,7 @@ coef[ 4] = 0.1111</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
+<li>Para ilustrar un comportamiento ciclico que no es sinusoidal, pero se puede formarlo con armónicas fundamentales.</li>
 <li>Considere <span class="math display">\[x_t=\sin(2\pi2t)+0.5\sin(2\pi4t)\]</span> <span class="math display">\[+0.4\sin(2\pi6t)+0.3\sin(2\pi10t)\]</span> <span class="math display">\[+0.1\sin(2\pi12t)\]</span></li>
 <li>Esta función es periódica, pero no es sinusoidal.</li>
 </ul>
