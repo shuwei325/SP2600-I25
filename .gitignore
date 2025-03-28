@@ -2,3 +2,4 @@
 *.Rmd
 *.qmd
 .Rhistory
+*.R
