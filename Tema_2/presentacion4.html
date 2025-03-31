@@ -426,6 +426,9 @@
 <li><div class="agenda-inactive agenda-post-active">
 <p>Serie estacionaria por tendencia y por diferencia</p>
 </div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>El contraste de raíz unitaria</p>
+</div></li>
 </ol>
 </div>
 </section>
@@ -469,6 +472,9 @@
 </div></li>
 <li><div class="agenda-active">
 <p>Serie estacionaria por tendencia y por diferencia</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>El contraste de raíz unitaria</p>
 </div></li>
 </ol>
 </div>
@@ -605,10 +611,30 @@ AIC=-15.24   AICc=-14.46   BIC=-10.57</code></pre>
 X_t=CD_t+ \eta_t,
 \]</span> donde <span class="math inline">\(CD_t=\beta_0+\beta_1 t\)</span> y <span class="math inline">\(\eta_t \sim ARMA(p,q)\)</span> que no necesariamente es estacionario e invertible, i.e., tiene su representación <span class="math display">\[\phi(B)\eta_t=\theta(B)\epsilon_t\]</span></li>
 <li>Si existe una raíz que está exactamente en el círculo unitario y el resto de las raíces están fuera del círculo unitario, i.e.&nbsp;<span class="math inline">\(\phi(B)=(1-B)\phi^*(B)\)</span>, y <span class="math inline">\(\phi^*(B)\eta_t\)</span> es estacionario. Por lo tanto, <span class="math inline">\(\left\lbrace X_t \right\rbrace\)</span> es estacionaria por diferencia. Por lo tanto, se puede realizar diferenciación para obtener una serie estacionaria.</li>
-<li>El modelo se puede representar como <span class="math display">\[X_t=CD_t+ \eta_t,\]</span> <span class="math display">\[\phi^*(B)(1-B)\eta_t=\theta(B)\epsilon_t\]</span> # El contraste de raíz unitaria</li>
+<li>El modelo se puede representar como <span class="math display">\[X_t=CD_t+ \eta_t,\]</span> <span class="math display">\[\phi^*(B)(1-B)\eta_t=\theta(B)\epsilon_t\]</span></li>
 </ul>
+</section></section>
+<section>
+<section id="el-contraste-de-raíz-unitaria" class="title-slide slide level1 agenda-slide center">
+<h1>El contraste de raíz unitaria</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Procesos integrados</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Serie estacionaria por tendencia y por diferencia</p>
+</div></li>
+<li><div class="agenda-active">
+<p>El contraste de raíz unitaria</p>
+</div></li>
+</ol>
+</div>
 </section>
-<section id="el-contraste-de-raíz-unitaria" class="slide level2">
+<section id="el-contraste-de-raíz-unitaria-1" class="slide level2">
 <h2>El contraste de raíz unitaria</h2>
 <p>Para investigar si el proceso: <span class="math display">\[\eta_t=X_t-CD_t,\]</span> contiene raíz unitaria, Dickey Fuller (1979) propuso la prueba de DF de la siguiente forma:</p>
 <ul>
@@ -618,23 +644,28 @@ X_t=CD_t+ \eta_t,
 <p><span class="math display">\[\nabla \eta_t=\eta_t-\eta_{t-1}=\phi_1 \eta_{t-1}+a_t-\eta_{t-1}=(\phi_1-1) \eta_{t-1}+a_t=\pi \eta_{t-1}+a_t\]</span></p>
 <p>Se puede obtener el estimador del mínimo cuadrado de <span class="math inline">\(\hat{\pi}^*\)</span> mediante una regresión ordinaria de <span class="math inline">\(\nabla \eta_t\)</span> sobre <span class="math inline">\(\eta_{t-1}\)</span>. Por lo tanto, el contraste para la estacionariedad se puede formular mediante las siguientes hipótesis: <span class="math display">\[H_0: \phi_1=1 ~~\text{v.s.}~~ H_1: \phi_1&lt;1\]</span></p>
 </section>
-<section id="el-contraste-de-raíz-unitaria-1" class="slide level2">
-<h2>El contraste de raíz unitaria</h2>
+<section class="slide level2">
+
 <ul>
 <li>De la diapositiva anterior,</li>
 </ul>
 <p><span class="math display">\[\nabla \eta_t=\eta_t-\eta_{t-1}=\phi_1 \eta_{t-1}+a_t-\eta_{t-1}=(\phi_1-1) \eta_{t-1}+a_t=\pi \eta_{t-1}+a_t\]</span></p>
 <p>La idea es obtener el estimador del mínimo cuadrado de <span class="math inline">\(\hat{\pi}\)</span> mediante una regresión ordinaria de <span class="math inline">\(\nabla \eta_t\)</span> sobre <span class="math inline">\(\eta_{t-1}\)</span>. Por lo tanto, el contraste para la estacionariedad se puede formular mediante las siguientes hipótesis: <span class="math display">\[H_0: \phi_1=1 ~~\text{v.s.}~~ H_1: \phi_1&lt;1\]</span> o equivalentemente a: <span class="math display">\[H_0: \pi=0 ~~\text{v.s.}~~ H_1: \pi&lt;0\]</span></p>
 </section>
-<section id="el-contraste-de-raíz-unitaria-2" class="slide level2">
-<h2>El contraste de raíz unitaria</h2>
+<section class="slide level2">
+
 <ul>
 <li>El contraste se puede realizar mediante la estadística <span class="math inline">\(\hat{\tau}\)</span> de Dickey-Fuller:</li>
 </ul>
-<p><span class="math display">\[\hat{\tau}=\frac{\hat{\pi}^*}{e.e.(\hat{\pi}^*)}.\]</span> - La distribución de <span class="math inline">\(\hat{\tau}\)</span> no es conocida y se obtiene los percentiles y los valores críticos de la distribución de <span class="math inline">\(\hat{\tau}\)</span> por medio de simulaciones. - Si se rechaza la <span class="math inline">\(H_0\)</span>, la serie es estacionaria. - Si no se rechaza la <span class="math inline">\(H_0\)</span>, la serie es no estacionaria, y se tiene que: <span class="math display">\[\eta_t-\eta_{t-1}=a_t,\]</span> la cual es denominada <strong>camino aleatorio</strong>.</p>
+<p><span class="math display">\[\hat{\tau}=\frac{\hat{\pi}^*}{e.e.(\hat{\pi}^*)}.\]</span></p>
+<ul>
+<li>La distribución de <span class="math inline">\(\hat{\tau}\)</span> no es conocida y se obtiene los percentiles y los valores críticos de la distribución de <span class="math inline">\(\hat{\tau}\)</span> por medio de simulaciones.</li>
+<li>Si se rechaza la <span class="math inline">\(H_0\)</span>, la serie es estacionaria.</li>
+<li>Si no se rechaza la <span class="math inline">\(H_0\)</span>, la serie es no estacionaria, y se tiene que: <span class="math display">\[\eta_t-\eta_{t-1}=a_t,\]</span> la cual es denominada <strong>camino aleatorio</strong>.</li>
+</ul>
 </section>
-<section id="el-contraste-de-raíz-unitaria-3" class="slide level2">
-<h2>El contraste de raíz unitaria</h2>
+<section class="slide level2">
+
 <ul>
 <li><p>El procedimiento anterior realiza la prueba después de remover el componente de tendencia determinística <span class="math inline">\(CD_t\)</span>, y además, considera un caso simple de AR(1).</p></li>
 <li><p>Se puede generalizar el procedimiento anterior involucrando la tendencia determinística y el componente aleatorio de AR(p) y es llamado como <strong>prueba de Dickey-Fuller aumentado</strong>. Considere</p></li>
@@ -644,8 +675,8 @@ X_t=CD_t+ \eta_t,
 <li>Este procedimiento involucra un valor <span class="math inline">\(k\)</span> predeterminado.</li>
 </ul>
 </section>
-<section id="el-contraste-de-raíz-unitaria-4" class="slide level2">
-<h2>El contraste de raíz unitaria</h2>
+<section class="slide level2">
+
 <ul>
 <li>Considere el caso de una tendencia lineal: <span class="math display">\[\nabla X_t= \beta_0 + \beta_1 t +  \pi X_{t-1} + \sum_{j=1}^{k} \gamma_j \nabla X_{t-j} +a_t,~~\text{con}~~ k=p-1\]</span> para asegurar que la correlación serial en el error es removido.</li>
 </ul>
@@ -678,8 +709,8 @@ X_t=CD_t+ \eta_t,
 </div>
 </div></div>
 </section>
-<section id="ejemplo-la-serie-de-consumo-1" class="slide level2">
-<h2>Ejemplo: La serie de consumo</h2>
+<section class="slide level2">
+
 <ul>
 <li>En R, aparece una tabla similar a esa:</li>
 </ul>
@@ -693,8 +724,8 @@ phi3 | 8.73 | 6.49 | 5.47 | 2.5972 |</div>
 </ul>
 <p><strong>Paso 1</strong>: Probar <span class="math inline">\(H_0: \pi=0\)</span> (con el estadístico <span class="math inline">\(\tau\)</span>) - Usando un 5% de significancia, note que el valor crítico es <span class="math inline">\(-3.45&lt;-2.2389\)</span> el estadístico <span class="math inline">\(\tau\)</span>. Por lo tanto, no se rechaza <span class="math inline">\(H_0\)</span>.</p>
 </section>
-<section id="ejemplo-la-serie-de-consumo-2" class="slide level2">
-<h2>Ejemplo: La serie de consumo</h2>
+<section class="slide level2">
+
 <ul>
 <li>En R, aparece una tabla similar a esa:</li>
 </ul>
@@ -706,8 +737,8 @@ phi3 | 8.73 | 6.49 | 5.47 | 2.5972 |</div>
 <p><strong>Paso 2</strong>: Dado que <span class="math inline">\(\pi=0\)</span>, probamos <span class="math inline">\(H_0: \beta_1=\pi=0\)</span> (con el estadístico <span class="math inline">\(\Phi_3\)</span>). - Note que el estadístico <span class="math inline">\(F\)</span>= <span class="math inline">\(2.5972&lt;6.49\)</span> el valor crítico. Por lo tanto, no se rechaza <span class="math inline">\(H_0\)</span>. - Se concluye que el modelo no tiene tendencia, y con raíz unitaria.</p>
 <p><strong>Paso 3</strong>: Ya que la serie contiene raíz unitaria, se realiza diferenciación para analizarlo.</p>
 </section>
-<section id="ejemplo-la-serie-de-consumo-3" class="slide level2">
-<h2>Ejemplo: La serie de consumo</h2>
+<section class="slide level2">
+
 <p>La serie diferenciada:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
