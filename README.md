@@ -27,7 +27,7 @@ aplicaciones.
 | 1\. Análisis Espectral | [Clase 1-1](./Tema_1/presentacion1.html) |  |
 |  | [Clase 1-2](./Tema_1/presentacion2.html) |  |
 |  | [Clase 1-3](./Tema_1/presentacion3.html) |  |
-|  | [Clase 1-4](./Tema_1/presentacion4.html) |  |
+|  | [Clase 1-4](./Tema_1/presentacion4.html) | [lab tema 1](./Tema_1/lab.html) |
 | 2\. Análisis Multivariado | [Clase 2-1](./Tema_2/presentacion1.html) |  |
 |  | [Clase 2-2](./Tema_2/presentacion2.html) |  |
 |  | [Clase 2-3](./Tema_2/presentacion3.html) |  |

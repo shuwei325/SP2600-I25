@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shu Wei Chou Chen">
+
+<title>Tema 2: Análisis multivariado de series temporales(1)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="lab02_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lab02_files/libs/quarto-html/quarto.js"></script>
+<script src="lab02_files/libs/quarto-html/popper.min.js"></script>
+<script src="lab02_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="lab02_files/libs/quarto-html/anchor.min.js"></script>
+<link href="lab02_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lab02_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="lab02_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="lab02_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="lab02_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="lab02_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="lab02_files/libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">Contenido</h2>
+   
+  <ul>
+  <li><a href="#librerías" id="toc-librerías" class="nav-link active" data-scroll-target="#librerías"><span class="header-section-number">1</span> librerías</a></li>
+  <li><a href="#producto-interno-bruto" id="toc-producto-interno-bruto" class="nav-link" data-scroll-target="#producto-interno-bruto"><span class="header-section-number">2</span> Producto interno bruto</a>
+  <ul class="collapse">
+  <li><a href="#var" id="toc-var" class="nav-link" data-scroll-target="#var"><span class="header-section-number">2.1</span> VAR</a>
+  <ul class="collapse">
+  <li><a href="#empezamos-con-var1-y-var2-usando-mts." id="toc-empezamos-con-var1-y-var2-usando-mts." class="nav-link" data-scroll-target="#empezamos-con-var1-y-var2-usando-mts."><span class="header-section-number">2.1.1</span> Empezamos con VAR(1) y VAR(2) usando <code>MTS</code>.</a></li>
+  <li><a href="#comparación-con-el-paquete-vars" id="toc-comparación-con-el-paquete-vars" class="nav-link" data-scroll-target="#comparación-con-el-paquete-vars"><span class="header-section-number">2.1.2</span> Comparación con el paquete <code>vars</code></a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#retornos-en-logaritmo-en-porcentaje-de-un-portafolio-de-crsp" id="toc-retornos-en-logaritmo-en-porcentaje-de-un-portafolio-de-crsp" class="nav-link" data-scroll-target="#retornos-en-logaritmo-en-porcentaje-de-un-portafolio-de-crsp"><span class="header-section-number">3</span> Retornos en logaritmo (en porcentaje) de un portafolio de CRSP</a>
+  <ul class="collapse">
+  <li><a href="#vma" id="toc-vma" class="nav-link" data-scroll-target="#vma"><span class="header-section-number">3.1</span> VMA</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Tema 2: Análisis multivariado de series temporales<sup>(1)</sup></h1>
+<p class="subtitle lead"><a href="https://shuwei325.github.io/SP2600-I25">Curso: Tópicos Avanzados de Series Temporales</a></p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Autor/a</div>
+  <div class="quarto-title-meta-heading">Afiliación</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author"><a href="https://shuwei325.github.io">Shu Wei Chou Chen</a> <a href="mailto:shuwei.chou@ucr.ac.cr" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-5495-2486" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://www.estadistica.ucr.ac.cr/">
+            Escuela de Estadística, Universidad de Costa Rica
+            </a>
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="librerías" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> librerías</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(astsa)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MTS)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(marima)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="producto-interno-bruto" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Producto interno bruto</h1>
+<ul>
+<li><p>El producto interno bruto de Reinos Unidos, Canadá y Estados Unidos de segundo trimestre del 1980 al segundo trimestre del 2011.</p></li>
+<li><p>Los datos son ajustados estacionalmente.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>da<span class="ot">=</span><span class="fu">read.table</span>(<span class="st">"q-gdp-ukcaus.txt"</span>,<span class="at">header=</span>T)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tsplot</span>(da[,<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>])</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>loggdp<span class="ot">=</span><span class="fu">log</span>(da[,<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tsplot</span>(loggdp)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Retornos</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span>loggdp[<span class="dv">2</span><span class="sc">:</span><span class="dv">126</span>,]<span class="sc">-</span>loggdp[<span class="dv">1</span><span class="sc">:</span><span class="dv">125</span>,]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span>x<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tsplot</span>(x)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(x)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="var" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="var"><span class="header-section-number">2.1</span> VAR</h2>
+<section id="empezamos-con-var1-y-var2-usando-mts." class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="empezamos-con-var1-y-var2-usando-mts."><span class="header-section-number">2.1.1</span> Empezamos con VAR(1) y VAR(2) usando <code>MTS</code>.</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>m1<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VAR</span>(x,<span class="dv">1</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Constant term: 
+Estimates:  0.1713324 0.1182869 0.2785892 
+Std.Error:  0.06790162 0.07193106 0.07877173 
+AR coefficient matrix 
+AR( 1 )-matrix 
+      [,1]  [,2]   [,3]
+[1,] 0.434 0.189 0.0373
+[2,] 0.185 0.245 0.3917
+[3,] 0.322 0.182 0.1674
+standard error 
+       [,1]   [,2]   [,3]
+[1,] 0.0811 0.0827 0.0872
+[2,] 0.0859 0.0877 0.0923
+[3,] 0.0940 0.0960 0.1011
+  
+Residuals cov-mtx: 
+           [,1]       [,2]       [,3]
+[1,] 0.28933472 0.01965508 0.06619853
+[2,] 0.01965508 0.32469319 0.16862723
+[3,] 0.06619853 0.16862723 0.38938665
+  
+det(SSE) =  0.02721916 
+AIC =  -3.459834 
+BIC =  -3.256196 
+HQ  =  -3.377107 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>m2<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VAR</span>(x,<span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Constant term: 
+Estimates:  0.1258163 0.1231581 0.2895581 
+Std.Error:  0.07266338 0.07382941 0.0816888 
+AR coefficient matrix 
+AR( 1 )-matrix 
+      [,1]  [,2]   [,3]
+[1,] 0.393 0.103 0.0521
+[2,] 0.351 0.338 0.4691
+[3,] 0.491 0.240 0.2356
+standard error 
+       [,1]   [,2]   [,3]
+[1,] 0.0934 0.0984 0.0911
+[2,] 0.0949 0.1000 0.0926
+[3,] 0.1050 0.1106 0.1024
+AR( 2 )-matrix 
+        [,1]   [,2]     [,3]
+[1,]  0.0566  0.106  0.01889
+[2,] -0.1914 -0.175 -0.00868
+[3,] -0.3120 -0.131  0.08531
+standard error 
+       [,1]   [,2]   [,3]
+[1,] 0.0924 0.0876 0.0938
+[2,] 0.0939 0.0890 0.0953
+[3,] 0.1038 0.0984 0.1055
+  
+Residuals cov-mtx: 
+           [,1]       [,2]       [,3]
+[1,] 0.28244420 0.02654091 0.07435286
+[2,] 0.02654091 0.29158166 0.13948786
+[3,] 0.07435286 0.13948786 0.35696571
+  
+det(SSE) =  0.02258974 
+AIC =  -3.502259 
+BIC =  -3.094982 
+HQ  =  -3.336804 </code></pre>
+</div>
+</div>
+<ul>
+<li>Criterios de información.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>m3<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VARorder</span>(x,<span class="at">maxp=</span><span class="dv">15</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>selected order: aic =  2 
+selected order: bic =  1 
+selected order: hq =  2 
+Summary table:  
+       p     AIC     BIC      HQ     M(p) p-value
+ [1,]  0 -3.3539 -3.3539 -3.3539   0.0000  0.0000
+ [2,]  1 -4.2694 -4.0657 -4.1866 111.7707  0.0000
+ [3,]  2 -4.3531 -3.9458 -4.1877  23.3444  0.0055
+ [4,]  3 -4.3094 -3.6985 -4.0612   9.9783  0.3522
+ [5,]  4 -4.2785 -3.4639 -3.9476  10.9118  0.2818
+ [6,]  5 -4.1655 -3.1473 -3.7518   2.8963  0.9683
+ [7,]  6 -4.0750 -2.8531 -3.5786   4.8423  0.8478
+ [8,]  7 -3.9830 -2.5576 -3.4039   4.5561  0.8712
+ [9,]  8 -4.1184 -2.4893 -3.4566  23.6080  0.0050
+[10,]  9 -4.0474 -2.2146 -3.3028   5.9445  0.7455
+[11,] 10 -3.9706 -1.9342 -3.1433   5.2766  0.8096
+[12,] 11 -3.9850 -1.7450 -3.0750  11.9593  0.2156
+[13,] 12 -4.0317 -1.5881 -3.0390  13.8308  0.1285
+[14,] 13 -4.0535 -1.4062 -2.9780  11.5191  0.2418
+[15,] 14 -4.1048 -1.2538 -2.9466  12.9867  0.1632
+[16,] 15 -4.3520 -1.2974 -3.1111  24.8411  0.0032</code></pre>
+</div>
+</div>
+</section>
+<section id="comparación-con-el-paquete-vars" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="comparación-con-el-paquete-vars"><span class="header-section-number">2.1.2</span> Comparación con el paquete <code>vars</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mvars<span class="ot">=</span>vars<span class="sc">::</span><span class="fu">VAR</span>(x,<span class="at">p=</span><span class="dv">1</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mvars)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+VAR Estimation Results:
+========================= 
+Endogenous variables: uk, ca, us 
+Deterministic variables: const 
+Sample size: 124 
+Log Likelihood: -304.407 
+Roots of the characteristic polynomial:
+0.7091 0.08735 0.05004
+Call:
+vars::VAR(y = x, p = 1)
+
+
+Estimation results for equation uk: 
+=================================== 
+uk = uk.l1 + ca.l1 + us.l1 + const 
+
+      Estimate Std. Error t value Pr(&gt;|t|)    
+uk.l1  0.43435    0.08106   5.358 4.12e-07 ***
+ca.l1  0.18888    0.08275   2.282   0.0242 *  
+us.l1  0.03727    0.08716   0.428   0.6697    
+const  0.17133    0.06790   2.523   0.0129 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+
+Residual standard error: 0.5468 on 120 degrees of freedom
+Multiple R-Squared: 0.3687, Adjusted R-squared: 0.3529 
+F-statistic: 23.36 on 3 and 120 DF,  p-value: 5.596e-12 
+
+
+Estimation results for equation ca: 
+=================================== 
+ca = uk.l1 + ca.l1 + us.l1 + const 
+
+      Estimate Std. Error t value Pr(&gt;|t|)    
+uk.l1  0.18499    0.08587   2.154   0.0332 *  
+ca.l1  0.24475    0.08766   2.792   0.0061 ** 
+us.l1  0.39166    0.09233   4.242 4.38e-05 ***
+const  0.11829    0.07193   1.644   0.1027    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+
+Residual standard error: 0.5792 on 120 degrees of freedom
+Multiple R-Squared: 0.4685, Adjusted R-squared: 0.4552 
+F-statistic: 35.26 on 3 and 120 DF,  p-value: &lt; 2.2e-16 
+
+
+Estimation results for equation us: 
+=================================== 
+us = uk.l1 + ca.l1 + us.l1 + const 
+
+      Estimate Std. Error t value Pr(&gt;|t|)    
+uk.l1  0.32153    0.09404   3.419 0.000859 ***
+ca.l1  0.18196    0.09600   1.895 0.060438 .  
+us.l1  0.16740    0.10111   1.656 0.100410    
+const  0.27859    0.07877   3.537 0.000577 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+
+Residual standard error: 0.6343 on 120 degrees of freedom
+Multiple R-Squared: 0.3044, Adjusted R-squared: 0.287 
+F-statistic:  17.5 on 3 and 120 DF,  p-value: 1.725e-09 
+
+
+
+Covariance matrix of residuals:
+        uk      ca      us
+uk 0.29898 0.02031 0.06841
+ca 0.02031 0.33552 0.17425
+us 0.06841 0.17425 0.40237
+
+Correlation matrix of residuals:
+        uk      ca     us
+uk 1.00000 0.06413 0.1972
+ca 0.06413 1.00000 0.4742
+us 0.19722 0.47424 1.0000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m3<span class="ot">=</span><span class="fu">VARorder</span>(x,<span class="at">maxp=</span><span class="dv">15</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>selected order: aic =  2 
+selected order: bic =  1 
+selected order: hq =  2 
+Summary table:  
+       p     AIC     BIC      HQ     M(p) p-value
+ [1,]  0 -3.3539 -3.3539 -3.3539   0.0000  0.0000
+ [2,]  1 -4.2694 -4.0657 -4.1866 111.7707  0.0000
+ [3,]  2 -4.3531 -3.9458 -4.1877  23.3444  0.0055
+ [4,]  3 -4.3094 -3.6985 -4.0612   9.9783  0.3522
+ [5,]  4 -4.2785 -3.4639 -3.9476  10.9118  0.2818
+ [6,]  5 -4.1655 -3.1473 -3.7518   2.8963  0.9683
+ [7,]  6 -4.0750 -2.8531 -3.5786   4.8423  0.8478
+ [8,]  7 -3.9830 -2.5576 -3.4039   4.5561  0.8712
+ [9,]  8 -4.1184 -2.4893 -3.4566  23.6080  0.0050
+[10,]  9 -4.0474 -2.2146 -3.3028   5.9445  0.7455
+[11,] 10 -3.9706 -1.9342 -3.1433   5.2766  0.8096
+[12,] 11 -3.9850 -1.7450 -3.0750  11.9593  0.2156
+[13,] 12 -4.0317 -1.5881 -3.0390  13.8308  0.1285
+[14,] 13 -4.0535 -1.4062 -2.9780  11.5191  0.2418
+[15,] 14 -4.1048 -1.2538 -2.9466  12.9867  0.1632
+[16,] 15 -4.3520 -1.2974 -3.1111  24.8411  0.0032</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>CI<span class="ot">=</span><span class="fu">data.frame</span>(<span class="at">order=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">15</span>,<span class="at">AIC=</span>m3<span class="sc">$</span>aic,<span class="at">BIC=</span>m3<span class="sc">$</span>bic,<span class="at">HQ=</span>m3<span class="sc">$</span>hq)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>CI<span class="sc">%&gt;%</span><span class="fu">gather</span>(</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">key =</span> <span class="st">"C.Info"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="st">"value"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  AIC,BIC,HQ</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>(<span class="at">x =</span> order, <span class="at">y =</span> value, <span class="at">group=</span>C.Info,<span class="at">color=</span>C.Info))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Los grados de libertad para VAR(1) son <span class="math inline">\(pk^2\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">*</span><span class="dv">3</span><span class="sc">^</span><span class="dv">2</span> </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mq</span>(m1<span class="sc">$</span>residuals,<span class="at">adj=</span><span class="dv">9</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ljung-Box Statistics:  
+         m       Q(m)     df    p-value
+ [1,]   1.00      9.66    0.00     1.00
+ [2,]   2.00     17.53    9.00     0.04
+ [3,]   3.00     26.88   18.00     0.08
+ [4,]   4.00     45.07   27.00     0.02
+ [5,]   5.00     52.91   36.00     0.03
+ [6,]   6.00     58.52   45.00     0.09
+ [7,]   7.00     66.50   54.00     0.12
+ [8,]   8.00     81.90   63.00     0.06
+ [9,]   9.00     92.83   72.00     0.05
+[10,]  10.00    103.90   81.00     0.04
+[11,]  11.00    107.82   90.00     0.10
+[12,]  12.00    119.23   99.00     0.08
+[13,]  13.00    132.59  108.00     0.05
+[14,]  14.00    142.52  117.00     0.05
+[15,]  15.00    153.51  126.00     0.05
+[16,]  16.00    158.83  135.00     0.08
+[17,]  17.00    165.14  144.00     0.11
+[18,]  18.00    171.03  153.00     0.15
+[19,]  19.00    184.52  162.00     0.11
+[20,]  20.00    193.41  171.00     0.12
+[21,]  21.00    198.35  180.00     0.17
+[22,]  22.00    206.70  189.00     0.18
+[23,]  23.00    211.62  198.00     0.24
+[24,]  24.00    223.23  207.00     0.21</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Los grados de libertad para VAR(2) son <span class="math inline">\(pk^2\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="dv">3</span><span class="sc">^</span><span class="dv">2</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mq</span>(m2<span class="sc">$</span>residuals,<span class="at">adj=</span><span class="dv">18</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ljung-Box Statistics:  
+          m       Q(m)     df    p-value
+ [1,]   1.000     0.816  -9.000     1.00
+ [2,]   2.000     3.978   0.000     1.00
+ [3,]   3.000    16.665   9.000     0.05
+ [4,]   4.000    35.122  18.000     0.01
+ [5,]   5.000    38.189  27.000     0.07
+ [6,]   6.000    41.239  36.000     0.25
+ [7,]   7.000    47.621  45.000     0.37
+ [8,]   8.000    61.677  54.000     0.22
+ [9,]   9.000    67.366  63.000     0.33
+[10,]  10.000    76.930  72.000     0.32
+[11,]  11.000    81.567  81.000     0.46
+[12,]  12.000    93.112  90.000     0.39
+[13,]  13.000   105.327  99.000     0.31
+[14,]  14.000   116.279 108.000     0.28
+[15,]  15.000   128.974 117.000     0.21
+[16,]  16.000   134.704 126.000     0.28
+[17,]  17.000   138.552 135.000     0.40
+[18,]  18.000   146.256 144.000     0.43
+[19,]  19.000   162.418 153.000     0.29
+[20,]  20.000   171.948 162.000     0.28
+[21,]  21.000   174.913 171.000     0.40
+[22,]  22.000   182.056 180.000     0.44
+[23,]  23.000   190.276 189.000     0.46
+[24,]  24.000   202.141 198.000     0.41</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MTSdiag</span>(m2,<span class="at">adj=</span><span class="dv">18</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Covariance matrix:"
+       uk     ca    us
+uk 0.2848 0.0268 0.075
+ca 0.0268 0.2940 0.141
+us 0.0750 0.1406 0.360
+CCM at lag:  0 
+       [,1]   [,2]  [,3]
+[1,] 1.0000 0.0925 0.234
+[2,] 0.0925 1.0000 0.432
+[3,] 0.2342 0.4324 1.000
+Simplified matrix: 
+CCM at lag:  1 
+. . . 
+. . . 
+. . . 
+CCM at lag:  2 
+. . . 
+. . . 
+. . . 
+CCM at lag:  3 
+. . . 
+. . . 
+. . . 
+CCM at lag:  4 
+. . - 
+. . . 
+. . . 
+CCM at lag:  5 
+. . . 
+. . . 
+. . . 
+CCM at lag:  6 
+. . . 
+. . . 
+. . . 
+CCM at lag:  7 
+. . . 
+. . . 
+. . . 
+CCM at lag:  8 
+. . . 
+. . . 
+. . . 
+CCM at lag:  9 
+. . . 
+. . . 
+. . . 
+CCM at lag:  10 
+. . . 
+. . . 
+. . . 
+CCM at lag:  11 
+. . . 
+. . . 
+. . . 
+CCM at lag:  12 
+. . . 
+. . . 
+. . . 
+CCM at lag:  13 
+. - . 
+. . . 
+. . . 
+CCM at lag:  14 
+. - . 
+. . . 
+. . . 
+CCM at lag:  15 
+. . . 
+. . . 
+. . . 
+CCM at lag:  16 
+. . . 
+. . . 
+. . . 
+CCM at lag:  17 
+. . . 
+. . . 
+. . . 
+CCM at lag:  18 
+. . . 
+. . . 
+. . . 
+CCM at lag:  19 
+. . . 
+. . + 
+. . . 
+CCM at lag:  20 
+. . . 
+. . . 
+. . . 
+CCM at lag:  21 
+. . . 
+. . . 
+. . . 
+CCM at lag:  22 
+. . . 
+. . . 
+. . . 
+CCM at lag:  23 
+. . . 
+. . . 
+. . . 
+CCM at lag:  24 
+. . . 
+. . . 
+. . . </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hit Enter for p-value plot of individual ccm:  </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hit Enter to compute MQ-statistics: 
+
+Ljung-Box Statistics:  
+          m       Q(m)     df    p-value
+ [1,]   1.000     0.816  -9.000     1.00
+ [2,]   2.000     3.978   0.000     1.00
+ [3,]   3.000    16.665   9.000     0.05
+ [4,]   4.000    35.122  18.000     0.01
+ [5,]   5.000    38.189  27.000     0.07
+ [6,]   6.000    41.239  36.000     0.25
+ [7,]   7.000    47.621  45.000     0.37
+ [8,]   8.000    61.677  54.000     0.22
+ [9,]   9.000    67.366  63.000     0.33
+[10,]  10.000    76.930  72.000     0.32
+[11,]  11.000    81.567  81.000     0.46
+[12,]  12.000    93.112  90.000     0.39
+[13,]  13.000   105.327  99.000     0.31
+[14,]  14.000   116.279 108.000     0.28
+[15,]  15.000   128.974 117.000     0.21
+[16,]  16.000   134.704 126.000     0.28
+[17,]  17.000   138.552 135.000     0.40
+[18,]  18.000   146.256 144.000     0.43
+[19,]  19.000   162.418 153.000     0.29
+[20,]  20.000   171.948 162.000     0.28
+[21,]  21.000   174.913 171.000     0.40
+[22,]  22.000   182.056 180.000     0.44
+[23,]  23.000   190.276 189.000     0.46
+[24,]  24.000   202.141 198.000     0.41</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-10-3.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hit Enter to obtain residual plots: </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-10-4.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="retornos-en-logaritmo-en-porcentaje-de-un-portafolio-de-crsp" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Retornos en logaritmo (en porcentaje) de un portafolio de CRSP</h1>
+<section id="vma" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="vma"><span class="header-section-number">3.1</span> VMA</h2>
+<ul>
+<li>Retornos en logaritmo (en porcentaje) de un portafolio de CRSP (Center for Research in Security Prices), de enero 1961 a diciembre 2011 (T=612).</li>
+<li>Consiste en stocks de NYSE, AMEX y NASDAQ.</li>
+<li>Se va a estudiar el decil 5 y decil 8 del logretorno.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>da<span class="ot">=</span><span class="fu">read.table</span>(<span class="st">"m-dec15678-6111.txt"</span>,<span class="at">header=</span>T)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(da)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      date      dec1      dec5      dec6      dec7      dec8
+1 19610131  0.058011  0.081767  0.084824  0.087414  0.099884
+2 19610228  0.029241  0.055524  0.067772  0.079544  0.079434
+3 19610330  0.025896  0.041304  0.055696  0.065426  0.069637
+4 19610428  0.005667  0.000780  0.005113  0.022786  0.019822
+5 19610531  0.019208  0.049590  0.047651  0.031453  0.047365
+6 19610630 -0.024670 -0.040046 -0.058176 -0.056580 -0.054167</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">log</span>(da[,<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>]<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>rtn<span class="ot">=</span><span class="fu">cbind</span>(x<span class="sc">$</span>dec5,x<span class="sc">$</span>dec8)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>tdx<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">612</span>)<span class="sc">/</span><span class="dv">12</span><span class="sc">+</span><span class="dv">1961</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfcol=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tdx,rtn[,<span class="dv">1</span>],<span class="at">type=</span><span class="st">'l'</span>,<span class="at">xlab=</span><span class="st">'year'</span>,<span class="at">ylab=</span><span class="st">'d5'</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tdx,rtn[,<span class="dv">2</span>],<span class="at">type=</span><span class="st">'l'</span>,<span class="at">xlab=</span><span class="st">'year'</span>,<span class="at">ylab=</span><span class="st">'d8'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ccm</span>(rtn)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Covariance matrix:"
+     [,1] [,2]
+[1,] 30.7 34.3
+[2,] 34.3 41.2
+CCM at lag:  0 
+      [,1]  [,2]
+[1,] 1.000 0.964
+[2,] 0.964 1.000
+Simplified matrix: 
+CCM at lag:  1 
++ + 
++ + 
+CCM at lag:  2 
+. . 
+. . 
+CCM at lag:  3 
+. . 
+. . 
+CCM at lag:  4 
+. . 
+. . 
+CCM at lag:  5 
+. . 
+. . 
+CCM at lag:  6 
+. . 
+. . 
+CCM at lag:  7 
+. . 
+. . 
+CCM at lag:  8 
+- - 
+- - 
+CCM at lag:  9 
+. . 
+. . 
+CCM at lag:  10 
+. . 
+. . 
+CCM at lag:  11 
+. . 
+. . 
+CCM at lag:  12 
+. . 
+. . </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hit Enter for p-value plot of individual ccm:  </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>MTS<span class="sc">::</span><span class="fu">VMAorder</span>(rtn,<span class="at">lag=</span><span class="dv">20</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Q(j,m) Statistics:  
+         j     Q(j,m)   p-value
+ [1,]   1.00    109.72     0.02
+ [2,]   2.00     71.11     0.64
+ [3,]   3.00     63.14     0.76
+ [4,]   4.00     58.90     0.78
+ [5,]   5.00     55.40     0.77
+ [6,]   6.00     55.20     0.65
+ [7,]   7.00     53.70     0.56
+ [8,]   8.00     53.05     0.43
+ [9,]   9.00     47.87     0.48
+[10,]  10.00     43.80     0.48
+[11,]  11.00     43.45     0.33
+[12,]  12.00     39.52     0.32
+[13,]  13.00     29.53     0.59
+[14,]  14.00     25.76     0.59
+[15,]  15.00     14.65     0.93
+[16,]  16.00     11.55     0.93
+[17,]  17.00     10.44     0.84
+[18,]  18.00      9.52     0.66
+[19,]  19.00      5.23     0.73
+[20,]  20.00      3.97     0.41</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>m1<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VMA</span>(rtn,<span class="at">q=</span><span class="dv">1</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of parameters:  6 
+initial estimates:  0.8935 0.9465 -0.3709 0.1852 -0.533 0.2658 
+Par. Lower-bounds:  0.4517 0.4391 -0.6746 -0.079 -0.8818 -0.0376 
+Par. Upper-bounds:  1.3353 1.4539 -0.0672 0.4493 -0.1843 0.5691 
+Final   Estimates:  0.9202559 0.9838171 -0.4321622 0.2300906 -0.5977665 0.3121535 
+
+Coefficient(s):
+      Estimate  Std. Error  t value Pr(&gt;|t|)    
+[1,]    0.9203      0.2596    3.546 0.000392 ***
+[2,]    0.9838      0.3027    3.251 0.001151 ** 
+[3,]   -0.4322      0.1448   -2.985 0.002837 ** 
+[4,]    0.2301      0.1255    1.833 0.066810 .  
+[5,]   -0.5978      0.1676   -3.567 0.000361 ***
+[6,]    0.3122      0.1454    2.146 0.031835 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+--- 
+Estimates in matrix form: 
+Constant term:  
+Estimates:  0.9202559 0.9838171 
+MA coefficient matrix 
+MA( 1 )-matrix 
+       [,1]  [,2]
+[1,] -0.432 0.230
+[2,] -0.598 0.312
+  
+Residuals cov-matrix: 
+         [,1]     [,2]
+[1,] 29.64753 32.81585
+[2,] 32.81585 39.13148
+---- 
+aic=  4.44172 
+bic=  4.485021 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>m2<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VMA</span>(rtn,<span class="at">q=</span><span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of parameters:  10 
+initial estimates:  0.8959 0.9458 -0.3715 0.1854 -0.0441 0.1132 -0.5355 0.2681 0.0321 0.0451 
+Par. Lower-bounds:  0.4551 0.4389 -0.6745 -0.0783 -0.3469 -0.1503 -0.884 -0.0351 -0.3161 -0.2579 
+Par. Upper-bounds:  1.3367 1.4527 -0.0685 0.4491 0.2587 0.3767 -0.1871 0.5713 0.3804 0.3481 
+Final   Estimates:  0.9111029 0.9727181 -0.3909807 0.1994245 -0.003166616 0.06987341 -0.5566988 0.2808989 0.06880401 0.0027429 
+
+Coefficient(s):
+       Estimate  Std. Error  t value Pr(&gt;|t|)    
+ [1,]  0.911103    0.241042    3.780 0.000157 ***
+ [2,]  0.972718    0.285405    3.408 0.000654 ***
+ [3,] -0.390981    0.151062   -2.588 0.009648 ** 
+ [4,]  0.199424    0.131483    1.517 0.129336    
+ [5,] -0.003167    0.142909   -0.022 0.982322    
+ [6,]  0.069873    0.123479    0.566 0.571482    
+ [7,] -0.556699    0.174391   -3.192 0.001412 ** 
+ [8,]  0.280899    0.151741    1.851 0.064145 .  
+ [9,]  0.068804    0.165529    0.416 0.677658    
+[10,]  0.002743    0.143014    0.019 0.984698    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+--- 
+Estimates in matrix form: 
+Constant term:  
+Estimates:  0.9111029 0.9727181 
+MA coefficient matrix 
+MA( 1 )-matrix 
+       [,1]  [,2]
+[1,] -0.391 0.199
+[2,] -0.557 0.281
+MA( 2 )-matrix 
+         [,1]    [,2]
+[1,] -0.00317 0.06987
+[2,]  0.06880 0.00274
+  
+Residuals cov-matrix: 
+         [,1]     [,2]
+[1,] 29.46232 32.66685
+[2,] 32.66685 39.00896
+---- 
+aic=  4.441487 
+bic=  4.513656 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>m1<span class="sc">$</span>bic</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.485021</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>m2<span class="sc">$</span>bic</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.513656</code></pre>
+</div>
+</div>
+<ul>
+<li>Podemos usar con VAR</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>m3<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VARorder</span>(rtn,<span class="at">maxp=</span><span class="dv">15</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>selected order: aic =  2 
+selected order: bic =  1 
+selected order: hq =  1 
+Summary table:  
+       p    AIC    BIC     HQ    M(p) p-value
+ [1,]  0 4.5056 4.5056 4.5056  0.0000  0.0000
+ [2,]  1 4.4520 4.4808 4.4632 39.5916  0.0000
+ [3,]  2 4.4492 4.5069 4.4717  9.3625  0.0527
+ [4,]  3 4.4547 4.5413 4.4884  4.4619  0.3471
+ [5,]  4 4.4614 4.5769 4.5063  3.7298  0.4438
+ [6,]  5 4.4742 4.6185 4.5303  0.1961  0.9955
+ [7,]  6 4.4842 4.6574 4.5515  1.7913  0.7741
+ [8,]  7 4.4948 4.6969 4.5734  1.4290  0.8391
+ [9,]  8 4.4990 4.7300 4.5888  5.1263  0.2746
+[10,]  9 4.5071 4.7669 4.6081  2.8904  0.5763
+[11,] 10 4.5196 4.8082 4.6318  0.3375  0.9873
+[12,] 11 4.5274 4.8449 4.6509  3.0272  0.5533
+[13,] 12 4.5208 4.8672 4.6555 11.2154  0.0242
+[14,] 13 4.5259 4.9012 4.6719  4.5388  0.3380
+[15,] 14 4.5253 4.9294 4.6825  7.7641  0.1006
+[16,] 15 4.5329 4.9659 4.7013  3.0885  0.5431</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>m4<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VAR</span>(rtn,<span class="at">p=</span><span class="dv">4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Constant term: 
+Estimates:  0.8010652 0.8162344 
+Std.Error:  0.2320281 0.2665311 
+AR coefficient matrix 
+AR( 1 )-matrix 
+      [,1]   [,2]
+[1,] 0.374 -0.185
+[2,] 0.542 -0.270
+standard error 
+      [,1]  [,2]
+[1,] 0.152 0.132
+[2,] 0.175 0.152
+AR( 2 )-matrix 
+         [,1]    [,2]
+[1,]  0.00144 -0.0907
+[2,] -0.09292 -0.0129
+standard error 
+      [,1]  [,2]
+[1,] 0.154 0.133
+[2,] 0.177 0.152
+AR( 3 )-matrix 
+      [,1]   [,2]
+[1,] 0.270 -0.216
+[2,] 0.287 -0.237
+standard error 
+      [,1]  [,2]
+[1,] 0.154 0.133
+[2,] 0.176 0.153
+AR( 4 )-matrix 
+       [,1]  [,2]
+[1,] -0.151 0.127
+[2,] -0.224 0.175
+standard error 
+      [,1]  [,2]
+[1,] 0.154 0.131
+[2,] 0.177 0.151
+  
+Residuals cov-mtx: 
+         [,1]     [,2]
+[1,] 29.34173 32.47576
+[2,] 32.47576 38.71687
+  
+det(SSE) =  81.34445 
+AIC =  4.45098 
+BIC =  4.56645 
+HQ  =  4.49589 </code></pre>
+</div>
+</div>
+<p>Los grados de libertad son <span class="math inline">\(k^2(p)\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">2</span><span class="sc">*</span><span class="dv">4</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mq</span>(m4<span class="sc">$</span>residuals,<span class="at">adj=</span><span class="dv">16</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ljung-Box Statistics:  
+            m       Q(m)       df    p-value
+ [1,]   1.00000   0.00366 -12.00000     1.00
+ [2,]   2.00000   0.01425  -8.00000     1.00
+ [3,]   3.00000   0.03051  -4.00000     1.00
+ [4,]   4.00000   0.07711   0.00000     1.00
+ [5,]   5.00000   0.15712   4.00000     1.00
+ [6,]   6.00000   2.30958   8.00000     0.97
+ [7,]   7.00000   3.01753  12.00000     1.00
+ [8,]   8.00000   8.18498  16.00000     0.94
+ [9,]   9.00000  11.52026  20.00000     0.93
+[10,]  10.00000  12.87117  24.00000     0.97
+[11,]  11.00000  16.03433  28.00000     0.97
+[12,]  12.00000  27.05013  32.00000     0.72
+[13,]  13.00000  28.82318  36.00000     0.80
+[14,]  14.00000  38.14113  40.00000     0.55
+[15,]  15.00000  41.28613  44.00000     0.59
+[16,]  16.00000  42.07408  48.00000     0.71
+[17,]  17.00000  43.14412  52.00000     0.80
+[18,]  18.00000  47.23349  56.00000     0.79
+[19,]  19.00000  48.48892  60.00000     0.86
+[20,]  20.00000  51.43031  64.00000     0.87
+[21,]  21.00000  56.90230  68.00000     0.83
+[22,]  22.00000  61.38877  72.00000     0.81
+[23,]  23.00000  65.11915  76.00000     0.81
+[24,]  24.00000  72.18807  80.00000     0.72</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MTSdiag</span>(m4,<span class="at">adj=</span><span class="dv">16</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Covariance matrix:"
+     [,1] [,2]
+[1,] 29.4 32.5
+[2,] 32.5 38.8
+CCM at lag:  0 
+      [,1]  [,2]
+[1,] 1.000 0.964
+[2,] 0.964 1.000
+Simplified matrix: 
+CCM at lag:  1 
+. . 
+. . 
+CCM at lag:  2 
+. . 
+. . 
+CCM at lag:  3 
+. . 
+. . 
+CCM at lag:  4 
+. . 
+. . 
+CCM at lag:  5 
+. . 
+. . 
+CCM at lag:  6 
+. . 
+. . 
+CCM at lag:  7 
+. . 
+. . 
+CCM at lag:  8 
+- - 
+. . 
+CCM at lag:  9 
+. . 
+. . 
+CCM at lag:  10 
+. . 
+. . 
+CCM at lag:  11 
+. . 
+. . 
+CCM at lag:  12 
+. . 
+. . 
+CCM at lag:  13 
+. . 
+. . 
+CCM at lag:  14 
+. . 
+. . 
+CCM at lag:  15 
+. . 
+. . 
+CCM at lag:  16 
+. . 
+. . 
+CCM at lag:  17 
+. . 
+. . 
+CCM at lag:  18 
+. . 
+. . 
+CCM at lag:  19 
+. . 
+. . 
+CCM at lag:  20 
+. . 
+. . 
+CCM at lag:  21 
+. . 
+. . 
+CCM at lag:  22 
+. . 
+. . 
+CCM at lag:  23 
+. . 
+. . 
+CCM at lag:  24 
+. . 
+. . </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hit Enter for p-value plot of individual ccm:  </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hit Enter to compute MQ-statistics: 
+
+Ljung-Box Statistics:  
+            m       Q(m)       df    p-value
+ [1,]   1.00000   0.00366 -12.00000     1.00
+ [2,]   2.00000   0.01425  -8.00000     1.00
+ [3,]   3.00000   0.03051  -4.00000     1.00
+ [4,]   4.00000   0.07711   0.00000     1.00
+ [5,]   5.00000   0.15712   4.00000     1.00
+ [6,]   6.00000   2.30958   8.00000     0.97
+ [7,]   7.00000   3.01753  12.00000     1.00
+ [8,]   8.00000   8.18498  16.00000     0.94
+ [9,]   9.00000  11.52026  20.00000     0.93
+[10,]  10.00000  12.87117  24.00000     0.97
+[11,]  11.00000  16.03433  28.00000     0.97
+[12,]  12.00000  27.05013  32.00000     0.72
+[13,]  13.00000  28.82318  36.00000     0.80
+[14,]  14.00000  38.14113  40.00000     0.55
+[15,]  15.00000  41.28613  44.00000     0.59
+[16,]  16.00000  42.07408  48.00000     0.71
+[17,]  17.00000  43.14412  52.00000     0.80
+[18,]  18.00000  47.23349  56.00000     0.79
+[19,]  19.00000  48.48892  60.00000     0.86
+[20,]  20.00000  51.43031  64.00000     0.87
+[21,]  21.00000  56.90230  68.00000     0.83
+[22,]  22.00000  61.38877  72.00000     0.81
+[23,]  23.00000  65.11915  76.00000     0.81
+[24,]  24.00000  72.18807  80.00000     0.72</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-16-3.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hit Enter to obtain residual plots: </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-16-4.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>m4<span class="sc">$</span>bic</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.56645</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>m1<span class="sc">$</span>bic</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.485021</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>m2<span class="sc">$</span>bic</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.513656</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>m5<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VAR</span>(rtn,<span class="at">p=</span><span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Constant term: 
+Estimates:  0.8194283 0.8148763 
+Std.Error:  0.2261943 0.2600441 
+AR coefficient matrix 
+AR( 1 )-matrix 
+      [,1]   [,2]
+[1,] 0.389 -0.202
+[2,] 0.555 -0.284
+standard error 
+      [,1]  [,2]
+[1,] 0.151 0.131
+[2,] 0.174 0.151
+AR( 2 )-matrix 
+        [,1]    [,2]
+[1,] -0.0287 -0.0532
+[2,] -0.1242  0.0271
+standard error 
+      [,1]  [,2]
+[1,] 0.152 0.130
+[2,] 0.174 0.149
+  
+Residuals cov-mtx: 
+         [,1]     [,2]
+[1,] 29.47473 32.64818
+[2,] 32.64818 38.95654
+  
+det(SSE) =  82.32963 
+AIC =  4.436875 
+BIC =  4.49461 
+HQ  =  4.45933 </code></pre>
+</div>
+</div>
+<p>Los grados de libertad son <span class="math inline">\(k^2(p)\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">2</span><span class="sc">*</span><span class="dv">2</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mq</span>(m4<span class="sc">$</span>residuals,<span class="at">adj=</span><span class="dv">8</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ljung-Box Statistics:  
+           m       Q(m)      df    p-value
+ [1,]  1.00000   0.00366 -4.00000     1.00
+ [2,]  2.00000   0.01425  0.00000     1.00
+ [3,]  3.00000   0.03051  4.00000     1.00
+ [4,]  4.00000   0.07711  8.00000     1.00
+ [5,]  5.00000   0.15712 12.00000     1.00
+ [6,]  6.00000   2.30958 16.00000     1.00
+ [7,]  7.00000   3.01753 20.00000     1.00
+ [8,]  8.00000   8.18498 24.00000     1.00
+ [9,]  9.00000  11.52026 28.00000     1.00
+[10,] 10.00000  12.87117 32.00000     1.00
+[11,] 11.00000  16.03433 36.00000     1.00
+[12,] 12.00000  27.05013 40.00000     0.94
+[13,] 13.00000  28.82318 44.00000     0.96
+[14,] 14.00000  38.14113 48.00000     0.85
+[15,] 15.00000  41.28613 52.00000     0.86
+[16,] 16.00000  42.07408 56.00000     0.92
+[17,] 17.00000  43.14412 60.00000     0.95
+[18,] 18.00000  47.23349 64.00000     0.94
+[19,] 19.00000  48.48892 68.00000     0.96
+[20,] 20.00000  51.43031 72.00000     0.97
+[21,] 21.00000  56.90230 76.00000     0.95
+[22,] 22.00000  61.38877 80.00000     0.94
+[23,] 23.00000  65.11915 84.00000     0.94
+[24,] 24.00000  72.18807 88.00000     0.89</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MTSdiag</span>(m4,<span class="at">adj=</span><span class="dv">8</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Covariance matrix:"
+     [,1] [,2]
+[1,] 29.4 32.5
+[2,] 32.5 38.8
+CCM at lag:  0 
+      [,1]  [,2]
+[1,] 1.000 0.964
+[2,] 0.964 1.000
+Simplified matrix: 
+CCM at lag:  1 
+. . 
+. . 
+CCM at lag:  2 
+. . 
+. . 
+CCM at lag:  3 
+. . 
+. . 
+CCM at lag:  4 
+. . 
+. . 
+CCM at lag:  5 
+. . 
+. . 
+CCM at lag:  6 
+. . 
+. . 
+CCM at lag:  7 
+. . 
+. . 
+CCM at lag:  8 
+- - 
+. . 
+CCM at lag:  9 
+. . 
+. . 
+CCM at lag:  10 
+. . 
+. . 
+CCM at lag:  11 
+. . 
+. . 
+CCM at lag:  12 
+. . 
+. . 
+CCM at lag:  13 
+. . 
+. . 
+CCM at lag:  14 
+. . 
+. . 
+CCM at lag:  15 
+. . 
+. . 
+CCM at lag:  16 
+. . 
+. . 
+CCM at lag:  17 
+. . 
+. . 
+CCM at lag:  18 
+. . 
+. . 
+CCM at lag:  19 
+. . 
+. . 
+CCM at lag:  20 
+. . 
+. . 
+CCM at lag:  21 
+. . 
+. . 
+CCM at lag:  22 
+. . 
+. . 
+CCM at lag:  23 
+. . 
+. . 
+CCM at lag:  24 
+. . 
+. . </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hit Enter for p-value plot of individual ccm:  </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-18-3.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hit Enter to compute MQ-statistics: 
+
+Ljung-Box Statistics:  
+           m       Q(m)      df    p-value
+ [1,]  1.00000   0.00366 -4.00000     1.00
+ [2,]  2.00000   0.01425  0.00000     1.00
+ [3,]  3.00000   0.03051  4.00000     1.00
+ [4,]  4.00000   0.07711  8.00000     1.00
+ [5,]  5.00000   0.15712 12.00000     1.00
+ [6,]  6.00000   2.30958 16.00000     1.00
+ [7,]  7.00000   3.01753 20.00000     1.00
+ [8,]  8.00000   8.18498 24.00000     1.00
+ [9,]  9.00000  11.52026 28.00000     1.00
+[10,] 10.00000  12.87117 32.00000     1.00
+[11,] 11.00000  16.03433 36.00000     1.00
+[12,] 12.00000  27.05013 40.00000     0.94
+[13,] 13.00000  28.82318 44.00000     0.96
+[14,] 14.00000  38.14113 48.00000     0.85
+[15,] 15.00000  41.28613 52.00000     0.86
+[16,] 16.00000  42.07408 56.00000     0.92
+[17,] 17.00000  43.14412 60.00000     0.95
+[18,] 18.00000  47.23349 64.00000     0.94
+[19,] 19.00000  48.48892 68.00000     0.96
+[20,] 20.00000  51.43031 72.00000     0.97
+[21,] 21.00000  56.90230 76.00000     0.95
+[22,] 22.00000  61.38877 80.00000     0.94
+[23,] 23.00000  65.11915 84.00000     0.94
+[24,] 24.00000  72.18807 88.00000     0.89</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-18-4.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hit Enter to obtain residual plots: </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab02_files/figure-html/unnamed-chunk-18-5.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>m4<span class="sc">$</span>bic</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.56645</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>m1<span class="sc">$</span>bic</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.485021</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>m2<span class="sc">$</span>bic</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.513656</code></pre>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
