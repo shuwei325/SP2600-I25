@@ -924,67 +924,67 @@ coef[ 2] = 0.0625</code></pre>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a>C.info<span class="ot">&lt;-</span><span class="fu">data.frame</span>(param.spec[[<span class="dv">1</span>]])</span>
-<span id="cb49-2"><a href=""></a><span class="fu">colnames</span>(C.info)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"t"</span>,<span class="st">"AIC"</span>,<span class="st">"BIC"</span>)</span>
+<span id="cb49-2"><a href=""></a><span class="fu">colnames</span>(C.info)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"orden"</span>,<span class="st">"AIC"</span>,<span class="st">"BIC"</span>)</span>
 <span id="cb49-3"><a href=""></a>C.info</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    t         AIC        BIC
-1   0 272.6937023 210.955320
-2   1  82.1484043  24.525915
-3   2  84.1441892  30.637592
-4   3  85.5926277  36.201922
-5   4  80.4715619  35.196749
-6   5  70.7822012  29.623280
-7   6  69.5898661  32.546837
-8   7  71.5718647  38.644728
-9   8  71.4320021  42.620757
-10  9  63.2815353  38.586183
-11 10  49.9872355  29.407775
-12 11  40.7220194  24.258451
-13 12  41.0928139  28.745138
-14 13  37.0833413  28.851557
-15 14   8.7779160   4.662024
-16 15   0.0000000   0.000000
-17 16   0.4321663   4.548058
-18 17   0.8834736   9.115258
-19 18   0.9605224  13.308199
-20 19   2.9348253  19.398394
-21 20   4.7475516  25.327012
-22 21   6.7012637  31.396616
-23 22   7.1553956  35.966641
-24 23   4.6428297  37.569967
-25 24   5.8610042  42.904033
-26 25   6.5000325  47.658954
-27 26   2.8918549  48.166668
-28 27   4.2581518  53.648857
-29 28   5.5960927  59.102690
-30 29   6.3765400  63.999030
-31 30   2.6978096  64.436191
-32 31   4.6243480  70.478622
-33 32   5.9246340  75.894800
-34 33   7.6085953  81.694654
-35 34   7.6354835  85.837434
-36 35   4.8817282  87.199571
-37 36   3.9962278  90.429962
-38 37   5.9223121  96.471939
-39 38   6.7647416 101.430260
-40 39   3.8167034 102.598114
-41 40   4.9371390 107.834442
-42 41   6.9361882 113.949383
-43 42   6.6242894 117.753377
-44 43   8.5812482 123.826228
-45 44  10.3970778 129.757949
-46 45  12.2889991 135.765763
-47 46  14.0998243 141.692480</code></pre>
+<pre><code>   orden         AIC        BIC
+1      0 272.6937023 210.955320
+2      1  82.1484043  24.525915
+3      2  84.1441892  30.637592
+4      3  85.5926277  36.201922
+5      4  80.4715619  35.196749
+6      5  70.7822012  29.623280
+7      6  69.5898661  32.546837
+8      7  71.5718647  38.644728
+9      8  71.4320021  42.620757
+10     9  63.2815353  38.586183
+11    10  49.9872355  29.407775
+12    11  40.7220194  24.258451
+13    12  41.0928139  28.745138
+14    13  37.0833413  28.851557
+15    14   8.7779160   4.662024
+16    15   0.0000000   0.000000
+17    16   0.4321663   4.548058
+18    17   0.8834736   9.115258
+19    18   0.9605224  13.308199
+20    19   2.9348253  19.398394
+21    20   4.7475516  25.327012
+22    21   6.7012637  31.396616
+23    22   7.1553956  35.966641
+24    23   4.6428297  37.569967
+25    24   5.8610042  42.904033
+26    25   6.5000325  47.658954
+27    26   2.8918549  48.166668
+28    27   4.2581518  53.648857
+29    28   5.5960927  59.102690
+30    29   6.3765400  63.999030
+31    30   2.6978096  64.436191
+32    31   4.6243480  70.478622
+33    32   5.9246340  75.894800
+34    33   7.6085953  81.694654
+35    34   7.6354835  85.837434
+36    35   4.8817282  87.199571
+37    36   3.9962278  90.429962
+38    37   5.9223121  96.471939
+39    38   6.7647416 101.430260
+40    39   3.8167034 102.598114
+41    40   4.9371390 107.834442
+42    41   6.9361882 113.949383
+43    42   6.6242894 117.753377
+44    43   8.5812482 123.826228
+45    44  10.3970778 129.757949
+46    45  12.2889991 135.765763
+47    46  14.0998243 141.692480</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a>C.info <span class="sc">%&gt;%</span> <span class="fu">gather</span>(</span>
 <span id="cb51-2"><a href=""></a>  <span class="at">key =</span> <span class="st">"C.Info"</span>,</span>
-<span id="cb51-3"><a href=""></a>  <span class="at">value =</span> <span class="st">"value"</span>,</span>
+<span id="cb51-3"><a href=""></a>  <span class="at">value =</span> <span class="st">"IC"</span>,</span>
 <span id="cb51-4"><a href=""></a>  AIC,BIC</span>
 <span id="cb51-5"><a href=""></a>) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb51-6"><a href=""></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>(<span class="at">x =</span> t, <span class="at">y =</span> value, <span class="at">group=</span>C.Info,<span class="at">color=</span>C.Info)) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb51-6"><a href=""></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>(<span class="at">x =</span> orden, <span class="at">y =</span> IC, <span class="at">group=</span>C.Info,<span class="at">color=</span>C.Info)) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>

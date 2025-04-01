@@ -663,7 +663,7 @@ coef[ 20] = 0.000625</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tsplot</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(param.spec[[<span class="dv">1</span>]][,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]), param.spec[[<span class="dv">1</span>]][,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">type=</span><span class="st">'o'</span>, <span class="at">col=</span><span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">xlab=</span><span class="st">'ORDER'</span>, <span class="at">nxm=</span><span class="dv">5</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">gg=</span><span class="cn">TRUE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tsplot</span>(param.spec[[<span class="dv">1</span>]][,<span class="dv">1</span>], param.spec[[<span class="dv">1</span>]][,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">type=</span><span class="st">'o'</span>, <span class="at">col=</span><span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">xlab=</span><span class="st">'ORDER'</span>, <span class="at">nxm=</span><span class="dv">5</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">gg=</span><span class="cn">TRUE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -674,13 +674,13 @@ coef[ 20] = 0.000625</code></pre>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>C.info<span class="ot">&lt;-</span><span class="fu">data.frame</span>(param.spec[[<span class="dv">1</span>]])</span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(C.info)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"lag"</span>,<span class="st">"AIC"</span>,<span class="st">"BIC"</span>)</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(C.info)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"orden"</span>,<span class="st">"AIC"</span>,<span class="st">"BIC"</span>)</span>
 <span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>C.info <span class="sc">%&gt;%</span> <span class="fu">gather</span>(</span>
 <span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">key =</span> <span class="st">"C.Info"</span>,</span>
-<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="st">"value"</span>,</span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="st">"IC"</span>,</span>
 <span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>  AIC,BIC</span>
 <span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>(<span class="at">x =</span> lag, <span class="at">y =</span> value, <span class="at">group=</span>C.Info,<span class="at">color=</span>C.Info))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>(<span class="at">x =</span> orden, <span class="at">y =</span> IC, <span class="at">group=</span>C.Info,<span class="at">color=</span>C.Info))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
