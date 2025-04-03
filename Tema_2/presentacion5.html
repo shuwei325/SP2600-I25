@@ -7,11 +7,12 @@
 <link href="presentacion5_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="presentacion5_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="presentacion5_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="presentacion5_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="presentacion5_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="presentacion5_files/libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Shu Wei Chou Chen">
-  <title>Tema 2: Análisis multivariado de series temporales-5</title>
+  <title>Tema 2: Análisis multivariado de series temporales(5)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="presentacion5_files/libs/revealjs/dist/theme/quarto.css">
   <link href="presentacion5_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -244,7 +310,6 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
-      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -327,88 +392,147 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Tema 2: Análisis multivariado de series temporales-5</h1>
-  <p class="subtitle">Curso: Tópicos Avanzados de Series Temporales</p>
+  <h1 class="title">Tema 2: Análisis multivariado de series temporales<sup>(5)</sup></h1>
+  <p class="subtitle"><a href="https://shuwei325.github.io/SP2600-I25">Curso: Tópicos Avanzados de Series Temporales</a></p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Shu Wei Chou Chen 
+<a href="https://shuwei325.github.io">Shu Wei Chou Chen</a> <a href="https://orcid.org/0000-0001-5495-2486" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
 </div>
 <div class="quarto-title-author-email">
 <a href="mailto:shuwei.chou@ucr.ac.cr">shuwei.chou@ucr.ac.cr</a>
 </div>
         <p class="quarto-title-affiliation">
+            <a href="https://www.estadistica.ucr.ac.cr/">
             Escuela de Estadística, Universidad de Costa Rica
+            </a>
           </p>
     </div>
 </div>
 
 </section>
-<section class="slide level2 scrollable">
-
-<p>En las clases anteriores vimos:</p>
-<ol type="1">
-<li>Introducción</li>
-<li>Modelos ARMA vectoriales</li>
-<li>Causalidad de Granger <br></li>
-<li>Raíz unitarias <br></li>
+<section>
+<section id="procesos-cointegrados" class="title-slide slide level1 agenda-slide center">
+<h1>Procesos cointegrados</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>Procesos cointegrados</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Pruebas de hipótesis para cointegración</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Modelos de corrección del error</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Modelos de corrección del error vectorial (VECM)</p>
+</div></li>
 </ol>
+</div>
 </section>
-<section id="contenido" class="slide level2 scrollable">
-<h2>Contenido</h2>
-<ol start="5">
-<ol start="5" type="1">
-<li>Procesos cointegrados: definición y pruebas de hipótesis para cointegración y modelos de corrección del error. <br></li>
-</ol>
-</ol>
-</section>
-<section id="procesos-cointegrados" class="slide level2">
+<section id="procesos-cointegrados-1" class="slide level2">
 <h2>Procesos cointegrados</h2>
 <ul>
 <li>Recuerde que si <span class="math inline">\(\nabla^d X_t\)</span> (univariada) es estacionario, decimos que <span class="math inline">\(X_t\)</span> es integrado de orden <span class="math inline">\(d\)</span>, y es denotado por <span class="math inline">\(X_t \sim I(d)\)</span>.</li>
 </ul>
-<p><strong>Definición:</strong> Sea <span class="math inline">\(X_t\)</span> una serie multivariada de <span class="math inline">\(k\)</span> dimensión. Se dice que <span class="math inline">\(X_t\)</span> es cointegrado de orden <span class="math inline">\((d, b)\)</span>, denotado por <span class="math inline">\(X_t \sim CI(d,b)\)</span>, si: - Todos los componentes de <span class="math inline">\(X_t\)</span> es <span class="math inline">\(I(d)\)</span>, y - existe un vector <span class="math inline">\(\alpha\)</span> no nulo, tal que <span class="math inline">\(Z_t=\alpha'X_t \sim I(d-b), d\geq b&gt;0\)</span>.</p>
-<p>El vector <span class="math inline">\(\alpha\)</span> es llamado vector de cointegración.</p>
-<p><strong>Ejemplo:</strong> - Si <span class="math inline">\(X_t\)</span> y <span class="math inline">\(Y_t\)</span> son <span class="math inline">\(I(1)\)</span>, pero existe una combinación lineal <span class="math inline">\(Z_t=Y_t- \alpha_1 X_t \sim I(0)\)</span>. - En este caso, <span class="math inline">\(d=1\)</span> y <span class="math inline">\(b=1\)</span> y el vector de cointegración es <span class="math inline">\(\alpha'=(1,-\alpha_1)\)</span>.</p>
+<p><strong>Definición:</strong> Sea <span class="math inline">\(X_t\)</span> una serie multivariada de <span class="math inline">\(k\)</span> dimensión. Se dice que <span class="math inline">\(X_t\)</span> es cointegrado de orden <span class="math inline">\((d, b)\)</span>, denotado por <span class="math inline">\(X_t \sim CI(d,b)\)</span>, si:</p>
+<ul>
+<li>Todos los componentes de <span class="math inline">\(X_t\)</span> es <span class="math inline">\(I(d)\)</span>, y</li>
+<li>existe un vector <span class="math inline">\(\alpha\)</span> no nulo, tal que <span class="math inline">\(Z_t=\alpha'X_t \sim I(d-b), d\geq b&gt;0\)</span>.</li>
+</ul>
+<p>El vector <span class="math inline">\(\alpha\)</span> es llamado <span class="alert">vector de cointegración</span>.</p>
+<p><strong>Ejemplo:</strong></p>
+<ul>
+<li>Si <span class="math inline">\(X_t\)</span> y <span class="math inline">\(Y_t\)</span> son <span class="math inline">\(I(1)\)</span>, pero existe una combinación lineal <span class="math inline">\(Z_t=Y_t- \alpha_1 X_t \sim I(0)\)</span>.</li>
+<li>En este caso, <span class="math inline">\(d=1\)</span> y <span class="math inline">\(b=1\)</span> y el vector de cointegración es <span class="math inline">\(\alpha'=(1,-\alpha_1)\)</span>.</li>
+</ul>
 </section>
 <section id="ejemplo" class="slide level2">
 <h2>Ejemplo</h2>
 <ul>
 <li>Considere <span class="math inline">\(a_t\)</span> y <span class="math inline">\(b_t\)</span> ruidos blancos Gaussianos.</li>
 </ul>
-<p><span class="math display">\[\left. \begin{eqnarray}  X_t &amp;=&amp; X_{t-1} + a_t = \sum_{i=1}^t a_t \\  Y_{t} &amp;=&amp; 0.6 X_t + b_t \end{eqnarray}\right.\]</span> - Note que - <span class="math inline">\(a_t\)</span> y <span class="math inline">\(b_t\)</span> son <span class="math inline">\(I(0)\)</span> por ser ruidos blancos. - <span class="math inline">\(X_t\)</span> y <span class="math inline">\(Y_t\)</span> son <span class="math inline">\(I(1)\)</span>. - <span class="math inline">\(Y_{t} - 0.6 X_t = b_t \sim I(0)\)</span> - El vector de cointegración es <span class="math inline">\(\alpha=(1,-0.6)\)</span>.</p>
-</section>
-<section id="ejemplo-1" class="slide level2">
-<h2>Ejemplo</h2>
+<p><span class="math display">\[\left. \begin{eqnarray}  X_t &amp;=&amp; X_{t-1} + a_t = \sum_{i=1}^t a_t \\  Y_{t} &amp;=&amp; 0.6 X_t + b_t \end{eqnarray}\right.\]</span></p>
 <ul>
-<li>Observe dos realizaciones de estas dos series.</li>
-<li>Estas series tienen una tendencia estocástica común.</li>
+<li><p>Note que</p>
+<ul>
+<li><span class="math inline">\(a_t\)</span> y <span class="math inline">\(b_t\)</span> son <span class="math inline">\(I(0)\)</span> por ser ruidos blancos.</li>
+<li><span class="math inline">\(X_t\)</span> y <span class="math inline">\(Y_t\)</span> son <span class="math inline">\(I(1)\)</span>.</li>
+<li><span class="math inline">\(Y_{t} - 0.6 X_t = b_t \sim I(0)\)</span></li>
+<li>El vector de cointegración es <span class="math inline">\(\alpha=(1,-0.6)\)</span>.</li>
+</ul></li>
 </ul>
+</section>
+<section class="slide level2">
+
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>coint_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">phi=</span><span class="fl">0.6</span>,<span class="at">t=</span><span class="dv">1000</span>){</span>
+<span id="cb1-2"><a href=""></a>  a <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(t)</span>
+<span id="cb1-3"><a href=""></a>  b <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(t)</span>
+<span id="cb1-4"><a href=""></a>  x <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(a)</span>
+<span id="cb1-5"><a href=""></a>  y <span class="ot">&lt;-</span> phi<span class="sc">*</span>x <span class="sc">+</span> b</span>
+<span id="cb1-6"><a href=""></a>  data <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">data.frame</span>(x,y))</span>
+<span id="cb1-7"><a href=""></a>  <span class="fu">return</span>(data)</span>
+<span id="cb1-8"><a href=""></a>}</span>
+<span id="cb1-9"><a href=""></a>data1 <span class="ot">&lt;-</span> <span class="fu">coint_sim</span>(<span class="at">phi=</span><span class="fl">0.6</span>, <span class="at">t=</span><span class="dv">1000</span>)</span>
+<span id="cb1-10"><a href=""></a><span class="fu">autoplot</span>(data1)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-2-1.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<ul>
+<li>Observe dos realizaciones de estas dos series.</li>
+<li>Estas series tienen una tendencia estocástica común.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a>data2 <span class="ot">&lt;-</span> <span class="fu">coint_sim</span>(<span class="at">phi=</span><span class="fl">0.6</span>, <span class="at">t=</span><span class="dv">1000</span>)</span>
+<span id="cb2-2"><a href=""></a><span class="fu">autoplot</span>(data2)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-3-1.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
+</section></section>
+<section>
+<section id="pruebas-de-hipótesis-para-cointegración" class="title-slide slide level1 agenda-slide center">
+<h1>Pruebas de hipótesis para cointegración</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Procesos cointegrados</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Pruebas de hipótesis para cointegración</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Modelos de corrección del error</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Modelos de corrección del error vectorial (VECM)</p>
+</div></li>
+</ol>
+</div>
 </section>
-<section id="pruebas-de-hipótesis-para-cointegración" class="slide level2">
+<section id="pruebas-de-hipótesis-para-cointegración-1" class="slide level2">
 <h2>Pruebas de hipótesis para cointegración</h2>
 <p><strong>Procedimiento de Engle y Granger</strong></p>
 <ul>
@@ -420,7 +544,7 @@ Shu Wei Chou Chen
 <li>Note que el modelo estimado permite expresar el vector de cointegración como <span class="math inline">\(\alpha=(1, -\beta'_1)\)</span>.</li>
 </ul>
 </section>
-<section id="ejemplo-2" class="slide level2">
+<section id="ejemplo-1" class="slide level2">
 <h2>Ejemplo</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -434,49 +558,422 @@ Shu Wei Chou Chen
 <li><p>Se ve claramente que no son series estacionarias.</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">data</span>(Raotbl3)</span>
+<span id="cb3-2"><a href=""></a>lc <span class="ot">&lt;-</span> <span class="fu">ts</span>(Raotbl3<span class="sc">$</span>lc, <span class="at">start=</span><span class="fu">c</span>(<span class="dv">1966</span>,<span class="dv">4</span>), <span class="at">end=</span><span class="fu">c</span>(<span class="dv">1991</span>,<span class="dv">2</span>),</span>
+<span id="cb3-3"><a href=""></a>         <span class="at">frequency=</span><span class="dv">4</span>)</span>
+<span id="cb3-4"><a href=""></a>li <span class="ot">&lt;-</span> <span class="fu">ts</span>(Raotbl3<span class="sc">$</span>li, <span class="at">start=</span><span class="fu">c</span>(<span class="dv">1966</span>,<span class="dv">4</span>), <span class="at">end=</span><span class="fu">c</span>(<span class="dv">1991</span>,<span class="dv">2</span>),</span>
+<span id="cb3-5"><a href=""></a>         <span class="at">frequency=</span><span class="dv">4</span>)</span>
+<span id="cb3-6"><a href=""></a>lw <span class="ot">&lt;-</span> <span class="fu">ts</span>(Raotbl3<span class="sc">$</span>lw, <span class="at">start=</span><span class="fu">c</span>(<span class="dv">1966</span>,<span class="dv">4</span>), <span class="at">end=</span><span class="fu">c</span>(<span class="dv">1991</span>,<span class="dv">2</span>),</span>
+<span id="cb3-7"><a href=""></a>         <span class="at">frequency=</span><span class="dv">4</span>)</span>
+<span id="cb3-8"><a href=""></a>ukcons <span class="ot">&lt;-</span> <span class="fu">window</span>(<span class="fu">cbind</span>(lc, li, lw), <span class="at">start=</span><span class="fu">c</span>(<span class="dv">1967</span>, <span class="dv">2</span>),</span>
+<span id="cb3-9"><a href=""></a>                 <span class="at">end=</span><span class="fu">c</span>(<span class="dv">1991</span>,<span class="dv">2</span>))</span>
+<span id="cb3-10"><a href=""></a><span class="fu">autoplot</span>(ukcons)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-4-1.png" width="288"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="ejemplo-3" class="slide level2">
-<h2>Ejemplo</h2>
+<section class="slide level2">
+
+<h3 id="prueba-de-dickey-fuller-aumentado">Prueba de Dickey-Fuller aumentado</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>lc.DF <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(lc, <span class="at">lags=</span><span class="dv">3</span>, <span class="at">type=</span><span class="st">'trend'</span>)</span>
+<span id="cb4-2"><a href=""></a><span class="fu">summary</span>(lc.DF)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+############################################### 
+# Augmented Dickey-Fuller Test Unit Root Test # 
+############################################### 
+
+Test regression trend 
+
+
+Call:
+lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.044714 -0.006525  0.000129  0.006225  0.045353 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)  0.7976591  0.3547775   2.248   0.0270 * 
+z.lag.1     -0.0758706  0.0338880  -2.239   0.0277 * 
+tt           0.0004915  0.0002159   2.277   0.0252 * 
+z.diff.lag1 -0.1063957  0.1006744  -1.057   0.2934   
+z.diff.lag2  0.2011373  0.1012373   1.987   0.0500 . 
+z.diff.lag3  0.2998586  0.1020548   2.938   0.0042 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.01307 on 89 degrees of freedom
+Multiple R-squared:  0.1472,    Adjusted R-squared:  0.09924 
+F-statistic: 3.071 on 5 and 89 DF,  p-value: 0.01325
+
+
+Value of test-statistic is: -2.2389 3.7382 2.5972 
+
+Critical values for test statistics: 
+      1pct  5pct 10pct
+tau3 -4.04 -3.45 -3.15
+phi2  6.50  4.88  4.16
+phi3  8.73  6.49  5.47</code></pre>
+</div>
+</div>
+<ol type="1">
+<li><p><span class="math inline">\(H_0: \pi=0\)</span> no se rechaza, pues <span class="math inline">\(\tau=-2.24&gt;-3.15\)</span>.</p></li>
+<li><p>Luego se comprueba <span class="math inline">\(H_0: \beta_1=\pi=0\)</span> con <span class="math inline">\(\Phi_3=2.5972&lt;5.47\)</span>.</p></li>
+<li><p>Se concluye que <span class="math inline">\(lc_t \sim I(1)\)</span>.</p></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>li.DF <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(li, <span class="at">lags=</span><span class="dv">3</span>, <span class="at">type=</span><span class="st">'trend'</span>)</span>
+<span id="cb6-2"><a href=""></a><span class="fu">summary</span>(li.DF)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+############################################### 
+# Augmented Dickey-Fuller Test Unit Root Test # 
+############################################### 
+
+Test regression trend 
+
+
+Call:
+lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.044111 -0.010578  0.000137  0.009169  0.056450 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)  1.1157144  0.5858229   1.905   0.0601 .
+z.lag.1     -0.1049535  0.0554035  -1.894   0.0614 .
+tt           0.0006854  0.0003458   1.982   0.0506 .
+z.diff.lag1 -0.1215088  0.1070525  -1.135   0.2594  
+z.diff.lag2  0.0890314  0.1090094   0.817   0.4163  
+z.diff.lag3 -0.0705492  0.1064929  -0.662   0.5094  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.01777 on 89 degrees of freedom
+Multiple R-squared:  0.09647,   Adjusted R-squared:  0.04571 
+F-statistic: 1.901 on 5 and 89 DF,  p-value: 0.1021
+
+
+Value of test-statistic is: -1.8943 5.6312 1.9979 
+
+Critical values for test statistics: 
+      1pct  5pct 10pct
+tau3 -4.04 -3.45 -3.15
+phi2  6.50  4.88  4.16
+phi3  8.73  6.49  5.47</code></pre>
+</div>
+</div>
+<ol type="1">
+<li><p><span class="math inline">\(H_0: \pi=0\)</span> no se rechaza, pues <span class="math inline">\(\tau=-1.89&gt;-3.15\)</span>.</p></li>
+<li><p>Luego se comprueba <span class="math inline">\(H_0: \beta_1=\pi=0\)</span> con <span class="math inline">\(\Phi_3=1.9979&lt;5.47\)</span>.</p></li>
+<li><p>Se concluye que <span class="math inline">\(li_t \sim I(1)\)</span>.</p></li>
+</ol>
+</div></div>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>lw.DF <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(lw, <span class="at">lags=</span><span class="dv">3</span>, <span class="at">type=</span><span class="st">'trend'</span>)</span>
+<span id="cb8-2"><a href=""></a><span class="fu">summary</span>(lw.DF)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+############################################### 
+# Augmented Dickey-Fuller Test Unit Root Test # 
+############################################### 
+
+Test regression trend 
+
+
+Call:
+lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.166827 -0.021565  0.007698  0.027117  0.078108 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)  0.2878077  0.2512347   1.146   0.2550  
+z.lag.1     -0.0231893  0.0196669  -1.179   0.2415  
+tt           0.0004415  0.0002145   2.058   0.0425 *
+z.diff.lag1  0.1592894  0.1064650   1.496   0.1381  
+z.diff.lag2 -0.0007941  0.1086003  -0.007   0.9942  
+z.diff.lag3  0.0558477  0.1075377   0.519   0.6048  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.04208 on 89 degrees of freedom
+Multiple R-squared:  0.08329,   Adjusted R-squared:  0.03179 
+F-statistic: 1.617 on 5 and 89 DF,  p-value: 0.1636
+
+
+Value of test-statistic is: -1.1791 1.9115 2.1351 
+
+Critical values for test statistics: 
+      1pct  5pct 10pct
+tau3 -4.04 -3.45 -3.15
+phi2  6.50  4.88  4.16
+phi3  8.73  6.49  5.47</code></pre>
+</div>
+</div>
+<ol type="1">
+<li><p><span class="math inline">\(H_0: \pi=0\)</span> no se rechaza, pues <span class="math inline">\(\tau=-1.18&gt;-3.15\)</span>.</p></li>
+<li><p>Luego se comprueba <span class="math inline">\(H_0: \beta_1=\pi=0\)</span> con <span class="math inline">\(\Phi_3=2.1351&lt;5.47\)</span>.</p></li>
+<li><p>Se concluye que <span class="math inline">\(lw_t \sim I(1)\)</span>.</p></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><p>Se puede sacar diferencia a las 3 series y comprobar que efectivamente son <span class="math inline">\(I(0)\)</span>.</p></li>
+<li><p>Concluimos que:</p>
+<ul>
+<li><span class="math inline">\(lc_t \sim I(1)\)</span>.</li>
+<li><span class="math inline">\(li_t \sim I(1)\)</span>.</li>
+<li><span class="math inline">\(lw_t \sim I(1)\)</span>.</li>
+</ul></li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
 <li>Se estima las regresiones lineales:</li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>lc.eq <span class="ot">&lt;-</span> <span class="fu">lm</span>(lc <span class="sc">~</span> li <span class="sc">+</span> lw, <span class="at">data=</span>ukcons)</span>
+<span id="cb10-2"><a href=""></a>li.eq <span class="ot">&lt;-</span> <span class="fu">lm</span>(li <span class="sc">~</span> lc <span class="sc">+</span> lw, <span class="at">data=</span>ukcons)</span>
+<span id="cb10-3"><a href=""></a>lw.eq <span class="ot">&lt;-</span> <span class="fu">lm</span>(lw <span class="sc">~</span> li <span class="sc">+</span> lc, <span class="at">data=</span>ukcons)</span>
+<span id="cb10-4"><a href=""></a>error.lc <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">resid</span>(lc.eq), <span class="at">start=</span><span class="fu">c</span>(<span class="dv">1967</span>,<span class="dv">2</span>),</span>
+<span id="cb10-5"><a href=""></a>               <span class="at">end=</span><span class="fu">c</span>(<span class="dv">1991</span>,<span class="dv">2</span>), <span class="at">frequency=</span><span class="dv">4</span>)</span>
+<span id="cb10-6"><a href=""></a>error.li <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">resid</span>(li.eq), <span class="at">start=</span><span class="fu">c</span>(<span class="dv">1967</span>,<span class="dv">2</span>),</span>
+<span id="cb10-7"><a href=""></a>               <span class="at">end=</span><span class="fu">c</span>(<span class="dv">1991</span>,<span class="dv">2</span>), <span class="at">frequency=</span><span class="dv">4</span>)</span>
+<span id="cb10-8"><a href=""></a>error.lw <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">resid</span>(lw.eq), <span class="at">start=</span><span class="fu">c</span>(<span class="dv">1967</span>,<span class="dv">2</span>),</span>
+<span id="cb10-9"><a href=""></a>               <span class="at">end=</span><span class="fu">c</span>(<span class="dv">1991</span>,<span class="dv">2</span>), <span class="at">frequency=</span><span class="dv">4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
 <ul>
 <li>Los gráficos de los residuales:</li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">1</span>))</span>
+<span id="cb11-2"><a href=""></a><span class="fu">plot</span>(error.lc)</span>
+<span id="cb11-3"><a href=""></a><span class="fu">plot</span>(error.li)</span>
+<span id="cb11-4"><a href=""></a><span class="fu">plot</span>(error.lw)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-9-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
 
-<img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:40.0%"></section>
-<section id="ejemplo-4" class="slide level2">
-<h2>Ejemplo</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>ci.lc <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(error.lc, <span class="at">lags=</span><span class="dv">1</span>, <span class="at">type=</span><span class="st">'none'</span>)</span>
+<span id="cb12-2"><a href=""></a><span class="fu">summary</span>(ci.lc)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+############################################### 
+# Augmented Dickey-Fuller Test Unit Root Test # 
+############################################### 
+
+Test regression none 
+
+
+Call:
+lm(formula = z.diff ~ z.lag.1 - 1 + z.diff.lag)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.042881 -0.009733  0.000985  0.008867  0.042400 
+
+Coefficients:
+           Estimate Std. Error t value Pr(&gt;|t|)    
+z.lag.1     -0.4665     0.1126  -4.141 7.59e-05 ***
+z.diff.lag  -0.2366     0.1013  -2.335   0.0217 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.0148 on 93 degrees of freedom
+Multiple R-squared:  0.3427,    Adjusted R-squared:  0.3286 
+F-statistic: 24.25 on 2 and 93 DF,  p-value: 3.346e-09
+
+
+Value of test-statistic is: -4.1414 
+
+Critical values for test statistics: 
+     1pct  5pct 10pct
+tau1 -2.6 -1.95 -1.61</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a>(jb.lc <span class="ot">&lt;-</span> <span class="fu">jarque.bera.test</span>(error.lc))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Jarque Bera Test
+
+data:  error.lc
+X-squared = 0.66447, df = 2, p-value = 0.7173</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a>ci.li <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(error.li, <span class="at">lags=</span><span class="dv">1</span>, <span class="at">type=</span><span class="st">'none'</span>)</span>
+<span id="cb16-2"><a href=""></a><span class="fu">summary</span>(ci.li)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+############################################### 
+# Augmented Dickey-Fuller Test Unit Root Test # 
+############################################### 
+
+Test regression none 
+
+
+Call:
+lm(formula = z.diff ~ z.lag.1 - 1 + z.diff.lag)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.044558 -0.009281 -0.001382  0.010989  0.048775 
+
+Coefficients:
+           Estimate Std. Error t value Pr(&gt;|t|)    
+z.lag.1     -0.4587     0.1130  -4.059 0.000103 ***
+z.diff.lag  -0.2406     0.1017  -2.364 0.020135 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.01612 on 93 degrees of freedom
+Multiple R-squared:  0.3395,    Adjusted R-squared:  0.3253 
+F-statistic:  23.9 on 2 and 93 DF,  p-value: 4.198e-09
+
+
+Value of test-statistic is: -4.059 
+
+Critical values for test statistics: 
+     1pct  5pct 10pct
+tau1 -2.6 -1.95 -1.61</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a>(jb.li <span class="ot">&lt;-</span> <span class="fu">jarque.bera.test</span>(error.li))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Jarque Bera Test
+
+data:  error.li
+X-squared = 0.065267, df = 2, p-value = 0.9679</code></pre>
+</div>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>ci.lw <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(error.lw, <span class="at">lags=</span><span class="dv">1</span>, <span class="at">type=</span><span class="st">'none'</span>)</span>
+<span id="cb20-2"><a href=""></a><span class="fu">summary</span>(ci.lw)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+############################################### 
+# Augmented Dickey-Fuller Test Unit Root Test # 
+############################################### 
+
+Test regression none 
+
+
+Call:
+lm(formula = z.diff ~ z.lag.1 - 1 + z.diff.lag)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.32322 -0.06238  0.00554  0.06636  0.28561 
+
+Coefficients:
+           Estimate Std. Error t value Pr(&gt;|t|)   
+z.lag.1    -0.21469    0.07911  -2.714  0.00793 **
+z.diff.lag -0.32469    0.09841  -3.299  0.00137 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1034 on 93 degrees of freedom
+Multiple R-squared:  0.2472,    Adjusted R-squared:  0.231 
+F-statistic: 15.27 on 2 and 93 DF,  p-value: 1.845e-06
+
+
+Value of test-statistic is: -2.7137 
+
+Critical values for test statistics: 
+     1pct  5pct 10pct
+tau1 -2.6 -1.95 -1.61</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>(jb.lw <span class="ot">&lt;-</span> <span class="fu">jarque.bera.test</span>(error.lw))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Jarque Bera Test
+
+data:  error.lw
+X-squared = 3.253, df = 2, p-value = 0.1966</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
 <ul>
-<li>Veremos en el laboratorio que los residuales de los 3 modelos son <span class="math inline">\(I(0)\)</span> de acuerdo a la prueba de Dickey-Fuller aumentado (ADF).</li>
+<li><p>Se concluye que los residuales de los 3 modelos son <span class="math inline">\(I(0)\)</span> de acuerdo a la prueba de Dickey-Fuller aumentado (ADF).</p></li>
+<li><p>Note que no nos interesa buscar evidencias de que sean no correlacionados, sino que los residuales sean <span class="math inline">\(I(0)\)</span>.</p></li>
 </ul>
-<div class="line-block">Modelo | ADF | valor crítico (5%) |<br>
-&nbsp;–|: -:| :|<br>
-lc | -4.14 | -1.95 |<br>
-li | -4.06 | -1.95 |<br>
-lw | -2.71 | -1.95 |</div>
-<ul>
-<li>Note que no nos interesa buscar evidencias de que sean no correlacionados, sino que los residuales sean <span class="math inline">\(I(0)\)</span>.</li>
-</ul>
+</div></div>
 </section>
 <section id="algunas-consideraciones-sobre-proceso-cointegrados" class="slide level2">
 <h2>Algunas consideraciones sobre proceso cointegrados</h2>
 <ul>
-<li><p>La relación entre series cointegradas de <span class="math inline">\(I(1)\)</span> es denominada <strong>relación de largo plazo</strong>.</p></li>
-<li><p>Mientras que, la relación entre series de <span class="math inline">\(I(0)\)</span> es denominada <strong>relación de corto plazo</strong>.</p></li>
+<li><p>La relación entre series cointegradas de <span class="math inline">\(I(1)\)</span> es denominada <span class="alert">relación de largo plazo</span>.</p></li>
+<li><p>Mientras que, la relación entre series de <span class="math inline">\(I(0)\)</span> es denominada <span class="alert">relación de corto plazo</span>.</p></li>
 </ul>
+</section></section>
+<section>
+<section id="modelos-de-corrección-del-error" class="title-slide slide level1 agenda-slide center">
+<h1>Modelos de corrección del error</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Procesos cointegrados</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Pruebas de hipótesis para cointegración</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Modelos de corrección del error</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Modelos de corrección del error vectorial (VECM)</p>
+</div></li>
+</ol>
+</div>
 </section>
-<section id="modelos-de-corrección-del-error" class="slide level2">
+<section id="modelos-de-corrección-del-error-1" class="slide level2">
 <h2>Modelos de corrección del error</h2>
 <ul>
 <li>Suponga que <span class="math inline">\(X_t\)</span> y <span class="math inline">\(Y_t\)</span> son <span class="math inline">\(I(1)\)</span> y se cointegran:</li>
@@ -487,14 +984,24 @@ lw | -2.71 | -1.95 |</div>
 </ul>
 <p><span class="math display">\[\nabla Y_t = \beta_0 + \beta_1 \nabla X_t + \nabla z_t\]</span> pero este modelo únicamente contempla su relación de corto plazo.</p>
 <ul>
+<li>Reescribiendo el modelo:</li>
+</ul>
+<p><span class="math display">\[\nabla Y_t = \beta_0 + \beta_1 \nabla X_t + z_t - z_{t-1}\]</span></p>
+</section>
+<section class="slide level2">
+
+<ul>
 <li>Es posible expresar dicha relación como:</li>
 </ul>
-<p><span class="math display">\[\nabla Y_t = \beta_0 + \beta_1 \nabla X_t - \gamma \hat{z}_{t-1} + z_t\]</span> donde <span class="math inline">\(\hat{z}_{t}=Y_t-\hat{\beta}_0-\hat{\beta}_1 X_t\)</span> son los residuales obtenidos del modelo de regresión. - En este caso, <span class="math inline">\(\gamma\)</span> es un coeficiente que mide la velocidad del ajuste y que tanto el desequilibrio es corregido.</p>
-</section>
-<section id="modelos-de-corrección-del-error-1" class="slide level2">
-<h2>Modelos de corrección del error</h2>
+<p><span class="math display">\[\nabla Y_t = \beta_0 + \beta_1 \nabla X_t - \gamma \hat{z}_{t-1} + z_t\]</span> donde <span class="math inline">\(\hat{z}_{t}=Y_t-\hat{\beta}_0-\hat{\beta}_1 X_t\)</span> son los residuales obtenidos del modelo de regresión.</p>
 <ul>
-<li>De manera general para dos series <span class="math inline">\(X_t\)</span> y <span class="math inline">\(Y_t\)</span> que son <span class="math inline">\(I(1)\)</span> cointegradas, El Modelo de corrección del error (ECM) tiene la representación:</li>
+<li>En este caso, <span class="math inline">\(\gamma\)</span> es un coeficiente que mide la velocidad del ajuste y que tanto el desequilibrio es corregido.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>De manera general para dos series <span class="math inline">\(X_t\)</span> y <span class="math inline">\(Y_t\)</span> que son <span class="math inline">\(I(1)\)</span> cointegradas, el Modelo de corrección del error (ECM) tiene la representación:</li>
 </ul>
 <p><span class="math display">\[\begin{aligned}
         \nabla Y_t &amp;= \psi_0 + \gamma_1\hat{z}_{t-1} + \sum^{K_1}_{i=1}\psi_{1,i}\nabla X_{t-i} + \sum^{L_1}_{i=1} \psi_{2,i}\nabla Y_{t-i} + \epsilon_{1,t} \\
@@ -504,7 +1011,7 @@ lw | -2.71 | -1.95 |</div>
 <span class="math inline">\(\hat{z}_t\)</span> es el error del modelo de regresión:</p>
 <p><span class="math display">\[Y_t = \beta_0 + \beta_1 X_t + z_t\]</span> <span class="math inline">\(\epsilon_{1,t}\)</span> y <span class="math inline">\(\epsilon_{2,t}\)</span> son ruidos blancos.</p>
 </section>
-<section id="ejemplo-5" class="slide level2">
+<section id="ejemplo-2" class="slide level2">
 <h2>Ejemplo</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -523,15 +1030,17 @@ lw | -2.71 | -1.95 |</div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="ejemplo-6" class="slide level2">
-<h2>Ejemplo</h2>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
 <li>Definimos
 <ul>
@@ -542,15 +1051,178 @@ lw | -2.71 | -1.95 |</div>
 </ul>
 <p><span class="math display">\[Y_t = \beta_0 + \beta_1 X_t + z_t \]</span></p>
 <ul>
-<li>Confirmamos por medio de prueba de ADF, los residuales son I(0). <span class="math inline">\(\tau=-2.6802&lt; -1.95\)</span> , valor crítico a un 5% de significancia.</li>
+<li>Confirmamos por medio de prueba de ADF, los residuales son <span class="math inline">\(I(0)\)</span>. <span class="math inline">\(\tau=-2.6802&lt; -1.95\)</span>, valor crítico a un 5% de significancia.</li>
 </ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a>x <span class="ot">&lt;-</span> lc</span>
+<span id="cb24-2"><a href=""></a>y <span class="ot">&lt;-</span> li</span>
+<span id="cb24-3"><a href=""></a>reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb24-4"><a href=""></a>error <span class="ot">&lt;-</span> <span class="fu">residuals</span>(reg)</span>
+<span id="cb24-5"><a href=""></a>error.DF <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(error, <span class="at">lags=</span><span class="dv">1</span>, <span class="at">type=</span><span class="st">'none'</span>)</span>
+<span id="cb24-6"><a href=""></a><span class="fu">summary</span>(error.DF)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+############################################### 
+# Augmented Dickey-Fuller Test Unit Root Test # 
+############################################### 
+
+Test regression none 
+
+
+Call:
+lm(formula = z.diff ~ z.lag.1 - 1 + z.diff.lag)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.038869 -0.011455 -0.000857  0.011170  0.059315 
+
+Coefficients:
+           Estimate Std. Error t value Pr(&gt;|t|)    
+z.lag.1    -0.20434    0.07624  -2.680 0.008673 ** 
+z.diff.lag -0.36370    0.09550  -3.808 0.000248 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.01609 on 95 degrees of freedom
+Multiple R-squared:  0.2717,    Adjusted R-squared:  0.2564 
+F-statistic: 17.72 on 2 and 95 DF,  p-value: 2.878e-07
+
+
+Value of test-statistic is: -2.6802 
+
+Critical values for test statistics: 
+     1pct  5pct 10pct
+tau1 -2.6 -1.95 -1.61</code></pre>
+</div>
+</div>
+</div></div>
 </section>
-<section id="ejemplo-7" class="slide level2">
-<h2>Ejemplo</h2>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Arreglo de la base:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>error.lagged <span class="ot">&lt;-</span> error[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">99</span>)]</span>
+<span id="cb26-2"><a href=""></a>dy <span class="ot">&lt;-</span> <span class="fu">diff</span>(y)</span>
+<span id="cb26-3"><a href=""></a>dx <span class="ot">&lt;-</span> <span class="fu">diff</span>(x)</span>
+<span id="cb26-4"><a href=""></a>diff.dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">embed</span>(<span class="fu">cbind</span>(dy, dx), <span class="dv">2</span>),error.lagged)</span>
+<span id="cb26-5"><a href=""></a><span class="fu">colnames</span>(diff.dat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'dy'</span>, <span class="st">'dx'</span>, <span class="st">'dyl1'</span>, <span class="st">'dxl1'</span>,<span class="st">'error.lagged'</span>)</span>
+<span id="cb26-6"><a href=""></a>diff.dat</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        dy      dx    dyl1    dxl1  error.lagged
+2   0.0190  0.0129 -0.0021  0.0062 -0.0168097165
+3   0.0272  0.0218  0.0190  0.0129 -0.0104056407
+4  -0.0117  0.0089  0.0272  0.0218 -0.0044917762
+5   0.0162  0.0257 -0.0117  0.0089 -0.0248819875
+6   0.0009 -0.0396  0.0162  0.0257 -0.0337761931
+7  -0.0184  0.0191  0.0009 -0.0396  0.0057903650
+8   0.0009  0.0041 -0.0184  0.0191 -0.0312594143
+9   0.0122 -0.0061  0.0009  0.0041 -0.0343627700
+10  0.0103  0.0101  0.0122 -0.0061 -0.0162065578
+11 -0.0053 -0.0003  0.0103  0.0101 -0.0157684830
+12  0.0011  0.0093 -0.0053 -0.0003 -0.0207755545
+13  0.0037 -0.0004  0.0011  0.0093 -0.0287563371
+14  0.0434  0.0162  0.0037 -0.0004 -0.0246657658
+15  0.0018  0.0151  0.0434  0.0162  0.0029160968
+16 -0.0012  0.0003  0.0018  0.0151 -0.0100279695
+17 -0.0268 -0.0062 -0.0012  0.0003 -0.0115208980
+18  0.0306  0.0204 -0.0268 -0.0062 -0.0322670429
+19  0.0050  0.0162  0.0306  0.0204 -0.0215861789
+20  0.0136  0.0107  0.0050  0.0162 -0.0324043163
+21  0.0187  0.0139  0.0136  0.0107 -0.0292520984
+22  0.0606  0.0215  0.0187  0.0139 -0.0241244508
+23 -0.0177  0.0129  0.0606  0.0215  0.0154823422
+24  0.0200  0.0123 -0.0177  0.0129 -0.0148135820
+25  0.0204  0.0359  0.0200  0.0123 -0.0068236493
+26  0.0185 -0.0097  0.0204  0.0359 -0.0214774229
+27  0.0089  0.0079  0.0185 -0.0097  0.0064939310
+28  0.0061 -0.0066  0.0089  0.0079  0.0076801479
+29 -0.0283 -0.0192  0.0061 -0.0066  0.0202245743
+30 -0.0169  0.0026 -0.0283 -0.0192  0.0106719963
+31  0.0382  0.0091 -0.0169  0.0026 -0.0087667171
+32  0.0018  0.0061  0.0382  0.0091  0.0205477860
+33  0.0199 -0.0064  0.0018  0.0061  0.0163915738
+34 -0.0438 -0.0005  0.0199 -0.0064  0.0425407145
+35  0.0113 -0.0119 -0.0438 -0.0005 -0.0007710714
+36 -0.0133 -0.0044  0.0113 -0.0119  0.0221484246
+37  0.0127  0.0057 -0.0133 -0.0044  0.0131447088
+38 -0.0150  0.0048  0.0127  0.0057  0.0202790679
+39  0.0326  0.0068 -0.0150  0.0048  0.0005922124
+40 -0.0249  0.0044  0.0326  0.0068  0.0265525004
+41 -0.0281 -0.0205 -0.0249  0.0044 -0.0026437839
+42 -0.0129 -0.0048 -0.0281 -0.0205 -0.0107270051
+43  0.0191  0.0115 -0.0129 -0.0048 -0.0189401496
+44  0.0465  0.0235  0.0191  0.0115 -0.0110690742
+45 -0.0036  0.0228  0.0465  0.0235  0.0124848623
+46  0.0302  0.0010 -0.0036  0.0228 -0.0133777015
+47  0.0249  0.0201  0.0302  0.0010  0.0158458703
+48  0.0040 -0.0030  0.0249  0.0201  0.0211196628
+49  0.0093  0.0104  0.0040 -0.0030  0.0280489475
+50  0.0091  0.0545  0.0093  0.0104  0.0271940939
+51  0.0058 -0.0410  0.0091  0.0545 -0.0169212449
+52  0.0507  0.0143  0.0058 -0.0410  0.0289123127
+53 -0.0349  0.0124  0.0507  0.0143  0.0656493890
+54  0.0020 -0.0230 -0.0349  0.0124  0.0186416789
+55  0.0162  0.0120  0.0020 -0.0230  0.0430995283
+56 -0.0041 -0.0161  0.0162  0.0120  0.0475823895
+57  0.0023  0.0111 -0.0041 -0.0161  0.0592028840
+58 -0.0194  0.0028  0.0023  0.0111  0.0506645306
+59 -0.0046  0.0001 -0.0194  0.0028  0.0285305316
+60  0.0078 -0.0017 -0.0046  0.0001  0.0238328887
+61 -0.0124 -0.0035  0.0078 -0.0017  0.0332928167
+62  0.0171  0.0049 -0.0124 -0.0035  0.0243103156
+63 -0.0104  0.0155  0.0171  0.0049  0.0366258172
+64  0.0046  0.0100 -0.0104  0.0155  0.0110911796
+65  0.0084  0.0145  0.0046  0.0100  0.0059268973
+66  0.0200  0.0077  0.0084  0.0145  0.0001686879
+67 -0.0036  0.0151  0.0200  0.0077  0.0126501905
+68  0.0074  0.0000 -0.0036  0.0151 -0.0056938759
+69  0.0066 -0.0018  0.0074  0.0000  0.0017061241
+70  0.0075  0.0117  0.0066 -0.0018  0.0100636950
+71  0.0023 -0.0083  0.0075  0.0117  0.0061394846
+72  0.0141  0.0144  0.0023 -0.0083  0.0165438390
+73 -0.0102  0.0116  0.0141  0.0144  0.0165832724
+74  0.0280  0.0029 -0.0102  0.0116 -0.0049432951
+75  0.0000  0.0178  0.0280  0.0029  0.0202250630
+76  0.0117  0.0086  0.0000  0.0178  0.0028446405
+77  0.0063  0.0207  0.0117  0.0086  0.0061473577
+78  0.0324  0.0254  0.0063  0.0207 -0.0077647068
+79 -0.0068  0.0037  0.0324  0.0254 -0.0001659839
+80  0.0088  0.0108 -0.0068  0.0037 -0.0105787684
+81 -0.0026  0.0070  0.0088  0.0108 -0.0123241933
+82  0.0221  0.0170 -0.0026  0.0070 -0.0217591909
+83  0.0105  0.0224  0.0221  0.0170 -0.0162584709
+84  0.0151  0.0148  0.0105  0.0224 -0.0276304633
+85  0.0021  0.0281  0.0151  0.0148 -0.0269816012
+86  0.0297  0.0050  0.0021  0.0281 -0.0523192346
+87  0.0094  0.0213  0.0297  0.0050 -0.0275013757
+88  0.0173  0.0105  0.0094  0.0213 -0.0388992971
+89  0.0033  0.0054  0.0173  0.0105 -0.0318517936
+90  0.0319  0.0108  0.0033  0.0054 -0.0338245060
+91 -0.0023 -0.0008  0.0319  0.0108 -0.0124699310
+92  0.0055  0.0080 -0.0023 -0.0008 -0.0139887884
+93  0.0096  0.0004  0.0055  0.0080 -0.0163002142
+94 -0.0013  0.0082  0.0096  0.0004 -0.0070907855
+95  0.0139 -0.0064 -0.0013  0.0082 -0.0163974970
+96  0.0066 -0.0064  0.0139 -0.0064  0.0037516436
+97 -0.0163 -0.0029  0.0066 -0.0064  0.0166007843
+98  0.0087 -0.0012 -0.0163 -0.0029  0.0031324262</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
 <ul>
 <li>Se procede con el ajuste de un ECM para <span class="math inline">\(Y_t\)</span>:</li>
 </ul>
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>ecm.dy <span class="ot">&lt;-</span> <span class="fu">lm</span>(dy <span class="sc">~</span> error.lagged <span class="sc">+</span> dyl1 <span class="sc">+</span> dxl1,</span>
+<span id="cb28-2"><a href=""></a>              <span class="at">data=</span>diff.dat)</span>
+<span id="cb28-3"><a href=""></a>ecm.dy1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(dy <span class="sc">~</span> error.lagged,</span>
+<span id="cb28-4"><a href=""></a>               <span class="at">data=</span>diff.dat)</span>
+<span id="cb28-5"><a href=""></a><span class="fu">summary</span>(ecm.dy)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -574,10 +1246,19 @@ Multiple R-squared:  0.2098,    Adjusted R-squared:  0.1843
 F-statistic: 8.231 on 3 and 93 DF,  p-value: 6.475e-05</code></pre>
 </div>
 </div>
+</div></div>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
 <li>Se procede con el ajuste de un ECM para <span class="math inline">\(X_t\)</span>:</li>
 </ul>
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a>ecm.dx <span class="ot">&lt;-</span> <span class="fu">lm</span>(dx <span class="sc">~</span> error.lagged <span class="sc">+</span> dyl1 <span class="sc">+</span> dxl1,</span>
+<span id="cb30-2"><a href=""></a>             <span class="at">data=</span>diff.dat)</span>
+<span id="cb30-3"><a href=""></a><span class="fu">summary</span>(ecm.dx)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -601,6 +1282,7 @@ Multiple R-squared:   0.14, Adjusted R-squared:  0.1123
 F-statistic: 5.048 on 3 and 93 DF,  p-value: 0.002767</code></pre>
 </div>
 </div>
+</div><div class="column" style="width:50%;">
 <ul>
 <li>De esta forma, tenemos estas ecuaciones:</li>
 </ul>
@@ -608,47 +1290,75 @@ F-statistic: 5.048 on 3 and 93 DF,  p-value: 0.002767</code></pre>
         \nabla Y_t &amp;= 0.008 -0.338 \hat{z}_{t-1} + \epsilon_{1,t} \\
         \nabla X_t &amp;= 0.007 -0.12 \hat{z}_{t-1} + 0.287 \nabla Y_{t-1} -0.32 \nabla X_{t-1} + \epsilon_{2,t}
 \end{aligned}\]</span></p>
-<ul>
-<li>Los residuales de las dos ecuaciones:</li>
-</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">ts.plot</span>(ecm.dy1<span class="sc">$</span>residuals)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-18-1.png" width="288"></p>
 </figure>
 </div>
 </div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">acf</span>(ecm.dy1<span class="sc">$</span>residuals)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-10-2.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-18-2.png" width="288"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="fu">ts.plot</span>(ecm.dx<span class="sc">$</span>residuals)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-19-1.png" width="288"></p>
 </figure>
 </div>
 </div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">acf</span>(ecm.dx<span class="sc">$</span>residuals)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-11-2.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<p><img data-src="presentacion5_files/figure-revealjs/unnamed-chunk-19-2.png" width="288"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
+</section></section>
+<section>
+<section id="modelos-de-corrección-del-error-vectorial-vecm" class="title-slide slide level1 agenda-slide center">
+<h1>Modelos de corrección del error vectorial (VECM)</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Procesos cointegrados</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Pruebas de hipótesis para cointegración</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Modelos de corrección del error</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Modelos de corrección del error vectorial (VECM)</p>
+</div></li>
+</ol>
+</div>
 </section>
-<section id="modelos-de-corrección-del-error-vectorial-vecm" class="slide level2">
+<section id="modelos-de-corrección-del-error-vectorial-vecm-1" class="slide level2">
 <h2>Modelos de corrección del error vectorial (VECM)</h2>
 <ul>
 <li>Recordando que para dos series <span class="math inline">\(X_t\)</span> y <span class="math inline">\(Y_t\)</span> que son <span class="math inline">\(I(1)\)</span> cointegradas, El Modelo de corrección del error (ECM) tiene la representación:</li>
@@ -659,15 +1369,28 @@ F-statistic: 5.048 on 3 and 93 DF,  p-value: 0.002767</code></pre>
     \end{aligned}\]</span></p>
 <p>donde <span class="math inline">\(\hat{z}_t =Y_t -\hat{\beta}_0 + \hat{\beta}_1 X_t\)</span> es el error del modelo de regresión:</p>
 <ul>
-<li>Se puede generalizar el modelo a un sistema de ECM, llamado VECM, en donde cada componente de una serie temporal <span class="math inline">\(Y_t\)</span> de <span class="math inline">\(k\)</span> dimensiones es I(d), y puede haber varias ecuaciones de cointegración.</li>
+<li>Se puede generalizar el modelo a un sistema de ECM, llamado VECM, en donde cada componente de una serie temporal <span class="math inline">\(Y_t\)</span> de <span class="math inline">\(k\)</span> dimensiones es <span class="math inline">\(I(d)\)</span>, y puede haber varias ecuaciones de cointegración.</li>
 </ul>
 </section>
 <section id="consideraciones-finales" class="slide level2">
 <h2>Consideraciones finales</h2>
 <ul>
 <li><p>Existe una extensa literatura de generalizaciones de VARMA, VECM y métodos de estimaciones alternativas.</p></li>
-<li><p>Por ejemplo, el paquete BVAR https://cran.r-project.org/web/packages/BVAR/index.html</p></li>
+<li><p>Por ejemplo, el paquete <a href="https://cran.r-project.org/web/packages/BVAR/index.html">BVAR</a>.</p></li>
 </ul>
+</section>
+<section id="paquetes-en-r" class="slide level2">
+<h2>Paquetes en R</h2>
+<p>Para replicar los ejemplos de esta presentación, necesitan estos paquetes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-2"><a href=""></a><span class="fu">library</span>(forecast)</span>
+<span id="cb36-3"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb36-4"><a href=""></a><span class="fu">library</span>(fpp2)</span>
+<span id="cb36-5"><a href=""></a><span class="fu">library</span>(urca)</span>
+<span id="cb36-6"><a href=""></a><span class="fu">library</span>(vars)</span>
+<span id="cb36-7"><a href=""></a><span class="fu">library</span>(tseries)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="en-la-próxima-clase-seguiremos" class="slide level2">
 <h2>En la próxima clase seguiremos</h2>
@@ -679,7 +1402,7 @@ F-statistic: 5.048 on 3 and 93 DF,  p-value: 0.002767</code></pre>
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -710,7 +1433,7 @@ F-statistic: 5.048 on 3 and 93 DF,  p-value: 0.002767</code></pre>
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"right","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"width":"wide","numbers":true},
 'smaller': false,
  
         // Display controls in the bottom right corner

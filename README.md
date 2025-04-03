@@ -30,8 +30,9 @@ aplicaciones.
 |  | [Clase 1-4](./Tema_1/presentacion4.html) | [lab01](./Tema_1/lab01.html) |
 | 2\. Análisis Multivariado | [Clase 2-1](./Tema_2/presentacion1.html) |  |
 |  | [Clase 2-2](./Tema_2/presentacion2.html) | [lab02](./Tema_2/lab02.html) \\ [archivos](./Tema_2/Tema02_datos.zip) |
-|  | [Clase 2-3](./Tema_2/presentacion3.html) |  |
+|  | [Clase 2-3](./Tema_2/presentacion3.html) | [lab03](./Tema_2/lab03.html) |
 |  | [Clase 2-4](./Tema_2/presentacion4.html) |  |
+|  | [Clase 2-5](./Tema_2/presentacion5.html) |  |
 
 # Ejercicios
 

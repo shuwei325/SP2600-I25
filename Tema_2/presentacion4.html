@@ -680,29 +680,40 @@ X_t=CD_t+ \eta_t,
 <ul>
 <li>Considere el caso de una tendencia lineal: <span class="math display">\[\nabla X_t= \beta_0 + \beta_1 t +  \pi X_{t-1} + \sum_{j=1}^{k} \gamma_j \nabla X_{t-j} +a_t,~~\text{con}~~ k=p-1\]</span> para asegurar que la correlación serial en el error es removido.</li>
 </ul>
-<p><strong>Paso 1</strong>: Probar <span class="math inline">\(H_0: \pi=0\)</span> (con el estadístico <span class="math inline">\(\tau\)</span>) - Si se rechaza <span class="math inline">\(H_0\)</span>, entonces no hay raíz unitaria.</p>
-<p><strong>Paso 2</strong>: Si <span class="math inline">\(\pi = 0\)</span>, probar <span class="math inline">\(H_0: \beta_1=\pi=0\)</span> (con el estadístico <span class="math inline">\(\Phi_3\)</span>). - Si no se rechaza <span class="math inline">\(H_0\)</span>, entonces no hay tendencia y contiene raíz unitaria. - Si se rechaza <span class="math inline">\(H_0\)</span>, hay tendencia y contiene raíz unitaria.</p>
+<p><strong>Paso 1</strong>: Probar <span class="math inline">\(H_0: \pi=0\)</span> (con el estadístico <span class="math inline">\(\tau\)</span>)</p>
+<ul>
+<li>Si se rechaza <span class="math inline">\(H_0\)</span>, entonces no hay raíz unitaria.</li>
+</ul>
+<p><strong>Paso 2</strong>: Si <span class="math inline">\(\pi = 0\)</span>, probar <span class="math inline">\(H_0: \beta_1=\pi=0\)</span> (con el estadístico <span class="math inline">\(\Phi_3\)</span>).</p>
+<ul>
+<li>Si no se rechaza <span class="math inline">\(H_0\)</span>, entonces no hay tendencia y tiene raíz unitaria.</li>
+<li>Si se rechaza <span class="math inline">\(H_0\)</span>, hay tendencia y tiene raíz unitaria.</li>
+</ul>
 </section>
 <section id="ejemplo-la-serie-de-consumo" class="slide level2">
 <h2>Ejemplo: La serie de consumo</h2>
 <p>La serie del índice de consumo en Reino Unido del cuarto trimestre, 1966 al segundo trimestre de 1991.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">data</span>(Raotbl3)</span>
+<span id="cb7-2"><a href=""></a>lc <span class="ot">&lt;-</span> <span class="fu">ts</span>(Raotbl3<span class="sc">$</span>lc, <span class="at">start=</span><span class="fu">c</span>(<span class="dv">1966</span>,<span class="dv">4</span>), <span class="at">end=</span><span class="fu">c</span>(<span class="dv">1991</span>,<span class="dv">2</span>), <span class="at">frequency=</span><span class="dv">4</span>)</span>
+<span id="cb7-3"><a href=""></a><span class="fu">plot</span>(lc)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-8-1.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">acf</span>(lc)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-9-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -712,51 +723,97 @@ X_t=CD_t+ \eta_t,
 <section class="slide level2">
 
 <ul>
-<li>En R, aparece una tabla similar a esa:</li>
+<li>Estimar el modelo completo</li>
 </ul>
-<div class="line-block">Statistics | 1pct | 5pct | 10pct | test-statistics |<br>
-&nbsp;&nbsp;–| –| | |<br>
-tau3 | -4.04 | -3.45 | -3.15 | -2.2389 |<br>
-phi2 | 6.50 | 4.88 | 4.16 | 3.7382 |<br>
-phi3 | 8.73 | 6.49 | 5.47 | 2.5972 |</div>
-<ul>
-<li>Vamos a ver con más detalle las salidas de R en el laboratorio.</li>
-</ul>
-<p><strong>Paso 1</strong>: Probar <span class="math inline">\(H_0: \pi=0\)</span> (con el estadístico <span class="math inline">\(\tau\)</span>) - Usando un 5% de significancia, note que el valor crítico es <span class="math inline">\(-3.45&lt;-2.2389\)</span> el estadístico <span class="math inline">\(\tau\)</span>. Por lo tanto, no se rechaza <span class="math inline">\(H_0\)</span>.</p>
-</section>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>lc.ct <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(lc, <span class="at">lags=</span><span class="dv">3</span>, <span class="at">type=</span><span class="st">'trend'</span>)</span>
+<span id="cb9-2"><a href=""></a><span class="fu">plot</span>(lc.ct) <span class="co">#comportamiento de los residuales de este modelo.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-10-1.png" width="480" class="r-stretch"></section>
 <section class="slide level2">
 
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">summary</span>(lc.ct)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+############################################### 
+# Augmented Dickey-Fuller Test Unit Root Test # 
+############################################### 
+
+Test regression trend 
+
+
+Call:
+lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.044714 -0.006525  0.000129  0.006225  0.045353 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)  0.7976591  0.3547775   2.248   0.0270 * 
+z.lag.1     -0.0758706  0.0338880  -2.239   0.0277 * 
+tt           0.0004915  0.0002159   2.277   0.0252 * 
+z.diff.lag1 -0.1063957  0.1006744  -1.057   0.2934   
+z.diff.lag2  0.2011373  0.1012373   1.987   0.0500 . 
+z.diff.lag3  0.2998586  0.1020548   2.938   0.0042 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.01307 on 89 degrees of freedom
+Multiple R-squared:  0.1472,    Adjusted R-squared:  0.09924 
+F-statistic: 3.071 on 5 and 89 DF,  p-value: 0.01325
+
+
+Value of test-statistic is: -2.2389 3.7382 2.5972 
+
+Critical values for test statistics: 
+      1pct  5pct 10pct
+tau3 -4.04 -3.45 -3.15
+phi2  6.50  4.88  4.16
+phi3  8.73  6.49  5.47</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Paso 1</strong>: Probar <span class="math inline">\(H_0: \pi=0\)</span> (con el estadístico <span class="math inline">\(\tau\)</span>)</p>
 <ul>
-<li>En R, aparece una tabla similar a esa:</li>
+<li>Usando un 5% de significancia, note que el valor crítico es <span class="math inline">\(-3.45&lt;-2.2389\)</span> el estadístico <span class="math inline">\(\tau\)</span>. Por lo tanto, no se rechaza <span class="math inline">\(H_0\)</span>.</li>
 </ul>
-<div class="line-block">Statistics | 1pct | 5pct | 10pct | test-statistics |<br>
-&nbsp;&nbsp;–| –| | |<br>
-tau3 | -4.04 | -3.45 | -3.15 | -2.2389 |<br>
-phi2 | 6.50 | 4.88 | 4.16 | 3.7382 |<br>
-phi3 | 8.73 | 6.49 | 5.47 | 2.5972 |</div>
-<p><strong>Paso 2</strong>: Dado que <span class="math inline">\(\pi=0\)</span>, probamos <span class="math inline">\(H_0: \beta_1=\pi=0\)</span> (con el estadístico <span class="math inline">\(\Phi_3\)</span>). - Note que el estadístico <span class="math inline">\(F\)</span>= <span class="math inline">\(2.5972&lt;6.49\)</span> el valor crítico. Por lo tanto, no se rechaza <span class="math inline">\(H_0\)</span>. - Se concluye que el modelo no tiene tendencia, y con raíz unitaria.</p>
+<p><strong>Paso 2</strong>: Dado que <span class="math inline">\(\pi=0\)</span>, probamos <span class="math inline">\(H_0: \beta_1=\pi=0\)</span> (con el estadístico <span class="math inline">\(\Phi_3\)</span>).</p>
+<ul>
+<li>Note que el estadístico <span class="math inline">\(F\)</span>= <span class="math inline">\(2.5972&lt;6.49\)</span> el valor crítico. Por lo tanto, no se rechaza <span class="math inline">\(H_0\)</span>.</li>
+<li>Se concluye que el modelo no tiene tendencia, y con raíz unitaria.</li>
+</ul>
 <p><strong>Paso 3</strong>: Ya que la serie contiene raíz unitaria, se realiza diferenciación para analizarlo.</p>
+</div></div>
 </section>
 <section class="slide level2">
 
 <p>La serie diferenciada:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>lc.dif <span class="ot">&lt;-</span> <span class="fu">diff</span>(lc)</span>
+<span id="cb12-2"><a href=""></a><span class="fu">plot</span>(lc.dif)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-12-1.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">acf</span>(lc.dif)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-13-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -771,6 +828,18 @@ phi3 | 8.73 | 6.49 | 5.47 | 2.5972 |</div>
 <li>Prueba de Schmidt-Phillips</li>
 <li>Prueba de Kwiatkowski-Phillips-Schmidt-Shin</li>
 </ul>
+</section>
+<section id="paquetes-en-r" class="slide level2">
+<h2>Paquetes en R</h2>
+<p>Para replicar los ejemplos de esta presentación, necesitan estos paquetes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb14-2"><a href=""></a><span class="fu">library</span>(forecast)</span>
+<span id="cb14-3"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb14-4"><a href=""></a><span class="fu">library</span>(fpp2)</span>
+<span id="cb14-5"><a href=""></a><span class="fu">library</span>(urca)</span>
+<span id="cb14-6"><a href=""></a><span class="fu">library</span>(vars)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="en-la-próxima-clase-veremos" class="slide level2">
 <h2>En la próxima clase veremos</h2>
