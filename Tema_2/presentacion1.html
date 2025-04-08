@@ -757,9 +757,9 @@ Autocorrelations of series 'X', by lag
 <section class="slide level2">
 
 <ul>
-<li>O bien, <span class="alert">la matriz de autocovariancias</span>: <span class="math display">\[\Gamma(t,s)= E[(X_{t}-\mu_{t})(X_{s}-\mu_s)']=E\left[ \left(  \begin{array}{c} X_{t1}-\mu_{t1}\\\vdots \\X_{tk}-\mu_{tk} \end{array} \right) \left( X_{t1}-\mu_{t1},\dots ,X_{tk}-\mu_{tk}  \right) \right]\]</span></li>
+<li>O bien, <span class="alert">la matriz de autocovariancias</span>: <span class="math display">\[\Gamma(t,s)= E[(X_{t}-\mu_{t})(X_{s}-\mu_s)']=E\left[ \left(  \begin{array}{c} X_{t1}-\mu_{t1}\\\vdots \\X_{tk}-\mu_{tk} \end{array} \right) \left( X_{s1}-\mu_{s1},\dots ,X_{sk}-\mu_{sk}  \right) \right]\]</span></li>
 </ul>
-<p><span class="math display">\[= E\left(  \begin{array}{c} (X_{t1}-\mu_{t1})^2 &amp; \dots &amp; (X_{t1}-\mu_{t1})(X_{tk}-\mu_{tk})\\ \vdots &amp; \ddots &amp; \vdots \\(X_{tk}-\mu_{tk})(X_{t1}-\mu_{t1}) &amp; \dots &amp; (X_{tk}-\mu_{tk})^2 \end{array} \right).\]</span></p>
+<p><span class="math display">\[= E\left(  \begin{array}{c} (X_{t1}-\mu_{t1})(X_{s1}-\mu_{s1}) &amp; \dots &amp; (X_{t1}-\mu_{t1})(X_{sk}-\mu_{sk})\\ \vdots &amp; \ddots &amp; \vdots \\(X_{tk}-\mu_{tk})(X_{s1}-\mu_{s1}) &amp; \dots &amp; (X_{tk}-\mu_{tk})(X_{sk}-\mu_{sk}) \end{array} \right).\]</span></p>
 </section></section>
 <section>
 <section id="estacionariedad" class="title-slide slide level1 agenda-slide center">
@@ -1132,12 +1132,12 @@ donde <span class="math inline">\(\pi(B)=1-\sum\limits_{j=0}^\infty \pi_j B\)</s
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Covariance matrix:"
       a1    a2
-a1 1.571 0.796
-a2 0.796 1.033
+a1 1.606 0.847
+a2 0.847 1.037
 CCM at lag:  0 
       [,1]  [,2]
-[1,] 1.000 0.625
-[2,] 0.625 1.000
+[1,] 1.000 0.657
+[2,] 0.657 1.000
 Simplified matrix: 
 CCM at lag:  1 
 . . 
@@ -1249,10 +1249,10 @@ CCM at lag:  4
 <div class="cell-output cell-output-stdout">
 <pre><code>Ljung-Box Statistics:  
        m       Q(m)     df    p-value
-[1,]  1.00      9.92    9.00     0.36
-[2,]  2.00     19.66   18.00     0.35
-[3,]  3.00     26.55   27.00     0.49
-[4,]  4.00     34.62   36.00     0.53</code></pre>
+[1,]  1.00      3.60    9.00     0.94
+[2,]  2.00      7.87   18.00     0.98
+[3,]  3.00     13.66   27.00     0.98
+[4,]  4.00     23.22   36.00     0.95</code></pre>
 </div>
 
 </div>
