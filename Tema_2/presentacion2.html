@@ -796,9 +796,9 @@ a_{2,t}
 
 <ul>
 <li><p>La condición de <span class="math inline">\(\phi_1^{J}\rightarrow 0\)</span> cuando <span class="math inline">\(J \rightarrow \infty\)</span> significa que todos los autovalores de <span class="math inline">\(\lambda_i\)</span> de la matriz <span class="math inline">\(\phi_1\)</span> satisfacen la condición de que <span class="math inline">\(\lambda_i^{J}\rightarrow 0\)</span> cuando <span class="math inline">\(J \rightarrow \infty\)</span>.</p></li>
-<li><p>Y esto significa que el valor absoluto de todos los autovalores <span class="math inline">\(\lambda_i\)</span> de <span class="math inline">\(\phi_1\)</span> es menor que 1.</p></li>
+<li><p>Y esto significa que el valor absoluto de todos los autovalores <span class="math inline">\(\lambda_i\)</span> de <span class="math inline">\(\phi_1\)</span> es menor a 1.</p></li>
 <li><p>Recordemos que para la matriz <span class="math inline">\(\phi_1\)</span>, sus autovalores son las soluciones de la ecuación: <span class="math display">\[|\lambda I_k - \phi_1|=0.\]</span></p></li>
-<li><p>y es posible reescrribir la condición <span class="math display">\[\lambda^k \left|I_k - \phi_1\frac{1}{\lambda}\right|=0.\]</span></p></li>
+<li><p>y es posible reescribir la condición <span class="math display">\[\lambda^k \left|I_k - \phi_1\frac{1}{\lambda}\right|=0.\]</span></p></li>
 <li><p>Es decir, <span class="math inline">\(\left|I_k - \phi_1 x\right|=0\)</span> donde <span class="math inline">\(x=1/\lambda\)</span>. Los autovalores de <span class="math inline">\(\phi_1\)</span> son inversos de la solución de esta ecuación.</p></li>
 </ul>
 </section>
@@ -821,30 +821,22 @@ a_{2,t}
 <h2>VAR(p) como representación de VAR(1)</h2>
 <ul>
 <li><p>Sin pérdida de generalidad, asuma <span class="math inline">\(\phi_0=0\)</span>. Defina <span class="math inline">\(\boldsymbol{X}_t=\left(X_t',X_{t-1}',...,X_{t-p+1}' \right)'\)</span> una serie temporal <span class="math inline">\(pk-\)</span>dimensional.</p></li>
-<li><p>El modelo VAR(p) se puede escribir como:</p></li>
-</ul>
-<p><span class="math display">\[\boldsymbol{X}_t=\Phi \boldsymbol{X}_{t-1}+\boldsymbol{b}_t,\]</span> donde</p>
-<p><span class="math display">\[\underset{(Kp \times 1)}{\boldsymbol{X}_{t}}=
+<li><p>El modelo VAR(p) se puede escribir como: <span class="math display">\[\boldsymbol{X}_t=\Phi \boldsymbol{X}_{t-1}+\boldsymbol{b}_t,\]</span> donde <span class="math display">\[\underset{(kp \times 1)}{\boldsymbol{X}_{t}}=
 \begin{bmatrix}X_{t}\\
 \vdots \\
 X_{t-p+1}
-\end{bmatrix},~~~\underset{(Kp \times Kp)}{\Phi}=\begin{bmatrix}\phi_{1} &amp; \phi_2 &amp; ... &amp; \phi_{p-1} &amp; \phi_{p} \\
+\end{bmatrix},~~~\underset{(kp \times kp)}{\Phi}=\begin{bmatrix}\phi_{1} &amp; \phi_2 &amp; ... &amp; \phi_{p-1} &amp; \phi_{p} \\
 I &amp; 0 &amp; ... &amp; 0 &amp; 0 \\
 0 &amp; I &amp; ... &amp; 0 &amp; 0\\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
 0 &amp; 0 &amp; ... &amp; I &amp; 0
-\end{bmatrix}~,\]</span></p>
-</section>
-<section id="varp-como-representación-de-var1-1" class="slide level2">
-<h2>VAR(p) como representación de VAR(1)</h2>
-<p><span class="math display">\[\underset{(Kp \times 1)}{\boldsymbol{b}_{t}}=
+\end{bmatrix}~,~~~ \underset{(kp \times 1)}{\boldsymbol{b}_{t}}=
 \begin{bmatrix}a_{t}\\
 0 \\
 \vdots\\
 0
-\end{bmatrix}\]</span></p>
-<ul>
-<li>La matrix <span class="math inline">\(\Phi\)</span> es conocida como <span class="alert">la matriz compañera</span> del polinomio autorregresivo <span class="math inline">\(\phi(B)\)</span>.</li>
+\end{bmatrix}\]</span></p></li>
+<li><p>La matrix <span class="math inline">\(\Phi\)</span> es conocida como <span class="alert">la matriz compañera</span> del polinomio autorregresivo <span class="math inline">\(\phi(B)\)</span>.</p></li>
 </ul>
 </section>
 <section id="condición-de-estacionariedad-de-varp" class="slide level2">
@@ -988,8 +980,33 @@ I &amp; 0 &amp; ... &amp; 0 &amp; 0 \\
 </ul>
 <p><span class="math display">\[r_t=\frac{X_t-X_{t-1}}{X_{t-1}}\]</span></p>
 <ul>
-<li><p>Despejando la expresión anterior: <span class="math display">\[X_t=(1+r_t)X_{t-1}\]</span> <span class="math display">\[\Rightarrow \ln X_t=\ln (1+r_t)+ \ln X_{t-1}\]</span> <span class="math display">\[\Rightarrow \nabla \ln X_t = \ln X_t - \ln X_{t-1}=\ln (1+r_t) \approx r_t,\]</span> si <span class="math inline">\(r_t\)</span> son cambios porcentuales pequeños.</p></li>
-<li><p>A partir de aquí, llamamos <span class="math inline">\(r_t\)</span> o <span class="math inline">\(\nabla \ln X_t\)</span> retornos y dicho valor es conocido como la tasa del crecimiento porcentual.</p></li>
+<li>Despejando la expresión anterior:</li>
+</ul>
+<p><span class="math display">\[X_t=(1+r_t)X_{t-1}\]</span> <span class="math display">\[\Rightarrow \ln X_t=\ln (1+r_t)+ \ln X_{t-1}\]</span> <span class="math display">\[\Rightarrow \nabla \ln X_t = \ln X_t - \ln X_{t-1}=\ln (1+r_t) \approx r_t,\]</span> si <span class="math inline">\(r_t\)</span> son cambios porcentuales pequeños.</p>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Nota</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Recuerde que para una función <span class="math inline">\(f(x)\)</span>, el polinomio de Taylor es una aproximación polinómica de una función n veces derivable en un punto <span class="math inline">\(a\)</span>. Concretamente:</li>
+</ul>
+<p><span class="math display">\[f(x) \approx f(a) + f'(a) (x-a) + \frac{f''(a)}{2!}(x-a)^2 + ...+ \frac{f^{(n)}(a)}{n!}(x-a)^n\]</span></p>
+<ul>
+<li>De esta forma, <span class="math display">\[\nabla \ln X_t = \ln X_t - \ln X_{t-1}=\ln (1+r_t) = f(r_t) \approx r_t,\]</span></li>
+</ul>
+</div>
+</div>
+</div>
+<ul>
+<li>A partir de aquí, llamamos <span class="math inline">\(r_t\)</span> o <span class="math inline">\(\nabla \ln X_t\)</span> retornos y dicho valor es conocido como la tasa del crecimiento porcentual.</li>
 </ul>
 </section>
 <section class="slide level2">
@@ -997,13 +1014,13 @@ I &amp; 0 &amp; ... &amp; 0 &amp; 0 \\
 <ul>
 <li>Se calculan sus retornos en porcentajes, i.e.&nbsp;retornos*100:</li>
 </ul>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>x<span class="ot">=</span>gdp[<span class="dv">2</span><span class="sc">:</span><span class="dv">126</span>,]<span class="sc">-</span>gdp[<span class="dv">1</span><span class="sc">:</span><span class="dv">125</span>,]</span>
 <span id="cb5-2"><a href=""></a>x<span class="ot">=</span>x<span class="sc">*</span><span class="dv">100</span></span>
 <span id="cb5-3"><a href=""></a><span class="fu">tsplot</span>(x)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" class="r-stretch"></section>
+<img data-src="presentacion2_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center r-stretch" width="480"></section>
 <section class="slide level2">
 
 <div class="columns">
@@ -1068,11 +1085,12 @@ a_{2t} \\ a_{3t}
 </ol></li>
 </ul>
 </section>
-<section id="pruebas-de-razón-de-verosimilitud-secuencial" class="slide level2">
-<h2>1. Pruebas de razón de verosimilitud secuencial</h2>
+<section class="slide level2">
+
+<h3 id="pruebas-de-razón-de-verosimilitud-secuencial">1. Pruebas de razón de verosimilitud secuencial</h3>
 <ul>
 <li><p>La idea básica es comparar un VAR(p) con un VAR(p-1).</p></li>
-<li><p>Formalmente, se plantean: <span class="math inline">\(H_0:\phi_p=0\)</span> <span class="math inline">\(H_1:\phi_p \neq 0\)</span></p></li>
+<li><p>Formalmente, se plantean: <span class="math inline">\(H_0:\phi_p=0\)</span> contra <span class="math inline">\(H_1:\phi_p \neq 0\)</span></p></li>
 <li><p>Sea <span class="math inline">\(\boldsymbol{\beta}=\left[\phi_0,\phi_1,...,\phi_p \right]\)</span> el conjunto de las matrices de coeficientes de un VAR(p), y <span class="math inline">\(\Sigma_{a,p}\)</span> la matriz de covariancias de las inovaciones del modelo.</p></li>
 <li><p>Bajo el supuesto de normalidad, la razón de verosimilitud es dada por</p></li>
 </ul>
@@ -1089,8 +1107,9 @@ a_{2t} \\ a_{3t}
 <li><p>En la práctica, se preselecciona un rezago <span class="math inline">\(L\)</span> grande y se realiza secuencialmente probando <span class="math inline">\(p=0,...,L\)</span>.</p></li>
 </ul>
 </section>
-<section id="criterio-de-información" class="slide level2">
-<h2>2. Criterio de información</h2>
+<section class="slide level2">
+
+<h3 id="criterio-de-información">2. Criterio de información</h3>
 <ul>
 <li>Debido a la complejidad de selección del orden <span class="math inline">\(p\)</span>, en la práctica se usan los criterios de información: AIC, BIC o Schwarz y Hanna Quinn.</li>
 </ul>
@@ -1155,7 +1174,7 @@ Summary table:
 <span class="math inline">\(H_1: R_j \neq 0\)</span>, para algún <span class="math inline">\(1\leq j \leq m\)</span></p></li>
 <li><p>Recuerden que <span class="alert">el estadístico de Portmanteau multivariado</span> es la versión multivariada de la prueba de Ljung-Box. <span class="math display">\[Q_m=T^2 \sum_{l=1}^m \frac{1}{T-l} tr \left(\hat{R}'_l\hat{R}^{-1}_0\hat{R}_l\hat{R}^{-1}_0\right)\]</span></p></li>
 <li><p>Bajo el supuesto de <span class="math inline">\(H_0\)</span>,i.e.&nbsp;<span class="math inline">\(R_l=0,~ l&gt;0\)</span>, y <span class="math inline">\(X_t\)</span> es distribuída normalmente, para <span class="math inline">\(T\)</span> y <span class="math inline">\(m\)</span> suficientemente grandes, el estadístico se aproxima a la distribución <span class="math inline">\(\chi^2_{mk^2}\)</span>.</p></li>
-<li><p>Para el caso de un VAR(p) se deben corregir los grados de libertad, es decir, <span class="math inline">\(\chi^2_{(m-p)k^2}\)</span>, i.e.&nbsp;el valor de corrección es <span class="math inline">\(pk^2\)</span>.</p></li>
+<li><p>Para el caso de un VAR(p) se deben corregir los grados de libertad. Note que <span class="math inline">\(\chi^2_{(m-p)k^2} = \chi^2_{mk^2-pk^2}\)</span> [El valor de corrección es <span class="math inline">\(pk^2\)</span>].</p></li>
 </ul>
 </section>
 <section id="ejemplo-con-var1" class="slide level2 scrollable">
