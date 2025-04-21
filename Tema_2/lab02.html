@@ -123,6 +123,7 @@ window.Quarto = {
   <li><a href="#retornos-en-logaritmo-en-porcentaje-de-un-portafolio-de-crsp" id="toc-retornos-en-logaritmo-en-porcentaje-de-un-portafolio-de-crsp" class="nav-link" data-scroll-target="#retornos-en-logaritmo-en-porcentaje-de-un-portafolio-de-crsp"><span class="header-section-number">3</span> Retornos en logaritmo (en porcentaje) de un portafolio de CRSP</a>
   <ul class="collapse">
   <li><a href="#vma" id="toc-vma" class="nav-link" data-scroll-target="#vma"><span class="header-section-number">3.1</span> VMA</a></li>
+  <li><a href="#comparación-con-var" id="toc-comparación-con-var" class="nav-link" data-scroll-target="#comparación-con-var"><span class="header-section-number">3.2</span> Comparación con VAR</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -948,9 +949,9 @@ bic=  4.513656 </code></pre>
 <pre><code>[1] 4.513656</code></pre>
 </div>
 </div>
-<ul>
-<li>Podemos usar con VAR</li>
-</ul>
+</section>
+<section id="comparación-con-var" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="comparación-con-var"><span class="header-section-number">3.2</span> Comparación con VAR</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>m3<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VARorder</span>(rtn,<span class="at">maxp=</span><span class="dv">15</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -976,263 +977,9 @@ Summary table:
 [15,] 14 4.5253 4.9294 4.6825  7.7641  0.1006
 [16,] 15 4.5329 4.9659 4.7013  3.0885  0.5431</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>m4<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VAR</span>(rtn,<span class="at">p=</span><span class="dv">4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Constant term: 
-Estimates:  0.8010652 0.8162344 
-Std.Error:  0.2320281 0.2665311 
-AR coefficient matrix 
-AR( 1 )-matrix 
-      [,1]   [,2]
-[1,] 0.374 -0.185
-[2,] 0.542 -0.270
-standard error 
-      [,1]  [,2]
-[1,] 0.152 0.132
-[2,] 0.175 0.152
-AR( 2 )-matrix 
-         [,1]    [,2]
-[1,]  0.00144 -0.0907
-[2,] -0.09292 -0.0129
-standard error 
-      [,1]  [,2]
-[1,] 0.154 0.133
-[2,] 0.177 0.152
-AR( 3 )-matrix 
-      [,1]   [,2]
-[1,] 0.270 -0.216
-[2,] 0.287 -0.237
-standard error 
-      [,1]  [,2]
-[1,] 0.154 0.133
-[2,] 0.176 0.153
-AR( 4 )-matrix 
-       [,1]  [,2]
-[1,] -0.151 0.127
-[2,] -0.224 0.175
-standard error 
-      [,1]  [,2]
-[1,] 0.154 0.131
-[2,] 0.177 0.151
-  
-Residuals cov-mtx: 
-         [,1]     [,2]
-[1,] 29.34173 32.47576
-[2,] 32.47576 38.71687
-  
-det(SSE) =  81.34445 
-AIC =  4.45098 
-BIC =  4.56645 
-HQ  =  4.49589 </code></pre>
-</div>
-</div>
-<p>Los grados de libertad son <span class="math inline">\(k^2(p)\)</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">2</span><span class="sc">*</span><span class="dv">4</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 16</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mq</span>(m4<span class="sc">$</span>residuals,<span class="at">adj=</span><span class="dv">16</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Ljung-Box Statistics:  
-            m       Q(m)       df    p-value
- [1,]   1.00000   0.00366 -12.00000     1.00
- [2,]   2.00000   0.01425  -8.00000     1.00
- [3,]   3.00000   0.03051  -4.00000     1.00
- [4,]   4.00000   0.07711   0.00000     1.00
- [5,]   5.00000   0.15712   4.00000     1.00
- [6,]   6.00000   2.30958   8.00000     0.97
- [7,]   7.00000   3.01753  12.00000     1.00
- [8,]   8.00000   8.18498  16.00000     0.94
- [9,]   9.00000  11.52026  20.00000     0.93
-[10,]  10.00000  12.87117  24.00000     0.97
-[11,]  11.00000  16.03433  28.00000     0.97
-[12,]  12.00000  27.05013  32.00000     0.72
-[13,]  13.00000  28.82318  36.00000     0.80
-[14,]  14.00000  38.14113  40.00000     0.55
-[15,]  15.00000  41.28613  44.00000     0.59
-[16,]  16.00000  42.07408  48.00000     0.71
-[17,]  17.00000  43.14412  52.00000     0.80
-[18,]  18.00000  47.23349  56.00000     0.79
-[19,]  19.00000  48.48892  60.00000     0.86
-[20,]  20.00000  51.43031  64.00000     0.87
-[21,]  21.00000  56.90230  68.00000     0.83
-[22,]  22.00000  61.38877  72.00000     0.81
-[23,]  23.00000  65.11915  76.00000     0.81
-[24,]  24.00000  72.18807  80.00000     0.72</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lab02_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="480"></p>
-</figure>
-</div>
-</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MTSdiag</span>(m4,<span class="at">adj=</span><span class="dv">16</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Covariance matrix:"
-     [,1] [,2]
-[1,] 29.4 32.5
-[2,] 32.5 38.8
-CCM at lag:  0 
-      [,1]  [,2]
-[1,] 1.000 0.964
-[2,] 0.964 1.000
-Simplified matrix: 
-CCM at lag:  1 
-. . 
-. . 
-CCM at lag:  2 
-. . 
-. . 
-CCM at lag:  3 
-. . 
-. . 
-CCM at lag:  4 
-. . 
-. . 
-CCM at lag:  5 
-. . 
-. . 
-CCM at lag:  6 
-. . 
-. . 
-CCM at lag:  7 
-. . 
-. . 
-CCM at lag:  8 
-- - 
-. . 
-CCM at lag:  9 
-. . 
-. . 
-CCM at lag:  10 
-. . 
-. . 
-CCM at lag:  11 
-. . 
-. . 
-CCM at lag:  12 
-. . 
-. . 
-CCM at lag:  13 
-. . 
-. . 
-CCM at lag:  14 
-. . 
-. . 
-CCM at lag:  15 
-. . 
-. . 
-CCM at lag:  16 
-. . 
-. . 
-CCM at lag:  17 
-. . 
-. . 
-CCM at lag:  18 
-. . 
-. . 
-CCM at lag:  19 
-. . 
-. . 
-CCM at lag:  20 
-. . 
-. . 
-CCM at lag:  21 
-. . 
-. . 
-CCM at lag:  22 
-. . 
-. . 
-CCM at lag:  23 
-. . 
-. . 
-CCM at lag:  24 
-. . 
-. . </code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lab02_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="480"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Hit Enter for p-value plot of individual ccm:  </code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lab02_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid figure-img" width="480"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Hit Enter to compute MQ-statistics: 
-
-Ljung-Box Statistics:  
-            m       Q(m)       df    p-value
- [1,]   1.00000   0.00366 -12.00000     1.00
- [2,]   2.00000   0.01425  -8.00000     1.00
- [3,]   3.00000   0.03051  -4.00000     1.00
- [4,]   4.00000   0.07711   0.00000     1.00
- [5,]   5.00000   0.15712   4.00000     1.00
- [6,]   6.00000   2.30958   8.00000     0.97
- [7,]   7.00000   3.01753  12.00000     1.00
- [8,]   8.00000   8.18498  16.00000     0.94
- [9,]   9.00000  11.52026  20.00000     0.93
-[10,]  10.00000  12.87117  24.00000     0.97
-[11,]  11.00000  16.03433  28.00000     0.97
-[12,]  12.00000  27.05013  32.00000     0.72
-[13,]  13.00000  28.82318  36.00000     0.80
-[14,]  14.00000  38.14113  40.00000     0.55
-[15,]  15.00000  41.28613  44.00000     0.59
-[16,]  16.00000  42.07408  48.00000     0.71
-[17,]  17.00000  43.14412  52.00000     0.80
-[18,]  18.00000  47.23349  56.00000     0.79
-[19,]  19.00000  48.48892  60.00000     0.86
-[20,]  20.00000  51.43031  64.00000     0.87
-[21,]  21.00000  56.90230  68.00000     0.83
-[22,]  22.00000  61.38877  72.00000     0.81
-[23,]  23.00000  65.11915  76.00000     0.81
-[24,]  24.00000  72.18807  80.00000     0.72</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lab02_files/figure-html/unnamed-chunk-16-3.png" class="img-fluid figure-img" width="480"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Hit Enter to obtain residual plots: </code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lab02_files/figure-html/unnamed-chunk-16-4.png" class="img-fluid figure-img" width="480"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>m4<span class="sc">$</span>bic</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.56645</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>m1<span class="sc">$</span>bic</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.485021</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>m2<span class="sc">$</span>bic</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.513656</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>m5<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VAR</span>(rtn,<span class="at">p=</span><span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>m4<span class="ot">=</span>MTS<span class="sc">::</span><span class="fu">VAR</span>(rtn,<span class="at">p=</span><span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Constant term: 
 Estimates:  0.8194283 0.8148763 
@@ -1266,58 +1013,58 @@ BIC =  4.49461
 HQ  =  4.45933 </code></pre>
 </div>
 </div>
-<p>Los grados de libertad son <span class="math inline">\(k^2(p)\)</span>.</p>
+<p>Los grados de libertad son <span class="math inline">\(k^2 \cdot p\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">2</span><span class="sc">*</span><span class="dv">2</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">2</span><span class="sc">*</span><span class="dv">2</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mq</span>(m4<span class="sc">$</span>residuals,<span class="at">adj=</span><span class="dv">8</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mq</span>(m4<span class="sc">$</span>residuals,<span class="at">adj=</span><span class="dv">8</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ljung-Box Statistics:  
-           m       Q(m)      df    p-value
- [1,]  1.00000   0.00366 -4.00000     1.00
- [2,]  2.00000   0.01425  0.00000     1.00
- [3,]  3.00000   0.03051  4.00000     1.00
- [4,]  4.00000   0.07711  8.00000     1.00
- [5,]  5.00000   0.15712 12.00000     1.00
- [6,]  6.00000   2.30958 16.00000     1.00
- [7,]  7.00000   3.01753 20.00000     1.00
- [8,]  8.00000   8.18498 24.00000     1.00
- [9,]  9.00000  11.52026 28.00000     1.00
-[10,] 10.00000  12.87117 32.00000     1.00
-[11,] 11.00000  16.03433 36.00000     1.00
-[12,] 12.00000  27.05013 40.00000     0.94
-[13,] 13.00000  28.82318 44.00000     0.96
-[14,] 14.00000  38.14113 48.00000     0.85
-[15,] 15.00000  41.28613 52.00000     0.86
-[16,] 16.00000  42.07408 56.00000     0.92
-[17,] 17.00000  43.14412 60.00000     0.95
-[18,] 18.00000  47.23349 64.00000     0.94
-[19,] 19.00000  48.48892 68.00000     0.96
-[20,] 20.00000  51.43031 72.00000     0.97
-[21,] 21.00000  56.90230 76.00000     0.95
-[22,] 22.00000  61.38877 80.00000     0.94
-[23,] 23.00000  65.11915 84.00000     0.94
-[24,] 24.00000  72.18807 88.00000     0.89</code></pre>
+          m       Q(m)     df    p-value
+ [1,]  1.0000    0.0314 -4.0000     1.00
+ [2,]  2.0000    0.1812  0.0000     1.00
+ [3,]  3.0000    3.7521  4.0000     0.44
+ [4,]  4.0000    8.5472  8.0000     0.38
+ [5,]  5.0000    8.5839 12.0000     0.74
+ [6,]  6.0000   10.6203 16.0000     0.83
+ [7,]  7.0000   11.2761 20.0000     0.94
+ [8,]  8.0000   16.3448 24.0000     0.88
+ [9,]  9.0000   19.9487 28.0000     0.87
+[10,] 10.0000   20.5030 32.0000     0.94
+[11,] 11.0000   23.6409 36.0000     0.94
+[12,] 12.0000   34.7159 40.0000     0.71
+[13,] 13.0000   36.5117 44.0000     0.78
+[14,] 14.0000   47.4664 48.0000     0.49
+[15,] 15.0000   50.4900 52.0000     0.53
+[16,] 16.0000   51.6680 56.0000     0.64
+[17,] 17.0000   52.6151 60.0000     0.74
+[18,] 18.0000   56.7417 64.0000     0.73
+[19,] 19.0000   57.8782 68.0000     0.80
+[20,] 20.0000   60.2908 72.0000     0.84
+[21,] 21.0000   66.0137 76.0000     0.79
+[22,] 22.0000   70.4019 80.0000     0.77
+[23,] 23.0000   73.5179 84.0000     0.79
+[24,] 24.0000   81.7431 88.0000     0.67</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab02_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="lab02_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MTSdiag</span>(m4,<span class="at">adj=</span><span class="dv">8</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MTSdiag</span>(m4,<span class="at">adj=</span><span class="dv">8</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Covariance matrix:"
      [,1] [,2]
-[1,] 29.4 32.5
-[2,] 32.5 38.8
+[1,] 29.5 32.7
+[2,] 32.7 39.0
 CCM at lag:  0 
       [,1]  [,2]
-[1,] 1.000 0.964
-[2,] 0.964 1.000
+[1,] 1.000 0.963
+[2,] 0.963 1.000
 Simplified matrix: 
 CCM at lag:  1 
 . . 
@@ -1360,7 +1107,7 @@ CCM at lag:  13
 . . 
 CCM at lag:  14 
 . . 
-. . 
+- - 
 CCM at lag:  15 
 . . 
 . . 
@@ -1395,7 +1142,7 @@ CCM at lag:  24
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab02_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="lab02_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -1405,7 +1152,7 @@ CCM at lag:  24
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab02_files/figure-html/unnamed-chunk-18-3.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="lab02_files/figure-html/unnamed-chunk-16-3.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -1413,36 +1160,36 @@ CCM at lag:  24
 <pre><code>Hit Enter to compute MQ-statistics: 
 
 Ljung-Box Statistics:  
-           m       Q(m)      df    p-value
- [1,]  1.00000   0.00366 -4.00000     1.00
- [2,]  2.00000   0.01425  0.00000     1.00
- [3,]  3.00000   0.03051  4.00000     1.00
- [4,]  4.00000   0.07711  8.00000     1.00
- [5,]  5.00000   0.15712 12.00000     1.00
- [6,]  6.00000   2.30958 16.00000     1.00
- [7,]  7.00000   3.01753 20.00000     1.00
- [8,]  8.00000   8.18498 24.00000     1.00
- [9,]  9.00000  11.52026 28.00000     1.00
-[10,] 10.00000  12.87117 32.00000     1.00
-[11,] 11.00000  16.03433 36.00000     1.00
-[12,] 12.00000  27.05013 40.00000     0.94
-[13,] 13.00000  28.82318 44.00000     0.96
-[14,] 14.00000  38.14113 48.00000     0.85
-[15,] 15.00000  41.28613 52.00000     0.86
-[16,] 16.00000  42.07408 56.00000     0.92
-[17,] 17.00000  43.14412 60.00000     0.95
-[18,] 18.00000  47.23349 64.00000     0.94
-[19,] 19.00000  48.48892 68.00000     0.96
-[20,] 20.00000  51.43031 72.00000     0.97
-[21,] 21.00000  56.90230 76.00000     0.95
-[22,] 22.00000  61.38877 80.00000     0.94
-[23,] 23.00000  65.11915 84.00000     0.94
-[24,] 24.00000  72.18807 88.00000     0.89</code></pre>
+          m       Q(m)     df    p-value
+ [1,]  1.0000    0.0314 -4.0000     1.00
+ [2,]  2.0000    0.1812  0.0000     1.00
+ [3,]  3.0000    3.7521  4.0000     0.44
+ [4,]  4.0000    8.5472  8.0000     0.38
+ [5,]  5.0000    8.5839 12.0000     0.74
+ [6,]  6.0000   10.6203 16.0000     0.83
+ [7,]  7.0000   11.2761 20.0000     0.94
+ [8,]  8.0000   16.3448 24.0000     0.88
+ [9,]  9.0000   19.9487 28.0000     0.87
+[10,] 10.0000   20.5030 32.0000     0.94
+[11,] 11.0000   23.6409 36.0000     0.94
+[12,] 12.0000   34.7159 40.0000     0.71
+[13,] 13.0000   36.5117 44.0000     0.78
+[14,] 14.0000   47.4664 48.0000     0.49
+[15,] 15.0000   50.4900 52.0000     0.53
+[16,] 16.0000   51.6680 56.0000     0.64
+[17,] 17.0000   52.6151 60.0000     0.74
+[18,] 18.0000   56.7417 64.0000     0.73
+[19,] 19.0000   57.8782 68.0000     0.80
+[20,] 20.0000   60.2908 72.0000     0.84
+[21,] 21.0000   66.0137 76.0000     0.79
+[22,] 22.0000   70.4019 80.0000     0.77
+[23,] 23.0000   73.5179 84.0000     0.79
+[24,] 24.0000   81.7431 88.0000     0.67</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab02_files/figure-html/unnamed-chunk-18-4.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="lab02_files/figure-html/unnamed-chunk-16-4.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -1452,19 +1199,19 @@ Ljung-Box Statistics:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab02_files/figure-html/unnamed-chunk-18-5.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="lab02_files/figure-html/unnamed-chunk-16-5.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>m4<span class="sc">$</span>bic</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>m4<span class="sc">$</span>bic <span class="co">#VAR(2)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.56645</code></pre>
+<pre><code>[1] 4.49461</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>m1<span class="sc">$</span>bic</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>m1<span class="sc">$</span>bic <span class="co">#MA(1) </span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4.485021</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>m2<span class="sc">$</span>bic</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>m2<span class="sc">$</span>bic <span class="co">#MA(2)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4.513656</code></pre>
 </div>
