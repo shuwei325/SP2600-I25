@@ -725,11 +725,11 @@ AIC(n)  HQ(n)  SC(n) FPE(n)
      1      1      1      1 
 
 $criteria
-                 1            2          3           4           5
-AIC(n) -0.02452751 -0.009138218 0.00169449 0.001655257 0.005712094
-HQ(n)  -0.01118959  0.017537633 0.04170827 0.055006960 0.072401722
-SC(n)   0.00944871  0.058814231 0.10362316 0.137560155 0.175593216
-FPE(n)  0.97577093  0.990904106 1.00169831 1.001662267 1.005739498</code></pre>
+                1          2          3          4          5
+AIC(n) 0.06069770 0.06529851 0.06971828 0.08414479 0.09290304
+HQ(n)  0.07403563 0.09197436 0.10973206 0.13749649 0.15959267
+SC(n)  0.09467393 0.13325096 0.17164695 0.22004968 0.26278416
+FPE(n) 1.06257774 1.06747838 1.07220862 1.08779250 1.09736740</code></pre>
 </div>
 </div>
 <ul>
@@ -741,7 +741,7 @@ FPE(n)  0.97577093  0.990904106 1.00169831 1.001662267 1.005739498</code></pre>
 <span id="cb8-3"><a href=""></a>roots <span class="ot">&lt;-</span> vars<span class="sc">::</span><span class="fu">roots</span>(varsimest)</span>
 <span id="cb8-4"><a href=""></a>roots</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5236734 0.4227979</code></pre>
+<pre><code>[1] 0.4873243 0.4518870</code></pre>
 </div>
 </div>
 </section>
@@ -757,7 +757,7 @@ FPE(n)  0.97577093  0.990904106 1.00169831 1.001662267 1.005739498</code></pre>
     Portmanteau Test (asymptotic)
 
 data:  Residuals of VAR object varsimest
-Chi-squared = 60.827, df = 60, p-value = 0.4459</code></pre>
+Chi-squared = 61.324, df = 60, p-value = 0.4283</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>(var.arch <span class="ot">&lt;-</span> <span class="fu">arch.test</span>(varsimest, <span class="at">lags.multi =</span> <span class="dv">5</span>, <span class="at">multivariate.only =</span> <span class="cn">TRUE</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -765,7 +765,7 @@ Chi-squared = 60.827, df = 60, p-value = 0.4459</code></pre>
     ARCH (multivariate)
 
 data:  Residuals of VAR object varsimest
-Chi-squared = 33.31, df = 45, p-value = 0.9009</code></pre>
+Chi-squared = 47.647, df = 45, p-value = 0.3655</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
@@ -777,7 +777,7 @@ Chi-squared = 33.31, df = 45, p-value = 0.9009</code></pre>
     JB-Test (multivariate)
 
 data:  Residuals of VAR object varsimest
-Chi-squared = 10.309, df = 4, p-value = 0.03553
+Chi-squared = 1.0368, df = 4, p-value = 0.9042
 
 
 $Skewness
@@ -785,7 +785,7 @@ $Skewness
     Skewness only (multivariate)
 
 data:  Residuals of VAR object varsimest
-Chi-squared = 4.6243, df = 2, p-value = 0.09905
+Chi-squared = 0.8841, df = 2, p-value = 0.6427
 
 
 $Kurtosis
@@ -793,7 +793,7 @@ $Kurtosis
     Kurtosis only (multivariate)
 
 data:  Residuals of VAR object varsimest
-Chi-squared = 5.6851, df = 2, p-value = 0.05828</code></pre>
+Chi-squared = 0.15267, df = 2, p-value = 0.9265</code></pre>
 </div>
 </div>
 </div></div>
@@ -841,7 +841,7 @@ Chi-squared = 5.6851, df = 2, p-value = 0.05828</code></pre>
     Granger causality H0: x2 do not Granger-cause x1
 
 data:  VAR object varsimest
-F-Test = 74.114, df1 = 1, df2 = 994, p-value &lt; 2.2e-16
+F-Test = 26.547, df1 = 1, df2 = 994, p-value = 3.102e-07
 
 
 $Instant
@@ -849,7 +849,7 @@ $Instant
     H0: No instantaneous causality between: x2 and x1
 
 data:  VAR object varsimest
-Chi-squared = 0.36695, df = 1, p-value = 0.5447</code></pre>
+Chi-squared = 0.52202, df = 1, p-value = 0.47</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -860,7 +860,7 @@ Chi-squared = 0.36695, df = 1, p-value = 0.5447</code></pre>
     Granger causality H0: x1 do not Granger-cause x2
 
 data:  VAR object varsimest
-F-Test = 0.015844, df1 = 1, df2 = 994, p-value = 0.8999
+F-Test = 5.3275, df1 = 1, df2 = 994, p-value = 0.0212
 
 
 $Instant
@@ -868,7 +868,7 @@ $Instant
     H0: No instantaneous causality between: x1 and x2
 
 data:  VAR object varsimest
-Chi-squared = 0.36695, df = 1, p-value = 0.5447</code></pre>
+Chi-squared = 0.52202, df = 1, p-value = 0.47</code></pre>
 </div>
 </div>
 </section></section>
