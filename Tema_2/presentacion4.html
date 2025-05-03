@@ -429,6 +429,9 @@
 <li><div class="agenda-inactive agenda-post-active">
 <p>El contraste de raíz unitaria</p>
 </div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Ejemplo</p>
+</div></li>
 </ol>
 </div>
 </section>
@@ -475,6 +478,9 @@
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
 <p>El contraste de raíz unitaria</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Ejemplo</p>
 </div></li>
 </ol>
 </div>
@@ -631,6 +637,9 @@ X_t=CD_t+ \eta_t,
 <li><div class="agenda-active">
 <p>El contraste de raíz unitaria</p>
 </div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Ejemplo</p>
+</div></li>
 </ol>
 </div>
 </section>
@@ -640,7 +649,10 @@ X_t=CD_t+ \eta_t,
 <ul>
 <li>Suponiendo que <span class="math inline">\(\eta_t\)</span> es un AR(1):</li>
 </ul>
-<p><span class="math display">\[\eta_t=\phi_1 \eta_{t-1}+a_t\]</span> - Si se toma una diferencia:</p>
+<p><span class="math display">\[\eta_t=\phi_1 \eta_{t-1}+a_t\]</span></p>
+<ul>
+<li>Si se toma una diferencia:</li>
+</ul>
 <p><span class="math display">\[\nabla \eta_t=\eta_t-\eta_{t-1}=\phi_1 \eta_{t-1}+a_t-\eta_{t-1}=(\phi_1-1) \eta_{t-1}+a_t=\pi \eta_{t-1}+a_t\]</span></p>
 <p>Se puede obtener el estimador del mínimo cuadrado de <span class="math inline">\(\hat{\pi}^*\)</span> mediante una regresión ordinaria de <span class="math inline">\(\nabla \eta_t\)</span> sobre <span class="math inline">\(\eta_{t-1}\)</span>. Por lo tanto, el contraste para la estacionariedad se puede formular mediante las siguientes hipótesis: <span class="math display">\[H_0: \phi_1=1 ~~\text{v.s.}~~ H_1: \phi_1&lt;1\]</span></p>
 </section>
@@ -689,6 +701,29 @@ X_t=CD_t+ \eta_t,
 <li>Si no se rechaza <span class="math inline">\(H_0\)</span>, entonces no hay tendencia y tiene raíz unitaria.</li>
 <li>Si se rechaza <span class="math inline">\(H_0\)</span>, hay tendencia y tiene raíz unitaria.</li>
 </ul>
+</section></section>
+<section>
+<section id="ejemplo" class="title-slide slide level1 agenda-slide center">
+<h1>Ejemplo</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Procesos integrados</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Serie estacionaria por tendencia y por diferencia</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>El contraste de raíz unitaria</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Ejemplo</p>
+</div></li>
+</ol>
+</div>
 </section>
 <section id="ejemplo-la-serie-de-consumo" class="slide level2">
 <h2>Ejemplo: La serie de consumo</h2>
@@ -722,21 +757,45 @@ X_t=CD_t+ \eta_t,
 </section>
 <section class="slide level2">
 
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
-<li>Estimar el modelo completo</li>
+<li>Contraste de Dickey-Fuller con el paquete <code>tseries</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>lc.ct <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(lc, <span class="at">lags=</span><span class="dv">3</span>, <span class="at">type=</span><span class="st">'trend'</span>)</span>
-<span id="cb9-2"><a href=""></a><span class="fu">plot</span>(lc.ct) <span class="co">#comportamiento de los residuales de este modelo.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">adf.test</span>(lc)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Augmented Dickey-Fuller Test
 
+data:  lc
+Dickey-Fuller = -1.85, Lag order = 4, p-value = 0.6387
+alternative hypothesis: stationary</code></pre>
 </div>
-<img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-10-1.png" width="480" class="r-stretch"></section>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Estimar el modelo completo con tendencia.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>lc.ct <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(lc, <span class="at">lags=</span><span class="dv">3</span>, <span class="at">type=</span><span class="st">'trend'</span>)</span>
+<span id="cb11-2"><a href=""></a><span class="fu">plot</span>(lc.ct) <span class="co">#comportamiento de los residuales de este modelo.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-11-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
 <section class="slide level2">
 
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">summary</span>(lc.ct)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">summary</span>(lc.ct)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ############################################### 
@@ -797,23 +856,240 @@ phi3  8.73  6.49  5.47</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>lc.dif <span class="ot">&lt;-</span> <span class="fu">diff</span>(lc)</span>
-<span id="cb12-2"><a href=""></a><span class="fu">plot</span>(lc.dif)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a>lc.dif <span class="ot">&lt;-</span> <span class="fu">diff</span>(lc)</span>
+<span id="cb14-2"><a href=""></a><span class="fu">plot</span>(lc.dif)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-12-1.png" width="480"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-13-1.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">acf</span>(lc.dif)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">acf</span>(lc.dif)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-13-1.png" width="480"></p>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-14-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="ejemplo-la-serie-de-varvas" class="slide level2">
+<h2>Ejemplo: La serie de varvas</h2>
+<p>Los glaciares que se derriten depositan capas anuales de arena y limo durante las temporadas de derretimiento de primavera, que pueden reconstruirse anualmente durante un período que va desde el momento en que comenzó la desglaciación en Nueva Inglaterra (hace unos 12.600 años) hasta el momento en que terminó (hace unos 6000 años). Dichos depósitos sedimentarios, llamados varvas, pueden utilizarse como sustitutos de parámetros paleoclimáticos, como la temperatura, porque, en un año cálido, se depositan más arena y limo del glaciar en retroceso.</p>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a>varvas<span class="ot">&lt;-</span> astsa<span class="sc">::</span>varve</span>
+<span id="cb16-2"><a href=""></a><span class="fu">plot</span>(varvas)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-15-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>logvarvas <span class="ot">=</span> <span class="fu">log</span>(varvas)</span>
+<span id="cb17-2"><a href=""></a><span class="fu">plot</span>(logvarvas)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-16-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Contraste de Dickey-Fuller con el paquete <code>tseries</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">adf.test</span>(logvarvas)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Augmented Dickey-Fuller Test
+
+data:  logvarvas
+Dickey-Fuller = -3.5166, Lag order = 8, p-value = 0.04071
+alternative hypothesis: stationary</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Estimar el modelo completo con tendencia.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>logvarvas.ct <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(logvarvas, <span class="at">lags=</span><span class="dv">3</span>, <span class="at">type=</span><span class="st">'trend'</span>)</span>
+<span id="cb20-2"><a href=""></a><span class="fu">plot</span>(logvarvas.ct) <span class="co">#comportamiento de los residuales de este modelo.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-18-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">summary</span>(logvarvas.ct)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+############################################### 
+# Augmented Dickey-Fuller Test Unit Root Test # 
+############################################### 
+
+Test regression trend 
+
+
+Call:
+lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.81723 -0.33265  0.02373  0.32042  1.35376 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.6719323  0.1198531   5.606 3.11e-08 ***
+z.lag.1     -0.2296531  0.0383667  -5.986 3.63e-09 ***
+tt           0.0001277  0.0001088   1.173    0.241    
+z.diff.lag1 -0.3866604  0.0466622  -8.286 7.15e-16 ***
+z.diff.lag2 -0.2397781  0.0454677  -5.274 1.85e-07 ***
+z.diff.lag3 -0.1624700  0.0395751  -4.105 4.57e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4883 on 624 degrees of freedom
+Multiple R-squared:  0.2905,    Adjusted R-squared:  0.2848 
+F-statistic: 51.09 on 5 and 624 DF,  p-value: &lt; 2.2e-16
+
+
+Value of test-statistic is: -5.9857 11.9565 17.9168 
+
+Critical values for test statistics: 
+      1pct  5pct 10pct
+tau3 -3.96 -3.41 -3.12
+phi2  6.09  4.68  4.03
+phi3  8.27  6.25  5.34</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Paso 1</strong>: Probar <span class="math inline">\(H_0: \pi=0\)</span> (con el estadístico <span class="math inline">\(\tau\)</span>)</p>
+<ul>
+<li>Usando un 5% de significancia, note que el valor crítico es <span class="math inline">\(-3.96&gt;-5.9857\)</span> el estadístico <span class="math inline">\(\tau\)</span>. Por lo tanto, se rechaza <span class="math inline">\(H_0\)</span>.</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Si excluimos la tendencia, los resultados son diferentes:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>logvarvas.ct2 <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(logvarvas, <span class="at">lags=</span><span class="dv">6</span>, <span class="at">type=</span><span class="st">'none'</span>)</span>
+<span id="cb23-2"><a href=""></a><span class="fu">plot</span>(logvarvas.ct2) <span class="co">#comportamiento de los residuales de este modelo.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-20-1.png" width="480" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Si excluimos la tendencia, los resultados son diferentes:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">summary</span>(logvarvas.ct2)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+############################################### 
+# Augmented Dickey-Fuller Test Unit Root Test # 
+############################################### 
+
+Test regression none 
+
+
+Call:
+lm(formula = z.diff ~ z.lag.1 - 1 + z.diff.lag)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.78375 -0.30973  0.03514  0.32733  1.38755 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+z.lag.1     -0.005218   0.006166  -0.846   0.3977    
+z.diff.lag1 -0.621933   0.040278 -15.441  &lt; 2e-16 ***
+z.diff.lag2 -0.477643   0.046705 -10.227  &lt; 2e-16 ***
+z.diff.lag3 -0.414364   0.048999  -8.457  &lt; 2e-16 ***
+z.diff.lag4 -0.299850   0.048991  -6.120 1.65e-09 ***
+z.diff.lag5 -0.197807   0.046575  -4.247 2.50e-05 ***
+z.diff.lag6 -0.080740   0.040033  -2.017   0.0441 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4873 on 620 degrees of freedom
+Multiple R-squared:  0.2928,    Adjusted R-squared:  0.2848 
+F-statistic: 36.68 on 7 and 620 DF,  p-value: &lt; 2.2e-16
+
+
+Value of test-statistic is: -0.8463 
+
+Critical values for test statistics: 
+      1pct  5pct 10pct
+tau1 -2.58 -1.95 -1.62</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Usando un 5% de significancia, note que el valor crítico es <span class="math inline">\(-2.58&gt;-0.8463\)</span> el estadístico <span class="math inline">\(\tau\)</span>. Por lo tanto, no se rechaza <span class="math inline">\(H_0\)</span> y se concluye que hay raíz unitaria.</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
+<p>La serie diferenciada:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>logvarvas.dif <span class="ot">&lt;-</span> <span class="fu">diff</span>(logvarvas)</span>
+<span id="cb26-2"><a href=""></a><span class="fu">plot</span>(logvarvas.dif)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-22-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">acf</span>(logvarvas.dif)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion4_files/figure-revealjs/unnamed-chunk-23-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -833,12 +1109,13 @@ phi3  8.73  6.49  5.47</code></pre>
 <h2>Paquetes en R</h2>
 <p>Para replicar los ejemplos de esta presentación, necesitan estos paquetes:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb14-2"><a href=""></a><span class="fu">library</span>(forecast)</span>
-<span id="cb14-3"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb14-4"><a href=""></a><span class="fu">library</span>(fpp2)</span>
-<span id="cb14-5"><a href=""></a><span class="fu">library</span>(urca)</span>
-<span id="cb14-6"><a href=""></a><span class="fu">library</span>(vars)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb28-2"><a href=""></a><span class="fu">library</span>(forecast)</span>
+<span id="cb28-3"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb28-4"><a href=""></a><span class="fu">library</span>(fpp2)</span>
+<span id="cb28-5"><a href=""></a><span class="fu">library</span>(urca)</span>
+<span id="cb28-6"><a href=""></a><span class="fu">library</span>(vars)</span>
+<span id="cb28-7"><a href=""></a><span class="fu">library</span>(tseries)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="en-la-próxima-clase-veremos" class="slide level2">
