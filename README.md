@@ -35,8 +35,7 @@ aplicaciones.
 |  | [Clase 2-5](./Tema_2/presentacion5.html) |  |
 | 3\. Espacio de Estados | [Clase 3-1](./Tema_3/presentacion1.html) |  |
 |  | [Clase 3-2](./Tema_3/presentacion2.html) |  |
-| 4\. Modelos no lineales | [Clase 4-1](./Tema_4/presentacion1.html) |  |
-|  | [Clase 4-2](./Tema_4/presentacion2.html) |  |
+| 4\. Modelos no lineales | [Clase 4-1](./Tema_4/presentacion1.html) | [lab04](./Tema_4/lab04.html) |
 
 # Ejercicios
 

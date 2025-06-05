@@ -233,6 +233,9 @@
 <li><div class="agenda-inactive agenda-post-active">
 <p>Extensiones del modelo GARCH: EGARCH y TGARCH</p>
 </div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Distribuciones simétricas y asimétricas</p>
+</div></li>
 </ol>
 </div>
 </section>
@@ -527,6 +530,9 @@ Model df: 2.   Total lags used: 20</code></pre>
 <li><div class="agenda-inactive agenda-post-active">
 <p>Extensiones del modelo GARCH: EGARCH y TGARCH</p>
 </div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Distribuciones simétricas y asimétricas</p>
+</div></li>
 </ol>
 </div>
 </section>
@@ -709,6 +715,9 @@ Model df: 2.   Total lags used: 20</code></pre>
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
 <p>Extensiones del modelo GARCH: EGARCH y TGARCH</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Distribuciones simétricas y asimétricas</p>
 </div></li>
 </ol>
 </div>
@@ -1100,6 +1109,9 @@ beta1     0.8285      0.0426  19.4699   0.0000</code></pre>
 <li><div class="agenda-active">
 <p>Extensiones del modelo GARCH: EGARCH y TGARCH</p>
 </div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Distribuciones simétricas y asimétricas</p>
+</div></li>
 </ol>
 </div>
 </section>
@@ -1220,19 +1232,173 @@ beta1     0.8285      0.0426  19.4699   0.0000</code></pre>
 <li><p>Si <span class="math inline">\(\gamma \neq 0\)</span>, hay un impacto de información asimétrica.</p></li>
 <li><p>Si <span class="math inline">\(\gamma &gt; 0\)</span>, mala noticia tiene un impacto mayor.</p></li>
 </ul>
+</section></section>
+<section>
+<section id="distribuciones-simétricas-y-asimétricas" class="title-slide slide level1 agenda-slide center">
+<h1>Distribuciones simétricas y asimétricas</h1>
+<div class="agenda-heading">
+<p>Contenido</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Introducción</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>ARCH</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>GARCH</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Extensiones del modelo GARCH: EGARCH y TGARCH</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Distribuciones simétricas y asimétricas</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="distribuciones-simétricas-y-asimétricas-1" class="slide level2">
+<h2>Distribuciones simétricas y asimétricas</h2>
+<ul>
+<li><p>La mayoría de los modelos suponen distribución simétrica de las innovaciones (normal, t-student, etc.).</p></li>
+<li><p>Si una distribución <span class="math inline">\(X\)</span> es simétrica alrededor de cero, entonces su función de densidad satisface <span class="math display">\[f(x)=f(-x)\]</span></p></li>
+<li><p>En la práctica es común enfrentar situaciones en donde los datos presentan asimetría. Por ejemplo, más impacto en los retornos negativos que los positivos, etc.</p></li>
+<li><p>La idea es incorporar asimetría a una distribución simétrica que ya es conocida.</p></li>
+</ul>
+</section>
+<section id="incorporación-de-la-asimetría-en-una-distribución-simétrica" class="slide level2">
+<h2>Incorporación de la asimetría en una distribución simétrica</h2>
+<ul>
+<li><p>Sea <span class="math inline">\(f(x)\)</span> la función de densidad simétrica de una variable aleatoria y <span class="math inline">\(\gamma \in (0,\infty)\)</span>.</p></li>
+<li><p>La clase de distribuciones asimétricas generadas a partir de <span class="math inline">\(f(x)\)</span> se define como: <span class="math display">\[p(x|\gamma) =\frac{2}{\gamma+\frac{1}{\gamma}} \left[ f\left(\frac{x}{\gamma}\right) I_{[0,\infty)}(x) + f(\gamma x) I_{(-\infty,0]}(x) \right]\]</span></p></li>
+<li><p>La idea es introducir factores de escala inversa tanto en el lado positivo como el negativo del dominio.</p></li>
+<li><p>La moda sigue siendo cero y <span class="math inline">\(p(x|\gamma)\)</span> es asimétrica cuando <span class="math inline">\(\gamma \neq 1\)</span>.</p></li>
+<li><p>Entre las más conocidas son:</p>
+<ul>
+<li>normal asimétrica</li>
+<li>t-student asimétrica</li>
+<li>error generalizada asimétrica</li>
+</ul></li>
+</ul>
+</section>
+<section id="distribución-normal-asimétrica" class="slide level2">
+<h2>Distribución normal asimétrica</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>La función de densidad de una normal estandarizada:</li>
+</ul>
+<p><span class="math display">\[f(x)=\frac{1}{\sqrt{2 \pi}}e^{\frac{-1}{2}x^2},~~x \in    \mathbb{R}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="fl">0.01</span>)</span>
+<span id="cb58-2"><a href=""></a>norm <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb58-3"><a href=""></a>snorm.p <span class="ot">&lt;-</span> <span class="fu">dsnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">xi =</span> <span class="fl">1.5</span>, <span class="at">log =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb58-4"><a href=""></a>snorm.n <span class="ot">&lt;-</span> <span class="fu">dsnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">xi =</span> <span class="fl">0.5</span>, <span class="at">log =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb58-5"><a href=""></a><span class="fu">plot</span>(x,norm,<span class="at">type=</span><span class="st">"l"</span>,<span class="at">col=</span><span class="dv">1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.8</span>))</span>
+<span id="cb58-6"><a href=""></a><span class="fu">points</span>(x,snorm.p,<span class="at">type=</span><span class="st">"l"</span>,<span class="at">col=</span><span class="dv">2</span>)</span>
+<span id="cb58-7"><a href=""></a><span class="fu">points</span>(x,snorm.n,<span class="at">type=</span><span class="st">"l"</span>,<span class="at">col=</span><span class="dv">3</span>)</span>
+<span id="cb58-8"><a href=""></a>legenda<span class="ot">=</span><span class="fu">c</span>(<span class="st">"norm"</span>,<span class="fu">TeX</span>(r<span class="st">'(snorm  $\gamma = 1.5$)'</span>),<span class="fu">TeX</span>(r<span class="st">'(snorm  $\gamma = 0.5$)'</span>))</span>
+<span id="cb58-9"><a href=""></a><span class="fu">legend</span>(<span class="st">"topright"</span>,legenda ,<span class="at">col=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),<span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-47-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="distribución-t-student-asimétrica" class="slide level2">
+<h2>Distribución t-student asimétrica</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>La función de densidad de una t-student estandarizada:</li>
+</ul>
+<p><span class="math display">\[f(t)=\frac{\Gamma(\frac{\nu+1}{2})}{\Gamma(\sqrt{\nu \pi}\frac{\nu}{2})}\left( 1+\frac{t^2}{\nu}\right)^{-(\nu+1)/2},\]</span></p>
+<p>y <span class="math inline">\(t \in    \mathbb{R}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="fl">0.01</span>)</span>
+<span id="cb59-2"><a href=""></a>norm <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb59-3"><a href=""></a>std <span class="ot">&lt;-</span> <span class="fu">dsstd</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">nu =</span> <span class="dv">4</span>, <span class="at">xi =</span> <span class="dv">1</span>, <span class="at">log =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb59-4"><a href=""></a>sstd.p <span class="ot">&lt;-</span> <span class="fu">dsstd</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">nu =</span> <span class="dv">4</span>, <span class="at">xi =</span> <span class="fl">1.5</span>, <span class="at">log =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb59-5"><a href=""></a>sstd.n <span class="ot">&lt;-</span> <span class="fu">dsstd</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">nu =</span> <span class="dv">4</span>, <span class="at">xi =</span> <span class="fl">0.5</span>, <span class="at">log =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb59-6"><a href=""></a><span class="fu">plot</span>(x,norm,<span class="at">type=</span><span class="st">"l"</span>,<span class="at">col=</span><span class="dv">1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb59-7"><a href=""></a><span class="fu">points</span>(x,std,<span class="at">type=</span><span class="st">"l"</span>,<span class="at">col=</span><span class="dv">2</span>)</span>
+<span id="cb59-8"><a href=""></a><span class="fu">points</span>(x,sstd.p,<span class="at">type=</span><span class="st">"l"</span>,<span class="at">col=</span><span class="dv">3</span>)</span>
+<span id="cb59-9"><a href=""></a><span class="fu">points</span>(x,sstd.n,<span class="at">type=</span><span class="st">"l"</span>,<span class="at">col=</span><span class="dv">4</span>)</span>
+<span id="cb59-10"><a href=""></a>legenda<span class="ot">=</span><span class="fu">c</span>(<span class="st">"norm"</span>,<span class="fu">TeX</span>(r<span class="st">'(st  $\gamma = 1$)'</span>),<span class="fu">TeX</span>(r<span class="st">'(st  $\gamma = 1.5$)'</span>),<span class="fu">TeX</span>(r<span class="st">'(st  $\gamma = 0.5$)'</span>))</span>
+<span id="cb59-11"><a href=""></a><span class="fu">legend</span>(<span class="st">"topright"</span>,legenda ,<span class="at">col=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),<span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-49-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="distribución-de-error-generalizada" class="slide level2">
+<h2>Distribución de error generalizada</h2>
+<ul>
+<li>La función de densidad de una distribución de error generalizada:</li>
+</ul>
+<p><span class="math display">\[f(x)=\frac{\beta}{2 \alpha \Gamma\left(\frac{1}{\beta}\right)}e^{\left( \frac{|x-\mu|}{\alpha}\right)^\beta}, x \in   \mathbb{R}\]</span> con parámetro de locación <span class="math inline">\(\mu \in \mathbb{R}\)</span>, escala <span class="math inline">\(\alpha &gt;0\)</span> y forma <span class="math inline">\(\beta &gt;0\)</span>.</p>
+</section>
+<section id="distribución-de-error-generalizada-1" class="slide level2">
+<h2>Distribución de error generalizada</h2>
+<ul>
+<li>Considere una distribución de error generalizada con <span class="math inline">\(\mu=0, \alpha=1, \beta=3\)</span> y su versión asimétrica con <span class="math inline">\(\gamma\)</span>.</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="fl">0.01</span>)</span>
+<span id="cb60-2"><a href=""></a>norm <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb60-3"><a href=""></a>sged <span class="ot">&lt;-</span> <span class="fu">dsged</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">nu =</span> <span class="dv">3</span>, <span class="at">xi =</span> <span class="dv">1</span>, <span class="at">log =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb60-4"><a href=""></a>sged.p <span class="ot">&lt;-</span> <span class="fu">dsged</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">nu =</span> <span class="dv">3</span>, <span class="at">xi =</span> <span class="fl">1.5</span>, <span class="at">log =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb60-5"><a href=""></a>sged.n <span class="ot">&lt;-</span> <span class="fu">dsged</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">nu =</span> <span class="dv">3</span>, <span class="at">xi =</span> <span class="fl">0.5</span>, <span class="at">log =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb60-6"><a href=""></a><span class="fu">plot</span>(x,norm,<span class="at">type=</span><span class="st">"l"</span>,<span class="at">col=</span><span class="dv">1</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.6</span>))</span>
+<span id="cb60-7"><a href=""></a><span class="fu">points</span>(x,sged,<span class="at">type=</span><span class="st">"l"</span>,<span class="at">col=</span><span class="dv">2</span>)</span>
+<span id="cb60-8"><a href=""></a><span class="fu">points</span>(x,sged.p,<span class="at">type=</span><span class="st">"l"</span>,<span class="at">col=</span><span class="dv">3</span>)</span>
+<span id="cb60-9"><a href=""></a><span class="fu">points</span>(x,sged.n,<span class="at">type=</span><span class="st">"l"</span>,<span class="at">col=</span><span class="dv">4</span>)</span>
+<span id="cb60-10"><a href=""></a>legenda<span class="ot">=</span><span class="fu">c</span>(<span class="st">"norm"</span>,<span class="fu">TeX</span>(r<span class="st">'(sged  $\gamma = 1$)'</span>),<span class="fu">TeX</span>(r<span class="st">'(sged  $\gamma = 1.5$)'</span>),<span class="fu">TeX</span>(r<span class="st">'(sged  $\gamma = 0.5$)'</span>))</span>
+<span id="cb60-11"><a href=""></a><span class="fu">legend</span>(<span class="st">"topright"</span>,legenda ,<span class="at">col=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),<span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion1_files/figure-revealjs/unnamed-chunk-51-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
 </section>
 <section id="paquetes-en-r" class="slide level2">
 <h2>Paquetes en R</h2>
 <p>Para replicar los ejemplos de esta presentación, necesitan estos paquetes:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb58-2"><a href=""></a><span class="fu">library</span>(forecast)</span>
-<span id="cb58-3"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb58-4"><a href=""></a><span class="fu">library</span>(astsa)</span>
-<span id="cb58-5"><a href=""></a><span class="fu">library</span>(car)</span>
-<span id="cb58-6"><a href=""></a><span class="fu">library</span>(fGarch)</span>
-<span id="cb58-7"><a href=""></a><span class="fu">library</span>(quantmod)</span>
-<span id="cb58-8"><a href=""></a><span class="fu">library</span>(moments)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb61-2"><a href=""></a><span class="fu">library</span>(forecast)</span>
+<span id="cb61-3"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb61-4"><a href=""></a><span class="fu">library</span>(astsa)</span>
+<span id="cb61-5"><a href=""></a><span class="fu">library</span>(car)</span>
+<span id="cb61-6"><a href=""></a><span class="fu">library</span>(fGarch)</span>
+<span id="cb61-7"><a href=""></a><span class="fu">library</span>(quantmod)</span>
+<span id="cb61-8"><a href=""></a><span class="fu">library</span>(moments)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section></section>
